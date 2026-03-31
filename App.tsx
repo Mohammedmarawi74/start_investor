@@ -22,6 +22,10 @@ import { PlanComparison } from './components/PlanComparison';
 import { NewPlan } from './components/NewPlan';
 import { LeftAiSidebar } from './components/LeftAiSidebar';
 import { BrandIdentityStudio } from './components/BrandIdentityStudio';
+import { UsersManagement } from './components/UsersManagement';
+import { AdminProjectsManagement } from './components/AdminProjectsManagement';
+import { AdminAnalyticsDashboard } from './components/AdminAnalyticsDashboard';
+import { AdminSecurityDashboard } from './components/AdminSecurityDashboard';
 import { User, PlanSection, BusinessModelItem, Comment } from './types';
 import { 
   ShieldCheck, 
@@ -76,7 +80,7 @@ const INITIAL_COMMENTS: Comment[] = [
 ];
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'home' | 'my-plans' | 'new-plan' | 'comparison' | 'brand-identity' | 'editor' | 'analytics' | 'tasks' | 'export-templates' | 'settings' | 'pricing' | 'notifications' | 'changelog'>('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'my-plans' | 'new-plan' | 'comparison' | 'brand-identity' | 'editor' | 'analytics' | 'tasks' | 'export-templates' | 'settings' | 'pricing' | 'notifications' | 'changelog' | 'admin-dashboard' | 'users-management' | 'admin-plans' | 'admin-analytics' | 'admin-security'>('home');
   const [sections, setSections] = useState<PlanSection[]>(INITIAL_SECTIONS);
   const [expandedSectionId, setExpandedSectionId] = useState<string | null>('1');
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | null>('saved');
@@ -187,11 +191,35 @@ const App: React.FC = () => {
            </div>
         </div>
 
-        <div className={`${activeTab === 'home' ? 'w-full pt-0 pb-0' : 'max-w-6xl mx-auto py-8 lg:py-10 px-6 lg:px-12'}`}>
+        <div className={`${(activeTab === 'home' || activeTab === 'admin-dashboard') ? 'w-full pt-0 pb-0' : 'max-w-6xl mx-auto py-8 lg:py-10 px-6 lg:px-12'}`}>
           
-          {activeTab === 'home' && (
+          {(activeTab === 'home' || activeTab === 'admin-dashboard') && (
             <div className="animate-in slide-in-from-bottom-4 duration-700">
                <Home setActiveTab={setActiveTab} />
+            </div>
+          )}
+
+          {activeTab === 'users-management' && (
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <UsersManagement />
+            </div>
+          )}
+
+          {activeTab === 'admin-plans' && (
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <AdminProjectsManagement />
+            </div>
+          )}
+
+          {activeTab === 'admin-analytics' && (
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <AdminAnalyticsDashboard />
+            </div>
+          )}
+
+          {activeTab === 'admin-security' && (
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <AdminSecurityDashboard />
             </div>
           )}
 

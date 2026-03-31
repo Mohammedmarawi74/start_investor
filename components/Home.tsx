@@ -26,22 +26,23 @@ export const Home: React.FC<{ setActiveTab: (tab: any) => void }> = ({ setActive
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-gray-900 font-sans selection:bg-primary-100" dir="rtl">
-      
-      {/* SECTION 1: HERO, STATS, SEARCH (Pure White) */}
-      <section className="bg-white pt-8 pb-10 px-6 lg:px-12 shadow-sm relative z-10 w-full rounded-b-3xl">
-        <div className="max-w-[1100px] mx-auto space-y-8 tracking-tight">
-          
-          {/* 1. Hero Banner */}
-          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-indigo-950 via-slate-900 to-slate-950 p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-800">
+    <div className="min-h-screen bg-white text-gray-900 font-sans selection:bg-primary-100" dir="rtl">
+
+      {/* SECTION 1: HERO, STATS (Pure White) */}
+      <section className="bg-white pb-10 shadow-sm relative z-10 w-full rounded-b-3xl">
+        
+        {/* 1. Hero Banner - FULL WIDTH */}
+        <div className="relative overflow-hidden bg-gradient-to-r from-[#171A3A] to-[#0D102A] px-6 lg:px-12 py-10 shadow-xl border-b border-white/5 w-full">
             {/* Background Decor */}
             <div className="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none overflow-hidden">
                <div className="absolute -top-32 -right-32 w-96 h-96 bg-primary-500 rounded-full blur-[100px]"></div>
             </div>
 
-            {/* Right Content */}
-            <div className="relative z-10 text-right space-y-5 flex-1 w-full max-w-2xl">
-              <div className="flex items-center gap-3">
+            {/* Banner Content Container (Centered) */}
+            <div className="max-w-[1100px] mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                {/* Right Content */}
+                <div className="text-right space-y-5 flex-1 w-full max-w-2xl">
+                  <div className="flex items-center gap-3">
                 <div className="px-3 py-1 bg-emerald-500/10 rounded-full border border-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></div>
                   متصل الآن
@@ -79,12 +80,14 @@ export const Home: React.FC<{ setActiveTab: (tab: any) => void }> = ({ setActive
                     <Sparkles size={14} />
                 </div>
             </div>
-          </div>
+            </div>
+        </div>
 
+        <div className="max-w-[1100px] mx-auto px-6 lg:px-12 pt-10 tracking-tight">
           {/* 2. Quick Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {quickStats.map((stat, idx) => (
-              <div key={idx} className="bg-white border border-slate-100 rounded-[1.5rem] p-6 shadow-sm hover:shadow-md transition-shadow flex items-center justify-between group cursor-pointer">
+              <div key={idx} className="bg-slate-50 border border-slate-100 rounded-[1.5rem] p-6 hover:bg-white shadow-sm hover:shadow-md transition-all flex items-center justify-between group cursor-pointer">
                 {/* Right side: text and icon */}
                 <div className="flex items-center gap-4">
                   <div className={`w-12 h-12 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center border border-slate-50 group-hover:scale-105 transition-transform`}>
@@ -109,7 +112,7 @@ export const Home: React.FC<{ setActiveTab: (tab: any) => void }> = ({ setActive
       </section>
 
       {/* SECTION 2: RECENT PLANS & AI (Off-White) */}
-      <section className="bg-slate-50 py-16 px-6 lg:px-12 w-full">
+      <section className="bg-white py-16 px-6 lg:px-12 w-full">
         <div className="max-w-[1100px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
              
@@ -128,7 +131,7 @@ export const Home: React.FC<{ setActiveTab: (tab: any) => void }> = ({ setActive
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                    {recentPlans.map(plan => (
-                      <div key={plan.id} onClick={() => setActiveTab('editor')} className="bg-white border border-slate-200 rounded-[1.5rem] p-6 hover:shadow-lg transition-all cursor-pointer group flex flex-col h-full relative overflow-hidden">
+                      <div key={plan.id} onClick={() => setActiveTab('editor')} className="bg-slate-50/80 border border-slate-100 rounded-[1.5rem] p-6 hover:bg-white hover:shadow-lg transition-all cursor-pointer group flex flex-col h-full relative overflow-hidden">
                          <div className="flex justify-between items-start mb-6">
                              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-50 text-blue-600 border border-blue-100 group-hover:scale-105 transition-transform">
                                 <Monitor size={20} />
@@ -164,7 +167,7 @@ export const Home: React.FC<{ setActiveTab: (tab: any) => void }> = ({ setActive
                    </div>
                 </div>
 
-                <div className="bg-white border border-slate-200 rounded-[1.5rem] p-6 hover:shadow-lg transition-all cursor-pointer group flex flex-col h-full relative text-center">
+                <div className="bg-purple-50/30 border border-purple-100/50 rounded-[1.5rem] p-6 hover:bg-white hover:shadow-lg transition-all cursor-pointer group flex flex-col h-full relative text-center">
                     <div className="flex justify-center mb-4">
                        <span className="text-[9px] font-bold bg-purple-50 text-purple-600 px-3 py-1 rounded-full text-center inline-block">رؤية استراتيجية</span>
                     </div>
@@ -217,7 +220,7 @@ export const Home: React.FC<{ setActiveTab: (tab: any) => void }> = ({ setActive
 
            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                {currentTasks.map(task => (
-                  <div key={task.id} className="bg-white border border-slate-200 rounded-[1.5rem] p-5 hover:border-emerald-200 hover:shadow-md transition-all flex flex-col group cursor-pointer shadow-sm">
+                  <div key={task.id} className="bg-slate-50/80 border border-slate-100 rounded-[1.5rem] p-5 hover:bg-white hover:border-emerald-200 hover:shadow-md transition-all flex flex-col group cursor-pointer shadow-sm">
                      <div className="flex justify-between items-start mb-5">
                          <span className={`text-[9px] font-black px-2 py-0.5 rounded-full ${task.priority === 'high' ? 'bg-rose-50 text-rose-600 border border-rose-100' : 'bg-amber-50 text-amber-600 border border-amber-100'}`}>
                             أولوية {task.priority === 'high' ? 'عالية' : 'متوسطة'}
@@ -240,7 +243,7 @@ export const Home: React.FC<{ setActiveTab: (tab: any) => void }> = ({ setActive
       </section>
 
       {/* SECTION 4: FEATURES (Off-White) */}
-      <section className="bg-slate-50 py-20 px-6 lg:px-12 w-full">
+      <section className="bg-white py-20 px-6 lg:px-12 w-full">
          <div className="max-w-[1100px] mx-auto space-y-10">
             <div className="flex flex-col items-center text-center space-y-6">
                 <div className="flex items-center gap-4 text-xs font-bold text-gray-500 overflow-x-auto w-full justify-center pb-2">
@@ -262,7 +265,7 @@ export const Home: React.FC<{ setActiveTab: (tab: any) => void }> = ({ setActive
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Feature 1 */}
-                <div className="bg-white rounded-[2rem] p-8 border border-slate-100 text-center flex flex-col items-center hover:shadow-xl transition-shadow shadow-sm group cursor-pointer">
+                <div className="bg-purple-50/30 rounded-[2rem] p-8 border border-purple-100/50 text-center flex flex-col items-center hover:bg-white hover:shadow-xl transition-all shadow-sm group cursor-pointer">
                    <div className="w-14 h-14 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mb-6 border border-purple-100 group-hover:rotate-12 transition-transform">
                       <BrainCircuit size={24} />
                    </div>
@@ -272,7 +275,7 @@ export const Home: React.FC<{ setActiveTab: (tab: any) => void }> = ({ setActive
                 </div>
 
                 {/* Feature 2 */}
-                <div className="bg-white rounded-[2rem] p-8 border border-slate-100 text-center flex flex-col items-center hover:shadow-xl transition-shadow shadow-sm group cursor-pointer">
+                <div className="bg-emerald-50/30 rounded-[2rem] p-8 border border-emerald-100/50 text-center flex flex-col items-center hover:bg-white hover:shadow-xl transition-all shadow-sm group cursor-pointer">
                    <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 border border-emerald-100 group-hover:rotate-12 transition-transform">
                       <TrendingUp size={24} />
                    </div>
