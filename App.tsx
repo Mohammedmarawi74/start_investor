@@ -81,6 +81,7 @@ const App: React.FC = () => {
   const [expandedSectionId, setExpandedSectionId] = useState<string | null>('1');
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | null>('saved');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isAiSidebarOpen, setIsAiSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -99,9 +100,16 @@ const App: React.FC = () => {
 
   return (
     <div className="flex min-h-screen bg-[#F1F5F9]/80">
-      <Sidebar user={MOCK_USER} isOpen={isSidebarOpen} activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Sidebar 
+        user={MOCK_USER} 
+        isOpen={isSidebarOpen} 
+        isCollapsed={isSidebarCollapsed}
+        onCollapseToggle={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+      />
 
-      <main className={`flex-1 transition-all duration-300 ease-in-out ${isSidebarOpen ? 'mr-72' : 'mr-0'} ${activeTab === 'editor' && isAiSidebarOpen ? 'ml-96' : 'ml-0'}`}>
+      <main className={`flex-1 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${!isSidebarOpen ? 'mr-0' : isSidebarCollapsed ? 'mr-24' : 'mr-72'} ${activeTab === 'editor' && isAiSidebarOpen ? 'ml-96' : 'ml-0'}`}>
         {/* Superior Navigation Bar */}
         <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-100 px-6 lg:px-12 py-3 flex items-center justify-between">
            <div className="flex items-center gap-4 lg:gap-6">
@@ -179,7 +187,7 @@ const App: React.FC = () => {
            </div>
         </div>
 
-        <div className="max-w-6xl mx-auto py-8 lg:py-10 px-6 lg:px-12">
+        <div className={`${activeTab === 'home' ? 'w-full pt-0 pb-0' : 'max-w-6xl mx-auto py-8 lg:py-10 px-6 lg:px-12'}`}>
           
           {activeTab === 'home' && (
             <div className="animate-in slide-in-from-bottom-4 duration-700">

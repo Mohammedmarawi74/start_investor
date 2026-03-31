@@ -12,6 +12,15 @@ body {
   color: #1e293b;
 }
 
+@keyframes shimmer {
+  0% { transform: translateX(-150%); }
+  50% { transform: translateX(150%); }
+  100% { transform: translateX(150%); }
+}
+.animate-shimmer {
+  animation: shimmer 3s infinite linear;
+}
+
 /* Ensure headings and strong text follow the font and weight rules */
 h1, h2, h3, h4, h5, h6, strong, b, .font-bold, .font-black, .font-extrabold {
   font-family: 'IBM Plex Sans Arabic', sans-serif !important;
