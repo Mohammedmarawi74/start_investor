@@ -1,0 +1,24 @@
+/* Global font override for IBM Plex Sans Arabic */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
+
+* , body, button, input, textarea, select {
+  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+}
+
+body {
+  background-color: #f8fafc; /* Subtle slate-50 background for contrast */
+  background-image: radial-gradient(#cbd5e1 0.8px, transparent 0.8px);
+  background-size: 24px 24px;
+  color: #1e293b;
+}
+
+/* Ensure headings and strong text follow the font and weight rules */
+h1, h2, h3, h4, h5, h6, strong, b, .font-bold, .font-black, .font-extrabold {
+  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+  font-weight: 700 !important; /* Force bold to 700 for IBM Plex */
+}
+
+/* Ensure regular text uses correct weight */
+p, span, div, a, li, label {
+  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+}
