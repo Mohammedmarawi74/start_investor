@@ -19,6 +19,7 @@ import { ExportTemplates } from './components/ExportTemplates';
 import { Tasks } from './components/Tasks';
 import { Home } from './components/Home';
 import { PlanComparison } from './components/PlanComparison';
+import { UnicornBenchmarking } from './components/UnicornBenchmarking';
 import { NewPlan } from './components/NewPlan';
 import { LeftAiSidebar } from './components/LeftAiSidebar';
 import { BrandIdentityStudio } from './components/BrandIdentityStudio';
@@ -47,7 +48,8 @@ import {
   ListTodo,
   Home as HomeIcon,
   ArrowRightLeft,
-  Plus
+  Plus,
+  Globe
 } from 'lucide-react';
 
 const MOCK_USER: User = {
@@ -80,7 +82,7 @@ const INITIAL_COMMENTS: Comment[] = [
 ];
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'home' | 'my-plans' | 'new-plan' | 'comparison' | 'brand-identity' | 'editor' | 'analytics' | 'tasks' | 'export-templates' | 'settings' | 'pricing' | 'notifications' | 'changelog' | 'admin-dashboard' | 'users-management' | 'admin-plans' | 'admin-analytics' | 'admin-security'>('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'my-plans' | 'new-plan' | 'comparison' | 'unicorn-benchmark' | 'brand-identity' | 'editor' | 'analytics' | 'tasks' | 'export-templates' | 'settings' | 'pricing' | 'notifications' | 'changelog' | 'admin-dashboard' | 'users-management' | 'admin-plans' | 'admin-analytics' | 'admin-security'>('home');
   const [sections, setSections] = useState<PlanSection[]>(INITIAL_SECTIONS);
   const [expandedSectionId, setExpandedSectionId] = useState<string | null>('1');
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | null>('saved');
@@ -155,6 +157,7 @@ const App: React.FC = () => {
                   <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-100 rounded-2xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                     {[
                       { id: 'comparison', label: 'المقارنة', icon: ArrowRightLeft },
+                      { id: 'unicorn-benchmark', label: 'رادار اليونيكورن', icon: Globe },
                       { id: 'analytics', label: 'التحليلات', icon: BarChart3 },
                       { id: 'export-templates', label: 'القوالب', icon: Palette },
                       { id: 'changelog', label: 'التحديثات', icon: History },
@@ -248,6 +251,12 @@ const App: React.FC = () => {
           {activeTab === 'comparison' && (
             <div className="animate-in slide-in-from-bottom-4 duration-700">
                <PlanComparison />
+            </div>
+          )}
+
+          {activeTab === 'unicorn-benchmark' && (
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <UnicornBenchmarking />
             </div>
           )}
 

@@ -290,6 +290,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ user, isOpen = true, isCollaps
                <NavItem icon={Plus} label="خطة جديدة" active={activeTab === 'new-plan'} onClick={() => setActiveTab?.('new-plan')} isCollapsed={isCollapsed} />
                <NavItem icon={Palette} label="الهوية البصرية" active={activeTab === 'brand-identity'} onClick={() => setActiveTab?.('brand-identity')} isCollapsed={isCollapsed} isNew />
                <NavItem icon={ArrowRightLeft} label="مقارنة الخطط" active={activeTab === 'comparison'} onClick={() => setActiveTab?.('comparison')} isCollapsed={isCollapsed} />
+               <NavItem icon={Globe} label="رادار اليونيكورن" active={activeTab === 'unicorn-benchmark'} onClick={() => setActiveTab?.('unicorn-benchmark')} isCollapsed={isCollapsed} isNew />
                <NavItem icon={ListTodo} label="مهامي" active={activeTab === 'tasks'} onClick={() => setActiveTab?.('tasks')} isCollapsed={isCollapsed} badge={2} />
              </NavGroup>
 
