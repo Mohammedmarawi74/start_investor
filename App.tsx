@@ -149,6 +149,45 @@ const App: React.FC = () => {
         {/* Superior Navigation Bar */}
         <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-100 px-6 lg:px-12 py-3 flex items-center justify-between">
            <div className="flex items-center gap-4 lg:gap-6">
+              {/* Dynamic Breadcrumb UI */}
+              <nav className="flex items-center gap-2 text-[10.5px] font-bold group">
+                 <button 
+                  onClick={() => setActiveTab('home')}
+                  className="flex items-center gap-2 text-gray-400 hover:text-primary-600 transition-colors"
+                 >
+                    <HomeIcon size={14} />
+                    <span className="hidden sm:inline">الرئيسية</span>
+                 </button>
+                 
+                 {activeTab !== 'home' && (
+                   <>
+                    <ChevronLeft size={12} className="text-gray-300" />
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 border border-gray-100 rounded-full text-gray-700 animate-in fade-in slide-in-from-right-2 duration-500">
+                       <span className="w-1 h-1 bg-primary-500 rounded-full"></span>
+                       <span>
+                         {activeTab === 'profile' && 'الملف الشخصي'}
+                         {activeTab === 'settings' && 'إعدادات الحساب والملف الشخصي'}
+                         {activeTab === 'pricing' && 'باقات الاشتراك والفوترة'}
+                         {activeTab === 'my-plans' && 'أرشيف مشاريعي'}
+                         {activeTab === 'new-plan' && 'خلق فكرة جديدة'}
+                         {activeTab === 'unicorn-benchmark' && 'رادار اليونيكورن'}
+                         {activeTab === 'brand-identity' && 'استوديو الهوية البصرية'}
+                         {activeTab === 'comparison' && 'مقارنة السيناريوهات'}
+                         {activeTab === 'editor' && 'محرر خطط الأعمال الذكي'}
+                         {activeTab === 'tasks' && 'المهام والجدولة'}
+                         {activeTab === 'notifications' && 'مركز التنبيهات'}
+                         {activeTab === 'changelog' && 'سجل التحديثات القادم'}
+                         {activeTab === 'export-templates' && 'قوالب التصدير والطباعة'}
+                         {activeTab === 'admin-dashboard' && 'لوحة تحكم الإدارة'}
+                         {activeTab === 'users-management' && 'إدارة قاعدة المستخدمين'}
+                         {activeTab === 'admin-plans' && 'أرشيف الخطط العمومية'}
+                         {activeTab === 'admin-analytics' && 'تحليلات المنصة الشاملة'}
+                         {activeTab === 'admin-security' && 'بروتوكولات الأمان'}
+                       </span>
+                    </div>
+                   </>
+                 )}
+              </nav>
            </div>
            
            <div className="flex items-center gap-4">

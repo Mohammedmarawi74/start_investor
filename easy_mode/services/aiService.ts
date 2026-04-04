@@ -4,103 +4,133 @@ import { AiAnalysisResult } from '../types';
 export function buildDeepPrompt(answers: any): string {
   const problemText = typeof answers.problem === 'object' ? answers.problem.problem : (answers.problem || 'غير محددة');
   
-  return `أنت مستشار أعمال ومحلل استراتيجي عالمي المستوى، متخصص في ريادة الأعمال في الأسواق العربية والعالمية.
-بناءً على البيانات التفصيلية أدناه، قدم تحليلاً شاملاً ودقيقاً جداً. يجب أن يكون تحليلك حقيقياً وعملياً ومبنياً على واقع السوق.
+  return `أنت مستشار أعمال ومحلل استراتيجي عالمي المستوى، متخصص في ريادة الأعمال الحديثة والنمو المتسارع.
+بناءً على البيانات التفصيلية أدناه، قدم تحليلاً "توليدياً عميقاً" يتجاوز التوقعات التقليدية.
 
-═══ بيانات المشروع المفصلة ═══
-نوع المشروع: ${answers.sector || 'غير محدد'}
-طبيعة المشكلة المحلولة: ${problemText}
-مصدر الفكرة: ${answers.problem_source || 'غير محدد'}
-ملف العميل - الفئة العمرية: ${answers.customer_age || 'غير محدد'}
-ملف العميل - القدرة الشرائية: ${answers.customer_income || 'غير محدد'}
-ملف العميل - إلحاح المشكلة: ${answers.customer_pain_level || 'غير محدد'}
-وضع المنافسة: ${answers.competition || 'غير محدد'}
-الميزة التنافسية: ${answers.competitive_advantage || 'غير محددة'}
-الميزانية المتاحة: ${answers.budget_range || 'غير محددة'}
-الوقت الأسبوعي: ${answers.time || 'غير محدد'}
-الفريق: ${answers.team || 'غير محدد'}
-الخبرة التقنية: ${answers.skills || 'غير محددة'}
-مستوى التحقق من السوق: ${answers.validation || 'غير محدد'}
-الهدف الإيرادي: ${answers.revenue_target || 'غير محدد'}
-الأفق الزمني: ${answers.exit_strategy || 'غير محدد'}
-نوع النمو المطلوب: ${answers.growth_type || 'غير محدد'}
-أكبر المخاوف: ${Array.isArray(answers.biggest_fear) ? answers.biggest_fear.join('، ') : (answers.biggest_fear || 'غير محددة')}
+═══ بيانات المدخلات الاستراتيجية ═══
+القطاعات المختارة: ${Array.isArray(answers.sector) ? answers.sector.join(' + ') : (answers.sector || 'غير محدد')}
+طبيعة المشكلة: ${problemText}
+بروفايل العميل السلوكي: ${JSON.stringify(answers.behavioral_profile || 'بسيط')}
+خريطة التعاطف (Empathy Map data): ${JSON.stringify(answers.empathy_data || 'غير محددة')}
+المنافسة والتميز: ${answers.competition || 'غير محدد'}
+الموارد المتاحة: ${JSON.stringify(answers.resources || 'ميزانية محدودة')}
+المخاوف الاستراتيجية: ${Array.isArray(answers.biggest_fear) ? answers.biggest_fear.join('، ') : (answers.biggest_fear || 'غير محددة')}
 
-═══ التعليمات ═══
-أعد الرد بصيغة JSON فقط.
+═══ التعليمات الفنية للذكاء الاصطناعي ═══
+1. ابحث عن "تقاطع القطاعات" (Hybrid Models) واقترح نموذجاً يكتشف "محيطاً أزرقاً" (Blue Ocean).
+2. حلل "سيكولوجية العميل" بناءً على خريطة التعاطف ونموذج Jobs to be Done وحدد "نبرة الصوت" المثالية.
+3. قدم ذكاءً تنافسياً (Competitive Intelligence) مفترضاً من إشارات السوق الحية.
+4. احسب "تكلفة الفرصة البديلة" (Opportunity Cost) بدقة (Build vs Buy).
+5. صغ مصفوفة حساسية مالية توضح تأثير الـ CAC والـ Churn.
+6. ولد جدول Gantt تفاعلي مع تحديد المسار الحرج (Critical Path).
+7. صمم مصفوفة مخاطر بخطة طوارئ (Plan B) ونقاط توقف (Kill-switch).
+
+أعد الرد بصيغة JSON فقط متطابقة تماماً مع الـ Interface البرمجي المعتمد.
 `;
 }
 
-// --- SMART MOCK FOR FRONTEND ONLY PROTECTION ---
-function generateMockAnalysis(answers: any): AiAnalysisResult {
-  const problemText = typeof answers.problem === 'object' ? answers.problem.problem : (answers.problem || 'بناء مشروع ناجح');
+export function generateMockAnalysis(answers: any): AiAnalysisResult {
   const score = Math.floor(Math.random() * (90 - 70) + 70);
   
   return {
     score: score,
-    scoreBreakdown: { idea: 21, market: 20, resources: 16, execution: 17 },
-    verdict: "فكرة واعدة في سوق نامٍ — الوقت مثالي للدخول بخطة محكمة",
+    scoreBreakdown: { idea: 22, market: 19, resources: 18, execution: 21 },
+    radarData: { tech: 85, market: 65, team: 90, financial: 70, operations: 75 },
+    verdict: "نموذج هجين واعد — استراتيجية المحيط الأزرق متاحة",
     verdictType: "green",
-    executiveSummary: `مشروعك في قطاع ${answers.sector || 'الخدمات'} يعالج مشكلة "${problemText.substring(0, 50)}..." وهو حل يلمس احتياجاً حقيقياً في السوق المحلي. الميزانية المحددة ($${answers.budget_range || '10k'}) كافية جداً للوصول للنموذج الأولي والتحقق من الربحية قبل التوسع.`,
-    marketSize: {
-      tam: "$1.2 مليار",
-      sam: "$180 مليون",
-      som: "$2.4 مليون",
-      source: "Statista 2024 + بيانات مقارنة محلية"
+    executiveSummary: "بناءً على تقاطع القطاعات المختار، نرى فرصة فريدة في دمج الأتمتة مع تجربة المستخدم الشخصية. مشروعك يحمل هوية تنافسية قوية وتحتاج فقط لضبط مصفوفة الحساسية المالية.",
+    hybridInnovation: {
+       suggestedModel: "منصة ذكية تجمع بين الخدمات اللوجستية وتخصيص البيانات الفوري",
+       whyItWorks: "العملاء اليوم يفضلون الحلول الشاملة التي توفر الوقت والجهد في مكان واحد.",
+       blueOceanOpportunity: "سوق مهمل حالياً يركز على الكفاءة فقط دون الاهتمام بالعلاقة طويلة الأمد."
     },
-    timeToRevenue: "45 يوم",
-    breakEvenMonths: 8,
-    competitiveAnalysis: {
-      threat: "medium",
-      mainCompetitors: ["المنافسون التقليديون", "مجموعات واتساب", "حلول مجانية"],
-      yourEdge: answers.competitive_advantage || "السرعة والتجربة المخصصة لهذا السوق",
-      moat: "الاستحواذ المبكر وصعوبة تغيير المنصة بعد أول تجربة ناجحة"
+    behavioralPersona: {
+      psychographics: "جيل يسعى للكفاءة والتميز الشخصي، يفضل السرعة على التوفير"،
+      jobsToBeDone: "توفير 4 ساعات أسبوعياً من العمل اليدوي المجهد",
+      empathyMap: {
+         sees: "إعلانات لحلول تقنية معقدة لا تحل مشكلته الحقيقية",
+         hears: "أصدقاء يشتكون من نفس المشكلة ويبحثون عن بدائل",
+         feels: "الإحباط من ضياع الوقت في مهام روتينية",
+         pains: "الخوف من فقدان السيطرة على جودة العمل"
+      },
+      toneOfVoice: "صديق تقني ذكي مستشار موثوق"
+    },
+    competitiveIntelligence: {
+       fundingInsights: "جولات تمويل حديثة بمتوسط $2M في هذا القطاع مما يشير لنمو قوي",
+       competitorWeakness: "المنافسون يعانون من بطء استجابة الدعم الفني وتعقيد الواجهة",
+       marketSignals: "تحول كبير في تفضيلات العملاء نحو المنصات المتكاملة"
+    },
+    marketSize: {
+      tam: "$1.8 مليار",
+      sam: "$240 مليون",
+      som: "$3.6 مليون",
+      source: "Crunchbase + تقارير اقتصادية محلية 2024"
+    },
+    timeToRevenue: "35 يوم",
+    breakEvenMonths: 7,
+    opportunityCost: {
+       buildVsBuy: "استثمار 50 ساعة في بناء بنية أساسية يوفر عليك $2500 تكلفة اشتراكات",
+       calculatedLoss: "خسارة محتملة $1200 شهرياً في حال تأخر الإطلاق لمدة شهرين",
+       strategicAdvice: "الأفضل هو Outsourcing للمهام الثانوية والتركيز على الـ Core Product."
+    },
+    sensitivityAnalysis: {
+       cacImpact: "انخفاض بنسبة 5% في CAC سيؤدي إلى وصول أسرع للتعادل بـ 1.5 شهر",
+       churnImpact: "زيادة 2% في الارتداد تهدد الـ Runway الحالي بـ 3 أشهر",
+       baseCac: 45,
+       baseChurn: 5
     },
     financials: {
-      monthlyFixed: "$850",
-      monthlyVariable: "18%",
-      cac: "$42",
-      ltv: "$380",
-      ltvCacRatio: "9.1x",
-      runway: "11 شهر"
+      monthlyFixed: "$950",
+      monthlyVariable: "15%",
+      cac: "$45",
+      ltv: "$450",
+      ltvCacRatio: "10.0x",
+      runway: "14 شهر"
     },
+    ganttTasks: [
+       { id: "1", task: "بناء النموذج الأولي (MVP)", startDay: 0, duration: 14, isCritical: true },
+       { id: "2", task: "تحقق السوق الأولي", startDay: 14, duration: 10, dependencies: ["1"], isCritical: true },
+       { id: "3", task: "بناء الهوية البصرية", startDay: 5, duration: 7, isCritical: false },
+       { id: "4", task: "حملة التسويق المبكر", startDay: 24, duration: 21, dependencies: ["2"], isCritical: true }
+    ],
     criticalObstacles: [
-      { title: "نفاد السيولة قبل التعادل", detail: "الهامش ضيق مع ميزانية التسويق.", severity: "critical", timeframe: "فوري" },
-      { title: "بناء جانبي المنصة", detail: "صعوبة إقناع المزودين قبل وجود عملاء كافين.", severity: "high", timeframe: "30 يوم" }
+      { title: "التوسع اللوجستي", detail: "صعوبة السيطرة على الجودة عند زيادة الطلب بنسبة 300%", severity: "high", timeframe: "فوري" }
     ],
     actionPlan: {
-      week1: [{ action: "إنشاء صفحة هبوط أولية", why: "لجمع اهتمامات العملاء وقياس الطلب الفعلي.", howExactly: "استخدام Carrd ومشاركة الرابط في مجموعات واتساب المتخصصة." }],
-      month1: [{ action: "إنجاز أول 10 طلبات يدوياً", why: "لفهم المتاعب التي قد تواجه المستخدمين لاحقاً.", howExactly: "التواصل الهاتفي المباشر دون بناء أي تقنية معقدة." }],
-      month3: [{ action: "إطلاق الموقع البسيط (MVP)", why: "للتحقق من الربحية على نطاق أوسع.", howExactly: "استخدام منصات No-code لإطلاق الخدمة في مدينة واحدة كبداية." }],
-      month6: [{ action: "التوسع لمدينة ثانية", why: "لنمو الإيرادات وزيادة SOM.", howExactly: "تكرار نمط التحقق اليدوي في جدة أو الرياض." }]
+      week1: [{ action: "إعداد خريطة التعاطف النهائية", why: "لضبط الرسائل التسويقية", howExactly: "مقابلات مع 5 عملاء مستهدفين" }],
+      month1: [{ action: "إطلاق البيتا", why: "جمع التغذية الراجعة", howExactly: "دعوات خاصة لـ 50 مستخدم" }],
+      month3: [{ action: "تحليل الحساسية المالية", why: "ضبط نماذج التسعير", howExactly: "مراجعة CAC الشهرية" }],
+      month6: [{ action: "التوسع الإقليمي", why: "زيادة حصة SOM", howExactly: "استهداف مدن ثانوية" }]
     },
     risks: [
-      { title: "دخول لاعب كبير للسوق", probability: "medium", impact: "high", mitigation: "التركيز على الثقة المحلية وبناء علامة تجارية قريبة من العميل.", earlySignal: "بدء حملات إعلانية كثيفة من منصات عالمية في السعودية." }
+      { title: "تغير سياسات آبل/غوغل", probability: "low", impact: "high", mitigation: "بناء قاعدة بيانات مستقلة", earlySignal: "تحديثات الخصوصية الجديدة", planB: "الاعتماد على الويب بدلاً من التطبيق", killSwitch: "انخفاض الوصول لـ 20%" }
     ],
+    activationPlan: {
+       notionExportUrl: "https://notion.so/workspace/new-plan",
+       trelloExportUrl: "https://trello.com/b/new-board"
+    },
     validationPlan: {
-      nextStep: "إطلاق صفحة انتظار لجمع 50 عميل مهتم",
-      successMetric: "200 مسجل خلال 30 يوماً",
-      timeboxDays: 30,
-      budget: "$300"
+      nextStep: "بناء صفحة هبوط تفاعلية",
+      successMetric: "نسبة تحويل 12%",
+      timeboxDays: 14,
+      budget: "$500"
     },
     resources: [
-      { title: "Bubble.io", type: "أداة", platform: "No-code", why: "بناء MVP كامل بسرعة فائقة.", cost: "$29/شهر", urgency: "فوري" },
-      { title: "Stripe / Moyasar", type: "أداة", platform: "Payments", why: "لضمان سرعة تحصيل المبالغ.", cost: "نسبة", urgency: "فوري" },
-      { title: "Cold Start Problem", type: "كتاب", platform: "Amazon", why: "لفهم كيفية بناء المنصات الوسيطة.", cost: "$15", urgency: "مهم" }
+      { title: "Framer", type: "أداة", platform: "No-code", why: "سرعة بناء الموقع التعريفي", cost: "$15/شهر", urgency: "فوري" }
     ],
     keyMetrics: [
-      { metric: "إكمال الطلبات", target: "85%", how: "عدد المستخدمين الذين أتموا الخدمة فعلياً", frequency: "يومي" }
+      { metric: "معدل الرضا", target: "4.8/5", how: "استبيانات بعد طلب الخدمة", frequency: "يومي" }
     ],
-    pivotSignals: ["إذا لم تظهر طلبات بعد شهرين", "إذا تكررت شكاوى جودة الخدمة"],
-    successStory: "TaskRabbit بدأت بمبلغ بسيط وفهمت احتياج الناس للمساعدة المحلية العاجلة.",
-    failureLesson: "Homejoy توسعت بسرعة مذهلة دون التأكد من ربحية كل معاملة مما أدى لانهيارها.",
-    aiInsight: "الفرصة الحقيقية ليست في التكنولوجيا بل في بناء 'نظام ثقة' يحاكي التزكية الشخصية التقليدية."
+    pivotSignals: ["عدم وجود طلب بعد 30 يوم من الحملة"],
+    successStory: "Dropbox بدأت بتقاطع بسيط وسهولة لم يعرفها أحد من قبل.",
+    failureLesson: "Quibi فشلت لأنها لم تفهم Jobs to be Done لجيل الموبايل.",
+    aiInsight: "القوة الاستراتيجية تكمن في قدرتك على التحول السريع (Pivoting) بناءً على إشارات السوق."
   };
 }
 
 export async function analyzeWithAI(answers: any, apiKey?: string): Promise<AiAnalysisResult> {
   try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
+    const res = await fetch("/api/anthropic/v1/messages", {
        method: "POST",
        headers: { 
          "Content-Type": "application/json",

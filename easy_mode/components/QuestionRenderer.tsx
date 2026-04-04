@@ -12,41 +12,100 @@ interface RendererProps {
   setTempAnswer: (val: any) => void;
 }
 
-// --- Dynamic Icon Component ---
 const LucideIcon: React.FC<{ name: string; size?: number; color?: string; fill?: string }> = ({ name, size = 20, color = THEME.text, fill = "none" }) => {
   const IconComponent = (Lucide as any)[name] || Lucide.HelpCircle;
   return <IconComponent size={size} color={color} fill={fill} strokeWidth={2} />;
 };
 
-// --- Selection Card ---
-export const QuestionCards: React.FC<RendererProps> = ({ question, onSelect, selected }) => (
-  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-    {question.options?.map(opt => {
-      const active = selected === opt.val;
-      return (
-        <button key={opt.val} onClick={() => onSelect(opt.val)}
-          style={{
-            padding: "24px 20px", borderRadius: 20, border: `2px solid ${active ? THEME.accent : 'transparent'}`,
-            background: active ? THEME.accentDim : THEME.bgSecondary,
-            cursor: "pointer", textAlign: "right", transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-            boxShadow: active ? THEME.accentGlow : "none",
-            display: "flex", flexDirection: "column", gap: 8,
-          }}>
-          <div style={{ 
-            width: 44, height: 44, borderRadius: 12, background: active ? '#fff' : 'rgba(0,0,0,0.03)',
-            display: "flex", alignItems: "center", justifyContent: "center"
-          }}>
-            <LucideIcon name={opt.icon || 'Box'} size={24} color={active ? THEME.accent : THEME.textMuted} />
-          </div>
-          <div>
-            <div style={{ fontSize: 15, fontWeight: 800, color: THEME.text, marginBottom: 4, fontFamily: THEME.fontDisplay }}>{opt.title}</div>
-            <div style={{ fontSize: 12, color: THEME.textMuted, lineHeight: 1.6, fontFamily: THEME.fontBody }}>{opt.desc}</div>
-          </div>
-        </button>
-      );
-    })}
-  </div>
-);
+// --- Enhanced Selection Card (Supports Multi-Selection for Cross-Sector) ---
+export const QuestionCards: React.FC<RendererProps> = ({ question, onSelect, selected, tempAnswer, setTempAnswer }) => {
+  const isMulti = question.multi;
+  const currentSelection = isMulti ? (tempAnswer || []) : selected;
+
+  const handleToggle = (val: string) => {
+    if (isMulti) {
+      if (currentSelection.includes(val)) {
+        setTempAnswer(currentSelection.filter((v: string) => v !== val));
+      } else {
+        setTempAnswer([...currentSelection, val]);
+      }
+    } else {
+      onSelect(val);
+    }
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+        {question.options?.map(opt => {
+          const active = isMulti ? currentSelection.includes(opt.val) : selected === opt.val;
+          return (
+            <button key={opt.val} onClick={() => handleToggle(opt.val)}
+              style={{
+                padding: "24px 20px", borderRadius: 20, border: `2px solid ${active ? THEME.accent : 'transparent'}`,
+                background: active ? THEME.accentDim : THEME.bgSecondary,
+                cursor: "pointer", textAlign: "right", transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                boxShadow: active ? THEME.accentGlow : "none",
+                display: "flex", flexDirection: "column", gap: 8,
+              }}>
+              <div style={{ 
+                width: 44, height: 44, borderRadius: 12, background: active ? '#fff' : 'rgba(0,0,0,0.03)',
+                display: "flex", alignItems: "center", justifyContent: "center"
+              }}>
+                <LucideIcon name={opt.icon || 'Box'} size={24} color={active ? THEME.accent : THEME.textMuted} />
+              </div>
+              <div>
+                <div style={{ fontSize: 15, fontWeight: 800, color: THEME.text, marginBottom: 4, fontFamily: THEME.fontDisplay }}>{opt.title}</div>
+                <div style={{ fontSize: 12, color: THEME.textMuted, lineHeight: 1.6, fontFamily: THEME.fontBody }}>{opt.desc}</div>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+      {isMulti && currentSelection.length >= 2 && (
+         <button onClick={() => onSelect(currentSelection)}
+           style={{ background: THEME.text, color: "#FFF", border: "none", borderRadius: 16, padding: "18px 48px", fontSize: 15, fontWeight: 800, cursor: "pointer", alignSelf: "flex-end", display: "flex", alignItems: "center", gap: 10, fontFamily: THEME.fontDisplay }}>
+           <span>دمج القطاعات واستمر</span>
+           <Lucide.ArrowLeft size={18} />
+         </button>
+      )}
+    </div>
+  );
+};
+
+// --- Empathy Map Renderer (2x2 Behavioral Grid) ---
+export const EmpathyMapRenderer: React.FC<RendererProps> = ({ question, onSelect, tempAnswer, setTempAnswer }) => {
+   const current = tempAnswer || {};
+   const isDone = Object.keys(current).length >= (question.options?.length || 0);
+
+   return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+            {question.options?.map((opt, i) => (
+               <div key={opt.val} style={{ background: THEME.bgSecondary, borderRadius: 24, padding: 20, border: `1px solid ${current[opt.val] ? THEME.accent : THEME.border}` }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+                     <LucideIcon name={i === 0 ? 'Eye' : i === 1 ? 'Ear' : i === 2 ? 'Brain' : 'AlertTriangle'} size={20} color={THEME.textMuted} />
+                     <span style={{ fontSize: 12, fontWeight: 800, color: THEME.text, fontFamily: THEME.fontDisplay }}>{opt.label}</span>
+                  </div>
+                  <textarea 
+                     placeholder="صف ملاحظتك هنا..."
+                     value={current[opt.val] || ""}
+                     onChange={(e) => setTempAnswer({ ...current, [opt.val]: e.target.value })}
+                     style={{ width: "100%", background: "#FFF", border: `1px solid ${THEME.border}`, borderRadius: 14, padding: 12, fontSize: 13, resize: "none", height: 80, fontFamily: THEME.fontBody, outline: "none" }}
+                  />
+               </div>
+            ))}
+         </div>
+         {isDone && (
+            <button onClick={() => onSelect(current)}
+              style={{ background: THEME.text, color: "#FFF", border: "none", borderRadius: 16, padding: "18px 48px", fontSize: 15, fontWeight: 800, cursor: "pointer", alignSelf: "flex-end", display: "flex", alignItems: "center", gap: 10, fontFamily: THEME.fontDisplay }}>
+              <span>حفظ التحليل السلوكي</span>
+              <Lucide.ArrowLeft size={18} />
+            </button>
+         )}
+      </div>
+   );
+};
 
 // --- Textarea + Choice ---
 export const QuestionTextAreaChoice: React.FC<RendererProps> = ({ question, onSelect, tempAnswer, setTempAnswer }) => (
@@ -66,7 +125,7 @@ export const QuestionTextAreaChoice: React.FC<RendererProps> = ({ question, onSe
     />
     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
       {question.options?.map(opt => (
-        <button key={opt.val} onClick={() => onSelect({ problem: tempAnswer?.text || "", problem_source: opt.val })}
+        <button key={opt.val} onClick={() => onSelect({ problem: tempAnswer?.text || "", problem_type: opt.val })}
           style={{
             padding: "16px 20px", borderRadius: 16, border: `1px solid ${THEME.border}`,
             background: THEME.bgCard, cursor: "pointer", textAlign: "right",
@@ -107,12 +166,12 @@ export const MultiSelectionRenderer: React.FC<RendererProps & { items: any[], fi
       ))}
       {isDone && (
         <button onClick={() => {
-          const ans: any = {};
+          const ansIndex: any = {};
           items.forEach(p => { 
             const key = fieldPrefix ? `${fieldPrefix}_${p.id}` : p.id;
-            ans[key] = (tempAnswer || {})[p.id]; 
+            ansIndex[key] = (tempAnswer || {})[p.id]; 
           });
-          onSelect(ans);
+          onSelect(ansIndex);
         }}
           style={{ marginTop: 12, background: THEME.text, color: "#FFF", border: "none", borderRadius: 16, padding: "16px 36px", fontSize: 15, fontWeight: 800, cursor: "pointer", alignSelf: "flex-end", display: "flex", alignItems: "center", gap: 10, fontFamily: THEME.fontDisplay }}>
           <span>استمر</span>
@@ -233,7 +292,7 @@ export const FearSelect: React.FC<RendererProps> = ({ question, onSelect, tempAn
       {isDone && (
         <button onClick={() => onSelect(selectedList)}
           style={{ background: THEME.accent, color: "#FFF", border: "none", borderRadius: 16, padding: "18px 48px", fontSize: 16, fontWeight: 800, cursor: "pointer", alignSelf: "flex-end", marginTop: 12, boxShadow: THEME.accentGlow, display: "flex", alignItems: "center", gap: 12, fontFamily: THEME.fontDisplay }}>
-          <span>حلل مشروعي الآن</span>
+          <span>بدء التوليد الاستراتيجي المحترف</span>
           <Lucide.Sparkles size={18} />
         </button>
       )}
