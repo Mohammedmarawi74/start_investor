@@ -23,10 +23,9 @@ const Badge: React.FC<{ children: React.ReactNode, type?: 'indigo' | 'emerald' |
   );
 };
 
-// --- 1. Hybrid Innovation Card (The Masterpiece) ---
+// --- 1. Hybrid Innovation Card ---
 export const HybridInnovationCard: React.FC<{ data: any }> = ({ data }) => (
   <div className="relative bg-slate-900 rounded-[3.5rem] p-12 lg:p-16 text-white overflow-hidden group shadow-[0_50px_100px_rgba(0,0,0,0.15)] mb-12">
-    {/* Intelligent Back-glows */}
     <div className="absolute -top-48 -right-48 w-96 h-96 bg-indigo-500/20 rounded-full blur-[120px] group-hover:scale-125 transition-transform duration-[2000ms]"></div>
     <div className="absolute -bottom-48 -left-48 w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px]"></div>
 
@@ -85,11 +84,11 @@ export const HybridInnovationCard: React.FC<{ data: any }> = ({ data }) => (
   </div>
 );
 
-// --- 2. Strategic Radar (Sonar Intelligence) ---
+// --- 2. Strategic Radar ---
 export const StrategicRadar: React.FC<{ labels: string[], values: number[] }> = ({ labels, values }) => {
-  const size = 320;
+  const size = 200;
   const center = size / 2;
-  const radius = size * 0.38;
+  const radius = size * 0.35;
   const angleStep = (Math.PI * 2) / labels.length;
 
   const points = values.map((val, i) => {
@@ -109,52 +108,52 @@ export const StrategicRadar: React.FC<{ labels: string[], values: number[] }> = 
   });
 
   return (
-    <div className="relative w-full flex flex-col items-center justify-center p-4">
-      <div className="relative group p-10 bg-slate-50/50 rounded-[4rem] border border-slate-100 shadow-inner w-full flex justify-center">
+    <div className="relative w-full flex flex-col items-center justify-center p-2">
+      <div className="relative group p-6 bg-slate-50/50 rounded-[3rem] border border-slate-100 shadow-inner w-full max-w-[280px] flex justify-center">
         {/* Dynamic Sonar Scan Line */}
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-10">
            <div className="w-full h-full rounded-full border border-indigo-200 animate-ping duration-[5000ms]"></div>
-           <div className="absolute top-1/2 left-1/2 w-[220px] h-1.5 bg-gradient-to-r from-indigo-500 to-transparent origin-left animate-spin duration-[8000ms] -translate-y-1/2 blur-[2px]"></div>
+           <div className="absolute top-1/2 left-1/2 w-[120px] h-1 bg-gradient-to-r from-indigo-500 to-transparent origin-left animate-spin duration-[8000ms] -translate-y-1/2 blur-[1px]"></div>
         </div>
 
-        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] max-w-full h-auto">
+        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="relative z-10 drop-shadow-[0_10px_30px_rgba(0,0,0,0.1)] max-w-full h-auto overflow-visible">
           <defs>
              <radialGradient id="radarGradElite">
                 <stop offset="0%" stopColor="#6366f1" stopOpacity="0.05" />
                 <stop offset="100%" stopColor="#6366f1" stopOpacity="0.5" />
              </radialGradient>
              <filter id="eliteGlowRadar" x="-30%" y="-30%" width="160%" height="160%">
-                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feGaussianBlur stdDeviation="3" result="blur" />
                 <feComposite in="SourceGraphic" in2="blur" operator="over" />
              </filter>
           </defs>
           
           {gridPoints.map((poly, i) => (
-            <polygon key={i} points={poly} fill="none" stroke="#e2e8f0" strokeWidth="1.5" strokeDasharray={i === 4 ? "0" : "6 4"} />
+            <polygon key={i} points={poly} fill="none" stroke="#e2e8f0" strokeWidth="1" strokeDasharray={i === 4 ? "0" : "4 3"} />
           ))}
           
           {Array.from({ length: labels.length }).map((_, i) => (
             <line key={i} x1={center} y1={center} 
               x2={center + radius * Math.sin(i * angleStep)} 
               y2={center - radius * Math.cos(i * angleStep)} 
-              stroke="#e2e8f0" strokeWidth="1.5" strokeOpacity="0.4" />
+              stroke="#e2e8f0" strokeWidth="1" strokeOpacity="0.3" />
           ))}
           
           <polygon 
             points={points} 
             fill="url(#radarGradElite)" 
             stroke="#6366f1" 
-            strokeWidth="5" 
+            strokeWidth="4" 
             strokeLinejoin="round" 
             filter="url(#eliteGlowRadar)"
             className="animate-in fade-in zoom-in duration-[1500ms] translate-z-0" 
           />
 
           {labels.map((label, i) => {
-               const x = center + (radius + 60) * Math.sin(i * angleStep);
-               const y = center - (radius + 60) * Math.cos(i * angleStep);
+               const x = center + (radius + 35) * Math.sin(i * angleStep);
+               const y = center - (radius + 35) * Math.cos(i * angleStep);
                return (
-                 <text key={i} x={x} y={y} className="fill-slate-700 text-[11px] font-black uppercase tracking-widest" textAnchor="middle" alignmentBaseline="middle" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>
+                 <text key={i} x={x} y={y} className="fill-slate-500 text-[9px] font-black uppercase tracking-widest" textAnchor="middle" alignmentBaseline="middle" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>
                    {label}
                  </text>
                );
@@ -165,7 +164,7 @@ export const StrategicRadar: React.FC<{ labels: string[], values: number[] }> = 
   );
 };
 
-// --- 3. Sensitivity Simulator (Strategic War Room) ---
+// --- 3. Sensitivity Simulator ---
 export const SensitivitySimulator: React.FC<{ initialCac: number, initialChurn: number }> = ({ initialCac, initialChurn }) => {
    const [cac, setCac] = React.useState(initialCac);
    const [churn, setChurn] = React.useState(initialChurn);
@@ -234,26 +233,28 @@ export const SensitivitySimulator: React.FC<{ initialCac: number, initialChurn: 
          </div>
 
          <div className="relative group/display">
-            <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500 to-amber-500 rounded-[4rem] blur-2xl opacity-10 group-hover/display:opacity-30 transition-opacity duration-1000"></div>
-            <div className="relative bg-slate-900 p-14 lg:p-20 rounded-[3.5rem] flex flex-col lg:row items-center gap-16 overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.2)]">
-               <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full -mr-40 -mt-40 blur-[120px]"></div>
+            <div className="absolute -inset-2 bg-gradient-to-r from-indigo-500/20 to-amber-500/20 rounded-[3rem] blur-xl opacity-0 group-hover/display:opacity-100 transition-opacity duration-1000"></div>
+            <div className="relative bg-slate-900 p-8 lg:p-10 rounded-[3rem] flex flex-col lg:flex-row items-center gap-10 overflow-hidden shadow-2xl border border-white/5">
+               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full -mr-32 -mt-32 blur-[80px]"></div>
                
-               <div className="w-28 h-28 bg-white/5 border border-white/10 rounded-[3rem] flex items-center justify-center text-indigo-400 backdrop-blur-3xl shadow-inner group-hover/display:scale-110 group-hover/display:rotate-12 transition-all duration-[1200ms]">
-                  <Lucide.History size={56} strokeWidth={1} />
-               </div>
-               
-               <div className="flex-1 text-center md:text-right">
-                  <div className="text-[12px] font-black text-indigo-300 uppercase tracking-[0.5em] mb-6 opacity-60">Calculated Break-even Horizon</div>
-                  <div className="text-8xl lg:text-[10rem] font-black text-white tracking-tighter tabular-nums flex items-baseline justify-center md:justify-start gap-6 leading-none">
-                     {breakEven} 
-                     <span className="text-sm font-black text-slate-500 uppercase tracking-[0.4em]">Months</span>
+               <div className="flex flex-col lg:flex-row items-center gap-8 flex-1">
+                  <div className="w-20 h-20 bg-white/5 border border-white/10 rounded-[2rem] flex items-center justify-center text-indigo-400 backdrop-blur-3xl shadow-inner group-hover/display:rotate-12 transition-all duration-700">
+                     <Lucide.History size={40} strokeWidth={1.5} />
+                  </div>
+                  
+                  <div className="text-center lg:text-right">
+                     <div className="text-[10px] font-black text-indigo-300 uppercase tracking-[0.4em] mb-2 opacity-60">نقطة التعادل المتوقعة (Break-even)</div>
+                     <div className="text-6xl lg:text-7xl font-black text-white tracking-tighter tabular-nums flex items-baseline justify-center lg:justify-start gap-4 leading-none">
+                        {breakEven} 
+                        <span className="text-sm font-black text-slate-500 uppercase tracking-[0.4em]">Months</span>
+                     </div>
                   </div>
                </div>
 
-               <div className="w-px h-32 bg-white/10 hidden lg:block"></div>
+               <div className="w-full lg:w-px h-px lg:h-20 bg-white/10"></div>
 
-               <div className="max-w-[260px] text-[12px] font-bold text-slate-400 leading-relaxed opacity-80 text-center md:text-right italic" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>
-                 "تحليل الحساسية هذا يثبت أن خفض تكلفة الاستحواذ بنسبة 20% يسرع نقطة التعادل بقرابة 3 أشهر كاملة. ركز على الجلب العضوي."
+               <div className="max-w-xs text-[12px] font-bold text-slate-400 leading-relaxed opacity-80 text-center lg:text-right italic border-r-2 border-indigo-500/30 pr-5" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>
+                 "هذا المحاكي يثبت أن خفض تكلفة الاستحواذ بنسبة 20% يسرع نقطة التعادل بقرابة 3 أشهر. ركز على النمو العضوي."
                </div>
             </div>
          </div>
@@ -261,10 +262,9 @@ export const SensitivitySimulator: React.FC<{ initialCac: number, initialChurn: 
    );
 };
 
-// --- 4. Behavioral Persona (Psychographic Intelligence) ---
+// --- 4. Behavioral Persona ---
 export const BehavioralPersonaCard: React.FC<{ persona: any }> = ({ persona }) => (
    <div className="bg-white border border-slate-100 rounded-[5rem] p-16 lg:p-24 shadow-2xl shadow-slate-200/40 relative overflow-hidden group">
-      {/* Abstract Persona Geometry */}
       <div className="absolute -top-32 -right-32 w-96 h-96 bg-indigo-50/50 rounded-full blur-[80px] -z-0"></div>
       
       <div className="relative z-10 flex flex-wrap justify-between items-start gap-12 mb-24">
@@ -281,7 +281,7 @@ export const BehavioralPersonaCard: React.FC<{ persona: any }> = ({ persona }) =
             </div>
          </div>
          <div className="flex flex-col items-end gap-4">
-            <span className="text-[11px] font-black text-slate-300 uppercase tracking-[0.2em]">Strategic Voice Path</span>
+            <span className="text-[11px] font-black text-slate-300 uppercase tracking-widest leading-none mb-3">Strategic Voice Path</span>
             <div className="inline-flex items-center gap-4 px-8 py-4 bg-indigo-50 text-indigo-700 rounded-3xl border border-indigo-100 text-[12px] font-black shadow-2xl shadow-indigo-100/50">
                <Lucide.Speaker size={18} />
                <span>{persona.toneOfVoice || "مستشار تقني موثوق وصديق للهوية"}</span>
@@ -342,32 +342,46 @@ export const BehavioralPersonaCard: React.FC<{ persona: any }> = ({ persona }) =
    </div>
 );
 
-// --- 5. Financials (Unit Economics Dashboard) ---
+// --- 5. Financials Grid ---
 export const FinancialsGrid: React.FC<{ financials: any }> = ({ financials }) => {
   const stats = [
-    { label: "Opex (Monthly Fixed)", val: financials.monthlyFixed, icon: Lucide.Landmark, col: "text-amber-600 bg-amber-50" },
-    { label: "Unit Cost (CAC)", val: financials.cac, icon: Lucide.UserPlus, col: "text-rose-600 bg-rose-50" },
-    { label: "Lifetime Value (LTV)", val: financials.gem, icon: Lucide.Gem, col: "text-emerald-600 bg-emerald-50" },
-    { label: "LTV:CAC Ratio", val: financials.ltvCacRatio, icon: Lucide.Activity, col: "text-indigo-600 bg-indigo-50" },
-    { label: "Variable OpEx", val: financials.package, icon: Lucide.Boxes, col: "text-amber-600 bg-amber-50" },
-    { label: "Runway (Burn Rate)", val: financials.runway, icon: Lucide.Timer, col: "text-indigo-600 bg-indigo-50" },
+    { label: "المصاريف الثابتة", sub: "Monthly Fixed", val: financials.monthlyFixed, hint: "تكاليف التشغيل الأساسية", icon: Lucide.Landmark, col: "text-amber-600 bg-amber-50" },
+    { label: "تكلفة جلب العميل", sub: "Target CAC", val: financials.cac, hint: "ميزانية التسويق لكل فرد", icon: Lucide.UserPlus, col: "text-rose-600 bg-rose-50" },
+    { label: "القيمة الدائمة للعميل", sub: "LTV Growth", val: financials.gem, hint: "الربح المتوقع لكل مشتري", icon: Lucide.Gem, col: "text-emerald-600 bg-emerald-50" },
+    { label: "معدل العائد الربحي", sub: "LTV:CAC Ratio", val: financials.ltvCacRatio, hint: "مقياس كفاءة النمو", icon: Lucide.Activity, col: "text-indigo-600 bg-indigo-50" },
+    { label: "المتطلبات التشغيلية", sub: "OpEx Detail", val: financials.package, hint: "تجهيزات العمل اللازمة", icon: Lucide.Boxes, col: "text-amber-600 bg-amber-50" },
+    { label: "فترة الصمود المالي", sub: "Runway Index", val: financials.runway, hint: "مدة البقاء دون دخل", icon: Lucide.Timer, col: "text-indigo-600 bg-indigo-50" },
   ];
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-       {stats.map(({ label, val, icon: Icon, col }) => (
-          <div key={label} className="bg-white border border-slate-100 rounded-[2.5rem] p-10 hover:border-indigo-200 hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-700 group hover:-translate-y-2">
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-6 transition-all shadow-xl ${col}`}>
-               <Icon size={24} strokeWidth={2.5} />
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10" dir="rtl">
+       {stats.map(({ label, sub, val, hint, icon: Icon, col }) => (
+          <div key={label} className="bg-white/70 backdrop-blur-md border border-slate-100 rounded-[2rem] p-6 hover:border-indigo-200 hover:shadow-xl transition-all duration-500 group relative overflow-hidden h-full flex flex-col justify-between">
+            <div className="relative z-10">
+               <div className="flex justify-between items-start mb-6">
+                  <div className={`w-11 h-11 rounded-1.5xl flex items-center justify-center transition-all group-hover:rotate-6 shadow-lg ${col}`}>
+                     <Icon size={20} strokeWidth={2.5} />
+                  </div>
+                  <div className="text-[9px] font-black text-slate-300 uppercase tracking-widest leading-none mt-2">{sub}</div>
+               </div>
+               
+               <div className="space-y-1">
+                  <div className="text-[11px] font-black text-slate-400 uppercase tracking-widest">{label}</div>
+                  <div className="text-2xl font-black text-slate-900 tracking-tighter tabular-nums" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>{val}</div>
+               </div>
             </div>
-            <div className="text-[11px] font-black text-slate-300 uppercase tracking-[0.3em] mb-3">{label}</div>
-            <div className="text-3xl font-black text-slate-900 tracking-tighter tabular-nums" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>{val}</div>
+
+            <div className="mt-4 pt-4 border-t border-slate-50 relative z-10">
+               <div className="text-[10px] font-bold text-slate-400 italic leading-none">{hint}</div>
+            </div>
+            
+            <div className="absolute bottom-0 right-0 w-24 h-24 bg-slate-50 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </div>
        ))}
     </div>
   );
 };
 
-// --- 6. Smart Gantt Chart (Operations Masterplan) ---
+// --- 6. Smart Gantt Chart ---
 export const SmartGanttChart: React.FC<{ tasks: any[] }> = ({ tasks }) => {
    const totalDays = 60;
    return (
@@ -424,7 +438,7 @@ export const SmartGanttChart: React.FC<{ tasks: any[] }> = ({ tasks }) => {
    );
 };
 
-// --- 7. Risk Matrix (Elite Strategic Guard) ---
+// --- 7. Risk Matrix ---
 export const RiskMatrix: React.FC<{ risks: any[] }> = ({ risks }) => (
   <div className="grid gap-12">
     {risks.map((r, i) => {
@@ -469,7 +483,7 @@ export const RiskMatrix: React.FC<{ risks: any[] }> = ({ risks }) => (
   </div>
 );
 
-// --- 8. Obstacles Grid (Defensive Intelligence) ---
+// --- 8. Obstacles Grid ---
 export const ObstaclesGrid: React.FC<{ obstacles: any[] }> = ({ obstacles }) => (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
      {obstacles.map((o, i) => (
@@ -487,7 +501,7 @@ export const ObstaclesGrid: React.FC<{ obstacles: any[] }> = ({ obstacles }) => 
   </div>
 );
 
-// --- 9. Action Timeline (Strategic March) ---
+// --- 9. Action Timeline ---
 export const ActionTimeline: React.FC<{ actionPlan: any }> = ({ actionPlan }) => {
   const phases = [
     { key: "week1", label: "الأسبوع الأول (التأسيس)", icon: Lucide.Zap, col: "text-rose-500", dot: "border-rose-500", bg: "bg-rose-50/50" },
@@ -511,13 +525,11 @@ export const ActionTimeline: React.FC<{ actionPlan: any }> = ({ actionPlan }) =>
            </div>
 
            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {(actionPlan?.[key] || []).map((a: any, idx: number) => (
-                 <div key={idx} className="bg-white border border-slate-100 p-8 rounded-[2.5rem] hover:border-indigo-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-700 group/card relative overflow-hidden">
+              <div className="bg-white border border-slate-100 p-8 rounded-[2.5rem] hover:border-indigo-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-700 group/card relative overflow-hidden">
                     <div className={`absolute top-0 left-0 w-2 h-full opacity-30 ${dot.replace('border-', 'bg-')}`}></div>
-                    <strong className="block text-md font-black text-slate-900 mb-3 tracking-tighter uppercase" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>{a.action}</strong>
-                    <p className="text-[12px] font-extrabold text-slate-400 leading-relaxed italic opacity-80" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>{a.why}</p>
+                    <strong className="block text-md font-black text-slate-900 mb-3 tracking-tighter uppercase" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>{(actionPlan?.[key] || [])[0]?.action}</strong>
+                    <p className="text-[12px] font-extrabold text-slate-400 leading-relaxed italic opacity-80" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>{(actionPlan?.[key] || [])[0]?.why}</p>
                  </div>
-              ))}
            </div>
         </div>
       ))}
@@ -525,36 +537,38 @@ export const ActionTimeline: React.FC<{ actionPlan: any }> = ({ actionPlan }) =>
   );
 };
 
-// --- 10. Opportunity Cost (Strategic Math) ---
+// --- 10. Opportunity Cost ---
 export const OpportunityCostCard: React.FC<{ data: any }> = ({ data }) => (
-   <div className="bg-slate-50 border border-slate-200 rounded-[3rem] p-8 lg:p-12 shadow-inner overflow-hidden flex flex-col h-full ring-1 ring-white">
-      <div className="flex items-center gap-6 mb-8">
-         <div className="w-14 h-14 bg-white text-indigo-600 rounded-[1.2rem] flex items-center justify-center shadow-2xl border border-slate-100 rotate-3">
-            <Lucide.Scale size={28} />
+   <div className="bg-slate-50 border border-slate-200 rounded-[2rem] p-5 shadow-inner overflow-hidden flex flex-col h-full ring-1 ring-white">
+      <div className="flex items-center gap-4 mb-4">
+         <div className="w-10 h-10 bg-white text-indigo-600 rounded-xl flex items-center justify-center shadow-md border border-slate-100 shrink-0">
+            <Lucide.Scale size={18} />
          </div>
          <div>
-            <h4 className="text-xl font-black text-slate-900 tracking-tighter" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>حساب تكلفة الفرصة البديلة</h4>
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Build vs Buy Economic Analysis</p>
+            <h4 className="text-sm font-black text-slate-900 tracking-tighter" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>تكلفة الفرصة البديلة</h4>
+            <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Build vs Buy Economic</p>
          </div>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 mb-8">
-         <div className="bg-white p-6 lg:p-8 rounded-[2.5rem] border border-slate-200 shadow-sm flex flex-col justify-center">
-            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">ميزان الإنتاج المباشر</div>
-            <p className="text-[13px] font-bold text-slate-700 leading-relaxed" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>{data.buildVsBuy}</p>
+      <div className="grid grid-cols-1 gap-3 flex-1 mb-4">
+         <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+            <div className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1.5 leading-none">ميزان الإنتاج</div>
+            <p className="text-[11px] font-bold text-slate-600 leading-tight" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>{data.buildVsBuy}</p>
          </div>
-         <div className="bg-rose-600 p-6 lg:p-8 rounded-[2.5rem] shadow-2xl shadow-rose-200 flex flex-col justify-center items-center text-center">
-            <div className="text-[9px] font-black text-rose-100 uppercase tracking-widest mb-3 opacity-80">Delayed Launch Loss</div>
-            <div className="text-3xl font-black text-white tracking-widest tabular-nums">{data.calculatedLoss}</div>
-            <div className="mt-2 text-[9px] font-black text-rose-200 uppercase">Expected Loss / Mo</div>
+         <div className="bg-rose-600 p-4 rounded-xl shadow-lg shadow-rose-100 flex justify-between items-center text-white">
+            <div className="text-left shrink-0">
+               <div className="text-[7px] font-black text-rose-100 uppercase tracking-widest opacity-80 leading-none">Monthly Loss</div>
+               <div className="text-lg font-black tracking-tighter tabular-nums leading-none mt-1">{data.calculatedLoss}</div>
+            </div>
+            <div className="text-[8px] font-black text-rose-200 uppercase text-right leading-tight max-w-[80px]">خسارة التأخير المتوقعة</div>
          </div>
       </div>
 
-      <div className="bg-indigo-50 border border-indigo-100 p-6 rounded-[2rem] flex items-center gap-5">
-         <div className="w-10 h-10 rounded-[1rem] bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-xl">
-            <Lucide.Lightbulb size={20} />
+      <div className="bg-indigo-50 border border-indigo-100 p-3 rounded-xl flex items-center gap-3">
+         <div className="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+            <Lucide.Lightbulb size={14} />
          </div>
-         <p className="text-[12px] font-black text-indigo-800 leading-relaxed italic" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>{data.strategicAdvice}</p>
+         <p className="text-[10px] font-black text-indigo-800 leading-tight italic" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>{data.strategicAdvice}</p>
       </div>
    </div>
 );

@@ -89,17 +89,17 @@ export const NewPlan: React.FC<{ onStart: (id: string) => void }> = ({ onStart }
 
   if (mode === 'easy') {
     return (
-      <div className="animate-in fade-in slide-in-from-left-4 duration-500">
-        <button 
-          onClick={() => setMode('selection')}
-          className="mb-8 flex items-center gap-2 text-gray-400 hover:text-gray-900 font-bold text-sm transition-all group"
-        >
-          <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          العودة لاختيار النظام
-        </button>
-        <div className="bg-white rounded-[2rem] border border-gray-100 overflow-hidden shadow-2xl">
-          <SmartBeginnerPro />
+      <div className="animate-in fade-in slide-in-from-left-4 duration-500 w-full">
+        <div className="px-6 lg:px-12 py-4">
+          <button 
+            onClick={() => setMode('selection')}
+            className="flex items-center gap-2 text-gray-400 hover:text-gray-900 font-bold text-sm transition-all group"
+          >
+            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            العودة لاختيار النظام
+          </button>
         </div>
+        <SmartBeginnerPro />
       </div>
     );
   }

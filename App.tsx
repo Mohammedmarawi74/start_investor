@@ -310,7 +310,7 @@ const App: React.FC = () => {
            </div>
         </div>
 
-        <div className={`${(activeTab === 'home' || activeTab === 'admin-dashboard') ? 'w-full pt-0 pb-0' : 'max-w-6xl mx-auto py-8 lg:py-10 px-6 lg:px-12'}`}>
+        <div className={`${(activeTab === 'home' || activeTab === 'admin-dashboard' || activeTab === 'new-plan') ? 'w-full pt-0 pb-0' : 'max-w-6xl mx-auto py-8 lg:py-10 px-6 lg:px-12'}`}>
           
           {(activeTab === 'home' || activeTab === 'admin-dashboard') && (
             <div className="animate-in slide-in-from-bottom-4 duration-700">

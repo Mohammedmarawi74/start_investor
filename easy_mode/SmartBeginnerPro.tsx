@@ -50,11 +50,11 @@ export default function SmartBeginnerPro() {
     setPhase("analyzing");
     setError("");
     try {
-      const result = await analyzeWithAI(finalAnswers);
+      const result = await analyzeWithAI(finalAnswers, (process.env as any).API_KEY);
       setAnalysis(result);
       setPhase("results");
     } catch (e: any) {
-      setError("حدث خطأ في النظام الاستراتيجي: " + e.message);
+      setError("حدث خطأ في النظام الاستراتيجي: " + (e.response?.data?.message || e.message));
       setPhase("form");
     }
   }, []);
@@ -210,43 +210,67 @@ export default function SmartBeginnerPro() {
   );
 
   if (phase === "results" && analysis) return (
-    <div className="min-h-screen bg-slate-50/50 p-6 lg:p-16 overflow-x-hidden" dir="rtl">
-      <div className="max-w-7xl mx-auto space-y-10 animate-in fade-in slide-in-from-bottom-12 duration-[1200ms]">
+    <div className="min-h-screen bg-white relative overflow-x-hidden selection:bg-indigo-500 selection:text-white pb-20" dir="rtl">
+      {/* Refined Fixed Background Layers */}
+      <div className="fixed inset-0 pointer-events-none -z-10">
+         <div className="absolute top-[-5%] right-[-5%] w-[30vw] h-[30vw] bg-indigo-50/50 rounded-full blur-[100px] animate-pulse"></div>
+         <div className="absolute bottom-[-5%] left-[-5%] w-[25vw] h-[25vw] bg-emerald-50/30 rounded-full blur-[80px]"></div>
+         
+         <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+               <pattern id="hq-grid-refined" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+               </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#hq-grid-refined)" />
+         </svg>
+      </div>
+
+      <div className="w-full px-6 lg:px-12 space-y-10 py-8 animate-in fade-in slide-in-from-bottom-8 duration-[1000ms]">
         
-        {/* EXECUTIVE COMMAND BAR */}
-        <div className="flex flex-wrap justify-between items-center gap-6 bg-white/80 backdrop-blur-3xl p-5 rounded-[2.5rem] border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.04)]">
+        {/* 1. COMPACT GLOBAL COMMAND BAR */}
+        <div className="flex flex-wrap justify-between items-center gap-4 bg-white/60 backdrop-blur-3xl p-4 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/20">
            <button 
              onClick={() => setPhase("form")} 
-             className="flex items-center gap-3 bg-slate-900 border border-slate-900 px-8 py-4 rounded-2xl text-[11px] font-black text-white hover:bg-indigo-600 hover:shadow-2xl transition-all shadow-xl group"
+             className="flex items-center gap-3 bg-slate-900 px-6 py-3 rounded-xl text-[10px] font-black text-white hover:bg-indigo-600 transition-all shadow-lg group"
            >
-              <Lucide.PlusCircle size={18} />
-              تحليل استراتيجي جديد
+              <Lucide.PlusCircle size={16} />
+              تحليل جديد
            </button>
-           <div className="flex gap-4">
-              <button onClick={() => window.print()} className="w-14 h-14 bg-white border border-slate-100 rounded-2xl flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:shadow-2xl hover:-translate-y-1 transition-all"><Lucide.Printer size={22} /></button>
-              <button className="px-10 py-4 bg-emerald-600 text-white rounded-2xl flex items-center gap-4 text-[11px] font-black shadow-2xl shadow-emerald-100/40 hover:bg-emerald-500 hover:scale-105 transition-all"><Lucide.FileStack size={18} /> تصدير التقرير التنفيذي</button>
+           <div className="flex gap-2">
+              <button onClick={() => window.print()} className="w-12 h-12 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-indigo-600 transition-all shadow-sm">
+                 <Lucide.Printer size={20} />
+              </button>
+              <button className="px-8 py-3 bg-emerald-600 text-white rounded-xl flex items-center gap-3 text-[10px] font-black shadow-lg hover:bg-emerald-500 transition-all">
+                 <Lucide.FileStack size={16} /> 
+                 تصدير التقرير التنفيذي
+              </button>
            </div>
         </div>
 
-        {/* HERO STRATEGIC CORE */}
-        <div className="flex flex-col lg:flex-row gap-10 items-start lg:items-center relative">
-           <div className="lg:col-span-1 space-y-4">
-              <div className="inline-flex items-center gap-3 text-indigo-600 font-black text-[10px] uppercase tracking-[0.5em] px-5 py-2.5 bg-indigo-50/80 border border-indigo-100 rounded-full shadow-sm">
-                <Lucide.Globe size={14} strokeWidth={3} />
+        {/* 2. REFINED HERO HEADER SECTION */}
+        <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center relative border-b border-slate-50 pb-10">
+           <div className="flex-1 space-y-4">
+              <div className="inline-flex items-center gap-2.5 text-indigo-600 font-black text-[9px] uppercase tracking-[0.4em] px-4 py-2 bg-indigo-50 border border-indigo-100 rounded-full shadow-sm">
+                <Lucide.Zap size={12} strokeWidth={3} className="animate-pulse" />
                 Strategic Cockpit Dashboard
               </div>
-              <h2 className="text-3xl lg:text-5xl font-black text-slate-900 leading-[1.1] tracking-tighter" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>
-                 {answers.sector === 'ecommerce' ? 'المتجر الاستخباراتي' : 'المشروع الهجين'} <span className="text-indigo-600 block">— {String(answers.problem?.problem || (typeof answers.problem === 'string' ? answers.problem : 'استبصار ذكي')).substring(0, 40)}...</span>
+              <h2 className="text-3xl lg:text-5xl font-black text-slate-900 leading-[1.2] tracking-tighter" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>
+                 {answers.sector === 'ecommerce' ? 'المتجر الاستخباراتي' : 'المشروع الهجين'} <br/>
+                 <span className="text-indigo-600">— {String(answers.problem?.problem || (typeof answers.problem === 'string' ? answers.problem : 'استبصار ذكي')).substring(0, 45)}</span>
               </h2>
+              <p className="text-xs font-bold text-slate-300 leading-relaxed italic border-r-2 border-indigo-100 pr-4">
+                 محاكاة لـ 250+ نموذج عمل محلي مماثل.
+              </p>
            </div>
            
-           <div className="min-w-[320px] bg-slate-900 border border-slate-800 p-8 rounded-[3.5rem] flex items-center justify-between shadow-[0_40px_80px_rgba(0,0,0,0.15)] relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-indigo-500 to-rose-500 group-hover:h-2 transition-all"></div>
+           <div className="w-full lg:w-[320px] bg-slate-900 border border-slate-800 p-8 rounded-[2.5rem] flex items-center justify-between shadow-2xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-indigo-500 to-rose-500"></div>
               <div className="flex-1">
-                 <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mb-2">Confidence Score</p>
-                 <div className={`text-xl font-black italic ${analysis.verdictType === 'green' ? 'text-emerald-400' : 'text-amber-400'}`} style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>{analysis.verdict}</div>
+                 <p className="text-[9px] font-black text-slate-500 uppercase tracking-[0.4em] mb-2">Confidence Score</p>
+                 <div className={`text-md lg:text-lg font-black italic ${analysis.verdictType === 'green' ? 'text-emerald-400' : 'text-amber-400'}`} style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>{analysis.verdict}</div>
               </div>
-              <div className="relative w-16 h-16 group-hover:scale-110 transition-transform duration-700">
+              <div className="relative w-16 h-16 group-hover:scale-105 transition-transform duration-700">
                  <svg className="w-full h-full rotate-[-90deg]" viewBox="0 0 64 64">
                     <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="6"/>
                     <circle cx="32" cy="32" r="28" fill="none" stroke={analysis.score > 80 ? '#10B981' : '#F59E0B'} strokeWidth="6" strokeDasharray="176" strokeDashoffset={176 - (analysis.score/100)*176} strokeLinecap="round" className="transition-all duration-[2000ms] delay-500" />
@@ -256,74 +280,99 @@ export default function SmartBeginnerPro() {
            </div>
         </div>
 
-        {/* FEATURED: THE HYBRID BLUE OCEAN ENGINE */}
-        <Charts.HybridInnovationCard data={analysis.hybridInnovation} />
-
-        {/* NAVIGATION TABS ELITE DESIGN */}
-        <div className="flex gap-4 pb-4 overflow-x-auto no-scrollbar scroll-smooth">
-           {[
-             { id: 'overview', label: 'النبض الاستراتيجي', icon: Lucide.Activity },
-             { id: 'behavioral', label: 'سيكولوجية العميل', icon: Lucide.UserSearch },
-             { id: 'financial', label: 'المحاكي المالي', icon: Lucide.Calculator },
-             { id: 'execution', label: 'خارطة الطريق', icon: Lucide.CalendarRange },
-             { id: 'risks', label: 'إدارة المخاطر', icon: Lucide.ShieldCheck },
-           ].map(t => (
-             <button 
-               key={t.id} 
-               onClick={() => setActiveTab(t.id)} 
-               className={`flex items-center gap-4 px-10 py-5 rounded-[2rem] text-[12px] font-black transition-all whitespace-nowrap border-2 relative overflow-hidden group ${
-                 activeTab === t.id 
-                   ? 'bg-slate-900 text-white border-slate-900 shadow-[0_30px_60px_rgba(0,0,0,0.15)] scale-[1.05] z-10' 
-                   : 'bg-white text-slate-400 border-slate-50 hover:border-indigo-100 hover:text-slate-900 shadow-sm'
-               }`}
-               style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}
-             >
-               <t.icon size={20} className={activeTab === t.id ? 'text-indigo-400' : 'opacity-40'} />
-               {t.label}
-               {activeTab === t.id && (
-                  <div className="absolute top-0 right-0 w-2 h-full bg-indigo-500 opacity-50"></div>
-               )}
-             </button>
-           ))}
-        </div>
-
-        {/* DYNAMIC TAB CONTENT GRID */}
-        <div className="animate-in fade-in slide-in-from-right-8 duration-[1000ms] min-h-[600px]">
-           {activeTab === 'overview' && <StrategicPulseTab analysis={analysis} />}
-           {activeTab === 'behavioral' && <CustomerPsychologyTab analysis={analysis} />}
-           {activeTab === 'financial' && <FinancialSimulatorTab analysis={analysis} />}
-           {activeTab === 'execution' && <RoadMapTab analysis={analysis} />}
-           {activeTab === 'risks' && <RiskManagementTab analysis={analysis} />}
-        </div>
-
-        {/* FINAL STRATEGIC CTA ELITE MODE */}
-        <div className="relative group overflow-hidden mt-24 rounded-[4rem] shadow-2xl">
-           <div className="absolute inset-0 bg-slate-900 -z-10">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-900/40 via-slate-900 to-slate-900"></div>
-              <Lucide.Rocket size={300} className="absolute -bottom-20 -left-20 text-white/5 -rotate-12 group-hover:translate-x-10 group-hover:translate-y-[-10px] transition-transform duration-[2000ms]" />
+        {/* 3. INNOVATION MATRIX SECTION (COMPACT) */}
+        <div className="space-y-6">
+           <div className="flex items-center gap-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500 text-white rounded-lg text-[9px] font-black uppercase tracking-widest shadow-lg shadow-emerald-100">
+                <Lucide.Sparkles size={12} /> Innovation Model
+              </div>
+              <div className="h-px flex-1 bg-slate-100"></div>
            </div>
            
-           <div className="p-16 lg:p-24 text-center relative z-10 space-y-8">
-              <div className="inline-flex items-center gap-3 px-6 py-2 border border-white/10 bg-white/5 rounded-full text-[10px] font-black text-indigo-300 uppercase tracking-[0.5em] backdrop-blur-xl">
-                 Ready for Phase 2: Implementation
+           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              <div className="lg:col-span-8 p-8 bg-slate-50 border border-slate-100 rounded-[2.5rem] shadow-inner relative group overflow-hidden transition-all hover:bg-white hover:shadow-xl">
+                 <div className="text-[10px] font-black text-emerald-600 uppercase tracking-widest mb-3 flex items-center gap-3">
+                    <div className="h-1 w-6 bg-emerald-400 rounded-full"></div>
+                    Core Strategy
+                 </div>
+                 <p className="text-xl lg:text-2xl font-bold leading-snug text-slate-900 tracking-tight" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>
+                   {analysis.hybridInnovation?.model || 'نموذج الاستشارة المؤتمتة — ربط بيانات السوق بقرارات الاستثمار.'}
+                 </p>
               </div>
-              <h3 className="text-3xl lg:text-6xl font-black text-white tracking-tighter leading-tight" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>
-                هل أنت مستعد لتحويل <br/> هذه الرؤية إلى واقع؟
+              
+              <div className="lg:col-span-4 p-8 bg-slate-900 border border-slate-800 rounded-[2.5rem] text-white shadow-xl relative group">
+                 <div className="w-10 h-10 bg-white/5 border border-white/10 text-emerald-400 rounded-xl flex items-center justify-center mb-4"><Lucide.TrendingUp size={20} /></div>
+                 <h4 className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Efficiency Delta</h4>
+                 <div className="text-4xl font-black tracking-tighter tabular-nums text-emerald-400">+45%</div>
+              </div>
+           </div>
+        </div>
+
+        {/* 4. COMPACT NAVIGATION PILLS */}
+        <div className="space-y-8">
+           <div className="flex gap-3 pb-2 overflow-x-auto no-scrollbar scroll-smooth">
+              {[
+                { id: 'overview',   label: 'النبض الاستراتيجي', icon: Lucide.Activity },
+                { id: 'behavioral', label: 'سيكولوجية العميل', icon: Lucide.UserSearch },
+                { id: 'financial',  label: 'المحاكي المالي',  icon: Lucide.Calculator },
+                { id: 'execution',  label: 'خارطة الطريق',    icon: Lucide.CalendarRange },
+                { id: 'risks',      label: 'إدارة المخاطر',   icon: Lucide.ShieldCheck },
+              ].map(t => {
+                const isActive = activeTab === t.id;
+                return (
+                  <button 
+                    key={t.id} 
+                    onClick={() => setActiveTab(t.id)} 
+                    className={`flex items-center gap-3 px-8 py-4 rounded-2xl text-[11px] font-black transition-all whitespace-nowrap border-2 relative overflow-hidden group ${
+                      isActive 
+                        ? 'bg-slate-900 text-white border-slate-900 shadow-xl scale-[1.02] z-10' 
+                        : 'bg-white text-slate-400 border-slate-50 hover:border-indigo-100 hover:text-slate-900 shadow-sm'
+                    }`}
+                    style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}
+                  >
+                    <t.icon size={18} className={isActive ? 'text-indigo-400' : 'opacity-40'} />
+                    {t.label}
+                    {isActive && <div className="absolute top-0 right-0 w-1.5 h-full bg-indigo-500 opacity-50"></div>}
+                  </button>
+                );
+              })}
+           </div>
+
+           {/* 5. DYNAMIC TAB CONTENT (REFINED) */}
+           <div className="min-h-[600px] transition-all duration-1000">
+              {activeTab === 'overview' && <StrategicPulseTab analysis={analysis} />}
+              {activeTab === 'behavioral' && <CustomerPsychologyTab analysis={analysis} />}
+              {activeTab === 'financial' && <FinancialSimulatorTab analysis={analysis} />}
+              {activeTab === 'execution' && <RoadMapTab analysis={analysis} />}
+              {activeTab === 'risks' && <RiskManagementTab analysis={analysis} />}
+           </div>
+        </div>
+
+        {/* 6. COMPACT FINAL STRATEGIC CTA */}
+        <div className="relative group overflow-hidden mt-16 rounded-[4rem] shadow-2xl">
+           <div className="absolute inset-0 bg-slate-950 -z-10">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-950 to-slate-950"></div>
+              <Lucide.Rocket size={250} className="absolute -bottom-20 -left-10 text-white/5 -rotate-12 group-hover:translate-x-10 transition-transform duration-[2000ms]" />
+           </div>
+           
+           <div className="p-12 lg:p-20 text-center relative z-10 space-y-8">
+              <div className="inline-flex items-center gap-3 px-5 py-2 border border-white/10 bg-white/5 rounded-full text-[9px] font-black text-indigo-300 uppercase tracking-widest backdrop-blur-xl">
+                 Ready for Phase 2: Professional Implementation
+              </div>
+              <h3 className="text-3xl lg:text-5xl font-black text-white tracking-tighter leading-tight" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>
+                 هل أنت مستعد لتحويل الرؤية لحقيقة؟
               </h3>
-              <p className="text-md lg:text-lg font-bold text-slate-400 max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}>
-                 المخطط الاستراتيجي مكتمل. حان الوقت لتفعيل "وضع المحترف" لبناء النموذج المالي الكامل وتجهيز ملف المستثمرين.
-              </p>
-              <div className="flex flex-wrap justify-center gap-6 pt-6">
+              <div className="flex flex-wrap justify-center gap-4 pt-4">
                  <button 
                    onClick={() => setPhase("form")} 
-                   className="px-12 py-5 bg-white text-slate-900 rounded-[2rem] text-[13px] font-black hover:bg-indigo-500 hover:text-white hover:scale-[1.03] transition-all shadow-2xl flex items-center gap-4 group/btn"
+                   className="px-10 py-5 bg-white text-slate-900 rounded-2xl text-[12px] font-black hover:bg-indigo-500 hover:text-white transition-all shadow-xl flex items-center gap-4 group/btn"
                    style={{ fontFamily: 'IBM Plex Sans Arabic, sans-serif' }}
                  >
                    تفعيل وضع المحترف (Pro Mode)
-                   <Lucide.ArrowLeft size={18} className="group-hover:-translate-x-2 transition-transform" />
+                   <Lucide.ArrowLeft size={20} className="group-hover:-translate-x-2 transition-transform" />
                  </button>
-                 <button className="px-12 py-5 bg-white/5 border border-white/10 text-white rounded-[2rem] text-[12px] font-black hover:bg-white/10 transition-all backdrop-blur-xl">
-                   حجز استشارة (Focus Session)
+                 <button className="px-10 py-5 bg-white/5 border border-white/10 text-white rounded-2xl text-[12px] font-black hover:bg-white/10 transition-all backdrop-blur-xl">
+                   حجز جلسة استشارية
                  </button>
               </div>
            </div>
