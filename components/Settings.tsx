@@ -5,7 +5,10 @@ import {
   ExternalLink, Save, Camera, CheckCircle2, 
   AlertCircle, Mail, Briefcase, MapPin, 
   Fingerprint, Key, Globe, ShieldCheck,
-  Layout, Sparkles, Pencil
+  Layout, Sparkles, Pencil, Lock,
+  Smartphone, History, Plus, Download,
+  CreditCard as CardIcon, CreditCard as VisaIcon,
+  Search, Filter
 } from 'lucide-react';
 import { User as UserType } from '../types';
 
@@ -60,15 +63,15 @@ export const Settings: React.FC<SettingsProps> = ({ user }) => {
           </div>
 
           {/* Account Health Card */}
-          <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-[2.5rem] p-6 text-white shadow-2xl shadow-indigo-200 relative overflow-hidden group">
+          <div className="bg-gradient-to-br from-primary-600 to-indigo-700 rounded-[2.5rem] p-6 text-white shadow-2xl shadow-primary-200 relative overflow-hidden group">
             <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000"></div>
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
-                <ShieldCheck size={20} className="text-indigo-200" />
-                <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-100">أمان الحساب</span>
+                <ShieldCheck size={20} className="text-white/80" />
+                <span className="text-[10px] font-bold uppercase tracking-widest text-white/80">أمان الحساب</span>
               </div>
               <h4 className="text-xl font-bold mb-1">ممتاز جداً</h4>
-              <p className="text-indigo-100/70 text-[11px] font-bold mb-4">لقد قمت بتفعيل كافة تدابير الحماية الموصى بها.</p>
+              <p className="text-white/70 text-[11px] font-bold mb-4">لقد قمت بتفعيل كافة تدابير الحماية الموصى بها.</p>
               <div className="h-1.5 bg-white/20 rounded-full overflow-hidden">
                 <div className="h-full bg-white w-[92%] rounded-full shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
               </div>
@@ -81,7 +84,7 @@ export const Settings: React.FC<SettingsProps> = ({ user }) => {
       <div className="flex-1">
         <div className="bg-white border border-gray-100 rounded-[3rem] shadow-2xl shadow-gray-200/30 overflow-hidden">
           
-          {activeSubTab === 'profile' ? (
+          {activeSubTab === 'profile' && (
             <div className="flex flex-col">
               {/* Profile Cover & Avatar Section */}
               <div className="relative h-48 bg-gradient-to-r from-primary-600 via-indigo-600 to-purple-700">
@@ -115,7 +118,6 @@ export const Settings: React.FC<SettingsProps> = ({ user }) => {
 
               {/* Form Content */}
               <div className="p-10 space-y-12">
-                
                 {/* Section 1: Personal Info */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="md:col-span-2 flex items-center gap-3 mb-2">
@@ -142,20 +144,6 @@ export const Settings: React.FC<SettingsProps> = ({ user }) => {
 
                   <div className="space-y-2 group">
                     <label className="text-[11px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2 px-1">
-                      المسمى الوظيفي
-                    </label>
-                    <div className="relative">
-                      <Briefcase className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-primary-500 transition-colors" size={18} />
-                      <input 
-                        type="text" 
-                        placeholder="مثلاً: مؤسس شركة، مدير مالي..."
-                        className="w-full pr-12 pl-5 py-4 bg-gray-50/50 border border-gray-100 rounded-[1.5rem] focus:bg-white focus:border-primary-500 focus:ring-8 focus:ring-primary-50 outline-none transition-all font-bold text-gray-700 shadow-inner"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2 group md:col-span-2">
-                    <label className="text-[11px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2 px-1">
                       البريد الإلكتروني الأساسي
                     </label>
                     <div className="relative">
@@ -165,36 +153,13 @@ export const Settings: React.FC<SettingsProps> = ({ user }) => {
                         defaultValue={user.email}
                         className="w-full pr-12 pl-5 py-4 bg-gray-50/50 border border-gray-100 rounded-[1.5rem] focus:bg-white focus:border-primary-500 focus:ring-8 focus:ring-primary-50 outline-none transition-all font-bold text-gray-700 shadow-inner"
                       />
-                      <button className="absolute left-4 top-1/2 -translate-y-1/2 text-[10px] font-bold text-primary-600 hover:text-primary-800 transition-colors bg-white px-3 py-1.5 rounded-xl border border-primary-100">تغيير</button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Section 2: Biography */}
-                <div className="space-y-4 pt-6 border-t border-gray-50">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
-                      <Sparkles size={18} strokeWidth={2.5} />
-                    </div>
-                    <h3 className="text-base font-bold text-gray-800">السيرة المهنية (AI Ready)</h3>
-                  </div>
-                  <div className="relative group">
-                    <textarea 
-                      placeholder="صف رؤيتك المهنية باختصار، سنستخدم هذا الوصف لتحسين صياغة خططك بواسطة الذكاء الاصطناعي..."
-                      className="w-full h-40 p-6 bg-gray-50/50 border border-gray-100 rounded-[2rem] focus:bg-white focus:border-primary-500 focus:ring-8 focus:ring-primary-50 outline-none transition-all font-medium text-gray-600 leading-relaxed shadow-inner resize-none"
-                    />
-                    <div className="absolute bottom-4 left-4 flex gap-2">
-                       <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl text-[10px] font-bold shadow-lg shadow-purple-200 hover:scale-105 active:scale-95 transition-all">
-                         <Sparkles size={14} />
-                         تحسين بالذكاء الاصطناعي
-                       </button>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Sticky Footer Action Bar */}
-              <div className="p-8 bg-gray-50/80 backdrop-blur-md border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+               {/* Sticky Footer Action Bar */}
+               <div className="p-8 bg-gray-50/80 backdrop-blur-md border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <div className="flex items-center gap-3 text-gray-400">
                   <div className="w-8 h-8 rounded-full bg-success/10 text-success flex items-center justify-center">
                     <CheckCircle2 size={16} strokeWidth={3} />
@@ -202,7 +167,6 @@ export const Settings: React.FC<SettingsProps> = ({ user }) => {
                   <span className="text-[11px] font-bold uppercase tracking-widest">تتم مزامنة كافة التغييرات بشكل آمن</span>
                 </div>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
-                  <button className="flex-1 sm:flex-none px-8 py-3.5 text-gray-500 font-bold text-xs hover:text-gray-900 transition-colors">إلغاء</button>
                   <button 
                     onClick={handleSave}
                     disabled={isSaving}
@@ -222,20 +186,189 @@ export const Settings: React.FC<SettingsProps> = ({ user }) => {
                 </div>
               </div>
             </div>
-          ) : (
-            <div className="min-h-[600px] flex flex-col items-center justify-center text-center p-20">
-               <div className="w-24 h-24 bg-gray-50 rounded-[2.5rem] flex items-center justify-center text-gray-200 mb-8 border-2 border-dashed border-gray-100">
-                  <Layout size={48} />
+          )}
+
+          {activeSubTab === 'security' && (
+            <div className="p-10 space-y-10 animate-in fade-in slide-in-from-left-4 duration-500">
+               <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">الأمان والخصوصية</h3>
+                  <p className="text-gray-400 text-sm font-bold">إدارة كلمات المرور وجلسات الدخول النشطة</p>
                </div>
-               <h2 className="text-2xl font-bold text-gray-800 mb-3">هذا القسم قيد التحديث</h2>
-               <p className="text-gray-400 font-bold max-w-sm leading-relaxed">نحن نعمل حالياً على بناء تجربة أمان وفوترة متطورة تليق بمستوى تطلعاتك. ابقَ متيقظاً!</p>
-               <button 
-                 onClick={() => setActiveSubTab('profile')}
-                 className="mt-8 flex items-center gap-2 px-8 py-3 bg-gray-900 text-white rounded-2xl text-xs font-bold hover:bg-black transition-all"
-               >
-                 <ArrowRight size={16} className="rotate-180" />
-                 العودة للملف الشخصي
-               </button>
+
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-6">
+                     <div className="p-6 bg-gray-50 rounded-3xl border border-gray-100 flex flex-col gap-4">
+                        <div className="flex items-center gap-3 text-primary-600">
+                           <Lock size={20} />
+                           <h4 className="font-bold text-sm">تغيير كلمة المرور</h4>
+                        </div>
+                        <input type="password" placeholder="كلمة المرور الحالية" className="w-full px-5 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-primary-500" />
+                        <input type="password" placeholder="كلمة المرور الجديدة" className="w-full px-5 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-primary-500" />
+                        <button className="bg-primary-600 text-white py-3 rounded-xl font-bold text-xs hover:bg-primary-700 transition-all">تحـديث</button>
+                     </div>
+
+                     <div className="p-6 bg-white border border-gray-100 rounded-3xl flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                           <div className="w-10 h-10 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center">
+                              <Smartphone size={20} />
+                           </div>
+                           <div>
+                              <h4 className="font-bold text-sm">التوثيق الثنائي (2FA)</h4>
+                              <p className="text-[10px] text-gray-400 font-bold">أضف طبقة إضافية من الحماية</p>
+                           </div>
+                        </div>
+                        <div className="w-12 h-6 bg-gray-200 rounded-full relative cursor-pointer">
+                           <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div className="space-y-4">
+                     <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-bold text-sm text-gray-800">جلسات الدخول النشطة</h4>
+                        <button className="text-[10px] font-bold text-red-500">خروج من الكل</button>
+                     </div>
+                     {[1, 2].map(i => (
+                        <div key={i} className="p-4 bg-white border border-gray-100 rounded-2xl flex items-center gap-4 group hover:border-primary-200 transition-all">
+                           <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 group-hover:text-primary-600">
+                              <History size={18} />
+                           </div>
+                           <div className="flex-1">
+                              <h5 className="text-[12px] font-bold text-gray-800">Chrome on MacBook Pro</h5>
+                              <p className="text-[10px] text-gray-400 font-bold">الرياض، السعودية • نشط الآن</p>
+                           </div>
+                        </div>
+                     ))}
+                  </div>
+               </div>
+            </div>
+          )}
+
+          {activeSubTab === 'billing' && (
+            <div className="p-10 space-y-10 animate-in fade-in slide-in-from-left-4 duration-500 text-right">
+                <div className="flex justify-between items-end">
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">طرق الدفع والفوترة</h3>
+                    <p className="text-gray-400 text-sm font-bold">إدارة البطاقات ووسائل الدفع المفضلة</p>
+                  </div>
+                  <button className="flex items-center gap-2 px-6 py-2.5 bg-primary-600 text-white rounded-xl text-xs font-bold hover:shadow-lg hover:shadow-primary-100 transition-all">
+                    <Plus size={16} />
+                     إضافة بطاقة
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                   <div className="relative h-48 bg-gradient-to-br from-slate-800 to-slate-900 rounded-[2rem] p-8 text-white shadow-2xl overflow-hidden group">
+                      <div className="absolute -right-10 -top-10 w-40 h-40 bg-white/5 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
+                      <div className="relative z-10 h-full flex flex-col justify-between">
+                         <div className="flex justify-between items-start">
+                            <CardIcon size={32} strokeWidth={1.5} className="text-white/40" />
+                            <span className="font-bold text-xs bg-white/10 px-3 py-1 rounded-full uppercase tracking-widest text-primary-400">Primary</span>
+                         </div>
+                         <div>
+                            <p className="text-lg font-black tracking-[0.2em] mb-1">•••• •••• •••• 8821</p>
+                            <div className="flex justify-between items-center opacity-60 text-[10px] font-bold">
+                               <span>ABDULLAH MOHAMMED</span>
+                               <span>12/28</span>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+
+                   <button className="h-48 border-2 border-dashed border-gray-100 rounded-[2rem] flex flex-col items-center justify-center gap-4 text-gray-300 hover:border-primary-200 hover:text-primary-600 hover:bg-primary-50/50 transition-all group">
+                      <div className="w-12 h-12 rounded-full border-2 border-dashed border-gray-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                         <Plus size={24} />
+                      </div>
+                      <span className="font-bold text-xs uppercase tracking-widest">إضافة وسيلة دفع جديدة</span>
+                   </button>
+                </div>
+            </div>
+          )}
+
+          {activeSubTab === 'subscription' && (
+            <div className="p-10 space-y-10 animate-in fade-in slide-in-from-left-4 duration-500">
+               <div className="flex justify-between items-center bg-primary-600 p-10 rounded-[3rem] text-white shadow-2xl shadow-primary-200 relative overflow-hidden">
+                  <div className="absolute right-0 top-0 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+                  <div className="relative z-10 space-y-4">
+                     <span className="bg-white/20 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-[0.2em]">باقة المحترفين PRO</span>
+                     <h3 className="text-4xl font-black italic">$29<span className="text-lg opacity-60 font-bold">/Month</span></h3>
+                     <p className="text-white/60 font-bold text-sm max-w-xs leading-relaxed italic">تجديد تلقائي في 25 أكتوبر 2023 عبر بطاقتك الأساسية.</p>
+                  </div>
+                  <div className="relative z-10 flex flex-col gap-3">
+                     <button className="bg-white text-primary-600 px-8 py-3.5 rounded-2xl font-black text-xs hover:bg-gray-100 transition-all shadow-xl">ترقية الاشتراك</button>
+                     <button className="bg-transparent border border-white/20 text-white/60 px-8 py-3.5 rounded-2xl font-bold text-xs hover:bg-white/5 transition-all">إلغاء الاشتراك</button>
+                  </div>
+               </div>
+
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[
+                    { label: 'رصيد نقاط AI', value: '85', total: '100', icon: Sparkles, color: 'text-purple-600', bg: 'bg-purple-50' },
+                    { label: 'عدد الخطط النشطة', value: '3', total: '10', icon: Layout, color: 'text-blue-600', bg: 'bg-blue-50' },
+                    { label: 'تصدير المستندات', value: '12', total: 'Unlimited', icon: Download, color: 'text-emerald-600', bg: 'bg-emerald-50' }
+                  ].map((stat, i) => (
+                    <div key={i} className="p-6 bg-white border border-gray-100 rounded-3xl shadow-sm hover:shadow-md transition-all">
+                       <div className="flex items-center gap-3 mb-4">
+                          <div className={`w-10 h-10 ${stat.bg} ${stat.color} rounded-xl flex items-center justify-center`}>
+                             <stat.icon size={20} />
+                          </div>
+                          <span className="text-xs font-bold text-gray-500">{stat.label}</span>
+                       </div>
+                       <div className="flex justify-between items-end mb-2">
+                          <span className="text-2xl font-black text-gray-900">{stat.value}</span>
+                          <span className="text-[10px] font-bold text-gray-300">/ {stat.total}</span>
+                       </div>
+                       <div className="h-1.5 bg-gray-50 rounded-full overflow-hidden">
+                          <div className={`h-full ${stat.color.replace('text', 'bg')} rounded-full`} style={{ width: stat.total === 'Unlimited' ? '100%' : `${(parseInt(stat.value)/parseInt(stat.total))*100}%` }}></div>
+                       </div>
+                    </div>
+                  ))}
+               </div>
+            </div>
+          )}
+
+          {activeSubTab === 'invoices' && (
+            <div className="p-10 space-y-10 animate-in fade-in slide-in-from-left-4 duration-500">
+                <div>
+                   <h3 className="text-xl font-bold text-gray-900 mb-2">سجل الفواتير والمدفوعات</h3>
+                   <p className="text-gray-400 text-sm font-bold">تحميل ومعاينة كافة الفواتير السابقة</p>
+                </div>
+
+                <div className="overflow-hidden border border-gray-100 rounded-[2rem]">
+                   <table className="w-full text-right">
+                      <thead>
+                         <tr className="bg-gray-50 border-b border-gray-100">
+                            <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest">رقم الفاتورة</th>
+                            <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest">التاريخ</th>
+                            <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest">المبلغ</th>
+                            <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest">الحالة</th>
+                            <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest text-center">الإجراء</th>
+                         </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-50">
+                         {[
+                           { id: 'INV-2023-001', date: '25 سبتمبر 2023', amount: '$29.00', status: 'مدفوعة' },
+                           { id: 'INV-2023-002', date: '25 أغسطس 2023', amount: '$29.00', status: 'مدفوعة' },
+                           { id: 'INV-2023-003', date: '25 يوليو 2023', amount: '$29.00', status: 'مدفوعة' },
+                         ].map((inv, i) => (
+                           <tr key={i} className="hover:bg-gray-50/50 transition-colors">
+                              <td className="px-8 py-5 text-sm font-bold text-gray-800">{inv.id}</td>
+                              <td className="px-8 py-5 text-xs font-bold text-gray-500">{inv.date}</td>
+                              <td className="px-8 py-5 text-sm font-black text-gray-900">{inv.amount}</td>
+                              <td className="px-8 py-5">
+                                 <span className="bg-success/10 text-success text-[10px] font-bold px-3 py-1 rounded-full border border-success/20">
+                                    {inv.status}
+                                 </span>
+                              </td>
+                              <td className="px-8 py-5 text-center">
+                                 <button className="p-2 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-all">
+                                    <Download size={18} />
+                                 </button>
+                              </td>
+                           </tr>
+                         ))}
+                      </tbody>
+                   </table>
+                </div>
             </div>
           )}
         </div>

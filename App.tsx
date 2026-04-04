@@ -14,6 +14,12 @@ import { AdminAnalyticsDashboard } from './components/AdminAnalyticsDashboard';
 import { AdminSecurityDashboard } from './components/AdminSecurityDashboard';
 import { FloatingActions } from './components/FloatingActions';
 import { AiSidekick } from './components/AiSidekick';
+import { PricingPlans } from './components/PricingPlans';
+import { Settings } from './components/Settings';
+import { Tasks } from './components/Tasks';
+import { Changelog } from './components/Changelog';
+import { ExportTemplates } from './components/ExportTemplates';
+import { Notifications } from './components/Notifications';
 import { User, PlanSection, BusinessModelItem, Comment } from './types';
 import { 
   ShieldCheck, 
@@ -46,7 +52,10 @@ import {
   ShoppingBag,
   CreditCard as BillingIcon,
   LifeBuoy,
-  LogOut
+  LogOut,
+  Layers,
+  Layout,
+  Briefcase
 } from 'lucide-react';
 
 const MOCK_USER: User = {
@@ -200,14 +209,14 @@ const App: React.FC = () => {
                         <div className="flex items-center gap-4 mb-3">
                            <img src={MOCK_USER.avatar} className="w-12 h-12 rounded-2xl border-2 border-white shadow-sm" alt="Avatar" />
                            <div className="min-w-0">
-                              <h4 className="font-black text-sm text-gray-900 truncate">{MOCK_USER.name}</h4>
-                              <p className="text-[10px] text-gray-400 truncate">{MOCK_USER.email}</p>
+                               <h4 className="font-black text-sm text-gray-900 truncate">{MOCK_USER.name}</h4>
+                               <p className="text-[10px] text-gray-400 truncate">{MOCK_USER.email}</p>
                            </div>
                         </div>
                         <div className="bg-primary-600 rounded-xl p-2.5 flex items-center justify-between text-white shadow-lg shadow-primary-200">
                            <div className="flex items-center gap-2">
-                              <Zap size={14} fill="currentColor" />
-                              <span className="text-[11px] font-black">باقة المحترفين PRO</span>
+                               <Zap size={14} fill="currentColor" />
+                               <span className="text-[11px] font-black">باقة المحترفين PRO</span>
                            </div>
                            <span className="text-[10px] font-bold opacity-80">85 نقطة</span>
                         </div>
@@ -216,13 +225,13 @@ const App: React.FC = () => {
                      {/* Profile Menu Links */}
                      <div className="p-3 py-4">
                         <div className="space-y-1">
-                           <button onClick={() => { setIsProfileOpen(false); setActiveTab('profile'); }} className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-[12px] font-bold text-gray-600 hover:bg-primary-50 hover:text-primary-700 transition-all group">
+                           <button onClick={() => { setIsProfileOpen(false); setActiveTab('settings'); }} className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-[12px] font-bold text-gray-600 hover:bg-primary-50 hover:text-primary-700 transition-all group">
                               <UserIcon size={16} className="group-hover:scale-110 transition-transform" />
-                              <span>ملفي الشخصي</span>
+                              <span>ملفي الشخصي وإعداداتي</span>
                            </button>
                            <button onClick={() => { setIsProfileOpen(false); setActiveTab('my-plans'); }} className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-[12px] font-bold text-gray-600 hover:bg-primary-50 hover:text-primary-700 transition-all group">
-                              <Layers size={16} className="group-hover:scale-110 transition-transform" />
-                              <span>أرشيف مشاريعي</span>
+                              <Briefcase size={16} className="group-hover:scale-110 transition-transform" />
+                              <span>مشاريعي وخططي</span>
                            </button>
                         </div>
 
@@ -230,13 +239,10 @@ const App: React.FC = () => {
 
                         <div className="space-y-1">
                            <button onClick={() => { setIsProfileOpen(false); setActiveTab('pricing'); }} className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-[12px] font-bold text-gray-600 hover:bg-primary-50 hover:text-primary-700 transition-all group">
-                              <ShoppingBag size={16} className="group-hover:scale-110 transition-transform" />
-                              <span>باقات الاشتراك</span>
+                              <CreditCard size={16} className="group-hover:scale-110 transition-transform" />
+                              <span>اشتراكاتي وفواتيري</span>
                            </button>
-                           <button onClick={() => { setIsProfileOpen(false); setActiveTab('settings'); }} className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-[12px] font-bold text-gray-600 hover:bg-primary-50 hover:text-primary-700 transition-all group">
-                              <SettingsIcon size={16} className="group-hover:scale-110 transition-transform" />
-                              <span>إعدادات النظام</span>
-                           </button>
+                           {/* Account Settings removed as it is now merged with Profile */}
                         </div>
 
                         <div className="h-px bg-gray-50 my-3 mx-4"></div>
@@ -340,7 +346,6 @@ const App: React.FC = () => {
             </div>
           )}
           
-          {/* Rest of the UI rendering omitted for brevity, but kept intact in the actual file */}
           {activeTab === 'admin-plans' && (
             <div className="animate-in slide-in-from-bottom-4 duration-700">
                <AdminProjectsManagement />
@@ -390,6 +395,36 @@ const App: React.FC = () => {
           {activeTab === 'comparison' && (
             <div className="animate-in slide-in-from-bottom-4 duration-700">
                <PlanComparison />
+            </div>
+          )}
+
+          {activeTab === 'pricing' && (
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <PricingPlans />
+            </div>
+          )}
+
+          {activeTab === 'settings' && (
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <Settings user={MOCK_USER} />
+            </div>
+          )}
+
+          {activeTab === 'tasks' && (
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <Tasks />
+            </div>
+          )}
+
+          {activeTab === 'changelog' && (
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <Changelog />
+            </div>
+          )}
+
+          {activeTab === 'export-templates' && (
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <ExportTemplates />
             </div>
           )}
 
