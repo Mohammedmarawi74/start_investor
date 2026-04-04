@@ -13,8 +13,11 @@ import {
   Lightbulb,
   ChevronLeft,
   Sparkles,
-  Layers
+  Layers,
+  Zap,
+  ArrowRight
 } from 'lucide-react';
+import SmartBeginnerPro from '../easy_mode/SmartBeginnerPro';
 
 interface Template {
   id: string;
@@ -81,6 +84,24 @@ const TEMPLATES: Template[] = [
 
 export const NewPlan: React.FC<{ onStart: (id: string) => void }> = ({ onStart }) => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [mode, setMode] = useState<'selection' | 'easy'>('selection');
+
+  if (mode === 'easy') {
+    return (
+      <div className="animate-in fade-in slide-in-from-left-4 duration-500">
+        <button 
+          onClick={() => setMode('selection')}
+          className="mb-8 flex items-center gap-2 text-gray-400 hover:text-gray-900 font-bold text-sm transition-all group"
+        >
+          <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          العودة لاختيار النظام
+        </button>
+        <div className="bg-white rounded-[3rem] border border-gray-100 overflow-hidden shadow-2xl">
+          <SmartBeginnerPro />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-700 pb-20">
@@ -89,38 +110,60 @@ export const NewPlan: React.FC<{ onStart: (id: string) => void }> = ({ onStart }
       <div className="text-center space-y-4">
         <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">ابدأ خطة عملك الآن</h1>
         <p className="text-gray-400 font-bold text-lg max-w-2xl mx-auto">
-          اختر قالباً جاهزاً مصمماً من قبل خبراء، أو ابدأ صفحة بيضاء وأطلق العنان لإبداعك.
+          اختر الطريقة التي تناسبك لبدء رحلة مشروعك القادم مع "خطة".
         </p>
       </div>
 
-      {/* Main Choice: Scratch or AI */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Main Choice: Scratch, AI, or EASY MODE */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* EASY MODE CARD */}
         <button 
-          onClick={() => onStart('scratch')}
-          className="group relative overflow-hidden bg-white border border-gray-100 p-8 rounded-[3rem] shadow-sm hover:shadow-2xl hover:shadow-primary-100/30 transition-all duration-500 text-right"
+          onClick={() => setMode('easy')}
+          className="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 p-8 rounded-[3rem] shadow-xl hover:shadow-emerald-200 transition-all duration-500 text-right text-white"
         >
-          <div className="flex items-center gap-6">
-            <div className="w-16 h-16 bg-gray-50 text-gray-400 rounded-2xl flex items-center justify-center group-hover:bg-primary-600 group-hover:text-white transition-all duration-500">
-              <Plus size={32} strokeWidth={3} />
+          <div className="absolute top-0 left-0 p-4 opacity-10">
+            <Zap size={100} />
+          </div>
+          <div className="flex flex-col gap-6 relative z-10">
+            <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+              <Zap size={32} strokeWidth={2.5} fill="currentColor" />
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">البدء من الصفر</h3>
-              <p className="text-gray-400 font-bold text-sm">أنشئ خطة مخصصة بالكامل خطوة بخطوة.</p>
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className="text-2xl font-black">Easy Mode</h3>
+                <span className="bg-white/20 text-[9px] px-2 py-0.5 rounded-full font-black uppercase">ناشئ</span>
+              </div>
+              <p className="text-emerald-50 font-bold text-sm opacity-90">تحليل فكرتك وبناء خطة عمل في دقائق عبر 8 أسئلة ذكية ومبسطة.</p>
             </div>
           </div>
         </button>
 
-        <button className="group relative overflow-hidden bg-gradient-to-r from-purple-600 to-indigo-600 p-8 rounded-[3rem] shadow-xl hover:shadow-purple-200 transition-all duration-500 text-right text-white">
+        <button className="group relative overflow-hidden bg-gradient-to-br from-purple-600 to-indigo-600 p-8 rounded-[3rem] shadow-xl hover:shadow-purple-200 transition-all duration-500 text-right text-white">
           <div className="absolute top-0 left-0 p-4 opacity-10">
             <Sparkles size={100} />
           </div>
-          <div className="flex items-center gap-6 relative z-10">
+          <div className="flex flex-col gap-6 relative z-10">
             <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
               <Wand2 size={32} strokeWidth={2.5} />
             </div>
             <div>
-              <h3 className="text-2xl font-bold mb-1">توليد ذكي (AI)</h3>
-              <p className="text-purple-100 font-bold text-sm opacity-80">دع الذكاء الاصطناعي يبني الهيكل الأساسي لك.</p>
+              <h3 className="text-2xl font-black mb-1">توليد ذكي (AI)</h3>
+              <p className="text-purple-100 font-bold text-sm opacity-90">دعنا نبني لك الهيكل المخصص والمسودة الأولى لمشروعك آلياً.</p>
+            </div>
+          </div>
+        </button>
+
+        <button 
+          onClick={() => onStart('scratch')}
+          className="group relative overflow-hidden bg-white border border-gray-100 p-8 rounded-[3rem] shadow-sm hover:shadow-2xl hover:shadow-gray-100 transition-all duration-500 text-right"
+        >
+          <div className="flex flex-col gap-6">
+            <div className="w-16 h-16 bg-gray-50 text-gray-400 rounded-2xl flex items-center justify-center group-hover:bg-gray-900 group-hover:text-white transition-all duration-500">
+              <Plus size={32} strokeWidth={3} />
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-1">البدء من الصفر</h3>
+              <p className="text-gray-400 font-bold text-sm">أنشئ خطة مخصصة بالكامل خطوة بخطوة بالتحكم الكامل في التفاصيل.</p>
             </div>
           </div>
         </button>
