@@ -20,6 +20,8 @@ import { Tasks } from './components/Tasks';
 import { Changelog } from './components/Changelog';
 import { ExportTemplates } from './components/ExportTemplates';
 import { Notifications } from './components/Notifications';
+import { SmartAnalyzer } from './components/SmartAnalyzer';
+import { Profile } from './components/Profile';
 import { User, PlanSection, BusinessModelItem, Comment } from './types';
 import { 
   ShieldCheck, 
@@ -88,7 +90,12 @@ const INITIAL_COMMENTS: Comment[] = [
 ];
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'home' | 'my-plans' | 'new-plan' | 'comparison' | 'unicorn-benchmark' | 'brand-identity' | 'editor' | 'analytics' | 'tasks' | 'export-templates' | 'settings' | 'pricing' | 'notifications' | 'changelog' | 'admin-dashboard' | 'users-management' | 'admin-plans' | 'admin-analytics' | 'admin-security' | 'profile'>('home');
+  // Persistence Logic: Initialize from localStorage or default to 'home'
+  const [activeTab, setActiveTab] = useState<'home' | 'my-plans' | 'new-plan' | 'comparison' | 'unicorn-benchmark' | 'brand-identity' | 'editor' | 'smart-analyzer' | 'analytics' | 'tasks' | 'export-templates' | 'settings' | 'pricing' | 'notifications' | 'changelog' | 'admin-dashboard' | 'users-management' | 'admin-plans' | 'admin-analytics' | 'admin-security' | 'profile'>(() => {
+    const savedTab = localStorage.getItem('khotta_active_tab');
+    return (savedTab as any) || 'home';
+  });
+
   const [sections, setSections] = useState<PlanSection[]>(INITIAL_SECTIONS);
   const [expandedSectionId, setExpandedSectionId] = useState<string | null>('1');
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | null>('saved');
@@ -100,6 +107,11 @@ const App: React.FC = () => {
   
   const notificationRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
+
+  // Persistence Effect: Update localStorage whenever activeTab changes
+  useEffect(() => {
+    localStorage.setItem('khotta_active_tab', activeTab);
+  }, [activeTab]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -174,6 +186,7 @@ const App: React.FC = () => {
                          {activeTab === 'brand-identity' && 'استوديو الهوية البصرية'}
                          {activeTab === 'comparison' && 'مقارنة السيناريوهات'}
                          {activeTab === 'editor' && 'محرر خطط الأعمال الذكي'}
+                         {activeTab === 'smart-analyzer' && 'المحلل الاستراتيجي المتقدم'}
                          {activeTab === 'tasks' && 'المهام والجدولة'}
                          {activeTab === 'notifications' && 'مركز التنبيهات'}
                          {activeTab === 'changelog' && 'سجل التحديثات القادم'}
@@ -306,50 +319,8 @@ const App: React.FC = () => {
           )}
 
           {activeTab === 'profile' && (
-            <div className="animate-in slide-in-from-bottom-4 duration-700 max-w-4xl mx-auto">
-               <div className="mb-10 text-right">
-                  <h1 className="text-3xl font-black text-gray-900 mb-2">الملف الشخصي</h1>
-                  <p className="text-gray-400 font-bold text-sm">إدارة البيانات الشخصية وإعدادات الأمان</p>
-               </div>
-               <div className="bg-white rounded-[2.5rem] p-10 border border-gray-100 shadow-sm text-center">
-                  <div className="relative inline-block mb-6">
-                     <img src={MOCK_USER.avatar} className="w-32 h-32 rounded-[2rem] border-4 border-white shadow-xl mx-auto" alt="Large Avatar" />
-                     <button className="absolute -bottom-2 -left-2 bg-primary-600 text-white p-3 rounded-2xl shadow-lg hover:scale-110 transition-transform">
-                        <Plus size={20} />
-                     </button>
-                  </div>
-                  <h2 className="text-2xl font-black text-gray-900 mb-1">{MOCK_USER.name}</h2>
-                  <p className="text-gray-400 font-bold mb-8">{MOCK_USER.email}</p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-right">
-                     <div className="p-6 bg-gray-50 rounded-3xl border border-gray-100">
-                        <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">البيانات الأساسية</h4>
-                        <div className="space-y-4">
-                           <div>
-                              <label className="block text-[11px] font-black text-gray-500 mb-2 mr-1">اسم المستخدم</label>
-                              <div className="bg-white p-3 rounded-xl border border-gray-200 text-sm font-bold text-gray-800">{MOCK_USER.name}</div>
-                           </div>
-                           <div>
-                              <label className="block text-[11px] font-black text-gray-500 mb-2 mr-1">البريد الإلكتروني</label>
-                              <div className="bg-white p-3 rounded-xl border border-gray-200 text-sm font-bold text-gray-800">{MOCK_USER.email}</div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="p-6 bg-gray-50 rounded-3xl border border-gray-100">
-                        <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">الأمان والاشتراك</h4>
-                        <div className="space-y-4">
-                           <div className="flex items-center justify-between bg-white p-4 rounded-xl border border-gray-200">
-                              <span className="text-[12px] font-bold text-gray-800">كلمة المرور</span>
-                              <button className="text-[10px] font-black text-primary-600">تغيير</button>
-                           </div>
-                           <div className="flex items-center justify-between bg-primary-600 p-4 rounded-xl shadow-lg shadow-primary-100">
-                              <span className="text-[12px] font-black text-white">الباقة الحالية</span>
-                              <span className="text-[10px] font-black bg-white/20 text-white px-2 py-1 rounded-lg">PRO PLAN</span>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <Profile user={MOCK_USER} />
             </div>
           )}
 
@@ -460,6 +431,12 @@ const App: React.FC = () => {
           {activeTab === 'export-templates' && (
             <div className="animate-in slide-in-from-bottom-4 duration-700">
                <ExportTemplates />
+            </div>
+          )}
+
+          {activeTab === 'smart-analyzer' && (
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <SmartAnalyzer />
             </div>
           )}
 

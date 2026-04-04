@@ -261,7 +261,7 @@ export const OpportunityCostCard: React.FC<{ data: any }> = ({ data }) => (
    <div style={{ background: THEME.bgSecondary, border: `1px solid ${THEME.border}`, borderRadius: 24, padding: 24 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
          <div style={{ width: 44, height: 44, background: THEME.amberDim, borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Lucide.Balance size={22} color={THEME.amber} />
+            <Lucide.Scale size={22} color={THEME.amber} />
          </div>
          <h4 style={{ fontSize: 16, fontWeight: 900 }}>حساب تكلفة الفرصة البديلة (Build vs Buy)</h4>
       </div>
@@ -285,7 +285,7 @@ export const OpportunityCostCard: React.FC<{ data: any }> = ({ data }) => (
 // --- Financials Grid (Legacy support) ---
 export const FinancialsGrid: React.FC<{ financials: any }> = ({ financials }) => {
   const stats = [
-    { label: "التكاليف الثابتة", val: financials.monthlyFixed, icon: Lucide.HardHat, col: THEME.amber },
+    { label: "التكاليف الثابتة", val: financials.monthlyFixed, icon: Lucide.Construction, col: THEME.amber },
     { label: "تكلفة العميل (CAC)", val: financials.cac, icon: Lucide.Target, col: THEME.red },
     { label: "قيمة العميل (LTV)", val: financials.ltv, icon: Lucide.Gem, col: THEME.accent },
     { label: "نسبة LTV:CAC", val: financials.ltvCacRatio, icon: Lucide.TrendingUp, col: '#534ab7' },

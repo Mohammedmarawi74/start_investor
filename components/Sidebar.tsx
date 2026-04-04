@@ -300,7 +300,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ user, isOpen = true, isCollaps
                  <NavGroup title="مركز العمليات" isCollapsed={isCollapsed}>
                     <NavItem icon={FileText} label="محرر الخطط" active={activeTab === 'editor'} onClick={() => setActiveTab?.('editor')} isCollapsed={isCollapsed} variant={activeTab === 'editor' ? 'active-project' : 'default'} />
                     <NavItem icon={Trello} label="المهام والجدولة" active={activeTab === 'tasks'} onClick={() => setActiveTab?.('tasks')} isCollapsed={isCollapsed} badge={2} />
-                    <NavItem icon={BrainCircuit} label="المحلل الذكي (AI)" variant="ai" isCollapsed={isCollapsed} />
+                    <NavItem icon={BrainCircuit} label="المحلل الذكي (AI)" active={activeTab === 'smart-analyzer'} onClick={() => setActiveTab?.('smart-analyzer')} variant="ai" isCollapsed={isCollapsed} />
                     <NavItem icon={FileCheck} label="قوالب التصدير" active={activeTab === 'export-templates'} onClick={() => setActiveTab?.('export-templates')} isCollapsed={isCollapsed} />
                  </NavGroup>
 
