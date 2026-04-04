@@ -1,4 +1,5 @@
 
+/* AI STRATEGIC SERVICE v2.6 - REFRESHED CONTENT */
 import { AiAnalysisResult } from '../types';
 
 export function buildDeepPrompt(answers: any): string {
@@ -45,7 +46,7 @@ export function generateMockAnalysis(answers: any): AiAnalysisResult {
        blueOceanOpportunity: "سوق مهمل حالياً يركز على الكفاءة فقط دون الاهتمام بالعلاقة طويلة الأمد."
     },
     behavioralPersona: {
-      psychographics: "جيل يسعى للكفاءة والتميز الشخصي، يفضل السرعة على التوفير"،
+      psychographics: "جيل يسعى للكفاءة والتميز الشخصي، يفضل السرعة على التوفير",
       jobsToBeDone: "توفير 4 ساعات أسبوعياً من العمل اليدوي المجهد",
       empathyMap: {
          sees: "إعلانات لحلول تقنية معقدة لا تحل مشكلته الحقيقية",

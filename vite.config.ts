@@ -31,3 +31,4 @@ export default defineConfig(({ mode }) => {
       }
     };
 });
+// Strategic Reload Trigger v2.6

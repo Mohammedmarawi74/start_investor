@@ -3,16 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global font override for IBM Plex Sans Arabic */
+/* IBM Plex Sans Arabic - Strategic Visual Identity */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
 
-/* Force font family globally on EVERYTHING */
 * {
-  font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif !important;
+  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
 }
 
 html, body {
-  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   background-color: #F8FAFC;
 }
@@ -25,34 +23,22 @@ body {
   background-size: 100% 100%, 100% 100%, 30px 30px;
 }
 
-/* Animations */
-@keyframes shimmer {
-  0% { transform: translateX(-150%); }
-  50% { transform: translateX(150%); }
-  100% { transform: translateX(150%); }
-}
-.animate-shimmer {
-  animation: shimmer 3s infinite linear;
-}
-
-/* Premium scrollbar */
+/* Luxury Scrollbar Logic */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(148,163,184,0.3);
-  border-radius: 100px;
+  background: #CBD5E1;
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148,163,184,0.5);
+  background: #94A3B8;
 }
 
 .sidebar-glass {
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
 }
