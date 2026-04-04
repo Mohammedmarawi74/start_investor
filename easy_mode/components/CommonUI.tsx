@@ -1,68 +1,91 @@
 
 import React from 'react';
 import { THEME } from '../constants';
+import * as Lucide from 'lucide-react';
 
-// --- Glass Card (Light Mode Optimized) ---
+// --- Glass Card (Tailwind Mixed) ---
 interface GlassCardProps {
   children: React.ReactNode;
-  style?: React.CSSProperties;
+  className?: string;
   glow?: boolean;
 }
 
-export const GlassCard: React.FC<GlassCardProps> = ({ children, style = {}, glow = false }) => (
-  <div style={{
-    background: THEME.bgCard,
-    border: `1px solid ${THEME.border}`,
-    borderRadius: 24,
-    padding: 24,
-    position: "relative",
-    overflow: "hidden",
-    boxShadow: glow ? '0 10px 40px rgba(16, 185, 129, 0.08)' : '0 4px 20px rgba(0,0,0,0.02)',
-    fontFamily: THEME.fontBody,
-    ...style,
-  }}>
+export const GlassCard: React.FC<GlassCardProps> = ({ children, className = "", glow = false }) => (
+  <div className={`
+    bg-white border border-slate-100 rounded-[2rem] p-6 relative overflow-hidden transition-all duration-300
+    ${glow ? 'shadow-2xl shadow-indigo-100/50' : 'shadow-sm hover:shadow-md'}
+    ${className}
+  `}>
     {children}
   </div>
 );
 
-// --- Badge (Premium Light Design) ---
+// --- Badge (Premium Level) ---
 interface BadgeProps {
   children: React.ReactNode;
   type?: 'default' | 'green' | 'red' | 'amber' | 'gold' | 'blue' | 'purple';
 }
 
 export const Badge: React.FC<BadgeProps> = ({ children, type = "default" }) => {
-  const styles = {
-    default: { bg: THEME.bgSecondary, color: THEME.textMuted, border: THEME.border },
-    green: { bg: THEME.accentDim, color: THEME.accent, border: 'rgba(16, 185, 129, 0.2)' },
-    red: { bg: THEME.redDim, color: THEME.red, border: 'rgba(239, 68, 68, 0.2)' },
-    amber: { bg: THEME.amberDim, color: THEME.amber, border: 'rgba(245, 158, 11, 0.2)' },
-    blue: { bg: THEME.blueDim, color: THEME.blue, border: 'rgba(59, 130, 246, 0.2)' },
-    gold: { bg: THEME.goldDim, color: THEME.gold, border: 'rgba(245, 158, 11, 0.2)' },
-    purple: { bg: 'rgba(83, 74, 183, 0.08)', color: '#534ab7', border: 'rgba(83, 74, 183, 0.15)' },
+  const themes = {
+    default: "bg-slate-100 text-slate-500 border-slate-200",
+    green: "bg-emerald-50 text-emerald-600 border-emerald-100",
+    red: "bg-rose-50 text-rose-600 border-rose-100",
+    amber: "bg-amber-50 text-amber-600 border-amber-100",
+    blue: "bg-blue-50 text-blue-600 border-blue-100",
+    gold: "bg-amber-100 text-amber-700 border-amber-200",
+    purple: "bg-indigo-50 text-indigo-600 border-indigo-100",
   };
-  const s = styles[type] || styles.default;
   return (
-    <span style={{
-      display: "inline-flex", alignItems: "center", gap: 4,
-      padding: "4px 12px", borderRadius: 20,
-      fontSize: 11, fontWeight: 700, letterSpacing: "0.02em",
-      background: s.bg, color: s.color, border: `1px solid ${s.border}`,
-      fontFamily: THEME.fontBody,
-    }}>{children}</span>
+    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black border uppercase tracking-wider ${themes[type]}`}>
+      {children}
+    </span>
   );
 };
 
-// --- Progress Dots ---
-export const ProgressDots: React.FC<{ total: number; current: number }> = ({ total, current }) => (
-  <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-    {Array.from({ length: total }).map((_, i) => (
-      <div key={i} style={{
-        width: i === current ? 24 : 8,
-        height: 8, borderRadius: 4,
-        background: i < current ? THEME.accent : i === current ? THEME.accent : "#E2E8F0",
-        transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-      }} />
-    ))}
+// --- Step Wizard (NEW ICONIC VERSION) ---
+interface StepWizardProps {
+  steps: { icon: string; id: string }[];
+  current: number;
+}
+
+export const ProgressDots: React.FC<StepWizardProps> = ({ steps, current }) => (
+  <div className="flex items-center gap-1.5" dir="rtl">
+    {steps.map((s, i) => {
+      const isCompleted = i < current;
+      const isActive = i === current;
+      const IconComp = (Lucide as any)[s.icon] || Lucide.Circle;
+
+      return (
+        <React.Fragment key={s.id}>
+          {/* Step Bubble */}
+          <div className="relative group">
+            <div className={`
+              w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-500 relative z-10
+              ${isCompleted ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-100 rotate-[360deg]' : 
+                isActive ? 'bg-slate-900 text-white shadow-xl shadow-indigo-100 animate-in zoom-in-75' : 
+                'bg-slate-50 text-slate-300 border border-slate-100'}
+            `}>
+              {isCompleted ? <Lucide.Check size={14} strokeWidth={4} /> : <IconComp size={isActive ? 14 : 12} strokeWidth={isActive ? 2.5 : 2} />}
+              
+              {/* Active Pulse Glow */}
+              {isActive && (
+                <div className="absolute inset-0 rounded-lg bg-indigo-500 animate-ping opacity-20 -z-10"></div>
+              )}
+            </div>
+            
+            {/* Tooltip hint on hover (Hidden by default, shown for UX density) */}
+            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap text-[8px] font-black text-slate-400 uppercase tracking-tighter">
+               STEP {i+1}
+            </div>
+          </div>
+
+          {/* Connector Line */}
+          {i < steps.length - 1 && (
+            <div className={`h-[2px] w-3 rounded-full transition-all duration-700 ${isCompleted ? 'bg-emerald-500' : 'bg-slate-100'}`} />
+          )}
+        </React.Fragment>
+      );
+    })}
   </div>
 );

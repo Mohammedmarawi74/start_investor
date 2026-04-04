@@ -1,131 +1,131 @@
-
-/* AI STRATEGIC SERVICE v2.6 - REFRESHED CONTENT */
+/* AI STRATEGIC INTELLIGENCE SERVICE v3.0 - ELITE UPGRADE */
 import { AiAnalysisResult } from '../types';
 
 export function buildDeepPrompt(answers: any): string {
   const problemText = typeof answers.problem === 'object' ? answers.problem.problem : (answers.problem || 'غير محددة');
   
-  return `أنت مستشار أعمال ومحلل استراتيجي عالمي المستوى، متخصص في ريادة الأعمال الحديثة والنمو المتسارع.
-بناءً على البيانات التفصيلية أدناه، قدم تحليلاً "توليدياً عميقاً" يتجاوز التوقعات التقليدية.
+  return `أنت مستشار استراتيجي رفيع المستوى (Level 7 Management Consultant) في McKinsey أو BCG، متخصص في نماذج الأعمال الهجينة واستراتيجيات النمو المتسارع (Blitzscaling).
+بناءً على البيانات الاستخباراتية الواردة أدناه، قم بتوليد تحليل استراتيجي "عالي الصرامة" (High-Rigor) يتجاوز السطحية.
 
-═══ بيانات المدخلات الاستراتيجية ═══
-القطاعات المختارة: ${Array.isArray(answers.sector) ? answers.sector.join(' + ') : (answers.sector || 'غير محدد')}
-طبيعة المشكلة: ${problemText}
-بروفايل العميل السلوكي: ${JSON.stringify(answers.behavioral_profile || 'بسيط')}
-خريطة التعاطف (Empathy Map data): ${JSON.stringify(answers.empathy_data || 'غير محددة')}
-المنافسة والتميز: ${answers.competition || 'غير محدد'}
-الموارد المتاحة: ${JSON.stringify(answers.resources || 'ميزانية محدودة')}
-المخاوف الاستراتيجية: ${Array.isArray(answers.biggest_fear) ? answers.biggest_fear.join('، ') : (answers.biggest_fear || 'غير محددة')}
+═══ المدخلات الاستراتيجية ═══
+القطاعات: ${Array.isArray(answers.sector) ? answers.sector.join(' + ') : (answers.sector || 'غير محدد')}
+جوهر المشكلة: ${problemText}
+الجمهور المستهدف (البروفايل): ${JSON.stringify(answers.behavioral_profile || 'بسيط')}
+بيانات التعاطف (Empathy): ${JSON.stringify(answers.empathy_data || 'غير محددة')}
+طبيعة المنافسة: ${answers.competition || 'غير محدد'}
+الموارد المتاحة (Capital & Tools): ${JSON.stringify(answers.resources || 'ميزانية محدودة')}
+المخاوف الحرجة: ${Array.isArray(answers.biggest_fear) ? answers.biggest_fear.join('، ') : (answers.biggest_fear || 'تحولات السوق')}
 
-═══ التعليمات الفنية للذكاء الاصطناعي ═══
-1. ابحث عن "تقاطع القطاعات" (Hybrid Models) واقترح نموذجاً يكتشف "محيطاً أزرقاً" (Blue Ocean).
-2. حلل "سيكولوجية العميل" بناءً على خريطة التعاطف ونموذج Jobs to be Done وحدد "نبرة الصوت" المثالية.
-3. قدم ذكاءً تنافسياً (Competitive Intelligence) مفترضاً من إشارات السوق الحية.
-4. احسب "تكلفة الفرصة البديلة" (Opportunity Cost) بدقة (Build vs Buy).
-5. صغ مصفوفة حساسية مالية توضح تأثير الـ CAC والـ Churn.
-6. ولد جدول Gantt تفاعلي مع تحديد المسار الحرج (Critical Path).
-7. صمم مصفوفة مخاطر بخطة طوارئ (Plan B) ونقاط توقف (Kill-switch).
+═══ بروتوكول التحليل (Executive Protocol) ═══
+1. ابحث عن "التقاطعات الاستراتيجية" (Strategic Crossroads) واقترح نموذجاً هجيناً يكتشف "محيطاً أزرقاً" (Blue Ocean).
+2. حلل سيكولوجية العميل عبر نموذج "الوظائف المطلوبة" (JTBD - Jobs to be Done) وحدد نبرة الصوت (Tone of Voice) التي تخترق جدار الثقة.
+3. قدم ذكاءً تنافسياً (Competitive Intelligence) يركز على نقاط الضعف الهيكلية للمنافسين التقليديين.
+4. احسب بدقة تكلفة الفرصة البديلة (Economic Build vs Buy Analysis).
+5. صغ مصفوفة حساسية مالية توضح الـ Break-even بناءً على تقلبات CAC و Churn.
+6. ولد جدول Gantt تنفيذي مع تحديد المسار الحرج (Critical Path) للأول 60 يوماً.
+7. حدد مصفوفة مخاطر ببروتوكولات طوارئ (Plan B) ونقاط توقف تشغيلية (Kill-switches).
 
-أعد الرد بصيغة JSON فقط متطابقة تماماً مع الـ Interface البرمجي المعتمد.
+أعد الرد بصيغة JSON فقط، متوافقة تماماً مع الـ Interface البرمجي، بلغة عربية احترافية مختلطة بمصطلحات استراتيجية إنجليزية دقيقة.
 `;
 }
 
 export function generateMockAnalysis(answers: any): AiAnalysisResult {
-  const score = Math.floor(Math.random() * (90 - 70) + 70);
+  const score = Math.floor(Math.random() * (95 - 82) + 82); // Elite projects usually have high base viability
   
   return {
     score: score,
-    scoreBreakdown: { idea: 22, market: 19, resources: 18, execution: 21 },
-    radarData: { tech: 85, market: 65, team: 90, financial: 70, operations: 75 },
-    verdict: "نموذج هجين واعد — استراتيجية المحيط الأزرق متاحة",
+    scoreBreakdown: { idea: 24, market: 21, resources: 19, execution: 23 },
+    radarData: { tech: 92, market: 78, team: 85, financial: 68, operations: 82 },
+    verdict: "موجة هجينة فائقة — نموذج Blue Ocean مكتشف",
     verdictType: "green",
-    executiveSummary: "بناءً على تقاطع القطاعات المختار، نرى فرصة فريدة في دمج الأتمتة مع تجربة المستخدم الشخصية. مشروعك يحمل هوية تنافسية قوية وتحتاج فقط لضبط مصفوفة الحساسية المالية.",
+    executiveSummary: "تحليلك يشير إلى فرصة 'تقاطع قطاعات' نادرة. دمج الأتمتة التقنية مع الموثوقية التقليدية في هذا القطاع سيخلق حاجز دخول (Barrier to Entry) مرتفع جداً يصعب على الشركات التقنية الناشئة اختراقه بسهولة.",
     hybridInnovation: {
-       suggestedModel: "منصة ذكية تجمع بين الخدمات اللوجستية وتخصيص البيانات الفوري",
-       whyItWorks: "العملاء اليوم يفضلون الحلول الشاملة التي توفر الوقت والجهد في مكان واحد.",
-       blueOceanOpportunity: "سوق مهمل حالياً يركز على الكفاءة فقط دون الاهتمام بالعلاقة طويلة الأمد."
+       suggestedModel: "نموذج 'الاستشارة المؤتمتة' (Automated Advisory) — ربط بيانات السوق الحية بقرارات الاستثمار الفورية للأفراد.",
+       whyItWorks: "العملاء في هذا السوق يثقون في الأرقام لكنهم يفتقرون للوقت؛ نموذجك يمنحهم الثقة والسرعة في آن واحد.",
+       blueOceanOpportunity: "سوق 'المستشار الذكي' شبه فارغ؛ المنافسون إما بنوك بطيئة أو تطبيقات بيانات جامدة لا تقدم رؤية استراتيجية."
     },
     behavioralPersona: {
-      psychographics: "جيل يسعى للكفاءة والتميز الشخصي، يفضل السرعة على التوفير",
-      jobsToBeDone: "توفير 4 ساعات أسبوعياً من العمل اليدوي المجهد",
+      psychographics: "مستثمر طموح، تكنولوجي النزعة، يكره هدر الوقت في الإجراءات التقليدية ويقدس شفافية البيانات.",
+      jobsToBeDone: "أتمتة اتخاذ القرار الاستثماري وضمان عائد ثابت بأقل تدخل بشري ممكن.",
       empathyMap: {
-         sees: "إعلانات لحلول تقنية معقدة لا تحل مشكلته الحقيقية",
-         hears: "أصدقاء يشتكون من نفس المشكلة ويبحثون عن بدائل",
-         feels: "الإحباط من ضياع الوقت في مهام روتينية",
-         pains: "الخوف من فقدان السيطرة على جودة العمل"
+         sees: "تطبيقات مالية معقدة، إعلانات تداول مضللة، بيروقراطية بنكية.",
+         hears: "أصدقاء حققوا ثروات من العقار الرقمي، نصائح الخبراء حول الأتمتة.",
+         feels: "القلق من تآكل القيمة الشرائية للمدخرات، الرغبة في التوسع المالي.",
+         pains: "الخوف من 'ضياع الفرصة' (FOMO) والوقوع في فخ التحليلات الخاطئة."
       },
-      toneOfVoice: "صديق تقني ذكي مستشار موثوق"
+      toneOfVoice: "شريك تقني حكيم، رصين، وموثوق كخبير مالي عالمي."
     },
     competitiveIntelligence: {
-       fundingInsights: "جولات تمويل حديثة بمتوسط $2M في هذا القطاع مما يشير لنمو قوي",
-       competitorWeakness: "المنافسون يعانون من بطء استجابة الدعم الفني وتعقيد الواجهة",
-       marketSignals: "تحول كبير في تفضيلات العملاء نحو المنصات المتكاملة"
+       fundingInsights: "تدفقات رأس مال مغامر (VC) تتجاوز $5M في مشاريع مشابهة إقليمياً.",
+       competitorWeakness: "قصور حاد في فهم سيكولوجية المستثمر الصغير وصعوبة في تخصيص التجارب الشخصية.",
+       marketSignals: "تحول جذري نحو الادخار الاستثماري القائم على الخوارزميات (Algorithmic Savings)."
     },
     marketSize: {
-      tam: "$1.8 مليار",
-      sam: "$240 مليون",
-      som: "$3.6 مليون",
-      source: "Crunchbase + تقارير اقتصادية محلية 2024"
+      tam: "$3.2 مليار (Total Addressable Market)",
+      sam: "$450 مليون (Serviceable Addressable Market)",
+      som: "$12.5 مليون (Target Beachhead Market)",
+      source: "Economic Data + General Authority for Statistics 2025"
     },
-    timeToRevenue: "35 يوم",
-    breakEvenMonths: 7,
+    timeToRevenue: "28 يوم (Velocity)",
+    breakEvenMonths: 5,
     opportunityCost: {
-       buildVsBuy: "استثمار 50 ساعة في بناء بنية أساسية يوفر عليك $2500 تكلفة اشتراكات",
-       calculatedLoss: "خسارة محتملة $1200 شهرياً في حال تأخر الإطلاق لمدة شهرين",
-       strategicAdvice: "الأفضل هو Outsourcing للمهام الثانوية والتركيز على الـ Core Product."
+       buildVsBuy: "استثمار 120 ساعة في 'الذكاء الأساسي' سيوفر $4200 شهرياً من رسوم طرف ثالث غير دقيق.",
+       calculatedLoss: "$3,800 شهرياً في حال الفشل في إطلاق MVP خلال الربع الأول.",
+       strategicAdvice: "تجنب بناء الواجهات المعقدة؛ ركز 80% من جهدك على دقة 'المحرك الاستراتيجي' الداخلي."
     },
     sensitivityAnalysis: {
-       cacImpact: "انخفاض بنسبة 5% في CAC سيؤدي إلى وصول أسرع للتعادل بـ 1.5 شهر",
-       churnImpact: "زيادة 2% في الارتداد تهدد الـ Runway الحالي بـ 3 أشهر",
-       baseCac: 45,
-       baseChurn: 5
+       cacImpact: "تحسين CAC بنسبة 10% سيؤدي لزيادة صافي الربح السنوي بقرابة $85,000.",
+       churnImpact: "الارتداد (Churn) هو العدو الأكبر؛ ارتياح العميل لمرة واحدة يضمن LTV عالي جداً.",
+       baseCac: 120,
+       baseChurn: 3
     },
     financials: {
-      monthlyFixed: "$950",
-      monthlyVariable: "15%",
-      cac: "$45",
-      ltv: "$450",
-      ltvCacRatio: "10.0x",
-      runway: "14 شهر"
+      monthlyFixed: "$1,200 (Lean Opex)",
+      monthlyVariable: "8% (Scalable Index)",
+      cac: "$120 (Target)",
+      ltv: "$1,850 (Projected)",
+      ltvCacRatio: "15.4x (Elite Elite)",
+      runway: "18 شهر (Conservative Forecast)"
     },
     ganttTasks: [
-       { id: "1", task: "بناء النموذج الأولي (MVP)", startDay: 0, duration: 14, isCritical: true },
-       { id: "2", task: "تحقق السوق الأولي", startDay: 14, duration: 10, dependencies: ["1"], isCritical: true },
-       { id: "3", task: "بناء الهوية البصرية", startDay: 5, duration: 7, isCritical: false },
-       { id: "4", task: "حملة التسويق المبكر", startDay: 24, duration: 21, dependencies: ["2"], isCritical: true }
+       { id: "1", task: "إعداد المحرك الاستراتيجي (Core Engine)", startDay: 0, duration: 18, isCritical: true },
+       { id: "2", task: "اختبار التحقق من الجمهور (Beachhead Test)", startDay: 18, duration: 12, dependencies: ["1"], isCritical: true },
+       { id: "3", task: "صياغة الهوية البصرية النخبوية", startDay: 5, duration: 10, isCritical: false },
+       { id: "4", task: "الإطلاق الهادئ (Soft Launch)", startDay: 32, duration: 28, dependencies: ["2"], isCritical: true }
     ],
     criticalObstacles: [
-      { title: "التوسع اللوجستي", detail: "صعوبة السيطرة على الجودة عند زيادة الطلب بنسبة 300%", severity: "high", timeframe: "فوري" }
+      { title: "الأعباء التنظيمية (Regulation)", detail: "الحاجة لتراخيص مالية دقيقة؛ ابدأ كأداة تحليلية لتجنب التعقيد القانوني المبكر.", severity: "critical", timeframe: "فوري" },
+      { title: "ثقة البيانات (Data Integrity)", detail: "ضمان دقة مصادر البيانات العقارية لتجنب القرارات الخاطئة.", severity: "high", timeframe: "أسبوع 3" }
     ],
     actionPlan: {
-      week1: [{ action: "إعداد خريطة التعاطف النهائية", why: "لضبط الرسائل التسويقية", howExactly: "مقابلات مع 5 عملاء مستهدفين" }],
-      month1: [{ action: "إطلاق البيتا", why: "جمع التغذية الراجعة", howExactly: "دعوات خاصة لـ 50 مستخدم" }],
-      month3: [{ action: "تحليل الحساسية المالية", why: "ضبط نماذج التسعير", howExactly: "مراجعة CAC الشهرية" }],
-      month6: [{ action: "التوسع الإقليمي", why: "زيادة حصة SOM", howExactly: "استهداف مدن ثانوية" }]
+      week1: [{ action: "مقابلات 'المستثمر النخبة'", why: "لضبط خوارزمية التوصيات", howExactly: "دعوة 10 مستثمرين عقاريين لجلسات تركيز" }],
+      month1: [{ action: "إطلاق صفحة الهبوط الاستباقية", why: "قياس الـ Conversion قبل البرمجة", howExactly: "حملة إعلانية مركزة بـ $200" }],
+      month3: [{ action: "ضبط الـ Unit Economics", why: "تحقيق الاستدامة المالية", howExactly: "مراجعة دقيقة لنسبة LTV:CAC" }],
+      month6: [{ action: "التوسع الأفقي (Scale)", why: "الهيمنة على حصة الـ SOM", howExactly: "إطلاق برنامج الإحالة للمستثمرين" }]
     },
     risks: [
-      { title: "تغير سياسات آبل/غوغل", probability: "low", impact: "high", mitigation: "بناء قاعدة بيانات مستقلة", earlySignal: "تحديثات الخصوصية الجديدة", planB: "الاعتماد على الويب بدلاً من التطبيق", killSwitch: "انخفاض الوصول لـ 20%" }
+      { title: "دخول منافس بنكي عملاق", probability: "medium", impact: "high", mitigation: "التركيز على تجربة مستخدم لا يمكن للبنوك تقليدها (Extreme UX)", earlySignal: "تغيير في حملاتهم التسويقية لتستهدف الشباب", planB: "الاستحواذ أو الاندماج المبكر", killSwitch: "انخفاض معدل التحويل عن 2%" }
     ],
     activationPlan: {
-       notionExportUrl: "https://notion.so/workspace/new-plan",
-       trelloExportUrl: "https://trello.com/b/new-board"
+       notionExportUrl: "https://notion.so/strategic-cockpit/plan-v3",
+       trelloExportUrl: "https://trello.com/b/strategic-agile-board"
     },
     validationPlan: {
-      nextStep: "بناء صفحة هبوط تفاعلية",
-      successMetric: "نسبة تحويل 12%",
-      timeboxDays: 14,
-      budget: "$500"
+      nextStep: "بناء 'النموذج الأولي الفعال' (Functional MVP)",
+      successMetric: "معدل استبقاء (Retention) > 40%",
+      timeboxDays: 21,
+      budget: "$850"
     },
     resources: [
-      { title: "Framer", type: "أداة", platform: "No-code", why: "سرعة بناء الموقع التعريفي", cost: "$15/شهر", urgency: "فوري" }
+      { title: "Bubble.io / Webflow", type: "أداة", platform: "No-code Elite", why: "تسريع التواجد في السوق دون ديون تقنية", cost: "$50/شهر", urgency: "فوري" }
     ],
     keyMetrics: [
-      { metric: "معدل الرضا", target: "4.8/5", how: "استبيانات بعد طلب الخدمة", frequency: "يومي" }
+      { metric: "نشاط المنصة (DAU)", target: "100 مستخدم", how: "تتبع Firebase", frequency: "يومي" }
     ],
-    pivotSignals: ["عدم وجود طلب بعد 30 يوم من الحملة"],
-    successStory: "Dropbox بدأت بتقاطع بسيط وسهولة لم يعرفها أحد من قبل.",
-    failureLesson: "Quibi فشلت لأنها لم تفهم Jobs to be Done لجيل الموبايل.",
-    aiInsight: "القوة الاستراتيجية تكمن في قدرتك على التحول السريع (Pivoting) بناءً على إشارات السوق."
+    pivotSignals: ["تجاوز تكلفة العميل (CAC) لقرابة 50% من الـ LTV مبكراً"],
+    successStory: "Airbnb بدأت بحل مشكلة ضيقة جداً لتتحول لأكبر محرك عقاري هجين في العالم.",
+    failureLesson: "مشاريع كثيرة فشلت لأنها بالغت في تعقيد التكنولوجيا ونسيت سيكولوجية المستخدم البشري.",
+    aiInsight: "مفتاح نجاحك هو 'الثقة الرقمية' (Digital Trust)؛ كل بكسل في واجهتك يجب أن يوحي بالدقة المالية المطلقة."
   };
 }
 
@@ -137,7 +137,7 @@ export async function analyzeWithAI(answers: any, apiKey?: string): Promise<AiAn
          "Content-Type": "application/json",
          "x-api-key": apiKey || '',
          "anthropic-version": "2023-06-01"
-       },
+        },
        body: JSON.stringify({
          model: "claude-3-5-sonnet-20240620",
          max_tokens: 4000,
@@ -153,7 +153,7 @@ export async function analyzeWithAI(answers: any, apiKey?: string): Promise<AiAn
     }
     return new Promise(resolve => setTimeout(() => resolve(generateMockAnalysis(answers)), 1500));
   } catch (error) {
-    console.warn("AI API unreachable. Fallback to optimized mock engine.");
+    console.warn("AI API unreachable. Fallback to Optimized Elite Mock Engine.");
     return new Promise(resolve => setTimeout(() => resolve(generateMockAnalysis(answers)), 1800));
   }
 }
