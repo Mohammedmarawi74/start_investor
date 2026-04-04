@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { Home } from './components/Home';
-import { PlansDashboard } from './components/PlansDashboard';
+import { MyProjects } from './components/MyProjects';
 import { NewPlan } from './components/NewPlan';
 import { PlanComparison } from './components/PlanComparison';
 import { UnicornBenchmarking } from './components/UnicornBenchmarking';
@@ -168,7 +168,7 @@ const App: React.FC = () => {
                          {activeTab === 'profile' && 'الملف الشخصي'}
                          {activeTab === 'settings' && 'إعدادات الحساب والملف الشخصي'}
                          {activeTab === 'pricing' && 'باقات الاشتراك والفوترة'}
-                         {activeTab === 'my-plans' && 'أرشيف مشاريعي'}
+                         {activeTab === 'my-plans' && 'مركز إدارة مشاريعي الاستثمارية'}
                          {activeTab === 'new-plan' && 'خلق فكرة جديدة'}
                          {activeTab === 'unicorn-benchmark' && 'رادار اليونيكورن'}
                          {activeTab === 'brand-identity' && 'استوديو الهوية البصرية'}
@@ -405,11 +405,7 @@ const App: React.FC = () => {
 
           {activeTab === 'my-plans' && (
             <div className="animate-in slide-in-from-bottom-4 duration-700">
-               <div className="mb-10 text-right">
-                  <h1 className="text-3xl font-black text-gray-900 mb-2">أرشيف المشاريع</h1>
-                  <p className="text-gray-400 font-bold text-sm">إدارة وتحرير كافة خطط الأعمال النشطة</p>
-               </div>
-               <PlansDashboard />
+                <MyProjects />
             </div>
           )}
 
