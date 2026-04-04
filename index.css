@@ -1,28 +1,31 @@
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Global font override for IBM Plex Sans Arabic */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
 
 /* Force font family globally on EVERYTHING */
 * {
-  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+  font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif !important;
 }
 
 html, body {
   font-family: 'IBM Plex Sans Arabic', sans-serif !important;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #F8FAFC;
 }
 
 body {
-  background-color: #f0f2f5;
   background-image: 
-    radial-gradient(circle at 20% 50%, rgba(99,102,241,0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(16,185,129,0.03) 0%, transparent 50%),
-    radial-gradient(#cbd5e1 0.6px, transparent 0.6px);
-  background-size: 100% 100%, 100% 100%, 20px 20px;
-  color: #1e293b;
+    radial-gradient(circle at 20% 50%, rgba(16,185,129,0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(59,130,246,0.02) 0%, transparent 50%),
+    radial-gradient(#E2E8F0 0.8px, transparent 0.8px);
+  background-size: 100% 100%, 100% 100%, 30px 30px;
 }
 
+/* Animations */
 @keyframes shimmer {
   0% { transform: translateX(-150%); }
   50% { transform: translateX(150%); }
@@ -30,17 +33,6 @@ body {
 }
 .animate-shimmer {
   animation: shimmer 3s infinite linear;
-}
-
-/* Ensure headings and strong text follow the font and weight rules */
-h1, h2, h3, h4, h5, h6, strong, b, .font-bold, .font-black, .font-extrabold {
-  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
-  font-weight: 700 !important;
-}
-
-/* Ensure regular text uses correct weight */
-p, span, div, a, li, label, button, input, textarea, select {
-  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
 }
 
 /* Premium scrollbar */
@@ -59,8 +51,8 @@ p, span, div, a, li, label, button, input, textarea, select {
   background: rgba(148,163,184,0.5);
 }
 
-/* Custom Padding Overrides */
-.py-10 {
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
+.sidebar-glass {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
