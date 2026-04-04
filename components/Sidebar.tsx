@@ -161,7 +161,7 @@ interface NavItemProps {
 }
 
 const NavItem: React.FC<NavItemProps> = ({ icon: Icon, label, variant = 'default', active, onClick, badge, isNew, isCollapsed, isAdminMode }) => {
-  const baseClasses = `w-full flex items-center ${isCollapsed ? 'justify-center p-0 h-11 w-11 mx-auto mb-1' : 'gap-3 px-4 py-2.5'} rounded-[1.1rem] text-[13px] font-bold transition-all duration-300 group relative overflow-hidden`;
+  const baseClasses = `w-full flex items-center ${isCollapsed ? 'justify-center p-0 h-11 w-11 mx-auto mb-1' : 'gap-3 px-4 py-2.5'} rounded-[1.1rem] text-[13px] font-bold transition-all duration-300 group relative`;
   
   const variants = {
     default: active 
@@ -208,7 +208,7 @@ const NavItem: React.FC<NavItemProps> = ({ icon: Icon, label, variant = 'default
         <div className="absolute top-1 right-1 w-2 h-2 bg-amber-400 rounded-full border-2 border-white shadow-sm"></div>
       )}
       {isCollapsed && badge && (
-        <div className="absolute -top-0.5 -left-0.5 w-4 h-4 bg-red-500 text-white text-[7px] rounded-full flex items-center justify-center border-2 border-white font-bold">
+        <div className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[7.5px] rounded-full flex items-center justify-center border-2 border-white font-black shadow-sm ring-1 ring-red-200">
            {badge}
         </div>
       )}
