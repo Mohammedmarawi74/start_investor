@@ -18,6 +18,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import SmartBeginnerPro from '../easy_mode/SmartBeginnerPro';
+import { IdeaCreation } from './IdeaCreation';
 
 interface Template {
   id: string;
@@ -84,7 +85,7 @@ const TEMPLATES: Template[] = [
 
 export const NewPlan: React.FC<{ onStart: (id: string) => void }> = ({ onStart }) => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [mode, setMode] = useState<'selection' | 'easy'>('selection');
+  const [mode, setMode] = useState<'selection' | 'easy' | 'ai'>('selection');
 
   if (mode === 'easy') {
     return (
@@ -101,6 +102,10 @@ export const NewPlan: React.FC<{ onStart: (id: string) => void }> = ({ onStart }
         </div>
       </div>
     );
+  }
+
+  if (mode === 'ai') {
+    return <IdeaCreation onBack={() => setMode('selection')} />;
   }
 
   return (
@@ -138,7 +143,10 @@ export const NewPlan: React.FC<{ onStart: (id: string) => void }> = ({ onStart }
           </div>
         </button>
 
-        <button className="group relative overflow-hidden bg-gradient-to-br from-purple-600 to-indigo-600 p-8 rounded-[3rem] shadow-xl hover:shadow-purple-200 transition-all duration-500 text-right text-white">
+        <button 
+          onClick={() => setMode('ai')}
+          className="group relative overflow-hidden bg-gradient-to-br from-purple-600 to-indigo-600 p-8 rounded-[3rem] shadow-xl hover:shadow-purple-200 transition-all duration-500 text-right text-white"
+        >
           <div className="absolute top-0 left-0 p-4 opacity-10">
             <Sparkles size={100} />
           </div>

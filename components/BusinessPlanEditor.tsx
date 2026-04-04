@@ -1,51 +1,84 @@
-import React, { useState } from 'react';
-import {
-  ChevronDown,
-  ChevronUp,
-  CheckCircle,
-  Circle,
-  Sparkles,
-  Edit3,
-  Save,
-  FileText,
-  BarChart3,
-  Lightbulb,
-  Target,
-  Users,
-  DollarSign,
-  Briefcase,
-  TrendingUp
+
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { 
+  FileText, BarChart3, Lightbulb, Target, Users, DollarSign, 
+  Briefcase, BrainCircuit, Save, Edit3, Plus, X, Zap, LayoutGrid, CheckCircle2 
 } from 'lucide-react';
 import { PlanSection } from '../types';
 
+// --- Configuration & Helpers ---
+export const SECTION_CONFIG: Record<string, { icon: any, color: string }> = {
+  'الملخص': { icon: FileText, color: 'text-blue-500' },
+  'السوق': { icon: BarChart3, color: 'text-purple-500' },
+  'العمل': { icon: Lightbulb, color: 'text-amber-500' },
+  'التسويق': { icon: Target, color: 'text-rose-500' },
+  'الهيكل': { icon: Users, color: 'text-emerald-500' },
+  'المالية': { icon: DollarSign, color: 'text-cyan-500' },
+  'default': { icon: Briefcase, color: 'text-slate-500' }
+};
+
+export const getSectionIcon = (title: string) => {
+  const entry = Object.entries(SECTION_CONFIG).find(([key]) => title.includes(key));
+  return entry ? entry[1].icon : SECTION_CONFIG.default.icon;
+};
+
+// --- Sub-components ---
+const EditorHeader = ({ progress, onToggleAi, isAiOpen }: { progress: number, onToggleAi: () => void, isAiOpen: boolean }) => (
+  <nav className="h-24 bg-white border-b border-slate-100 flex items-center justify-between px-10 shrink-0 z-50">
+    <div className="flex items-center gap-4">
+      <div className="w-12 h-12 bg-slate-950 text-white rounded-2xl flex items-center justify-center shadow-lg transform -rotate-3">
+        <Briefcase size={24} />
+      </div>
+      <div>
+        <h1 className="text-2xl font-black text-slate-950 leading-none">المحرر الاستراتيجي</h1>
+        <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest mt-1 block text-right">Cloud Synced</span>
+      </div>
+    </div>
+
+    <div className="flex items-center gap-6">
+      <div className="hidden md:flex items-center gap-4 bg-slate-50 px-5 py-3 rounded-2xl border border-slate-100">
+        <span className="text-[11px] font-bold text-slate-400">جاهزية الاستثمار</span>
+        <div className="w-32 h-2 bg-slate-200 rounded-full overflow-hidden">
+          <div className="h-full bg-blue-600 transition-all duration-700" style={{ width: `${progress}%` }} />
+        </div>
+        <span className="text-xs font-black text-slate-900">{progress}%</span>
+      </div>
+      
+      <button 
+        onClick={onToggleAi}
+        className={`flex items-center gap-3 px-6 py-3.5 rounded-2xl text-sm font-bold transition-all ${
+          isAiOpen ? 'bg-slate-950 text-white shadow-xl' : 'bg-white border-2 border-slate-100 text-slate-600 hover:border-slate-300'
+        }`}
+      >
+        <BrainCircuit size={18} />
+        <span>ذكاء الخطة</span>
+      </button>
+    </div>
+  </nav>
+);
+
+const AiMetric = ({ label, score, warning }: { label: string, score: number, warning?: boolean }) => (
+  <div className="space-y-2">
+    <div className="flex justify-between text-[11px] font-bold">
+      <span className="text-slate-500">{label}</span>
+      <span className={warning ? 'text-amber-600' : 'text-slate-900'}>{score}%</span>
+    </div>
+    <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+      <div 
+        className={`h-full transition-all duration-1000 ${warning ? 'bg-amber-400' : 'bg-blue-600'}`} 
+        style={{ width: `${score}%` }} 
+      />
+    </div>
+  </div>
+);
+
+// --- Main Component ---
 interface BusinessPlanEditorProps {
   sections: PlanSection[];
   onSectionUpdate: (id: string, updates: Partial<PlanSection>) => void;
   expandedSectionId: string | null;
   onSectionExpand: (id: string | null) => void;
 }
-
-const getSectionIcon = (title: string) => {
-  if (title.includes('الملخص')) return FileText;
-  if (title.includes('السوق')) return BarChart3;
-  if (title.includes('العمل')) return Lightbulb;
-  if (title.includes('التسويق')) return Target;
-  if (title.includes('الهيكل')) return Users;
-  if (title.includes('المالية')) return DollarSign;
-  return FileText;
-};
-
-const getSectionColor = (index: number) => {
-  const colors = [
-    'bg-blue-500',
-    'bg-purple-500',
-    'bg-pink-500',
-    'bg-orange-500',
-    'bg-green-500',
-    'bg-indigo-500',
-  ];
-  return colors[index % colors.length];
-};
 
 export const BusinessPlanEditor: React.FC<BusinessPlanEditorProps> = ({
   sections,
@@ -55,237 +88,188 @@ export const BusinessPlanEditor: React.FC<BusinessPlanEditorProps> = ({
 }) => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState('');
+  const [isAiSidebarOpen, setIsAiSidebarOpen] = useState(true);
+  const editorRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleEdit = (section: PlanSection) => {
-    setEditingId(section.id);
-    setEditContent(section.content);
+  // حساب التقدم
+  const totalProgress = useMemo(() => 
+    sections.length > 0 ? Math.round((sections.filter(s => s.isCompleted).length / sections.length) * 100) : 0, 
+  [sections]);
+
+  const activeSection = useMemo(() => 
+    sections.find(s => s.id === expandedSectionId) || sections[0] || { id: '0', title: 'خطة جديدة', content: '', isCompleted: false },
+  [sections, expandedSectionId]);
+
+  // التحكم في التعديل
+  const startEditing = () => {
+    setEditingId(activeSection.id);
+    setEditContent(activeSection.content || '');
   };
 
-  const handleSave = () => {
-    if (editingId) {
-      onSectionUpdate(editingId, { content: editContent });
-      setEditingId(null);
-      setEditContent('');
-    }
-  };
+  const cancelEditing = () => setEditingId(null);
 
-  const handleCancel = () => {
+  const saveContent = () => {
+    onSectionUpdate(activeSection.id, { 
+      content: editContent, 
+      isCompleted: editContent.trim().length > 50 
+    });
     setEditingId(null);
-    setEditContent('');
-  };
-
-  const toggleSection = (id: string) => {
-    if (expandedSectionId === id) {
-      onSectionExpand(null);
-    } else {
-      onSectionExpand(id);
-    }
   };
 
   return (
-    <div className="h-full overflow-y-auto bg-gray-50/50 p-6 lg:p-10">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-black text-gray-900 mb-2">محرر خطة العمل</h1>
-        <p className="text-gray-500 font-medium text-sm">
-          قم بتحرير وتحسين أقسام خطة عملك بمساعدة الذكاء الاصطناعي
-        </p>
-      </div>
+    <div dir="rtl" className="h-screen flex flex-col font-['IBM_Plex_Sans_Arabic'] bg-white overflow-hidden text-slate-900">
+      
+      <EditorHeader 
+        progress={totalProgress} 
+        onToggleAi={() => setIsAiSidebarOpen(!isAiSidebarOpen)} 
+        isAiOpen={isAiSidebarOpen} 
+      />
 
-      {/* Progress Overview */}
-      <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-gray-900">التقدم الكلي</h2>
-          <span className="text-2xl font-black text-primary-600">
-            {Math.round(sections.filter((s) => s.isCompleted).length / sections.length * 100)}%
-          </span>
-        </div>
-        <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
-          <div
-            className="h-full bg-gradient-to-r from-primary-500 to-primary-600 rounded-full transition-all duration-700"
-            style={{
-              width: `${sections.filter((s) => s.isCompleted).length / sections.length * 100}%`,
-            }}
-          />
-        </div>
-      </div>
-
-      {/* Sections List */}
-      <div className="space-y-4">
-        {sections.map((section, index) => {
-          const Icon = getSectionIcon(section.title);
-          const colorClass = getSectionColor(index);
-          const isExpanded = expandedSectionId === section.id;
-          const isEditing = editingId === section.id;
-
-          return (
-            <div
-              key={section.id}
-              className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md"
-            >
-              {/* Section Header */}
-              <div
-                className="p-5 cursor-pointer flex items-center gap-4"
-                onClick={() => toggleSection(section.id)}
-              >
-                {/* Icon */}
-                <div
-                  className={`w-12 h-12 ${colorClass} rounded-2xl flex items-center justify-center text-white shadow-lg`}
-                >
-                  <Icon size={22} strokeWidth={2} />
-                </div>
-
-                {/* Info */}
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-1">
-                    <h3 className="text-base font-bold text-gray-900">{section.title}</h3>
-                    {section.isCompleted && (
-                      <CheckCircle size={16} className="text-green-500" />
-                    )}
-                  </div>
-                  <div className="flex items-center gap-4 text-xs text-gray-400 font-medium">
-                    {section.lastEdited && <span>آخر تعديل: {section.lastEdited}</span>}
-                    {section.progress && <span>التقدم: {section.progress}%</span>}
-                  </div>
-                </div>
-
-                {/* Scores */}
-                <div className="flex items-center gap-3">
-                  {section.aiScore !== undefined && (
-                    <div className="text-center">
-                      <div className="text-xs font-bold text-gray-400 mb-0.5">AI</div>
-                      <div
-                        className={`text-sm font-black ${
-                          section.aiScore >= 80
-                            ? 'text-green-600'
-                            : section.aiScore >= 60
-                            ? 'text-amber-600'
-                            : 'text-red-600'
-                        }`}
-                      >
-                        {section.aiScore}
-                      </div>
+      <div className="flex-1 flex overflow-hidden">
+        
+        {/* الملاح الجانبي (Right) */}
+        <aside className="w-72 border-l border-slate-100 flex flex-col bg-white shrink-0">
+          <div className="p-8">
+            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-6 text-right">هيكل الاستراتيجية</h4>
+            <div className="space-y-1.5">
+              {sections.map((section) => {
+                const Icon = getSectionIcon(section.title);
+                const isActive = activeSection.id === section.id;
+                return (
+                  <button 
+                    key={section.id}
+                    onClick={() => { onSectionExpand(section.id); cancelEditing(); }}
+                    className={`w-full group p-4 rounded-2xl text-right transition-all flex items-center justify-between border-2 ${
+                      isActive 
+                        ? 'bg-blue-50/50 border-blue-600 text-blue-950 shadow-sm' 
+                        : 'border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Icon size={18} className={isActive ? 'text-blue-600' : 'text-slate-400'} />
+                      <span className={`text-sm ${isActive ? 'font-black' : 'font-medium'}`}>{section.title}</span>
                     </div>
-                  )}
-                  {section.humanScore !== undefined && (
-                    <div className="text-center">
-                      <div className="text-xs font-bold text-gray-400 mb-0.5">بشري</div>
-                      <div
-                        className={`text-sm font-black ${
-                          section.humanScore >= 80
-                            ? 'text-green-600'
-                            : section.humanScore >= 60
-                            ? 'text-amber-600'
-                            : 'text-red-600'
-                        }`}
-                      >
-                        {section.humanScore}
-                      </div>
-                    </div>
-                  )}
-                  <button className="text-gray-400 hover:text-primary-600 transition-colors">
-                    {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                    {section.isCompleted && <CheckCircle2 size={16} className="text-emerald-500" />}
                   </button>
+                );
+              })}
+            </div>
+          </div>
+        </aside>
+
+        {/* منطقة المحرر المركزية (Center) */}
+        <main className="flex-1 overflow-y-auto bg-slate-50/30 flex flex-col items-center py-10 px-6">
+          <div className="w-full max-w-4xl flex flex-col flex-1">
+            <div className="bg-white rounded-[2.5rem] border border-slate-200/60 shadow-sm flex-1 flex flex-col overflow-hidden">
+              
+              {/* ترويسة القسم الحالية */}
+              <div className="px-12 py-8 border-b border-slate-50 flex items-center justify-between text-right">
+                <div className="flex items-center gap-5">
+                  <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-900 shadow-inner">
+                    {React.createElement(getSectionIcon(activeSection.title), { size: 24 })}
+                  </div>
+                  <h2 className="text-3xl font-black tracking-tight">{activeSection.title}</h2>
                 </div>
               </div>
 
-              {/* Section Content */}
-              {isExpanded && (
-                <div className="border-t border-gray-50 p-6 bg-gray-50/50">
-                  {/* Progress Bar */}
-                  <div className="mb-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-bold text-gray-600">تقدم القسم</span>
-                      <span className="text-xs font-black text-primary-600">
-                        {section.progress || 0}%
-                      </span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                      <div
-                        className="h-full bg-primary-500 rounded-full transition-all duration-500"
-                        style={{ width: `${section.progress || 0}%` }}
-                      />
+              {/* محتوى المحرر */}
+              <div className="flex-1 p-12 text-right">
+                {editingId === activeSection.id ? (
+                  <div className="h-full flex flex-col">
+                    <textarea 
+                      autoFocus
+                      ref={editorRef}
+                      value={editContent}
+                      onChange={(e) => setEditContent(e.target.value)}
+                      className="w-full flex-1 text-xl font-medium text-slate-800 leading-relaxed outline-none border-none resize-none placeholder:text-slate-200"
+                      placeholder="ابدأ بصياغة رؤيتك الاستراتيجية هنا..."
+                    />
+                    <div className="mt-8 pt-8 border-t border-slate-50 flex items-center justify-between">
+                      <button onClick={cancelEditing} className="text-slate-400 hover:text-rose-500 font-bold text-sm transition-colors">إلغاء التغييرات</button>
+                      <button 
+                        onClick={saveContent}
+                        className="px-8 py-4 bg-blue-600 text-white rounded-2xl font-bold text-sm shadow-lg shadow-blue-200 hover:bg-blue-700 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3"
+                      >
+                        <Save size={18} /> حفظ المسودة الاستراتيجية
+                      </button>
                     </div>
                   </div>
-
-                  {/* Content Editor */}
-                  {isEditing ? (
-                    <div className="space-y-4">
-                      <textarea
-                        value={editContent}
-                        onChange={(e) => setEditContent(e.target.value)}
-                        className="w-full min-h-[200px] p-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none text-gray-700 font-medium leading-relaxed"
-                        placeholder="اكتب محتوى القسم هنا..."
-                      />
-                      <div className="flex items-center justify-end gap-3">
-                        <button
-                          onClick={handleCancel}
-                          className="px-6 py-2.5 bg-gray-100 text-gray-600 rounded-xl font-bold text-sm hover:bg-gray-200 transition-colors"
+                ) : (
+                  <div className="h-full flex flex-col">
+                    {activeSection.content ? (
+                      <div className="flex-1">
+                        <p className="text-xl font-medium text-slate-700 leading-[2] whitespace-pre-wrap">{activeSection.content}</p>
+                        <div className="mt-12 flex gap-4">
+                          <button 
+                            onClick={startEditing}
+                            className="px-6 py-3 bg-slate-900 text-white rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-slate-800 transition-all"
+                          >
+                            <Edit3 size={16} /> تعديل النص
+                          </button>
+                          <button className="px-6 py-3 bg-blue-50 text-blue-600 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-blue-100 transition-all">
+                            <Zap size={16} /> تحسين بواسطة AI
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex-1 flex flex-col items-center justify-center text-center opacity-60">
+                        <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mb-6">
+                          <Plus size={32} className="text-slate-300" />
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-400 mb-6">هذا القسم ينتظر إبداعك...</h3>
+                        <button 
+                          onClick={startEditing}
+                          className="px-10 py-4 bg-slate-950 text-white rounded-2xl font-bold shadow-xl hover:scale-105 transition-all"
                         >
-                          إلغاء
-                        </button>
-                        <button
-                          onClick={handleSave}
-                          className="px-6 py-2.5 bg-primary-600 text-white rounded-xl font-bold text-sm hover:bg-primary-700 transition-colors flex items-center gap-2"
-                        >
-                          <Save size={16} />
-                          حفظ
+                          ابدأ الكتابة الآن
                         </button>
                       </div>
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      <div className="bg-white border border-gray-100 rounded-2xl p-6 min-h-[150px]">
-                        {section.content ? (
-                          <p className="text-gray-700 leading-relaxed font-medium whitespace-pre-wrap">
-                            {section.content}
-                          </p>
-                        ) : (
-                          <div className="text-center py-8 text-gray-400">
-                            <Edit3 size={32} className="mx-auto mb-3 opacity-30" />
-                            <p className="text-sm font-bold">لا يوجد محتوى بعد</p>
-                            <p className="text-xs mt-1">اضغط على "تحرير" لبدء الكتابة</p>
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <button
-                          onClick={() => handleEdit(section)}
-                          className="px-6 py-2.5 bg-white border border-gray-200 text-gray-700 rounded-xl font-bold text-sm hover:bg-gray-50 hover:border-primary-300 transition-all flex items-center gap-2"
-                        >
-                          <Edit3 size={16} />
-                          تحرير
-                        </button>
-                        <button className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center gap-2">
-                          <Sparkles size={16} />
-                          توليد بالذكاء الاصطناعي
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        </main>
 
-      {/* AI Assistant CTA */}
-      <div className="mt-8 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl p-8 text-white shadow-xl">
-        <div className="flex items-center gap-6">
-          <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center">
-            <Sparkles size={32} strokeWidth={2} />
-          </div>
-          <div className="flex-1">
-            <h3 className="text-xl font-black mb-2">هل تحتاج مساعدة في الكتابة؟</h3>
-            <p className="text-purple-100 font-medium text-sm opacity-90">
-              دع الذكاء الاصطناعي يساعدك في إنشاء محتوى احترافي لخطة عملك
-            </p>
-          </div>
-          <button className="px-8 py-3 bg-white text-purple-600 rounded-2xl font-bold text-sm hover:shadow-lg transition-all">
-            ابدأ الآن
-          </button>
-        </div>
+        {/* لوحة التحليل الذكي (Left) */}
+        {isAiSidebarOpen && (
+          <aside className="w-80 bg-white border-r border-slate-100 flex flex-col shrink-0 animate-in slide-in-from-left duration-500">
+            <div className="p-8 border-b border-slate-50 flex items-center justify-between text-right">
+              <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest text-right">تحليل الجودة اللحظي</h4>
+              <button onClick={() => setIsAiSidebarOpen(false)} className="text-slate-300 hover:text-slate-900 transition-colors"><X size={18} /></button>
+            </div>
+            
+            <div className="p-8 space-y-10 overflow-y-auto no-scrollbar text-right">
+              {/* بطاقة التقييم */}
+              <div className="bg-slate-950 rounded-[2rem] p-8 text-white relative overflow-hidden">
+                <Zap className="absolute -bottom-10 -right-10 w-40 h-40 text-white/5 rotate-12" />
+                <div className="relative z-10">
+                  <span className="text-[10px] font-black text-blue-400 uppercase mb-2 block">Score الاستراتيجي</span>
+                  {/* @ts-ignore */}
+                  <div className="text-5xl font-black mb-4 leading-none">{activeSection.aiScore || 0}%</div>
+                  <p className="text-slate-400 text-xs leading-relaxed font-medium">
+                    يُنصح بزيادة التركيز على <span className="text-white font-bold">الميزة التنافسية</span> لتحسين فرص قبول الخطة.
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <h5 className="text-[10px] font-black text-slate-400 uppercase flex items-center gap-2">
+                  <LayoutGrid size={14} /> مقاييس الأداء
+                </h5>
+                <div className="space-y-5">
+                   {/* @ts-ignore */}
+                  <AiMetric label="وضوح الرؤية" score={activeSection.aiScore || 90} />
+                   {/* @ts-ignore */}
+                  <AiMetric label="التحليل التنافسي" score={45} warning />
+                   {/* @ts-ignore */}
+                  <AiMetric label="الواقعية المالية" score={85} />
+                </div>
+              </div>
+            </div>
+          </aside>
+        )}
       </div>
     </div>
   );

@@ -1,9 +1,11 @@
 
 import React, { useState } from 'react';
-import { 
-  Palette, Sparkles, Type, Image as ImageIcon, Download, 
+import {
+  Palette, Sparkles, Type, Image as ImageIcon, Download,
   RefreshCw, Layers, Check, Zap, Layout, CreditCard,
-  Target, Wand2, ChevronLeft, SlidersHorizontal, CheckCircle2
+  Target, Wand2, ChevronLeft, SlidersHorizontal, CheckCircle2,
+  Smartphone, Monitor, Presentation, Shirt, AppWindow,
+  Eye, EyeOff, ClipboardCheck, ArrowUpRight, Briefcase
 } from 'lucide-react';
 import { generateBrandImage } from '../services/geminiService';
 
@@ -14,28 +16,38 @@ interface PaletteOption {
 }
 
 const COLOR_PALETTES: PaletteOption[] = [
-  { id: '1', name: 'التقني الحديث', colors: ['#0052FF', '#8B5CF6', '#3B82F6', '#F8FAFC'] },
-  { id: '2', name: 'الفخامة الهادئة', colors: ['#0F172A', '#CBD5E1', '#334155', '#F1F5F9'] },
-  { id: '3', name: 'الحيوية والنمو', colors: ['#10B981', '#34D399', '#059669', '#F0FDF4'] },
-  { id: '4', name: 'الإبداع الجريء', colors: ['#EC4899', '#F43F5E', '#8B5CF6', '#FFF1F2'] }
+  { id: '1', name: 'التقني الحديث (Tech Modern)', colors: ['#0052FF', '#8B5CF6', '#3B82F6', '#F8FAFC'] },
+  { id: '2', name: 'الفخامة الهادئة (Quiet Luxury)', colors: ['#0F172A', '#CBD5E1', '#334155', '#F1F5F9'] },
+  { id: '3', name: 'الحيوية والنمو (Bio Vitality)', colors: ['#10B981', '#34D399', '#059669', '#F0FDF4'] },
+  { id: '4', name: 'الإبداع الجريء (Bold Creative)', colors: ['#EC4899', '#F43F5E', '#8B5CF6', '#FFF1F2'] }
+];
+
+const BRAND_PERSONALITIES = [
+  { id: 'minimalist', label: 'بسيط (Minimalist)', icon: Target },
+  { id: 'luxurious', label: 'فاخر (Luxurious)', icon: Sparkles },
+  { id: 'playful', label: 'مبتكر (Playful)', icon: Zap },
+  { id: 'traditional', label: 'رصين (Traditional)', icon: Briefcase }
 ];
 
 export const BrandIdentityStudio: React.FC = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [prompt, setPrompt] = useState('');
   const [selectedPalette, setSelectedPalette] = useState<string>('1');
+  const [selectedPersonality, setSelectedPersonality] = useState<string>('minimalist');
   const [generatedLogos, setGeneratedLogos] = useState<string[]>([]);
-  const [activeStep, setActiveStep] = useState<number>(1);
+  const [activeMockup, setActiveMockup] = useState<'logo' | 'mobile' | 'card' | 'website'>('logo');
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleGenerateLogo = async () => {
     if (!prompt) return;
     setIsGenerating(true);
     try {
       const palette = COLOR_PALETTES.find(p => p.id === selectedPalette);
-      const stylePrompt = `Logo design, ${prompt}, using colors ${palette?.colors.join(', ')}. Professional, minimalist, high quality, vector style.`;
+      const personality = BRAND_PERSONALITIES.find(p => p.id === selectedPersonality);
+      const stylePrompt = `Logo design for ${prompt}, personality: ${personality?.label}, using colors ${palette?.colors.join(', ')}. Professional, minimalist, high quality, vector style, white background.`;
       const imageUrl = await generateBrandImage(stylePrompt, "professional brand logo");
       setGeneratedLogos(prev => [imageUrl, ...prev]);
-      setActiveStep(3);
+      setActiveMockup('logo');
     } catch (err) {
       alert("حدث خطأ أثناء توليد الشعار. يرجى المحاولة لاحقاً.");
     } finally {
@@ -44,230 +56,268 @@ export const BrandIdentityStudio: React.FC = () => {
   };
 
   return (
-    <div className="font-['IBM_Plex_Sans_Arabic'] space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-700 pb-24 bg-gradient-to-br from-[#FAFAF9] via-white to-[#F8FAFC] min-h-screen p-4 lg:p-8 rounded-[32px]">
+    <div dir="rtl" className={`font-['IBM_Plex_Sans_Arabic'] min-h-screen transition-colors duration-700 p-4 lg:p-10 ${isDarkMode ? 'bg-slate-950 text-white' : 'bg-[#FAFAF9] text-slate-900'}`}>
       
-      {/* Dynamic Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 relative z-10">
-        <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#0052FF]/10 text-[#0052FF] rounded-full text-[11px] font-bold uppercase tracking-[0.2em] backdrop-blur-md border border-[#0052FF]/20 shadow-[0_4px_20px_rgba(0,82,255,0.15)]">
-            <Sparkles size={14} />
-            AI Visual Studio
-          </div>
-          <h1 className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight drop-shadow-sm">استوديو الهوية البصرية</h1>
-          <p className="text-slate-500 font-normal text-lg max-w-xl leading-relaxed">حوّل رؤيتك الاستراتيجية إلى واقع بصري مذهل، معتمداً على أدق معايير التصميم الاحترافي.</p>
-        </div>
-        <div className="flex items-center gap-4 bg-white/60 backdrop-blur-xl p-3 rounded-[20px] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.03)]">
-          <div className="flex -space-x-3 overflow-hidden flex-row-reverse">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-100 overflow-hidden shadow-sm">
-                <img src={`https://api.dicebear.com/7.x/shapes/svg?seed=brand${i}`} alt="Sample Logo" />
+      {/* Immersive Navigation Header */}
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 mb-16">
+        <div className="flex-1">
+           <div className="flex items-center gap-3 mb-6">
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg transition-transform hover:rotate-12 ${isDarkMode ? 'bg-indigo-600 text-white shadow-indigo-900/50' : 'bg-[#0052FF] text-white shadow-[#0052FF]/30'}`}>
+                 <Palette size={24} />
               </div>
-            ))}
-          </div>
-          <div className="flex flex-col px-2 text-right">
-             <span className="text-[14px] font-bold text-slate-800 leading-none">1,240+</span>
-             <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">هوية مبنية</span>
-          </div>
+              <div>
+                 <span className={`text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border mb-1 inline-block ${isDarkMode ? 'bg-white/5 border-white/10 text-indigo-400' : 'bg-blue-50 border-blue-100 text-[#0052FF]'}`}>Studio Engine v5.0</span>
+                 <h1 className="text-4xl lg:text-5xl font-black tracking-tight leading-tight">استوديو <span className={isDarkMode ? 'text-indigo-400' : 'text-[#0052FF]'}>الهوية البصرية</span></h1>
+              </div>
+           </div>
+           <p className={`text-lg font-bold max-w-2xl leading-relaxed ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+              نحن لا نصمم شعارات، بل نبني روحاً بصرية لمشروعك تتحدث لغة التميز والابتكار التنافسي.
+           </p>
+        </div>
+
+        <div className="flex items-center gap-4">
+           <button 
+             onClick={() => setIsDarkMode(!isDarkMode)}
+             className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${isDarkMode ? 'bg-white text-slate-900 shadow-xl' : 'bg-slate-900 text-white shadow-xl hover:bg-slate-800'}`}
+           >
+              {isDarkMode ? <Eye size={24} /> : <EyeOff size={24} />}
+           </button>
+           <div className={`p-4 rounded-3xl border flex items-center gap-5 shadow-sm ${isDarkMode ? 'bg-slate-900/50 border-white/10' : 'bg-white border-slate-100'}`}>
+              <div className="text-center">
+                 <div className="text-2xl font-black">94%</div>
+                 <div className="text-[9px] font-black uppercase tracking-widest text-slate-400">تحقق الاتساق</div>
+              </div>
+              <div className="w-px h-10 bg-slate-200 dark:bg-white/10"></div>
+              <div className="text-center">
+                 <div className="text-2xl font-black">1.2k+</div>
+                 <div className="text-[9px] font-black uppercase tracking-widest text-slate-400">هوية مكتملة</div>
+              </div>
+           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
         
-        {/* Left Control Panel (Lg 4) */}
-        <div className="lg:col-span-4 flex flex-col gap-6">
-          
-          {/* Concept Brief Card */}
-          <div className="bg-white/70 backdrop-blur-2xl border border-white scroll-smooth shadow-[0_8px_32px_rgba(0,82,255,0.04)] rounded-[24px] p-8 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#0052FF]/5 rounded-bl-[100px] pointer-events-none transition-transform group-hover:scale-110"></div>
-            <div className="flex items-center gap-3 mb-6 relative z-10">
-              <div className="w-12 h-12 bg-[#0052FF]/10 text-[#0052FF] rounded-2xl flex items-center justify-center shadow-inner">
-                <Target size={22} strokeWidth={2.5} />
-              </div>
-              <div>
-                 <h3 className="text-lg font-bold text-slate-900">مفهوم العلامة</h3>
-                 <p className="text-[11px] font-normal text-slate-400">صف رؤيتك بدقة</p>
-              </div>
-            </div>
-            <textarea 
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              placeholder="مثلاً: تطبيق مالي ذكي يعتمد على الأمان والسرعة، شعار يعبر عن الثقة والابتكار التكنولوجي..."
-              className="w-full h-32 p-5 bg-slate-50/50 border border-slate-200/60 rounded-[16px] outline-none focus:bg-white focus:border-[#0052FF]/50 focus:ring-4 focus:ring-[#0052FF]/10 transition-all font-normal text-sm leading-relaxed text-slate-700 resize-none shadow-inner"
-            />
-          </div>
-
-          {/* Color Palette Widget */}
-          <div className="bg-white/70 backdrop-blur-2xl border border-white shadow-[0_8px_32px_rgba(0,82,255,0.04)] rounded-[24px] p-8 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/5 rounded-bl-[100px] pointer-events-none transition-transform group-hover:scale-110"></div>
-            <div className="flex items-center gap-3 mb-6 relative z-10">
-              <div className="w-12 h-12 bg-violet-500/10 text-violet-600 rounded-2xl flex items-center justify-center shadow-inner">
-                <SlidersHorizontal size={22} strokeWidth={2.5} />
-              </div>
-              <div>
-                 <h3 className="text-lg font-bold text-slate-900">التكوين اللوني</h3>
-                 <p className="text-[11px] font-normal text-slate-400">اختر النغمة البصرية</p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3 relative z-10">
-              {COLOR_PALETTES.map((p) => (
-                <button 
-                  key={p.id}
-                  onClick={() => setSelectedPalette(p.id)}
-                  className={`relative w-full p-4 rounded-[16px] border transition-all duration-300 flex items-center justify-between group overflow-hidden ${
-                    selectedPalette === p.id 
-                      ? 'bg-white border-[#0052FF]/30 shadow-[0_4px_20px_rgba(0,82,255,0.08)] ring-1 ring-[#0052FF]/10' 
-                      : 'bg-slate-50/50 border-slate-200/60 hover:bg-white hover:border-slate-300'
-                  }`}
-                >
-                  {selectedPalette === p.id && <div className="absolute inset-0 bg-gradient-to-r from-[#0052FF]/5 to-transparent pointer-events-none"></div>}
-                  <span className={`text-sm font-bold transition-colors z-10 ${selectedPalette === p.id ? 'text-[#0052FF]' : 'text-slate-600 group-hover:text-slate-900'}`}>{p.name}</span>
-                  
-                  <div className="flex items-center gap-1 z-10">
-                    <div className="flex -space-x-2 mr-3">
-                       {p.colors.map((c, i) => (
-                         <div key={i} className="w-6 h-6 rounded-full border-2 border-white shadow-sm transition-transform hover:-translate-y-1" style={{ backgroundColor: c, zIndex: 10 - i }}></div>
-                       ))}
-                    </div>
-                    <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${selectedPalette === p.id ? 'bg-[#0052FF] text-white scale-100' : 'bg-slate-200 text-transparent scale-75'}`}>
-                       <Check size={12} strokeWidth={4} />
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Primary CTA */}
-          <button 
-            onClick={handleGenerateLogo}
-            disabled={isGenerating || !prompt}
-            className="w-full py-5 bg-gradient-to-r from-[#0052FF] to-violet-600 text-white rounded-[24px] text-[15px] font-bold shadow-[0_15px_30px_rgba(0,82,255,0.3)] hover:shadow-[0_20px_40px_rgba(0,82,255,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-60 disabled:hover:scale-100 flex items-center justify-center gap-3 group relative overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out skew-x-12"></div>
-            {isGenerating ? <RefreshCw size={22} className="animate-spin" /> : <Wand2 size={22} className="group-hover:rotate-12 transition-transform" />}
-            توليد الهوية البصرية الذكية
-          </button>
-        </div>
-
-        {/* Right Preview Section (Lg 8) */}
-        <div className="lg:col-span-8 flex flex-col gap-6">
-          
-          {/* Main Showcase */}
-          <div className="bg-white/80 backdrop-blur-xl rounded-[24px] min-h-[600px] shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col relative overflow-hidden p-2">
-            
-            {/* Soft Ambient Canvas Background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#F8FAFC] via-white to-[#F1F5F9] opacity-50 pointer-events-none"></div>
-
-            <div className="flex-1 rounded-[20px] bg-white border border-slate-50 p-10 flex text-center items-center justify-center relative z-10 shadow-sm overflow-hidden">
-               {/* Decorative Canvas elements */}
-               <div className="absolute top-10 left-10 w-2 h-2 rounded-full bg-slate-200"></div>
-               <div className="absolute top-10 right-10 w-2 h-2 rounded-full bg-slate-200"></div>
-               <div className="absolute bottom-10 left-10 w-2 h-2 rounded-full bg-slate-200"></div>
-               <div className="absolute bottom-10 right-10 w-2 h-2 rounded-full bg-slate-200"></div>
-               
-               {generatedLogos.length === 0 ? (
-                 <div className="space-y-6 animate-in fade-in zoom-in-95 duration-700 max-w-md">
-                   <div className="w-24 h-24 bg-slate-50 rounded-[24px] flex items-center justify-center text-slate-300 mx-auto border-2 border-dashed border-slate-200">
-                      <ImageIcon size={40} strokeWidth={1.5} />
-                   </div>
-                   <div className="space-y-2">
-                      <h2 className="text-2xl font-bold text-slate-800">قماش العرض البصري</h2>
-                      <p className="text-slate-400 font-normal text-sm leading-relaxed">بمجرد بدء التوليد، ستظهر مسودات الهوية البصرية هنا في هذه المساحة الواسعة لتقييمها بشكل احترافي.</p>
-                   </div>
+        {/* Left Side: Strategic Controls (4 Col) */}
+        <div className="lg:col-span-4 flex flex-col gap-8">
+           
+           {/* Brief Card */}
+           <div className={`rounded-[2.5rem] p-8 border transition-all ${isDarkMode ? 'bg-slate-900/30 border-white/5' : 'bg-white border-slate-100 shadow-sm'}`}>
+              <div className="flex items-center gap-3 mb-8">
+                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isDarkMode ? 'bg-indigo-600/20 text-indigo-400' : 'bg-blue-50 text-[#0052FF]'}`}>
+                    <Target size={20} />
                  </div>
-               ) : (
-                 <div className="w-full h-full flex flex-col animate-in zoom-in-95 duration-500">
-                   <div className="flex-1 w-full bg-slate-50/50 rounded-[16px] border border-slate-100 flex items-center justify-center p-8 group relative overflow-hidden shadow-inner">
-                      <img src={generatedLogos[0]} className="w-full max-w-[400px] aspect-square object-contain drop-shadow-2xl transition-transform duration-700 group-hover:scale-105" alt="AI Generated Logo" />
-                      <div className="absolute top-4 left-4 p-2.5 bg-white/90 backdrop-blur-md rounded-xl text-[#0052FF] shadow-[0_8px_30px_rgba(0,82,255,0.15)] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                         <Download size={20} className="cursor-pointer hover:scale-110 transition-transform"/>
+                 <h4 className="text-lg font-black italic">جوهر العلامة</h4>
+              </div>
+              <textarea 
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="صف روح علامتك التجارية... (مثال: تطبيق عقاري فندقي فاخر يهتم بالأمان والخصوصية)"
+                className={`w-full h-32 p-5 rounded-2xl outline-none border transition-all text-sm font-bold resize-none ${isDarkMode ? 'bg-white/5 border-white/10 focus:border-indigo-400/50' : 'bg-slate-50 border-slate-200 focus:bg-white focus:border-[#0052FF]/50 shadow-inner'}`}
+              />
+           </div>
+
+           {/* Personality Selector */}
+           <div className={`rounded-[2.5rem] p-8 border transition-all ${isDarkMode ? 'bg-slate-900/30 border-white/5' : 'bg-white border-slate-100 shadow-sm'}`}>
+              <h4 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6">طابع الشخصية البصرية</h4>
+              <div className="grid grid-cols-2 gap-4">
+                 {BRAND_PERSONALITIES.map(p => (
+                   <button 
+                     key={p.id}
+                     onClick={() => setSelectedPersonality(p.id)}
+                     className={`p-4 rounded-2xl border text-center transition-all group ${selectedPersonality === p.id 
+                       ? (isDarkMode ? 'bg-indigo-600 border-indigo-400' : 'bg-slate-900 border-slate-900 text-white')
+                       : (isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-slate-50 border-slate-100 hover:bg-white')}`}
+                   >
+                      <p.icon size={22} className={`mx-auto mb-2 transition-transform group-hover:scale-110 ${selectedPersonality === p.id ? 'text-white' : 'text-slate-400'}`} />
+                      <span className="text-[10px] font-black uppercase">{p.label.split(' ')[0]}</span>
+                   </button>
+                 ))}
+              </div>
+           </div>
+
+           {/* Palette Selection (Vertical List) */}
+           <div className={`rounded-[2.5rem] p-8 border transition-all ${isDarkMode ? 'bg-slate-900/30 border-white/5' : 'bg-white border-slate-100 shadow-sm'}`}>
+              <h4 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6">التكوين السيكولوجي للألوان</h4>
+              <div className="space-y-4">
+                 {COLOR_PALETTES.map(p => (
+                   <button 
+                     key={p.id}
+                     onClick={() => setSelectedPalette(p.id)}
+                     className={`w-full p-4 rounded-2xl border flex items-center justify-between transition-all group ${selectedPalette === p.id 
+                       ? (isDarkMode ? 'bg-white/10 border-white/20 ring-1 ring-white/10' : 'bg-white border-slate-900 shadow-xl')
+                       : (isDarkMode ? 'bg-transparent border-white/5 hover:bg-white/5' : 'bg-slate-50 border-slate-50 hover:bg-white')}`}
+                   >
+                      <span className="text-xs font-black">{p.name.split(' (')[0]}</span>
+                      <div className="flex -space-x-2">
+                         {p.colors.map((c, i) => <div key={i} className="w-5 h-5 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: c, zIndex: 10 - i }}></div>)}
                       </div>
+                   </button>
+                 ))}
+              </div>
+           </div>
+
+           {/* Action CTA */}
+           <button 
+             onClick={handleGenerateLogo}
+             disabled={isGenerating || !prompt}
+             className={`w-full py-6 rounded-[2rem] text-sm font-black shadow-2xl transition-all flex items-center justify-center gap-4 group active:scale-95 disabled:opacity-50 ${isDarkMode ? 'bg-indigo-600 text-white shadow-indigo-900/50 hover:bg-indigo-500' : 'bg-[#0052FF] text-white shadow-[#0052FF]/30 hover:bg-blue-600'}`}
+           >
+              {isGenerating ? <RefreshCw className="animate-spin" /> : <Wand2 className="group-hover:rotate-12 transition-transform" /> }
+              توليد الهوية البصرية المدعومة آلياً
+           </button>
+        </div>
+
+        {/* Right Side: Showcase Workspace (8 Col) */}
+        <div className="lg:col-span-8 flex flex-col gap-8">
+           
+           {/* Immersive Viewport */}
+           <div className={`rounded-[4rem] min-h-[650px] border flex flex-col relative overflow-hidden transition-all duration-1000 ${isDarkMode ? 'bg-slate-900/50 border-white/5' : 'bg-white border-slate-100 shadow-sm'}`}>
+              
+              {/* Toolbar Preview Switcher */}
+              <div className={`absolute top-8 left-1/2 -translate-x-1/2 flex items-center gap-3 p-2 rounded-2xl border z-30 ${isDarkMode ? 'bg-slate-950/80 border-white/10 backdrop-blur-xl' : 'bg-white/80 border-slate-100 backdrop-blur-xl'}`}>
+                 <MockupModeBtn active={activeMockup === 'logo'} onClick={() => setActiveMockup('logo')} icon={<ImageIcon size={18} />} label="شعار" darkMode={isDarkMode} />
+                 <MockupModeBtn active={activeMockup === 'mobile'} onClick={() => setActiveMockup('mobile')} icon={<Smartphone size={18} />} label="موبايل" darkMode={isDarkMode} />
+                 <MockupModeBtn active={activeMockup === 'card'} onClick={() => setActiveMockup('card')} icon={<CreditCard size={18} />} label="بزنس" darkMode={isDarkMode} />
+                 <MockupModeBtn active={activeMockup === 'website'} onClick={() => setActiveMockup('website')} icon={<Monitor size={18} />} label="موقع" darkMode={isDarkMode} />
+              </div>
+
+              {/* Main Content Render */}
+              <div className="flex-1 flex items-center justify-center p-12 relative overflow-hidden">
+                 {/* Visual Decor */}
+                 <div className={`absolute top-0 right-0 w-80 h-80 rounded-full blur-[120px] opacity-10 pointer-events-none ${isDarkMode ? 'bg-indigo-400' : 'bg-[#0052FF]'}`}></div>
+                 <div className={`absolute bottom-0 left-0 w-80 h-80 rounded-full blur-[120px] opacity-10 pointer-events-none ${isDarkMode ? 'bg-violet-400' : 'bg-indigo-400'}`}></div>
+
+                 {generatedLogos.length === 0 ? (
+                   <div className="text-center animate-in zoom-in-95 duration-1000">
+                      <div className={`w-24 h-24 rounded-[2rem] flex items-center justify-center mb-6 mx-auto ${isDarkMode ? 'bg-white/5 text-white/20' : 'bg-slate-50 text-slate-200'}`}>
+                         <ImageIcon size={48} strokeWidth={1.5} />
+                      </div>
+                      <h3 className={`text-2xl font-black mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>قماش العرض البصري</h3>
+                      <p className="text-slate-400 font-bold text-sm max-w-sm mx-auto leading-relaxed">
+                         ابدأ بوصف رؤيتك لاختيار ملامح العلامة وتجسيدها على مختلف المنصات التسويقية هنا.
+                      </p>
                    </div>
-                   
-                   <div className="grid grid-cols-4 gap-4 mt-6">
-                       {[
-                         { icon: Layout, label: 'UI Mockups' },
-                         { icon: CreditCard, label: 'Business Cards' },
-                         { icon: Layers, label: 'Social Media' },
-                         { icon: Type, label: 'Typography' }
-                       ].map((m, idx) => (
-                         <div key={idx} className="bg-white border border-slate-100 rounded-[16px] p-4 flex flex-col items-center justify-center text-center hover:bg-slate-50 hover:border-[#0052FF]/30 transition-all shadow-[0_4px_15px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_20px_rgba(0,82,255,0.06)] cursor-pointer group">
-                            <m.icon size={20} className="text-slate-400 group-hover:text-[#0052FF] mb-2 transition-colors" />
-                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{m.label}</span>
+                 ) : (
+                    <div className="w-full max-w-3xl animate-in zoom-in-95 duration-500">
+                       {activeMockup === 'logo' && (
+                         <div className="flex flex-col items-center">
+                            <div className={`relative p-16 rounded-[4rem] group ${isDarkMode ? 'bg-white border-white' : 'bg-slate-50 border-slate-100 shadow-inner border'}`}>
+                               <img src={generatedLogos[0]} className="w-64 h-64 object-contain transition-transform duration-700 group-hover:scale-105" alt="AI Generated Logo" />
+                               <button className={`absolute top-8 left-8 p-3 rounded-2xl shadow-xl transition-all opacity-0 group-hover:opacity-100 ${isDarkMode ? 'bg-indigo-600 text-white' : 'bg-slate-950 text-white'}`}>
+                                  <Download size={20} />
+                               </button>
+                            </div>
                          </div>
-                       ))}
-                   </div>
+                       )}
+
+                       {activeMockup === 'mobile' && (
+                         <div className="relative w-72 h-[550px] mx-auto bg-slate-950 border-[6px] border-slate-800 rounded-[3rem] shadow-[0_40px_100px_rgba(0,0,0,0.4)] overflow-hidden animate-in slide-in-from-bottom-12">
+                            <div className="absolute top-0 inset-x-0 h-7 bg-slate-950 flex justify-center z-20"><div className="w-20 h-5 bg-slate-800 rounded-b-xl"></div></div>
+                            <div className="h-full bg-slate-100 p-6 flex flex-col items-center justify-center relative bg-white">
+                               <img src={generatedLogos[0]} className="w-32 h-32 object-contain mb-8 opacity-90" alt="Identity" />
+                               <div className="w-full h-8 bg-slate-100 rounded-lg mb-4"></div>
+                               <div className="w-full h-24 bg-slate-50 rounded-2xl mb-4 border border-slate-100"></div>
+                               <div className="grid grid-cols-2 gap-4 w-full">
+                                  <div className="h-20 bg-slate-50 rounded-xl border border-slate-100"></div>
+                                  <div className="h-20 bg-slate-50 rounded-xl border border-slate-100"></div>
+                               </div>
+                               <div className="mt-10 w-full h-12 bg-slate-900 rounded-xl flex items-center justify-center text-white text-[10px] font-black uppercase">Start Experience</div>
+                            </div>
+                         </div>
+                       )}
+
+                       {activeMockup === 'card' && (
+                         <div className="flex flex-col gap-10 items-center animate-in fade-in zoom-in-95">
+                            <div className="w-[450px] h-[260px] bg-slate-950 rounded-3xl shadow-2xl p-10 flex flex-col justify-between relative overflow-hidden text-white">
+                               <div className="absolute top-0 right-0 p-10 opacity-5"><Layers size={200} /></div>
+                               <img src={generatedLogos[0]} className="w-20 h-20 object-contain brightness-0 invert opacity-90" alt="Logo" />
+                               <div>
+                                  <div className="text-xl font-black mb-1">اسم المؤسس</div>
+                                  <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">Co-Founder & CEO</div>
+                               </div>
+                            </div>
+                            <div className="w-[450px] h-[260px] bg-white rounded-3xl shadow-2xl p-10 flex items-center justify-center border border-slate-100">
+                               <img src={generatedLogos[0]} className="w-40 h-40 object-contain" alt="Logo" />
+                            </div>
+                         </div>
+                       )}
+
+                       {activeMockup === 'website' && (
+                         <div className="w-full h-[400px] bg-slate-50 border-[6px] border-slate-200 rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95">
+                            <div className="h-10 bg-slate-200 flex items-center px-4 gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-rose-400"></div><div className="w-2.5 h-2.5 rounded-full bg-amber-400"></div><div className="w-2.5 h-2.5 rounded-full bg-emerald-400"></div></div>
+                            <div className="bg-white h-full">
+                               <div className="p-6 border-b border-slate-50 flex items-center justify-between px-10">
+                                  <img src={generatedLogos[0]} className="h-10 object-contain" alt="Logo" />
+                                  <div className="flex gap-6"><div className="w-16 h-2 bg-slate-100 rounded-full"></div><div className="w-16 h-2 bg-slate-100 rounded-full"></div><div className="w-16 h-2 bg-slate-100 rounded-full"></div></div>
+                               </div>
+                               <div className="p-16 text-center max-w-xl mx-auto">
+                                  <h2 className="text-4xl font-black text-slate-800 mb-6 leading-tight">القوة الحقيقية لعلامتك التجارية</h2>
+                                  <div className="w-full h-4 bg-slate-50 rounded-full mb-3"></div>
+                                  <div className="w-3/4 h-3 bg-slate-50 rounded-full mx-auto mb-10"></div>
+                                  <div className={`w-40 h-14 mx-auto rounded-2xl flex items-center justify-center text-white text-[10px] font-black uppercase ${isDarkMode ? 'bg-indigo-600' : 'bg-blue-600'}`}>See Dashboard</div>
+                               </div>
+                            </div>
+                         </div>
+                       )}
+                    </div>
+                 )}
+              </div>
+
+              {/* Bottom Info Ribbon */}
+              <div className={`py-6 px-10 border-t flex items-center justify-between ${isDarkMode ? 'bg-white/5 border-white/5' : 'bg-slate-50/50 border-slate-50'}`}>
+                 <div className="flex items-center gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                    <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-blue-600"></div> Vector AI</div>
+                    <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-emerald-600"></div> 300 DPI Export</div>
+                    <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-purple-600"></div> Psychology Matched</div>
                  </div>
-               )}
-            </div>
-            
-            {/* Visual Consistency Floating Glass Overlay */}
-            {generatedLogos.length > 0 && (
-               <div className="absolute bottom-32 right-8 w-80 bg-white/60 backdrop-blur-3xl border border-white p-6 rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] z-20 animate-in slide-in-from-right-8 duration-700">
-                  <div className="flex items-start justify-between">
-                     <div className="space-y-2">
-                        <div className="flex items-center gap-2 text-[#0052FF]">
-                           <Zap size={16} fill="currentColor" />
-                           <h4 className="text-sm font-bold text-slate-900">الاتساق البصري</h4>
-                        </div>
-                        <p className="text-[10px] font-normal text-slate-500 leading-relaxed max-w-[180px]">
-                           تطابق بصري مثالي بنسبة عالية بين الألوان والشكل. الهوية جاهزة للاستخدام التجاري.
-                        </p>
-                     </div>
-                     {/* Circular Progress Glow */}
-                     <div className="relative w-16 h-16 flex items-center justify-center">
-                        <div className="absolute inset-0 bg-[#0052FF]/20 rounded-full blur-xl animate-pulse"></div>
-                        <svg className="w-full h-full transform -rotate-90 relative z-10">
-                           <circle cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="4" fill="transparent" className="text-white/50" />
-                           <circle cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="4" fill="transparent" strokeDasharray="175.9" strokeDashoffset={175.9 * (1 - 0.94)} className="text-[#0052FF] drop-shadow-[0_0_8px_rgba(0,82,255,0.8)]" strokeLinecap="round" />
-                        </svg>
-                        <span className="absolute text-sm font-black tracking-tighter text-slate-800 z-10">94</span>
-                     </div>
-                  </div>
-               </div>
-            )}
-            
-            {/* Background Decoration */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#0052FF] rounded-full blur-[120px] opacity-10 pointer-events-none"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-violet-500 rounded-full blur-[120px] opacity-10 pointer-events-none"></div>
-          </div>
+                 {generatedLogos.length > 0 && (
+                   <button className={`px-6 py-3 rounded-xl text-[10px] font-black flex items-center gap-2 shadow-xl hover:scale-105 active:scale-95 transition-all ${isDarkMode ? 'bg-white text-slate-900' : 'bg-slate-950 text-white'}`}>
+                      <span>تحميل باقة الهوية الكاملة</span>
+                      <ArrowUpRight size={14} />
+                   </button>
+                 )}
+              </div>
+           </div>
+
+           {/* Typography Studio (Lower Grid) */}
+           <div className={`rounded-[3rem] p-10 border flex flex-col md:flex-row items-center gap-10 ${isDarkMode ? 'bg-slate-900/30 border-white/5 text-white' : 'bg-white border-slate-100 shadow-sm text-slate-900'}`}>
+              <div className="flex-1">
+                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-6 shadow-sm ${isDarkMode ? 'bg-indigo-600/20 text-indigo-400' : 'bg-blue-50 text-[#0052FF]'}`}><Type size={20} /></div>
+                 <h4 className="text-xl font-black mb-2">استوديو التيبوغرافيا</h4>
+                 <p className="text-xs font-bold text-slate-400 max-w-xs leading-relaxed">
+                    اخترنا هذي الخطوط لتناسب شخصية علامتك التجارية وتضمن وضوحاً فائقاً في المحتوى العربي والعالمي.
+                 </p>
+              </div>
+              <div className="flex-1 space-y-6 w-full">
+                 <FontPreview name="IBM Plex Sans Arabic" sample="نص تجريبي للعنوان الرئيسي" isPrimary={true} darkMode={isDarkMode} />
+                 <FontPreview name="Readex Pro" sample="هذا هو نص الفقرات والمحتوى العام" isPrimary={false} darkMode={isDarkMode} />
+              </div>
+           </div>
         </div>
       </div>
-
-      {/* Sleek Footer Info */}
-      <div className="bg-white/80 backdrop-blur-xl border border-white shadow-[0_10px_40px_rgba(0,0,0,0.03)] rounded-[24px] p-8 flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
-         <div className="flex items-center gap-6">
-            <div className="w-14 h-14 bg-slate-50 text-slate-600 rounded-[16px] flex items-center justify-center flex-shrink-0 border border-slate-100 shadow-inner">
-               <ImageIcon size={26} strokeWidth={1.5} />
-            </div>
-            <div>
-               <h4 className="text-lg font-bold text-slate-900 mb-1">هل تمتلك شعاراً حالياً؟</h4>
-               <p className="text-slate-500 font-normal text-xs leading-relaxed max-w-md">قم برفع هويتك الحالية وسيتولى الذكاء الاصطناعي استخلاص الأنماط والألوان لتوحيد أعمالك البصرية فوراً.</p>
-            </div>
-         </div>
-         <button className="flex items-center gap-3 px-8 py-3.5 bg-slate-900 text-white rounded-[16px] text-xs font-bold hover:bg-black hover:shadow-xl hover:shadow-slate-900/20 active:scale-95 transition-all group">
-            رفع ملف الهوية
-            <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-         </button>
-      </div>
-
     </div>
   );
 };
 
-const CheckCircle = ({ size }: { size?: number }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width={size || 24} 
-    height={size || 24} 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="3" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
+const MockupModeBtn = ({ active, onClick, icon, label, darkMode }: { active: boolean, onClick: () => void, icon: React.ReactNode, label: string, darkMode: boolean }) => (
+  <button 
+    onClick={onClick}
+    className={`px-6 py-2.5 rounded-xl text-[10px] font-black flex items-center gap-2 transition-all ${active 
+      ? (darkMode ? 'bg-indigo-600 text-white shadow-xl' : 'bg-slate-950 text-white shadow-xl') 
+      : (darkMode ? 'hover:bg-white/5 text-slate-400' : 'hover:bg-slate-50 text-slate-400')}`}
   >
-    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-    <polyline points="22 4 12 14.01 9 11.01"/>
-  </svg>
+     {icon}
+     <span className="uppercase tracking-widest">{label}</span>
+  </button>
+);
+
+const FontPreview = ({ name, sample, isPrimary, darkMode }: { name: string, sample: string, isPrimary: boolean, darkMode: boolean }) => (
+  <div className={`p-5 rounded-2xl border flex flex-col gap-1 transition-all ${darkMode ? 'bg-white/5 border-white/5 hover:bg-white/10' : 'bg-slate-50 border-slate-50 hover:bg-white'}`}>
+     <div className="flex items-center justify-between">
+        <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{name}</span>
+        {isPrimary && <span className={`text-[8px] font-black px-2 py-0.5 rounded-full ${darkMode ? 'bg-indigo-600/20 text-indigo-400' : 'bg-blue-50 text-[#0052FF]'}`}>Primary</span>}
+     </div>
+     <div className="text-base font-black truncate mt-1">{sample}</div>
+  </div>
 );
