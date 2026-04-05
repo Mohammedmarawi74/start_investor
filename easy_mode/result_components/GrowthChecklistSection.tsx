@@ -115,7 +115,7 @@ export const GrowthChecklistSection = ({
                      flex: 1,
                      textDecoration: isDone ? "line-through" : "none",
                      transition: "0.3s"
-                  }}>{item}</p>
+                  }}>{item.label}</p>
                   <div style={{ 
                      fontSize: "11px", 
                      fontWeight: 900, 

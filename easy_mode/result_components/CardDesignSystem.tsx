@@ -65,14 +65,17 @@ export const BaseCard = ({
   variant = "default", 
   className = "", 
   style = {}, 
-  onClick 
+  onClick,
+  isInitiallyOpen = false
 }: {
   children: React.ReactNode;
   variant?: "default" | "highlight" | "danger" | "success";
   className?: string;
   style?: React.CSSProperties;
   onClick?: () => void;
+  isInitiallyOpen?: boolean;
 }) => {
+  const [isOpen, setIsOpen] = React.useState(isInitiallyOpen);
   
   const getVariantStyles = () => {
     switch (variant) {
@@ -85,32 +88,39 @@ export const BaseCard = ({
 
   const baseStyles: React.CSSProperties = {
     borderRadius: TOKENS.radius.card,
-    padding: TOKENS.spacing.cardPadding,
+    padding: isOpen ? TOKENS.spacing.cardPadding : "20px 24px",
     transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
     position: "relative",
     border: "1px solid",
-    boxShadow: TOKENS.shadows.premium,
+    boxShadow: isOpen ? TOKENS.shadows.premium : "0 4px 6px -1px rgba(0,0,0,0.02)",
     cursor: onClick ? "pointer" : "default",
     overflow: "hidden",
+    height: "fit-content",
+    display: "flex",
+    flexDirection: "column",
     ...getVariantStyles(),
     ...style
   };
+
+  const toggleOpen = (e: React.MouseEvent) => {
+    // If there's an onClick passed, let it handle the logic if needed
+    if (onClick) {
+      onClick();
+    } else {
+      setIsOpen(!isOpen);
+    }
+    e.stopPropagation();
+  };
+
+  // Extract the header and the body from children to separate them
+  const childrenArray = React.Children.toArray(children);
+  const header = childrenArray.find((child: any) => child.type === CardHeader);
+  const others = childrenArray.filter((child: any) => child.type !== CardHeader);
 
   return (
     <div 
       className={`group ${className} fade-in`}
       style={baseStyles}
-      onClick={onClick}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-4px)";
-        e.currentTarget.style.borderColor = TOKENS.colors.borderHover;
-        e.currentTarget.style.boxShadow = `0 30px 60px -12px ${TOKENS.colors.primaryGlow}, ${TOKENS.shadows.premium}`;
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.borderColor = getVariantStyles().borderColor as string;
-        e.currentTarget.style.boxShadow = TOKENS.shadows.premium;
-      }}
     >
       <div style={{
         position: "absolute",
@@ -124,8 +134,38 @@ export const BaseCard = ({
         zIndex: 0
       }} />
       
-      <div style={{ position: "relative", zIndex: 1 }}>
-        {children}
+      <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", height: "100%" }}>
+        {header && (
+          <div 
+             onClick={toggleOpen} 
+             style={{ cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}
+          >
+             <div style={{ flex: 1 }}>{header}</div>
+             <div style={{ 
+               padding: "8px", 
+               color: TOKENS.colors.text.muted, 
+               transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", 
+               transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+               marginLeft: "12px",
+               marginTop: "4px"
+             }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                   <path d="m6 9 6 6 6-6"/>
+                </svg>
+             </div>
+          </div>
+        )}
+        
+        <div style={{ 
+          maxHeight: isOpen ? "5000px" : "0px", 
+          opacity: isOpen ? 1 : 0,
+          overflow: "hidden",
+          transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+          marginTop: isOpen ? "0" : "-10px"
+        }}>
+          {!header && children}
+          {header && others}
+        </div>
       </div>
     </div>
   );
@@ -249,5 +289,57 @@ export const CardFooter = ({
     justifyContent: "space-between"
   }}>
     {children}
+  </div>
+);
+
+export const TabHeader = ({ 
+  title, 
+  description, 
+  icon, 
+  color = TOKENS.colors.primary 
+}: { 
+  title: string; 
+  description: string; 
+  icon?: React.ReactNode; 
+  color?: string;
+}) => (
+  <div style={{ 
+    marginBottom: "32px", 
+    padding: "32px", 
+    background: "linear-gradient(to right, #fff, #f8fafc)", 
+    borderRadius: TOKENS.radius.card, 
+    border: `1px solid ${TOKENS.colors.border}`,
+    borderRight: `6px solid ${color}`,
+    boxShadow: TOKENS.shadows.soft,
+    position: "relative",
+    overflow: "hidden"
+  }}>
+    <div style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "flex-start", gap: 20 }}>
+      {icon && (
+        <div style={{ 
+          width: 56, 
+          height: 56, 
+          borderRadius: "16px", 
+          background: "#fff", 
+          boxShadow: "0 10px 20px rgba(0,0,0,0.04)", 
+          display: "flex", 
+          alignItems: "center", 
+          justifyContent: "center",
+          color: color,
+          flexShrink: 0,
+          border: `1px solid ${TOKENS.colors.border}`
+        }}>
+          {icon}
+        </div>
+      )}
+      <div style={{ flex: 1 }}>
+        <h2 style={{ fontSize: "24px", fontWeight: 900, color: TOKENS.colors.text.title, margin: "0 0 12px", lineHeight: 1.2 }}>
+          {title}
+        </h2>
+        <p style={{ fontSize: "14.5px", color: TOKENS.colors.text.body, lineHeight: 1.7, fontWeight: 600, maxWidth: "800px", margin: 0 }}>
+          {description}
+        </p>
+      </div>
+    </div>
   </div>
 );

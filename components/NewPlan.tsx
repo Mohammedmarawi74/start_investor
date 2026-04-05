@@ -87,14 +87,6 @@ export const NewPlan: React.FC<{ onStart: (id: string) => void }> = ({ onStart }
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [mode, setMode] = useState<'selection' | 'easy' | 'ai'>('selection');
 
-  if (mode === 'easy') {
-    return (
-      <div className="animate-in fade-in slide-in-from-left-4 duration-500 w-full">
-        <SmartBeginnerPro />
-      </div>
-    );
-  }
-
   if (mode === 'ai') {
     return <IdeaCreation onBack={() => setMode('selection')} />;
   }
@@ -114,7 +106,7 @@ export const NewPlan: React.FC<{ onStart: (id: string) => void }> = ({ onStart }
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {/* EASY MODE CARD */}
         <button 
-          onClick={() => setMode('easy')}
+          onClick={() => onStart('easy')}
           className="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 p-6 rounded-[2rem] shadow-xl hover:shadow-emerald-100 transition-all duration-500 text-right text-white"
         >
           <div className="absolute top-0 left-0 p-2 opacity-10">

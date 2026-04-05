@@ -22,6 +22,7 @@ import { ExportTemplates } from './components/ExportTemplates';
 import { Notifications } from './components/Notifications';
 import { SmartAnalyzer } from './components/SmartAnalyzer';
 import { Profile } from './components/Profile';
+import ResultPage from './easy_mode/ResultPage';
 import { User, PlanSection, BusinessModelItem, Comment } from './types';
 import { 
   ShieldCheck, 
@@ -91,7 +92,7 @@ const INITIAL_COMMENTS: Comment[] = [
 
 const App: React.FC = () => {
   // Persistence Logic: Initialize from localStorage or default to 'home'
-  const [activeTab, setActiveTab] = useState<'home' | 'my-plans' | 'new-plan' | 'comparison' | 'unicorn-benchmark' | 'brand-identity' | 'editor' | 'smart-analyzer' | 'analytics' | 'tasks' | 'export-templates' | 'settings' | 'pricing' | 'notifications' | 'changelog' | 'admin-dashboard' | 'users-management' | 'admin-plans' | 'admin-analytics' | 'admin-security' | 'profile'>(() => {
+  const [activeTab, setActiveTab] = useState<'home' | 'my-plans' | 'new-plan' | 'comparison' | 'unicorn-benchmark' | 'brand-identity' | 'editor' | 'smart-analyzer' | 'analytics' | 'tasks' | 'export-templates' | 'settings' | 'pricing' | 'notifications' | 'changelog' | 'admin-dashboard' | 'users-management' | 'admin-plans' | 'admin-analytics' | 'admin-security' | 'profile' | 'strategic-dashboard'>(() => {
     const savedTab = localStorage.getItem('khotta_active_tab');
     return (savedTab as any) || 'home';
   });
@@ -226,6 +227,7 @@ const App: React.FC = () => {
                          {activeTab === 'admin-plans' && 'أرشيف الخطط العمومية'}
                          {activeTab === 'admin-analytics' && 'تحليلات المنصة الشاملة'}
                          {activeTab === 'admin-security' && 'بروتوكولات الأمان'}
+                         {activeTab === 'strategic-dashboard' && 'مختبر الاستثمار الذكي: النبض الاستراتيجي'}
                        </span>
                     </div>
                    </>
@@ -365,7 +367,7 @@ const App: React.FC = () => {
            </div>
         </div>
 
-        <div className={`${(activeTab === 'home' || activeTab === 'admin-dashboard' || activeTab === 'new-plan') ? 'w-full pt-0 pb-0' : 'max-w-6xl mx-auto py-8 lg:py-10 px-6 lg:px-12'}`}>
+        <div className={['editor', 'strategic-dashboard'].includes(activeTab) ? 'p-0' : 'max-w-6xl mx-auto py-8 lg:py-10 px-6 lg:px-12'}>
           
           {(activeTab === 'home' || activeTab === 'admin-dashboard') && (
             <div className="animate-in slide-in-from-bottom-4 duration-700">
@@ -445,7 +447,7 @@ const App: React.FC = () => {
 
           {activeTab === 'new-plan' && (
             <div className="animate-in slide-in-from-bottom-4 duration-700">
-               <NewPlan onStart={(id) => setActiveTab('editor')} />
+                <NewPlan onStart={(id) => id === 'easy' ? setActiveTab('strategic-dashboard') : setActiveTab('editor')} />
             </div>
           )}
 
@@ -511,6 +513,11 @@ const App: React.FC = () => {
                  expandedSectionId={expandedSectionId}
                  onSectionExpand={setExpandedSectionId}
                />
+            </div>
+          )}
+          {activeTab === 'strategic-dashboard' && (
+            <div className="animate-in slide-in-from-bottom-4 duration-700">
+               <ResultPage />
             </div>
           )}
         </div>
