@@ -165,10 +165,10 @@ const NavItem: React.FC<NavItemProps> = ({ icon: Icon, label, variant = 'default
   
   const variants = {
     default: active 
-      ? (isAdminMode ? "bg-amber-500/10 text-amber-500 border border-amber-500/20 shadow-md" : "bg-white text-primary-600 shadow-sm border border-primary-50")
+      ? (isAdminMode ? "bg-amber-500 text-white shadow-lg shadow-amber-200" : "bg-primary-600 text-white shadow-lg shadow-primary-200")
       : (isAdminMode ? "text-slate-400 hover:bg-slate-800 hover:text-slate-200" : "text-gray-500 hover:bg-white hover:text-gray-900"),
     ai: active 
-      ? "bg-purple-100 text-purple-700 shadow-sm border border-purple-200" 
+      ? "bg-purple-600 text-white shadow-lg shadow-purple-200" 
       : "text-purple-600 hover:bg-purple-50 hover:shadow-purple-100/20",
     danger: "text-red-400 hover:bg-red-50 hover:text-red-600",
     'active-project': "bg-primary-600 text-white shadow-lg shadow-primary-200"
@@ -178,7 +178,7 @@ const NavItem: React.FC<NavItemProps> = ({ icon: Icon, label, variant = 'default
     <button onClick={onClick} className={`${baseClasses} ${variants[variant]}`} title={isCollapsed ? label : ''}>
       <div className={`${isCollapsed ? 'p-2' : 'p-2'} rounded-xl transition-all duration-500 ${
         active 
-          ? variant === 'active-project' ? 'bg-white/20 text-white' : (isAdminMode ? 'bg-amber-500/10 text-amber-500' : 'bg-primary-50 text-primary-600') 
+          ? 'bg-white/20 text-white' 
           : (isAdminMode ? 'bg-transparent group-hover:bg-slate-700/50 group-hover:scale-110' : 'bg-transparent group-hover:bg-gray-50 group-hover:scale-110')
       }`}>
         <Icon size={isCollapsed ? 20 : 17} strokeWidth={active ? 2.5 : 2} />

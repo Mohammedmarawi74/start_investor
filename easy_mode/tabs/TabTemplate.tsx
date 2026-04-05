@@ -3,6 +3,7 @@ import * as Lucide from "lucide-react";
 import { TOKENS, BaseCard } from "../result_components/CardDesignSystem";
 import { ProgressDots } from "../components/CommonUI";
 import * as Renderers from "../components/QuestionRenderer";
+import { WizardGuidance } from "../components/WizardGuidance";
 
 export interface TabQuestion {
   id: string;
@@ -190,86 +191,106 @@ const TabForm = ({ config, onFinish }: { config: TabConfig, onFinish: (vals: any
         </div>
       </div>
 
-      <BaseCard isInitiallyOpen={true} style={{ 
-        display: "flex", 
-        flexDirection: "column",
-        border: `3px solid ${config.themeColor}`,
-        boxShadow: `0 0 40px ${config.themeColor}40, 0 0 100px ${config.themeColor}15, inset 0 0 20px ${config.themeColor}05`,
-        background: `linear-gradient(135deg, #ffffff, ${config.themeColor}08)`,
-        position: "relative",
-        overflow: "visible",
-        padding: "24px",
-        maxWidth: "850px", // Reduced width to "half" style
-        margin: "0 auto"   // Center it
+      <div style={{ 
+        display: "grid", 
+        gridTemplateColumns: "600px 600px", 
+        gap: 32, 
+        width: "100%",
+        justifyContent: "center", // Center both cards
+        alignItems: "stretch"
       }}>
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-          <div>
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: "28px" }}>
-              <ProgressDots 
-                steps={steps.map(s => ({ icon: s.qs[0].icon, id: s.num.toString() }))} 
-                current={currentStepNumber - 1} 
-              />
-            </div>
+        {/* Right Column - Wizard Form */}
+        <BaseCard isInitiallyOpen={true} style={{ 
+          display: "flex", 
+          flexDirection: "column",
+          border: `3px solid ${config.themeColor}`,
+          boxShadow: `0 0 40px ${config.themeColor}40, 0 0 100px ${config.themeColor}15, inset 0 0 20px ${config.themeColor}05`,
+          background: `linear-gradient(135deg, #ffffff, ${config.themeColor}08)`,
+          position: "relative",
+          overflow: "visible",
+          padding: "24px",
+          margin: 0,
+          borderRadius: "20px",
+          width: "600px", // Exact 600px width requested
+          flexShrink: 0
+        }}>
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div>
+              <div style={{ display: "flex", justifyContent: "center", marginBottom: "28px" }}>
+                <ProgressDots 
+                  steps={steps.map(s => ({ icon: s.qs[0].icon, id: s.num.toString() }))} 
+                  current={currentStepNumber - 1} 
+                />
+              </div>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
-              {currentStep.qs.map((q, idx) => (
-                <div key={q.id} className="animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${idx * 0.1}s` }}>
-                  {/* Question Title */}
-                  <div style={{ display: "flex", gap: "12px", marginBottom: "16px" }}>
-                    <div style={{ width: "34px", height: "34px", background: "#0f172a", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", flexShrink: 0 }}>
-                      {React.createElement((Lucide as any)[q.icon] || Lucide.Target, { size: 18 })}
+              <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+                {currentStep.qs.map((q, idx) => (
+                  <div key={q.id} className="animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${idx * 0.1}s` }}>
+                    {/* Question Title */}
+                    <div style={{ display: "flex", gap: "12px", marginBottom: "16px" }}>
+                      <div style={{ width: "34px", height: "34px", background: "#0f172a", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", flexShrink: 0 }}>
+                        {React.createElement((Lucide as any)[q.icon] || Lucide.Target, { size: 18 })}
+                      </div>
+                      <div>
+                        <h2 style={{ fontSize: "16px", fontWeight: 900, color: TOKENS.colors.text.title, marginBottom: "0px" }}>{q.label}</h2>
+                        <p style={{ fontSize: "12px", color: TOKENS.colors.text.muted, fontWeight: 700 }}>{q.sublabel}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h2 style={{ fontSize: "16px", fontWeight: 900, color: TOKENS.colors.text.title, marginBottom: "0px" }}>{q.label}</h2>
-                      <p style={{ fontSize: "12px", color: TOKENS.colors.text.muted, fontWeight: 700 }}>{q.sublabel}</p>
+
+                    {/* Question Content */}
+                    <div style={{ minHeight: "60px" }}>
+                        <RenderQuestion 
+                          question={q} 
+                          answer={tempAnswers[q.id] || answers[q.id]} 
+                          onAnswer={(val) => setSingleAnswer(q.id, val)}
+                          themeColor={config.themeColor}
+                        />
                     </div>
                   </div>
+                ))}
+              </div>
+            </div>
 
-                  {/* Question Content */}
-                  <div style={{ minHeight: "60px" }}>
-                      <RenderQuestion 
-                        question={q} 
-                        answer={tempAnswers[q.id] || answers[q.id]} 
-                        onAnswer={(val) => setSingleAnswer(q.id, val)}
-                        themeColor={config.themeColor}
-                      />
-                  </div>
-                </div>
-              ))}
+            <div style={{ marginTop: "60px", paddingTop: "32px", borderTop: `1px solid ${TOKENS.colors.border}`, display: "flex", justifyContent: "space-between" }}>
+              <button 
+                onClick={() => currentStepNumber > 1 && setCurrentStepNumber(currentStepNumber - 1)}
+                disabled={currentStepNumber === 1}
+                style={{ padding: "12px 32px", borderRadius: "15px", background: "#f8fafc", border: `1px solid ${TOKENS.colors.border}`, color: TOKENS.colors.text.body, fontWeight: 900, cursor: currentStepNumber === 1 ? "not-allowed" : "pointer", opacity: currentStepNumber === 1 ? 0.3 : 1 }}
+              >
+                السابق
+              </button>
+              <button 
+                onClick={handleNext}
+                style={{ 
+                  padding: "16px 48px", 
+                  borderRadius: "18px", 
+                  background: config.themeColor, 
+                  color: "#fff", 
+                  fontWeight: 900, 
+                  fontSize: "16px", 
+                  boxShadow: `0 15px 30px ${config.themeColor}30`,
+                  transition: "all 0.4s",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  cursor: "pointer"
+                }}
+              >
+                  <span>{currentStepNumber === totalSteps ? "تحليل النتائج النهائية" : "الخطوة التالية"}</span>
+                  <Lucide.Zap size={20} fill="currentColor" />
+              </button>
             </div>
           </div>
+        </BaseCard>
 
-          <div style={{ marginTop: "60px", paddingTop: "32px", borderTop: `1px solid ${TOKENS.colors.border}`, display: "flex", justifyContent: "space-between" }}>
-            <button 
-              onClick={() => currentStepNumber > 1 && setCurrentStepNumber(currentStepNumber - 1)}
-              disabled={currentStepNumber === 1}
-              style={{ padding: "12px 32px", borderRadius: "15px", background: "#f8fafc", border: `1px solid ${TOKENS.colors.border}`, color: TOKENS.colors.text.body, fontWeight: 900, cursor: currentStepNumber === 1 ? "not-allowed" : "pointer", opacity: currentStepNumber === 1 ? 0.3 : 1 }}
-            >
-              السابق
-            </button>
-            <button 
-              onClick={handleNext}
-              style={{ 
-                padding: "16px 48px", 
-                borderRadius: "18px", 
-                background: config.themeColor, 
-                color: "#fff", 
-                fontWeight: 900, 
-                fontSize: "16px", 
-                boxShadow: `0 15px 30px ${config.themeColor}30`,
-                transition: "all 0.4s",
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                cursor: "pointer"
-              }}
-            >
-                <span>{currentStepNumber === totalSteps ? "تحليل النتائج النهائية" : "الخطوة التالية"}</span>
-                <Lucide.Zap size={20} fill="currentColor" />
-            </button>
-          </div>
-        </div>
-      </BaseCard>
+        {/* Left Column - Guidance */}
+        <WizardGuidance 
+          currentStep={currentStepNumber}
+          totalSteps={totalSteps}
+          themeColor={config.themeColor}
+          configId={config.id}
+        />
+      </div>
     </div>
   );
 };
