@@ -141,9 +141,39 @@ const App: React.FC = () => {
   };
 
   const notifications = [
-    { id: 1, type: 'ai', title: 'تحليل SWOT جـاهز', msg: 'أكمل الذكاء الاصطناعي تحليل نقاط القوة لمشروعك.', time: 'منذ 5 دقائق', icon: Sparkles, color: 'text-purple-600 bg-purple-50' },
-    { id: 2, type: 'task', title: 'مهمة قريبة الموعد', msg: 'بقي 24 ساعة على تسليم خطة التسويق.', time: 'منذ ساعة', icon: Clock3, color: 'text-amber-600 bg-amber-50' },
-    { id: 3, type: 'system', title: 'اشتراك PRO', msg: 'تم تجديد اشتراكك السنوي بنجاح.', time: 'منذ يوم', icon: Check, color: 'text-green-600 bg-green-50' },
+    { 
+      id: 1, 
+      type: 'ai', 
+      priority: 'high',
+      title: 'تحليل SWOT جـاهز', 
+      msg: 'أكمل الذكاء الاصطناعي تحليل نقاط القوة والضعف لمشروعك الاستراتيجي. يمكنك الآن مراجعة النتائج.', 
+      time: 'منذ 5 دقائق', 
+      icon: Sparkles, 
+      color: 'text-purple-600 bg-purple-50',
+      action: 'مراجعة التحليل'
+    },
+    { 
+      id: 2, 
+      type: 'task', 
+      priority: 'urgent',
+      title: 'مهمة قريبة الموعد', 
+      msg: 'بقي أقل من 24 ساعة على الموعد النهائي لتسليم خطة التسويق الرقمي.', 
+      time: 'منذ ساعة', 
+      icon: Clock3, 
+      color: 'text-amber-600 bg-amber-50',
+      action: 'انتقل للمهام'
+    },
+    { 
+      id: 3, 
+      type: 'system', 
+      priority: 'low',
+      title: 'تجديد اشتراك PRO', 
+      msg: 'تم تجديد اشتراكك السنوي بنجاح؛ استمتع بكامل ميزات المنصة والذكاء الاصطناعي.', 
+      time: 'منذ يوم', 
+      icon: Check, 
+      color: 'text-emerald-600 bg-emerald-50',
+      action: 'تفاصيل الفاتورة'
+    },
   ];
 
   return (
@@ -215,21 +245,46 @@ const App: React.FC = () => {
                 </button>
 
                 {isNotificationsOpen && (
-                  <div className="absolute left-0 mt-3 w-80 bg-white border border-gray-100 rounded-3xl shadow-2xl z-[100] animate-in fade-in slide-in-from-top-2 duration-300 overflow-hidden rtl text-right">
-                    <div className="p-4 border-b border-gray-50 flex items-center justify-between bg-gray-50/50">
-                      <h3 className="font-black text-sm text-gray-900">التنبيهات</h3>
-                      <button className="text-[10px] font-bold text-primary-600 hover:underline">Mark as read</button>
+                  <div className="absolute left-0 mt-4 w-[380px] bg-white border border-slate-100 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-[100] animate-in fade-in slide-in-from-top-4 duration-500 overflow-hidden rtl text-right">
+                    <div className="p-6 pb-4 border-b border-slate-50 flex items-center justify-between bg-gradient-to-l from-slate-50/50 to-white">
+                      <div>
+                        <h3 className="font-black text-lg text-slate-900 leading-none">مركز التنبيهات</h3>
+                        <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-widest">3 تنبيهات غير مقروءة</p>
+                      </div>
+                      <button className="p-2 hover:bg-slate-100 rounded-full transition-colors">
+                        <SettingsIcon size={16} className="text-slate-400" />
+                      </button>
                     </div>
-                    <div className="max-h-96 overflow-y-auto no-scrollbar">
+
+                    <div className="max-h-[460px] overflow-y-auto no-scrollbar py-2">
+                       {/* Section Header */}
+                       <div className="px-6 py-2">
+                          <span className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">الأخيرة</span>
+                       </div>
+
                       {notifications.map((notif) => (
-                        <div key={notif.id} className="p-4 flex gap-4 hover:bg-gray-50 transition-colors cursor-pointer border-b border-gray-50/50 last:border-0 group">
-                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110 ${notif.color}`}>
-                            <notif.icon size={18} />
+                        <div key={notif.id} className="mx-3 my-1 p-4 flex gap-4 hover:bg-slate-50/80 rounded-[1.8rem] transition-all cursor-pointer border border-transparent hover:border-slate-100 group">
+                          <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg ${notif.color} group-hover:shadow-current/5`}>
+                            <notif.icon size={20} strokeWidth={2.5} />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-[12px] font-black text-gray-900 mb-0.5">{notif.title}</h4>
-                            <p className="text-[11px] text-gray-400 line-clamp-2 leading-relaxed">{notif.msg}</p>
-                            <span className="text-[9px] font-bold text-gray-300 mt-2 block italic">{notif.time}</span>
+                            <div className="flex items-center justify-between mb-1">
+                              <h4 className="text-[13px] font-black text-slate-900">{notif.title}</h4>
+                              <span className="text-[9px] font-black text-slate-400 opacity-60">{notif.time}</span>
+                            </div>
+                            <p className="text-[12px] text-slate-500 line-clamp-2 leading-relaxed font-medium mb-3">{notif.msg}</p>
+
+                            <div className="flex items-center justify-between mt-auto">
+                               <button className="text-[10px] font-black text-primary-600 bg-primary-50 px-3 py-1.5 rounded-lg hover:bg-primary-600 hover:text-white transition-all">
+                                 {notif.action}
+                               </button>
+                               {notif.priority === 'urgent' && (
+                                 <span className="flex items-center gap-1 text-[9px] font-black text-red-500 animate-pulse">
+                                   <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                   مستعجل
+                                 </span>
+                               )}
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -325,24 +380,32 @@ const App: React.FC = () => {
           )}
 
           {activeTab === 'notifications' && (
-            <div className="animate-in slide-in-from-bottom-4 duration-700 max-w-4xl mx-auto">
-               <div className="mb-10 text-right">
-                  <h1 className="text-3xl font-black text-gray-900 mb-2">مركز التنبيهات</h1>
-                  <p className="text-gray-400 font-bold text-sm">متابعة كافة النشاطات والتحديثات المتعلقة بمشاريعك</p>
+            <div className="animate-in slide-in-from-bottom-4 duration-700 max-w-3xl mx-auto py-4">
+               <div className="mb-8 text-right px-2">
+                  <h1 className="text-2xl font-black text-slate-800 mb-1">مركز التنبيهات</h1>
+                  <p className="text-slate-400 font-bold text-[11px] uppercase tracking-wider">متابعة النشاطات والتحديثات الاستراتيجية</p>
                </div>
-               <div className="space-y-4">
+               <div className="space-y-2.5">
                  {notifications.map((notif) => (
-                   <div key={notif.id} className="bg-white p-6 rounded-[2rem] border border-gray-100 flex items-center gap-6 shadow-sm hover:shadow-md transition-all group">
-                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${notif.color}`}>
-                         <notif.icon size={24} />
+                   <div key={notif.id} className="bg-white p-4 rounded-[1.8rem] border border-slate-100 flex items-center gap-5 shadow-sm hover:shadow-md transition-all group overflow-hidden relative">
+                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${notif.color}`}>
+                         <notif.icon size={22} strokeWidth={2.5} />
                       </div>
-                      <div className="flex-1 text-right">
-                         <div className="flex items-center justify-between mb-1">
-                            <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">{notif.type}</span>
-                            <span className="text-[11px] font-bold text-gray-400 italic">{notif.time}</span>
+                      <div className="flex-1 text-right min-w-0">
+                         <div className="flex items-center justify-between mb-0.5">
+                            <div className="flex items-center gap-2">
+                              <span className="text-[9px] font-black text-slate-300 uppercase tracking-widest">{notif.type}</span>
+                              {notif.priority === 'urgent' && <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" title="مستعجل"></span>}
+                            </div>
+                            <span className="text-[10px] font-bold text-slate-400 italic italic">{notif.time}</span>
                          </div>
-                         <h3 className="text-lg font-black text-gray-900 mb-1">{notif.title}</h3>
-                         <p className="text-sm text-gray-500 leading-relaxed">{notif.msg}</p>
+                         <h3 className="text-[14px] font-black text-slate-900 mb-0.5">{notif.title}</h3>
+                         <p className="text-[11.5px] text-slate-500 leading-relaxed font-medium line-clamp-1">{notif.msg}</p>
+                      </div>
+                      <div className="pr-4 flex items-center">
+                         <button className="px-5 py-1.5 bg-slate-50 hover:bg-primary-600 hover:text-white text-slate-500 rounded-xl text-[10.5px] font-black transition-all border border-slate-100/50">
+                           {notif.action}
+                         </button>
                       </div>
                    </div>
                  ))}
