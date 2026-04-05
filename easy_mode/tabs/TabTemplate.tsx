@@ -4,6 +4,7 @@ import { TOKENS, BaseCard } from "../result_components/CardDesignSystem";
 import { ProgressDots } from "../components/CommonUI";
 import * as Renderers from "../components/QuestionRenderer";
 import { WizardGuidance } from "../components/WizardGuidance";
+import { WIZARD_GUIDANCE_DATA } from "../wizardGuidanceData";
 
 export interface TabQuestion {
   id: string;

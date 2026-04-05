@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as Lucide from "lucide-react";
 import { ResultHeader } from "./components/ResultHeader";
 import { StrategicPulseTab } from "./tabs/StrategicPulseTab";
 import { FinancialViabilityTab } from "./tabs/FinancialViabilityTab";
@@ -155,12 +156,46 @@ export default function ResultPage() {
         <div style={{ position: "absolute", top: -50, right: -50, width: 200, height: 200, background: "radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%)", opacity: 0.5, pointerEvents: "none" }} />
         <div style={{ position: "relative", zIndex: 1, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
-            <h1 style={{ fontSize: "28px", fontWeight: 900, color: "#fff", margin: "0 0 6px", letterSpacing: "-0.02em" }}>مركز التشخيص والذكاء الاستثماري</h1>
-            <p style={{ fontSize: "14px", color: "#94a3b8", fontWeight: 600, margin: 0 }}>مختبر الاستراتيجيات عالية الدقة: استكشف مخرجات الذكاء الاصطناعي وتابع تطور مشروعك.</p>
+            <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "12px" }}>
+              <div style={{ 
+                width: "48px", 
+                height: "48px", 
+                background: "rgba(99, 102, 241, 0.15)", 
+                borderRadius: "15px", 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center", 
+                color: "#6366f1", 
+                border: "1px solid rgba(99, 102, 241, 0.3)",
+                boxShadow: "0 0 20px rgba(99, 102, 241, 0.2)"
+              }}>
+                <Lucide.Rocket size={26} fill="currentColor" />
+              </div>
+              <h1 style={{ fontSize: "32px", fontWeight: 900, color: "#fff", margin: 0, letterSpacing: "-0.02em" }}>مسار التنفيذ – الوضع السهل (Easy Mode)</h1>
+            </div>
+            <p style={{ fontSize: "15px", color: "#94a3b8", fontWeight: 600, margin: 0, maxWidth: "800px", lineHeight: "1.6" }}>
+              كل خطوة مُبسطة مع تلميحات تعليمية وسهلة الاختيار لتوجيهك خطوة بخطوة نحو تنفيذ مشروعك بثقة، مع إجابات سريعة تساعد الذكاء على توليد خطة عملية واضحة.
+            </p>
           </div>
           <div style={{ display: "flex", gap: "10px" }}>
-            <div style={{ background: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: "100px", padding: "6px 14px", fontSize: "11px", fontWeight: 900, color: "#6366f1", alignSelf: "center", marginRight: 12 }}>
-               نظام التشخيص الفوري نشط
+            <div style={{ 
+              background: "linear-gradient(90deg, #6366f1, #8b5cf6, #d946ef)", 
+              border: "1px solid rgba(255, 255, 255, 0.2)", 
+              borderRadius: "100px", 
+              padding: "7px 18px", 
+              fontSize: "12px", 
+              fontWeight: 900, 
+              color: "#fff", 
+              alignSelf: "center", 
+              marginRight: 12,
+              boxShadow: "0 4px 15px rgba(99, 102, 241, 0.4), 0 0 20px rgba(168, 85, 247, 0.2)",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              cursor: "default"
+            }}>
+               <Lucide.Sparkles size={14} fill="currentColor" />
+               <span>الوضع السهل</span>
             </div>
             <button style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff", padding: "8px 18px", borderRadius: "12px", fontSize: "12px", fontWeight: 800 }}>تصدير PDF</button>
             <button style={{ background: "#6366f1", border: "none", color: "#fff", padding: "8px 22px", borderRadius: "12px", fontSize: "12px", fontWeight: 800, boxShadow: "0 10px 20px rgba(99, 102, 241, 0.2)" }}>مشاركة التقرير</button>
