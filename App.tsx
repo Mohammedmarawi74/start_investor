@@ -148,7 +148,7 @@ import B2BEcommerceDashboard from './components/Ecommerce/B2BEcommerceDashboard'
 import B2CEcommerceDashboard from './components/Ecommerce/B2CEcommerceDashboard';
 import C2CEcommerceDashboard from './components/Ecommerce/C2CEcommerceDashboard';
 import DigitalShoppingBehaviourDashboard from './components/Ecommerce/DigitalShoppingBehaviourDashboard';
-import ECommerceKeyFiguresDashboard from './components/Ecommerce/ECommerceKeyFiguresDashboard';
+import ECommerceKeyFiguresDashboard from './components/Ecommerce/EcommerceKeyFiguresDashboard';
 import PaidContentDashboard from './components/Ecommerce/PaidContentDashboard';
 import { BottomNavBar } from './components/BottomNavBar';
 import SearchEngineOptimizationContentMarketingDashboard from './components/AdvertisingMarketing/SearchEngineOptimizationContentMarketingDashboard';
@@ -160,7 +160,7 @@ import BatteryMaterialsDashboard from './components/ChemicalsResources/BatteryMa
 import SustainableConsumerGoodsDashboard from './components/ConsumerGoodsFMCG/SustainableConsumerGoodsDashboard';
 import PackagedFoodsDashboard from './components/ConsumerGoodsFMCG/PackagedFoodsDashboard';
 import OnlineMarketplacesDashboard from './components/Ecommerce/OnlineMarketplacesDashboard';
-import CrossBorderEcommerceDashboard from './components/Ecommerce/CrossBorderEcommerceDashboard';
+import CrossBorderEcommerceDashboard from './components/Ecommerce/CrossBorderECommerceDashboard';
 import SocialCommerceDashboard from './components/Ecommerce/SocialCommerceDashboard';
 import FinancialTechnologyFintechDashboard from './components/FinanceInsurance/FinancialTechnologyFintechDashboard';
 import DigitalPaymentsDashboard from './components/FinanceInsurance/DigitalPaymentsDashboard';
