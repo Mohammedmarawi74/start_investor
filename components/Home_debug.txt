@@ -1,0 +1,200 @@
+﻿
+import React, { useState } from 'react';
+import { 
+  Sparkles, 
+  Plus, 
+  Zap, 
+  ArrowUpRight, 
+  FileText, 
+  LayoutDashboard, 
+  Star, 
+  TrendingUp, 
+  BrainCircuit, 
+  Clock,
+  CheckCircle2,
+  ChevronLeft,
+  Crown,
+  Cloud,
+  Monitor,
+  Search,
+  Filter,
+  Bell,
+  AlertTriangle
+} from 'lucide-react';
+
+export const Home: React.FC<{ setActiveTab: (tab: any) => void }> = ({ setActiveTab }) => {
+  const recentPlans = [
+    { id: '1', title: 'Ø®Ø·Ø© Ø¹Ù…Ù„ ØªØ·Ø¨ÙŠÙ‚ ØªÙŠÙƒ', progress: 85, category: 'ØªÙ‚Ù†ÙŠØ©', lastEdited: 'Ù…Ù†Ø° Ø³Ø§Ø¹ØªÙŠÙ†', nextStep: 'Ø§Ù„Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠØ© ÙˆØ§Ù„ØªØµØ¯ÙŠØ±', color: 'bg-emerald-500', aiInsight: 'ØªØ­Ø³ÙŠÙ† Ù†Ù…ÙˆØ°Ø¬ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯Ø§Øª Ø¨Ù†Ø§Ø¡Ù‹ Ø¹Ù„Ù‰ Ø§Ù„Ø³ÙˆÙ‚ Ø§Ù„Ø®Ù„ÙŠØ¬ÙŠ' },
+    { id: '2', title: 'Ù…Ø´Ø±ÙˆØ¹ ÙƒØ§ÙÙŠÙ‡ Ù„Ø§ÙˆÙ†Ø¬', progress: 40, category: 'ØªØ¬Ø§Ø±Ø©', lastEdited: 'Ù…Ù†Ø° ÙŠÙˆÙ…', nextStep: 'Ø¥ÙƒÙ…Ø§Ù„ Ù‡ÙŠÙƒÙ„ Ø§Ù„ØªÙƒØ§Ù„ÙŠÙ ÙˆØ§Ù„Ø¥ÙŠØ±Ø§Ø¯Ø§Øª', color: 'bg-amber-500', aiInsight: 'Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„Ù…ÙˆØ±Ø¯ÙŠÙ† Ù„ØªÙ‚Ù„ÙŠÙ„ Ø§Ù„ØªÙƒØ§Ù„ÙŠÙ Ø§Ù„ØªØ´ØºÙŠÙ„ÙŠØ©' },
+  ];
+
+  const currentTasks = [
+    { id: 't1', title: 'ØªØ­Ù„ÙŠÙ„ SWOT Ù„Ù„Ù…Ù†Ø§ÙØ³ÙŠÙ†', project: 'ØªØ·Ø¨ÙŠÙ‚ ØªÙŠÙƒ', priority: 'high', dueDate: 'Ø§Ù„ÙŠÙˆÙ…', status: 'pending' },
+    { id: 't2', title: 'ØªØ­Ø¯ÙŠØ¯ Ø§Ù„Ù…ÙŠØ²Ø§Ù†ÙŠØ© Ø§Ù„ØªØ´ØºÙŠÙ„ÙŠØ©', project: 'ÙƒØ§ÙÙŠÙ‡ Ù„Ø§ÙˆÙ†Ø¬', priority: 'medium', dueDate: 'ØºØ¯Ø§Ù‹', status: 'pending' },
+    { id: 't3', title: 'Ø¥Ù†Ø´Ø§Ø¡ Ø§Ù„Ù‡ÙˆÙŠØ© Ø§Ù„Ø¨ØµØ±ÙŠØ© Ø§Ù„Ø£Ø³Ø§Ø³ÙŠØ©', project: 'ØªØ·Ø¨ÙŠÙ‚ ØªÙŠÙƒ', priority: 'high', dueDate: 'Ù…Ù†Ø° ÙŠÙˆÙ…ÙŠÙ†', status: 'overdue' },
+  ];
+  const [taskFilter, setTaskFilter] = useState<'all' | 'high' | 'overdue'>('all');
+
+  const filteredTasks = currentTasks.filter(task => {
+     if (taskFilter === 'all') return true;
+     if (taskFilter === 'high') return task.priority === 'high';
+     if (taskFilter === 'overdue') return task.status === 'overdue';
+     return true;
+  });
+  const quickStats = [
+    { 
+      label: 'Ø§Ù„Ø®Ø·Ø· Ø§Ù„Ù†Ø´Ø·Ø©', 
+      value: '12', 
+      icon: FileText, 
+      color: 'text-blue-600', 
+      bg: 'bg-blue-50',
+      trend: '+2 Ù‡Ø°Ø§ Ø§Ù„Ø£Ø³Ø¨ÙˆØ¹',
+      trendUp: true,
+      onClick: () => setActiveTab('my-plans')
+    },
+    { 
+      label: 'Ù†Ù‚Ø§Ø· AI Ø§Ù„Ù…ØªØ§Ø­Ø©', 
+      value: '85', 
+      icon: Zap, 
+      color: 'text-purple-600', 
+      bg: 'bg-purple-50',
+      trend: 'ÙƒØ§ÙÙŠØ© Ù„Ù€ 15 Ø®Ø·Ø©',
+      trendUp: true,
+      onClick: () => setActiveTab('pricing')
+    },
+    { 
+      label: 'Ù…Ù‡Ø§Ù… Ù…ÙƒØªÙ      {/* SECTION 1: HERO - White Layer */}
+      <section className="pt-10 pb-16 px-6 lg:px-12 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 p-6 lg:p-10 text-white shadow-2xl">
+            <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+              <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary-500 rounded-full blur-[120px] animate-pulse"></div>
+            </div>
+            
+            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+              <div className="text-center lg:text-right flex-1">
+                <div className="flex items-center justify-center lg:justify-start gap-3 mb-4">
+                  <div className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/10 text-primary-300 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+                    <Crown size={12} className="text-amber-400" />
+                    Ø®Ø·Ø© Pro Ø§Ù„Ù†Ø´Ø·Ø©
+                  </div>
+                  <div className="px-3 py-1 bg-emerald-500/10 backdrop-blur-md rounded-full border border-emerald-500/20 text-emerald-400 text-[10px] font-bold flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></div>
+                    Ù…ØªØµÙ„ Ø§Ù„Ø¢Ù†
+                  </div>
+                </div>
+                
+                <h1 className="text-3xl lg:text-5xl font-extrabold mb-4 leading-tight tracking-tight">
+                  Ø£Ù‡Ù„Ø§Ù‹ Ø¨Ùƒ Ù…Ø¬Ø¯Ø¯Ø§Ù‹ØŒ <span className="text-amber-300">Ø¹Ø¨Ø¯Ø§Ù„Ù„Ù‡.</span>
+                </h1>
+                
+                <p className="text-gray-400 font-bold text-sm lg:text-base mb-8 max-w-lg leading-relaxed">
+                  Ù„Ø¯ÙŠÙƒ <span className="text-white">3 Ù…Ù‡Ø§Ù…</span> Ø¨Ø§Ù†ØªØ¸Ø§Ø±Ùƒ ÙÙŠ "Ù…Ø´Ø±ÙˆØ¹ ÙƒØ§ÙÙŠÙ‡ Ù„Ø§ÙˆÙ†Ø¬"ØŒ Ù‡Ù„ ØªØ±ÙŠØ¯ Ø§Ù„Ù…ØªØ§Ø¨Ø¹Ø© Ù…Ù† Ø­ÙŠØ« ØªÙˆÙ‚ÙØªØŸ
+                </p>
+                
+                <div className="flex flex-wrap items-center gap-5 mt-10 relative z-10">
+                   {/* Unified Indicator 1: New Plan */}
+                   <button 
+                     onClick={() => setActiveTab('new-plan')}
+                     className="h-16 px-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[1.4rem] shadow-2xl hover:bg-white/10 transition-all hover:translate-y-[-4px] flex items-center justify-center gap-3 min-w-[200px]"
+                   >
+                     <div className="w-8 h-8 bg-white/10 text-white rounded-lg flex items-center justify-center shadow-lg border border-white/5">
+                        <Plus size={18} strokeWidth={3} />
+                     </div>
+                     <span className="text-sm font-black text-white whitespace-nowrap">Ø®Ø·Ø© Ø¹Ù…Ù„ Ø¬Ø¯ÙŠØ¯Ø©</span>
+                   </button>
+                   
+                   {/* Unified Indicator 2: Continue Work */}
+                   <button 
+                     onClick={() => setActiveTab('editor')}
+                     className="h-16 px-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[1.4rem] shadow-2xl hover:bg-white/10 transition-all hover:translate-y-[-4px] flex items-center justify-center gap-3 min-w-[200px]"
+                   >
+                     <div className="w-8 h-8 bg-primary-500/20 text-primary-400 rounded-lg flex items-center justify-center shadow-lg border border-primary-400/10">
+                        <Zap size={18} fill="currentColor" />
+                     </div>
+                     <span className="text-sm font-black text-white whitespace-nowrap">Ù…ØªØ§Ø¨Ø¹Ø© Ø§Ù„Ø¹Ù…Ù„ Ø§Ù„Ø­Ø§Ù„ÙŠ</span>
+                   </button>
+    
+                   {/* Unified Indicator 3: Smart Alert */}
+                   <div className="h-16 px-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[1.4rem] shadow-2xl hover:bg-white/10 transition-all hover:translate-y-[-4px] flex items-center justify-center gap-3 min-w-[240px] cursor-pointer group">
+                      <div className="w-8 h-8 bg-amber-400/20 text-amber-400 rounded-lg flex items-center justify-center animate-pulse shadow-lg border border-amber-400/10">
+                         <AlertTriangle size={18} fill="currentColor" />
+                      </div>
+                      <div className="text-right">
+                         <p className="text-[9px] font-black text-amber-400 uppercase tracking-widest leading-none mb-1">ØªÙ†Ø¨ÙŠÙ‡ Ø°ÙƒÙŠ</p>
+                         <p className="text-[11px] font-black text-white/90">ØªØ­Ù„ÙŠÙ„ SWOT ÙŠÙ‚ØªØ±Ø¨</p>
+                      </div>
+                   </div>
+                </div>
+              </div>
+              
+              <div className="hidden lg:flex items-center gap-8">
+                <div className="h-24 w-px bg-white/10"></div>
+                <div className="relative group">
+                   <div className="w-40 h-40 bg-gradient-to-br from-primary-500/20 to-purple-600/20 rounded-[2.5rem] border border-white/10 flex items-center justify-center transition-all duration-700 group-hover:rotate-6 group-hover:scale-110">
+                      <BrainCircuit size={80} className="text-white/40" />
+                   </div>
+                   <div className="absolute -top-2 -right-2 w-10 h-10 bg-white rounded-2xl shadow-xl flex items-center justify-center text-primary-600 animate-bounce">
+                      <Sparkles size={20} />
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+/10 flex items-center justify-center transition-all duration-700 group-hover:rotate-6 group-hover:scale-110">
+                  <BrainCircuit size={80} className="text-white/40" />
+               </div>
+               <div className="absolute -top-2 -right-2 w-10 h-10 bg-white rounded-2xl shadow-xl flex items-center justify-center text-primary-600 animate-bounce">
+                  <Sparkles size={20} />
+               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 2: SEARCH & STATS - Soft Neutral Layer */}
+      <section className="py-20 px-6 lg:px-12 bg-slate-50/50 border-y border-slate-100">
+        <div className="max-w-6xl mx-auto space-y-16">
+          {/* Smart Search & Advanced Filters - Fast Access */}
+          <div className="bg-white border border-slate-100 p-4 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.03)] flex flex-col lg:flex-row items-center gap-6">
+            <div className="relative flex-1 w-full group">
+               <div className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary-600 transition-colors">
+                  <Search size={22} />
+               </div>
+               <input 
+                  type="text" 
+                  placeholder="Ø§Ø¨Ø­Ø« Ø¹Ù† Ù…Ø´Ø±ÙˆØ¹ØŒ Ù…Ù‡Ù…Ø©ØŒ Ø£Ùˆ Ù†ØµÙŠØ­Ø© Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ©..."
+                  className="w-full bg-slate-50/50 border border-transparent focus:border-primary-100 focus:bg-white px-16 py-5 rounded-3xl outline-none text-[15px] font-bold text-gray-700 transition-all placeholder:text-gray-300 shadow-sm focus:shadow-md"
+               />
+            </div>
+            
+            <div className="flex items-center gap-4 w-full lg:w-auto">
+               <div className="flex bg-slate-50 p-1.5 rounded-2xl border border-slate-100">
+                  <button className="px-6 py-3 bg-white text-primary-600 rounded-xl text-[10px] font-black shadow-sm border border-primary-50">Ø§Ù„Ù‚Ø·Ø§Ø¹: Ø§Ù„ÙƒÙ„</button>
+                  <button className="px-6 py-3 text-gray-400 hover:text-gray-600 rounded-xl text-[10px] font-black">ØªÙ‚Ù†ÙŠ</button>
+                  <button className="px-6 py-3 text-gray-400 hover:text-gray-600 rounded-xl text-[10px] font-black">+50% Ø¥Ù†Ø¬Ø§Ø²</button>
+               </div>
+               <button className="p-5 bg-white border border-slate-100 text-gray-400 rounded-2xl hover:bg-slate-50 hover:text-primary-600 transition-all shadow-sm">
+                  <Filter size={20} />
+               </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 3: RECENT PLANS & AI - White Layer */}
+      <section className="py-20 px-6 lg:px-12 bg-white">
+        <div className="max-w-6xl mx-auto space-y-20">
+          {/* Navigation Quick Stats Grid - Compact Square Aesthetic moved into Section 3 container or keep separate */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            
+            {/* Recent Activity Section - Minimalist Redesign */}
+            <div className="lg:col-span-2 space-y-8">
+              <div className="flex items-center justify-between px-4">
+                <div className="flex items-center gap-3">
+                   <div className="w-2.5 h-10 bg-primary-600 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.3)]"></div>
+                   <h2 className="text-3xl font-black text-gray-950 tracking-tighter">Ø¢Ø®Ø± Ø§Ù„Ø®Ø·Ø· Ø§Ù„Ù†Ø´Ø·Ø©</h2>
+                </div>

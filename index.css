@@ -1,0 +1,170 @@
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans Arabic", "Tajawal", "Inter", sans-serif;
+
+  --color-primary-50: #f0f7ff;
+  --color-primary-100: #e0effe;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+
+  --color-ai-light: #f5f3ff;
+  --color-ai-dark: #7c3aed;
+
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+
+  --breakpoint-xs: 480px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* IBM Plex Sans Arabic - Strategic Visual Identity */
+
+* {
+  font-family: var(--font-sans) !important;
+}
+
+html, body {
+  -webkit-font-smoothing: antialiased;
+  background-color: #FFFFFF;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(16,185,129,0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(59,130,246,0.02) 0%, transparent 50%),
+    radial-gradient(#E2E8F0 0.8px, transparent 0.8px);
+  background-size: 100% 100%, 100% 100%, 30px 30px;
+}
+
+/* Luxury Scrollbar Logic */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+.sidebar-glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Mobile-First Responsive Utilities */
+@media (max-width: 640px) {
+  /* Optimize touch targets for mobile */
+  button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve readability on small screens */
+  p, span, div {
+    word-break: break-word;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 640px) and (max-width: 1024px) {
+  .max-w-7xl {
+    max-width: 100%;
+  }
+}
+
+/* Ensure proper spacing on mobile */
+@media (max-width: 480px) {
+  .p-6 {
+    padding: 1rem;
+  }
+  
+  .gap-6 {
+    gap: 1rem;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Easy Mode RTL Fixes for Mobile */
+.easy-mode-page {
+  direction: rtl !important;
+  text-align: right !important;
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+}
+
+.easy-mode-header,
+.easy-mode-content {
+  direction: rtl !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.content-wrapper,
+.tab-template,
+.tab-form,
+.questions-list,
+.question-item {
+  direction: rtl !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 640px) {
+  .easy-mode-page {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .easy-mode-header {
+    padding: 12px !important;
+  }
+  
+  .easy-mode-content {
+    padding: 12px !important;
+    padding-bottom: 80px !important;
+  }
+  
+  .content-wrapper {
+    max-width: 100vw !important;
+    width: 100vw !important;
+    overflow-x: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Ensure all text is properly aligned */
+  .easy-mode-page *,
+  .easy-mode-header *,
+  .easy-mode-content * {
+    text-align: inherit !important;
+  }
+  
+  .easy-mode-header h1,
+  .easy-mode-header p,
+  .title-section,
+  .title-text {
+    text-align: right !important;
+  }
+}

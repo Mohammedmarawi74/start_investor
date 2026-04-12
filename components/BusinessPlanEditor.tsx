@@ -1,0 +1,276 @@
+
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { 
+  FileText, BarChart3, Lightbulb, Target, Users, DollarSign, 
+  Briefcase, BrainCircuit, Save, Edit3, Plus, X, Zap, LayoutGrid, CheckCircle2 
+} from 'lucide-react';
+import { PlanSection } from '../types';
+
+// --- Configuration & Helpers ---
+export const SECTION_CONFIG: Record<string, { icon: any, color: string }> = {
+  'الملخص': { icon: FileText, color: 'text-blue-500' },
+  'السوق': { icon: BarChart3, color: 'text-purple-500' },
+  'العمل': { icon: Lightbulb, color: 'text-amber-500' },
+  'التسويق': { icon: Target, color: 'text-rose-500' },
+  'الهيكل': { icon: Users, color: 'text-emerald-500' },
+  'المالية': { icon: DollarSign, color: 'text-cyan-500' },
+  'default': { icon: Briefcase, color: 'text-slate-500' }
+};
+
+export const getSectionIcon = (title: string) => {
+  const entry = Object.entries(SECTION_CONFIG).find(([key]) => title.includes(key));
+  return entry ? entry[1].icon : SECTION_CONFIG.default.icon;
+};
+
+// --- Sub-components ---
+const EditorHeader = ({ progress, onToggleAi, isAiOpen }: { progress: number, onToggleAi: () => void, isAiOpen: boolean }) => (
+  <nav className="h-24 bg-white border-b border-slate-100 flex items-center justify-between px-10 shrink-0 z-50">
+    <div className="flex items-center gap-4">
+      <div className="w-12 h-12 bg-slate-950 text-white rounded-2xl flex items-center justify-center shadow-lg transform -rotate-3">
+        <Briefcase size={24} />
+      </div>
+      <div>
+        <h1 className="text-2xl font-black text-slate-950 leading-none">المحرر الاستراتيجي</h1>
+        <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest mt-1 block text-right">Cloud Synced</span>
+      </div>
+    </div>
+
+    <div className="flex items-center gap-6">
+      <div className="hidden md:flex items-center gap-4 bg-slate-50 px-5 py-3 rounded-2xl border border-slate-100">
+        <span className="text-[11px] font-bold text-slate-400">جاهزية الاستثمار</span>
+        <div className="w-32 h-2 bg-slate-200 rounded-full overflow-hidden">
+          <div className="h-full bg-blue-600 transition-all duration-700" style={{ width: `${progress}%` }} />
+        </div>
+        <span className="text-xs font-black text-slate-900">{progress}%</span>
+      </div>
+      
+      <button 
+        onClick={onToggleAi}
+        className={`flex items-center gap-3 px-6 py-3.5 rounded-2xl text-sm font-bold transition-all ${
+          isAiOpen ? 'bg-slate-950 text-white shadow-xl' : 'bg-white border-2 border-slate-100 text-slate-600 hover:border-slate-300'
+        }`}
+      >
+        <BrainCircuit size={18} />
+        <span>ذكاء الخطة</span>
+      </button>
+    </div>
+  </nav>
+);
+
+const AiMetric = ({ label, score, warning }: { label: string, score: number, warning?: boolean }) => (
+  <div className="space-y-2">
+    <div className="flex justify-between text-[11px] font-bold">
+      <span className="text-slate-500">{label}</span>
+      <span className={warning ? 'text-amber-600' : 'text-slate-900'}>{score}%</span>
+    </div>
+    <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+      <div 
+        className={`h-full transition-all duration-1000 ${warning ? 'bg-amber-400' : 'bg-blue-600'}`} 
+        style={{ width: `${score}%` }} 
+      />
+    </div>
+  </div>
+);
+
+// --- Main Component ---
+interface BusinessPlanEditorProps {
+  sections: PlanSection[];
+  onSectionUpdate: (id: string, updates: Partial<PlanSection>) => void;
+  expandedSectionId: string | null;
+  onSectionExpand: (id: string | null) => void;
+}
+
+export const BusinessPlanEditor: React.FC<BusinessPlanEditorProps> = ({
+  sections,
+  onSectionUpdate,
+  expandedSectionId,
+  onSectionExpand,
+}) => {
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editContent, setEditContent] = useState('');
+  const [isAiSidebarOpen, setIsAiSidebarOpen] = useState(true);
+  const editorRef = useRef<HTMLTextAreaElement>(null);
+
+  // حساب التقدم
+  const totalProgress = useMemo(() => 
+    sections.length > 0 ? Math.round((sections.filter(s => s.isCompleted).length / sections.length) * 100) : 0, 
+  [sections]);
+
+  const activeSection = useMemo(() => 
+    sections.find(s => s.id === expandedSectionId) || sections[0] || { id: '0', title: 'خطة جديدة', content: '', isCompleted: false },
+  [sections, expandedSectionId]);
+
+  // التحكم في التعديل
+  const startEditing = () => {
+    setEditingId(activeSection.id);
+    setEditContent(activeSection.content || '');
+  };
+
+  const cancelEditing = () => setEditingId(null);
+
+  const saveContent = () => {
+    onSectionUpdate(activeSection.id, { 
+      content: editContent, 
+      isCompleted: editContent.trim().length > 50 
+    });
+    setEditingId(null);
+  };
+
+  return (
+    <div dir="rtl" className="h-screen flex flex-col font-['IBM_Plex_Sans_Arabic'] bg-white overflow-hidden text-slate-900">
+      
+      <EditorHeader 
+        progress={totalProgress} 
+        onToggleAi={() => setIsAiSidebarOpen(!isAiSidebarOpen)} 
+        isAiOpen={isAiSidebarOpen} 
+      />
+
+      <div className="flex-1 flex overflow-hidden">
+        
+        {/* الملاح الجانبي (Right) */}
+        <aside className="w-72 border-l border-slate-100 flex flex-col bg-white shrink-0">
+          <div className="p-8">
+            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-6 text-right">هيكل الاستراتيجية</h4>
+            <div className="space-y-1.5">
+              {sections.map((section) => {
+                const Icon = getSectionIcon(section.title);
+                const isActive = activeSection.id === section.id;
+                return (
+                  <button 
+                    key={section.id}
+                    onClick={() => { onSectionExpand(section.id); cancelEditing(); }}
+                    className={`w-full group p-4 rounded-2xl text-right transition-all flex items-center justify-between border-2 ${
+                      isActive 
+                        ? 'bg-blue-50/50 border-blue-600 text-blue-950 shadow-sm' 
+                        : 'border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Icon size={18} className={isActive ? 'text-blue-600' : 'text-slate-400'} />
+                      <span className={`text-sm ${isActive ? 'font-black' : 'font-medium'}`}>{section.title}</span>
+                    </div>
+                    {section.isCompleted && <CheckCircle2 size={16} className="text-emerald-500" />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </aside>
+
+        {/* منطقة المحرر المركزية (Center) */}
+        <main className="flex-1 overflow-y-auto bg-slate-50/30 flex flex-col items-center py-10 px-6">
+          <div className="w-full max-w-4xl flex flex-col flex-1">
+            <div className="bg-white rounded-[2.5rem] border border-slate-200/60 shadow-sm flex-1 flex flex-col overflow-hidden">
+              
+              {/* ترويسة القسم الحالية */}
+              <div className="px-12 py-8 border-b border-slate-50 flex items-center justify-between text-right">
+                <div className="flex items-center gap-5">
+                  <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-900 shadow-inner">
+                    {React.createElement(getSectionIcon(activeSection.title), { size: 24 })}
+                  </div>
+                  <h2 className="text-3xl font-black tracking-tight">{activeSection.title}</h2>
+                </div>
+              </div>
+
+              {/* محتوى المحرر */}
+              <div className="flex-1 p-12 text-right">
+                {editingId === activeSection.id ? (
+                  <div className="h-full flex flex-col">
+                    <textarea 
+                      autoFocus
+                      ref={editorRef}
+                      value={editContent}
+                      onChange={(e) => setEditContent(e.target.value)}
+                      className="w-full flex-1 text-xl font-medium text-slate-800 leading-relaxed outline-none border-none resize-none placeholder:text-slate-200"
+                      placeholder="ابدأ بصياغة رؤيتك الاستراتيجية هنا..."
+                    />
+                    <div className="mt-8 pt-8 border-t border-slate-50 flex items-center justify-between">
+                      <button onClick={cancelEditing} className="text-slate-400 hover:text-rose-500 font-bold text-sm transition-colors">إلغاء التغييرات</button>
+                      <button 
+                        onClick={saveContent}
+                        className="px-8 py-4 bg-blue-600 text-white rounded-2xl font-bold text-sm shadow-lg shadow-blue-200 hover:bg-blue-700 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3"
+                      >
+                        <Save size={18} /> حفظ المسودة الاستراتيجية
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="h-full flex flex-col">
+                    {activeSection.content ? (
+                      <div className="flex-1">
+                        <p className="text-xl font-medium text-slate-700 leading-[2] whitespace-pre-wrap">{activeSection.content}</p>
+                        <div className="mt-12 flex gap-4">
+                          <button 
+                            onClick={startEditing}
+                            className="px-6 py-3 bg-slate-900 text-white rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-slate-800 transition-all"
+                          >
+                            <Edit3 size={16} /> تعديل النص
+                          </button>
+                          <button className="px-6 py-3 bg-blue-50 text-blue-600 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-blue-100 transition-all">
+                            <Zap size={16} /> تحسين بواسطة AI
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex-1 flex flex-col items-center justify-center text-center opacity-60">
+                        <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mb-6">
+                          <Plus size={32} className="text-slate-300" />
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-400 mb-6">هذا القسم ينتظر إبداعك...</h3>
+                        <button 
+                          onClick={startEditing}
+                          className="px-10 py-4 bg-slate-950 text-white rounded-2xl font-bold shadow-xl hover:scale-105 transition-all"
+                        >
+                          ابدأ الكتابة الآن
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </main>
+
+        {/* لوحة التحليل الذكي (Left) */}
+        {isAiSidebarOpen && (
+          <aside className="w-80 bg-white border-r border-slate-100 flex flex-col shrink-0 animate-in slide-in-from-left duration-500">
+            <div className="p-8 border-b border-slate-50 flex items-center justify-between text-right">
+              <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest text-right">تحليل الجودة اللحظي</h4>
+              <button onClick={() => setIsAiSidebarOpen(false)} className="text-slate-300 hover:text-slate-900 transition-colors"><X size={18} /></button>
+            </div>
+            
+            <div className="p-8 space-y-10 overflow-y-auto no-scrollbar text-right">
+              {/* بطاقة التقييم */}
+              <div className="bg-slate-950 rounded-[2rem] p-8 text-white relative overflow-hidden">
+                <Zap className="absolute -bottom-10 -right-10 w-40 h-40 text-white/5 rotate-12" />
+                <div className="relative z-10">
+                  <span className="text-[10px] font-black text-blue-400 uppercase mb-2 block">Score الاستراتيجي</span>
+                  {/* @ts-ignore */}
+                  <div className="text-5xl font-black mb-4 leading-none">{activeSection.aiScore || 0}%</div>
+                  <p className="text-slate-400 text-xs leading-relaxed font-medium">
+                    يُنصح بزيادة التركيز على <span className="text-white font-bold">الميزة التنافسية</span> لتحسين فرص قبول الخطة.
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <h5 className="text-[10px] font-black text-slate-400 uppercase flex items-center gap-2">
+                  <LayoutGrid size={14} /> مقاييس الأداء
+                </h5>
+                <div className="space-y-5">
+                   {/* @ts-ignore */}
+                  <AiMetric label="وضوح الرؤية" score={activeSection.aiScore || 90} />
+                   {/* @ts-ignore */}
+                  <AiMetric label="التحليل التنافسي" score={45} warning />
+                   {/* @ts-ignore */}
+                  <AiMetric label="الواقعية المالية" score={85} />
+                </div>
+              </div>
+            </div>
+          </aside>
+        )}
+      </div>
+    </div>
+  );
+};
