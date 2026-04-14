@@ -180,6 +180,7 @@ const config: SectorDashboardProps = {
   ],
 
   tags: ['Inorganic', 'Organic', 'Petrochemicals', 'Polymers', 'Agrochemicals', 'Specialty'],
+  sectorId: 'chemical-industry-dashboard',
 };
 
 const ChemicalIndustryDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

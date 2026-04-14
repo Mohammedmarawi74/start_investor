@@ -105,7 +105,8 @@ const config: SectorDashboardProps = {
     'الذكاء الاصطناعي يعيد تعريف محركات البحث من الروابط إلى الإجابات المباشرة.',
     'المستقبل يتجه نحو "الوجود داخل الإجابة" بدلاً من مجرد جلب الزيارات للموقع.'
   ],
-  tags: ['SEO', 'ContentMarketing', 'SearchEngine', 'OrganicTraffic', 'DigitalMarketing', 'AISEO', 'ContentStrategy']
+  tags: ['SEO', 'ContentMarketing', 'SearchEngine', 'OrganicTraffic', 'DigitalMarketing', 'AISEO', 'ContentStrategy'],
+  sectorId: 'seo-content-marketing',
 };
 
 const SearchEngineOptimizationContentMarketingDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

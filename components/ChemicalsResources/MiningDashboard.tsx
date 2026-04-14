@@ -191,7 +191,8 @@ const config: SectorDashboardProps = {
     'المعادن الحيوية تُعدّ العمود الفقري لتحقيق أهداف الطاقة النظيفة العالمية',
   ],
 
-  tags: ['Iron Ore', 'Copper', 'Gold', 'Lithium', 'Cobalt', 'Rare Earths', 'Smart Mining'],
+  tags: ['GoldMining', 'IronOre', 'Lithium', 'RareEarth', 'Exploration', 'MineralWealth'],
+  sectorId: 'mining-dashboard',
 };
 
 const MiningDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

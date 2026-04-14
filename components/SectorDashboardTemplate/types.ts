@@ -34,7 +34,7 @@ export interface SectorLeader {
 export interface BusinessOpportunity {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   examples: string[];
   note?: string;
   icon?: LucideIcon;
@@ -60,4 +60,5 @@ export interface SectorDashboardProps {
   onBack?: () => void;
   onBuildPlan?: (projectName?: string) => void;
   parentCategory?: string;
+  sectorId?: string; // New: To link with central registry
 }

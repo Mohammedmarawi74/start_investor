@@ -128,6 +128,7 @@ const config: SectorDashboardProps = {
   ],
 
   tags: ['Advertising', 'Marketing', 'WPP', 'Digital Ad Spend', 'Retail Media', 'MENA Growth'],
+  sectorId: 'advertising-dashboard',
 };
 
 const AdvertisingDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

@@ -128,6 +128,7 @@ const config: SectorDashboardProps = {
   ],
 
   tags: ['Forestry', 'Timber', 'Canada Forestry', 'Amazon', 'Sustainable Management', 'Wood Production'],
+  sectorId: 'forestry-dashboard',
 };
 
 const ForestryDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

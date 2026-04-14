@@ -14,6 +14,7 @@ import { OpportunitiesSection } from './BusinessOpportunities';
 import { LeadersSection } from './LeadersSection';
 import { BottomRow } from './BottomRow';
 import { buildNav, buildNavMap } from './NavHelpers';
+import { OPPORTUNITIES_REGISTRY } from '../../data/opportunitiesRegistry';
 
 const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
   title,
@@ -29,17 +30,22 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
   industryInsights = [],
   tags = [],
   topMarkets = [],
-  businessOpportunities = [],
+  businessOpportunities: manualOpportunities = [],
   onBack,
   onBuildPlan,
   parentCategory = 'استكشاف السوق',
+  sectorId,
 }) => {
   // Inject CSS vars
   useAccentVars(accent, accentHex);
 
+  // Auto-fetch opportunities if not provided manually
+  const registryOpportunities = sectorId ? OPPORTUNITIES_REGISTRY[sectorId] : [];
+  const businessOpportunities = (manualOpportunities && manualOpportunities.length > 0) ? manualOpportunities : registryOpportunities;
+
   const hasLeaders = leaders.length > 0;
   const hasDefinition = !!definition;
-  const hasOpportunities = (businessOpportunities?.length ?? 0) > 0;
+  const hasOpportunities = (businessOpportunities && businessOpportunities.length > 0);
 
   const nav = useMemo(
     () => buildNav(sections, hasLeaders, hasDefinition, hasOpportunities),

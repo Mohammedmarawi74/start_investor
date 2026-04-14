@@ -168,6 +168,7 @@ const config: SectorDashboardProps = {
   ],
 
   tags: ['Crude Oil', 'Natural Gas', 'Coal', 'LNG', 'OPEC', 'Upstream'],
+  sectorId: 'fossil-fuels-dashboard',
 };
 
 const FossilFuelsDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

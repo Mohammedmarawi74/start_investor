@@ -128,6 +128,7 @@ const config: SectorDashboardProps = {
   ],
 
   tags: ['Brands', 'Leaders', 'Apple', 'P&G', 'Creative Agencies', 'Brand Value'],
+  sectorId: 'brands-leaders-dashboard',
 };
 
 const BrandsLeadersDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

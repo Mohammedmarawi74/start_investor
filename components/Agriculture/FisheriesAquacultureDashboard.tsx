@@ -128,6 +128,7 @@ const config: SectorDashboardProps = {
   ],
 
   tags: ['Fisheries', 'Aquaculture', 'China Fish', 'Seafood Trade', 'Sustainability', 'Salmon Market'],
+  sectorId: 'fisheries-aquaculture-dashboard',
 };
 
 const FisheriesAquacultureDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

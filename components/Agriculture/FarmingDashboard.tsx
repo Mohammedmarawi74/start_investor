@@ -129,7 +129,7 @@ const config: SectorDashboardProps = {
   ],
 
   tags: ['Farming', 'Agriculture', 'Smart Farming', 'IoT', 'Livestock', 'Grains'],
-  businessOpportunities: AGRICULTURE_OPPORTUNITIES,
+  sectorId: 'farming-dashboard',
 };
 
 const FarmingDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

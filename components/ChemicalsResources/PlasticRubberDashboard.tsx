@@ -144,6 +144,7 @@ const config: SectorDashboardProps = {
   ],
 
   tags: ['Polymer', 'Packaging', 'Bioplastics', 'Polyethylene', 'Synthetic Rubber', 'Natural Rubber'],
+  sectorId: 'plastic-rubber-dashboard',
 };
 
 const PlasticRubberDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

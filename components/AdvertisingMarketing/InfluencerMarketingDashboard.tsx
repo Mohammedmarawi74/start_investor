@@ -153,6 +153,7 @@ const config: SectorDashboardProps = {
   ],
 
   tags: ['InfluencerEconomy', 'AttentionEconomy', 'CreatorEconomy', 'SocialCommerce', 'DigitalTrust', 'AIInfluencers', 'MarketingFuture'],
+  sectorId: 'influencer-marketing-dashboard',
 };
 
 const InfluencerMarketingDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

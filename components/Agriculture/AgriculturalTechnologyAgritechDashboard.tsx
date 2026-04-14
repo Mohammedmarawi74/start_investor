@@ -114,7 +114,8 @@ const config: SectorDashboardProps = {
     'الذكاء الاصطناعي يعيد تصميم سلاسل التوريد الغذائية العالمية من البداية للنهاية.',
     'الأمن الغذائي العالمي تحول من قضية جغرافية إلى قضية تقنية بالدرجة الأولى.'
   ],
-  tags: ['AgriTech', 'SmartFarming', 'PrecisionAgriculture', 'FoodSecurity', 'AI_Agriculture', 'SustainableProduction']
+  tags: ['AgriTech', 'Agriculture', 'FoodSecurity', 'SmartFarming', 'SatelliteAgri', 'DataAgriculture', 'Sustainability'],
+  sectorId: 'agritech-dashboard',
 };
 
 const AgriculturalTechnologyAgritechDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

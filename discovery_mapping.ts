@@ -54,7 +54,7 @@ export const DISCOVERY_MAPPING: CategoryMapping[] = [
     category: "Consumer Goods & FMCG",
     sectors: [
       { label: "Alcoholic Beverages", id: "alcoholic-beverages-dashboard", filename: "AlcoholicBeveragesDashboard" },
-      { label: "Apparel & Shoes", id: "apparel-shoes-dashboard", filename: "ApparelShoesDashboard" },
+      { label: "Apparel, Shoes & Fashion", id: "apparel-shoes-dashboard", filename: "ApparelShoesDashboard" },
       { label: "Cannabis", id: "cannabis-dashboard", filename: "CannabisDashboard" },
       { label: "Cleaning Products", id: "cleaning-products-dashboard", filename: "CleaningProductsDashboard" },
       { label: "Cosmetics & Personal Care", id: "cosmetics-personal-care-dashboard", filename: "CosmeticsPersonalCareDashboard" },

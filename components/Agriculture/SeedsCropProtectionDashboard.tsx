@@ -97,7 +97,8 @@ const config: SectorDashboardProps = {
     'تغير المناخ يفرض تطوير محاصيل مقاومة للظروف الجوية القاسية (الجفاف والملوحة).',
     'الابتكار الجيني والذكاء الاصطناعي هما الركيزتان الأساسيتان لتطوير البذور الحديثة.'
   ],
-  tags: ['Seeds', 'CropProtection', 'Biotechnology', 'FoodSecurity', 'Genetics', 'SustainableAgriculture']
+  tags: ['Seeds', 'CropProtection', 'Biotechnology', 'FoodSecurity', 'Genetics', 'SustainableAgriculture'],
+  sectorId: 'seeds-crop-protection-dashboard'
 };
 
 const SeedsCropProtectionDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;
