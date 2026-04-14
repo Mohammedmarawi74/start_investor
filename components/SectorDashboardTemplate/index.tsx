@@ -17,6 +17,7 @@ import { buildNav, buildNavMap } from './NavHelpers';
 import { SwotSection } from './SwotSection';
 import { OPPORTUNITIES_REGISTRY } from '../../data/opportunitiesRegistry';
 import { SWOT_REGISTRY } from '../../data/swotRegistry';
+import './mobile-responsive.css';
 
 const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
   title,
@@ -147,10 +148,13 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
   return (
     <div
       dir="rtl"
+      className="sd-mobile-safe"
       style={{
         minHeight: '100vh',
         background: '#f8fafc',
         fontFamily: "'Cairo', 'Tajawal', 'IBM Plex Sans Arabic', system-ui, sans-serif",
+        maxWidth: '100vw',
+        overflowX: 'hidden',
       }}
     >
       <header style={{ background: 'linear-gradient(160deg, #0a0f1e 0%, #0f172a 60%, #131f35 100%)', position: 'relative', overflow: 'hidden' }}>

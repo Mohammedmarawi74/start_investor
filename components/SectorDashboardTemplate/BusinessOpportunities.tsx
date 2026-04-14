@@ -97,6 +97,7 @@ export const OpportunityCard: FC<{ opp: BusinessOpportunity; index: number; onBu
                     e.stopPropagation();
                     onBuildPlan?.(ex);
                   }}
+                  className="sd-touch-btn"
                   style={{
                     width: '100%',
                     display: 'flex',
