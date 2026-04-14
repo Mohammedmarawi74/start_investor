@@ -105,44 +105,6 @@ export const lifeOpportunities: Record<string, BusinessOpportunity[]> = {
       ]
     }
   ],
-  'love-sex-dashboard': [
-    {
-      id: 'lov-relations',
-      title: 'العلاقات العاطفية والزواج',
-      icon: Heart,
-      examples: [
-        'تطبيقات التعارف والزواج الجاد',
-        'خدمات الخطابة والوساطة الرقمية Matchmaking'
-      ]
-    },
-    {
-      id: 'lov-health',
-      title: 'الصحة والعافية البدنية',
-      icon: Activity,
-      examples: [
-        'عيادات وتوعية طبية متخصصة',
-        'استشارات الصحة الجسدية والعاطفية'
-      ]
-    },
-    {
-      id: 'lov-therapy',
-      title: 'العلاج النفسي للعلاقات',
-      icon: Smile,
-      examples: [
-        'جلسات الإرشاد الزوجي والدعم',
-        'استشارات حل الخلافات الأسرية'
-      ]
-    },
-    {
-      id: 'lov-economy',
-      title: 'اقتصاد العلاقات والخدمات',
-      icon: Sparkles,
-      examples: [
-        'تنظيم فعاليات التعارف والمناسبات',
-        'خدمات استشارات تحسين جودة العلاقة'
-      ]
-    }
-  ],
   'personality-behavior-dashboard': [
     {
       id: 'per-psych',

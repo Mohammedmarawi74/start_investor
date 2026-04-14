@@ -63,6 +63,8 @@ export const useAccentVars = (accent: string, accentHex?: string) => {
       .sd-kpi-icon { color: var(--acc) !important; }
       .sd-section-dark-bar { background: var(--acc) !important; box-shadow: 0 0 16px var(--acc-60) !important; }
       .sd-section-dark-bar-glow { background: var(--acc) !important; opacity: 0.4 !important; }
+      
+      /* Web Application Typography Fixes */
       .sd-section-light .sd-section-light-body {
         color: #0f172a;
         font-weight: 600;
@@ -79,6 +81,152 @@ export const useAccentVars = (accent: string, accentHex?: string) => {
         font-weight: 800 !important;
         color: #0f172a !important;
       }
+
+      /* Responsive Layout Utilities */
+      .sd-container {
+        width: 100%;
+        max-width: 1320px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      @media (min-width: 768px) {
+        .sd-container {
+          padding-left: 40px;
+          padding-right: 40px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .sd-container {
+          padding-left: 60px;
+          padding-right: 60px;
+        }
+      }
+
+      .sd-header-section {
+        padding-top: 30px !important;
+        padding-bottom: 40px !important;
+      }
+      @media (min-width: 1024px) {
+        .sd-header-section {
+          padding-top: 60px !important;
+          padding-bottom: 80px !important;
+        }
+      }
+
+      .sd-header-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+      @media (min-width: 1024px) {
+        .sd-header-grid {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 60px;
+        }
+      }
+
+      .sd-kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      @media (min-width: 640px) {
+        .sd-kpi-grid {
+          grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+          gap: 14px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .sd-kpi-grid {
+          flex: 1 1 360px;
+        }
+      }
+
+      .sd-market-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      @media (min-width: 768px) {
+        .sd-market-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .sd-market-grid {
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+      }
+
+      .sd-nav-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+      }
+      .sd-nav-container::-webkit-scrollbar {
+        display: none; /* Safari/Chrome */
+      }
+
+      .sd-nav-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .sd-section-card {
+        padding: 24px 20px !important;
+      }
+      @media (min-width: 768px) {
+        .sd-section-card {
+          padding: 40px 48px !important;
+        }
+      }
+
+      .sd-hero-title {
+        font-size: 28px !important;
+      }
+      @media (min-width: 768px) {
+        .sd-hero-title {
+          font-size: 36px !important;
+        }
+      }
+      @media (min-width: 1024px) {
+        .sd-hero-title {
+          font-size: 48px !important;
+        }
+      }
+
+      .sd-opp-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      @media (min-width: 768px) {
+        .sd-opp-grid {
+          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+          gap: 24px;
+        }
+      }
+
+      .sd-bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      @media (min-width: 1024px) {
+        .sd-bottom-grid.has-split {
+          grid-template-columns: 3fr 2fr;
+        }
+      }
+    
     `;
   }, [hex]);
 

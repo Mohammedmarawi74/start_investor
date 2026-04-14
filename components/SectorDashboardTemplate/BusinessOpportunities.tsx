@@ -152,11 +152,11 @@ export const OpportunitiesSection: FC<{ opportunities: BusinessOpportunity[]; on
     <div
       id="opportunities-section"
       data-section="opportunities-section"
+      className="sd-section-card"
       style={{
         background: '#fff',
         borderRadius: 24,
         border: '1px solid #f1f5f9',
-        padding: '40px 48px',
         direction: 'rtl',
       }}
     >
@@ -164,21 +164,21 @@ export const OpportunitiesSection: FC<{ opportunities: BusinessOpportunity[]; on
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           gap: 16,
           marginBottom: 32,
         }}
       >
         <div
           className="sd-bar"
-          style={{ width: 4, height: 40, borderRadius: 4 }}
+          style={{ width: 4, height: 40, borderRadius: 4, flexShrink: 0 }}
         />
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ textAlign: 'right', flex: 1 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 10 }}>
             <h3
               style={{
                 margin: 0,
-                fontSize: 24,
+                fontSize: 'clamp(20px, 4vw, 24px)',
                 fontWeight: 800,
                 color: '#0f172a',
                 letterSpacing: '-0.01em',
@@ -206,6 +206,7 @@ export const OpportunitiesSection: FC<{ opportunities: BusinessOpportunity[]; on
               fontSize: 14,
               fontWeight: 600,
               color: '#64748b',
+              lineHeight: 1.4
             }}
           >
             أبرز مسارات العمل المتاحة في هذا القطاع وكيفية البدء فيها
@@ -214,13 +215,7 @@ export const OpportunitiesSection: FC<{ opportunities: BusinessOpportunity[]; on
       </div>
 
       {/* Grid */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-          gap: 24,
-        }}
-      >
+      <div className="sd-opp-grid">
         {opportunities.map((opp, idx) => (
           <OpportunityCard key={opp.id} opp={opp} index={idx} onBuildPlan={onBuildPlan} />
         ))}

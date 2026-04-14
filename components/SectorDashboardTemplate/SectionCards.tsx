@@ -24,13 +24,12 @@ const parseContent = (content: string, dark: boolean): React.ReactNode => {
 
 export const LightCard: FC<{ section: SectorSection }> = ({ section }) => (
   <div
-    className="sd-section-light"
+    className="sd-section-light sd-section-card"
     style={{
       position: 'relative',
       background: '#fff',
       borderRadius: 24,
       border: '1px solid #f1f5f9',
-      padding: '40px 48px',
       overflow: 'hidden',
       transition: 'box-shadow 0.3s, border-color 0.3s',
     }}
@@ -62,8 +61,8 @@ export const LightCard: FC<{ section: SectorSection }> = ({ section }) => (
 
 export const DarkCard: FC<{ section: SectorSection }> = ({ section }) => (
   <div
-    className="sd-section-dark"
-    style={{ position: 'relative', background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', borderRadius: 24, border: '1px solid rgba(255,255,255,0.08)', padding: '40px 48px', overflow: 'hidden' }}
+    className="sd-section-dark sd-section-card"
+    style={{ position: 'relative', background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', borderRadius: 24, border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden' }}
   >
     <div className="sd-glow" style={{ position: 'absolute', top: -80, left: -80, width: 280, height: 280, borderRadius: '50%', filter: 'blur(80px)', pointerEvents: 'none' }} />
     <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '28px 28px', pointerEvents: 'none' }} />
@@ -87,7 +86,7 @@ export const DarkCard: FC<{ section: SectorSection }> = ({ section }) => (
 
 export const KpiCard: FC<{ kpi: SectorKPI }> = ({ kpi }) => (
   <div
-    style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 18, padding: '26px 22px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, transition: 'background 0.2s', cursor: 'default', minHeight: 122 }}
+    style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 18, padding: '20px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10, transition: 'background 0.2s', cursor: 'default', minHeight: 110 }}
     onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)'; }}
     onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)'; }}
   >
@@ -106,7 +105,7 @@ export const KpiCard: FC<{ kpi: SectorKPI }> = ({ kpi }) => (
 
 export const MarketCard: FC<{ market: SectorMarket }> = ({ market }) => (
   <div
-    style={{ background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 18, padding: '26px 22px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, transition: 'background 0.2s', cursor: 'default', minHeight: 132 }}
+    style={{ background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 18, padding: '20px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10, transition: 'background 0.2s', cursor: 'default', minHeight: 120 }}
     onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(15,23,42,0.85)'; }}
     onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(15,23,42,0.6)'; }}
   >

@@ -157,12 +157,12 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)', backgroundSize: '32px 32px', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', top: -120, right: -120, width: 500, height: 500, borderRadius: '50%', background: 'var(--acc)', filter: 'blur(160px)', opacity: 0.08, pointerEvents: 'none' }} />
 
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '60px 48px 80px', position: 'relative', zIndex: 10 }}>
-          <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: 40, direction: 'rtl' }}>
-            <div style={{ flex: '1 1 500px', maxWidth: 720, minWidth: 320 }}>
+        <div className="sd-container sd-header-section" style={{ position: 'relative', zIndex: 10 }}>
+          <div className="sd-header-grid" style={{ direction: 'rtl' }}>
+            <div style={{ flex: '1 1 auto', maxWidth: 720 }}>
               <button 
                 onClick={onBack}
-                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 14px', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '100px', color: '#94a3b8', fontSize: '12px', fontWeight: 700, marginBottom: 24, cursor: 'pointer', transition: 'all 0.2s' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '100px', color: '#94a3b8', fontSize: '11px', fontWeight: 700, marginBottom: 20, cursor: 'pointer', transition: 'all 0.2s' }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = '#f8fafc'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = '#94a3b8'; }}
               >
@@ -171,32 +171,32 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
               </button>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
-                <div className="sd-hero-icon-bg" style={{ padding: 12, borderRadius: 20, boxShadow: '0 15px 35px rgba(0,0,0,0.3)', position: 'relative' }}>
-                  <Icon size={30} color="#fff" strokeWidth={1.5} />
-                  <div style={{ position: 'absolute', inset: 0, borderRadius: 20, boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.2)' }} />
+                <div className="sd-hero-icon-bg" style={{ padding: 10, borderRadius: 16, boxShadow: '0 10px 25px rgba(0,0,0,0.3)', position: 'relative' }}>
+                   <Icon size={24} color="#fff" strokeWidth={1.5} />
+                  <div style={{ position: 'absolute', inset: 0, borderRadius: 16, boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.2)' }} />
                 </div>
-                <div style={{ height: 32, width: 1, background: 'rgba(255,255,255,0.1)' }} />
+                <div style={{ height: 28, width: 1, background: 'rgba(255,255,255,0.1)' }} />
               </div>
 
-              <h1 style={{ margin: 0, fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 900, color: '#f8fafc', letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: 14 }}>{title}</h1>
-              <p style={{ margin: 0, fontSize: 16, color: '#94a3b8', fontWeight: 500, lineHeight: 1.6, maxWidth: 600 }}>{subtitle}</p>
+              <h1 className="sd-hero-title" style={{ margin: 0, fontWeight: 900, color: '#f8fafc', letterSpacing: '-0.02em', lineHeight: 1.2, marginBottom: 12 }}>{title}</h1>
+              <p style={{ margin: 0, fontSize: 'clamp(14px, 2vw, 16px)', color: '#94a3b8', fontWeight: 500, lineHeight: 1.6, maxWidth: 600 }}>{subtitle}</p>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 32 }}>
-                <button className="sd-download-btn" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '14px 28px', borderRadius: 14, color: '#fff', fontSize: 14, fontWeight: 800, border: 'none', cursor: 'pointer', transition: 'all 0.3s', boxShadow: '0 8px 25px rgba(0,0,0,0.2)' }}>
-                  <Download size={18} />
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 28 }}>
+                <button className="sd-download-btn" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 24px', borderRadius: 12, color: '#fff', fontSize: 13, fontWeight: 800, border: 'none', cursor: 'pointer', transition: 'all 0.3s', boxShadow: '0 8px 25px rgba(0,0,0,0.2)' }}>
+                  <Download size={16} />
                   <span>{pdfLabel}</span>
                 </button>
               </div>
             </div>
 
-            <div style={{ flex: '1 1 360px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 14 }}>
+            <div className="sd-kpi-grid">
               {kpis.slice(0, 4).map((kpi, i) => (
                 <KpiCard key={i} kpi={kpi} />
               ))}
             </div>
           </div>
 
-          <div style={{ marginTop: 60, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 14 }}>
+          <div className="sd-market-grid" style={{ marginTop: 60 }}>
             {topMarkets.map((market, i) => (
               <MarketCard key={i} market={market} />
             ))}
@@ -204,15 +204,18 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
         </div>
       </header>
 
-      <nav ref={navRef} style={{ position: 'sticky', top: 0, zIndex: 100, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(20px)', borderBottom: '1px solid #e2e8f0', padding: '0 48px' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4, height: 72 }}>
-          {nav.map((item) => (
-            <button key={item} onClick={() => handleNavClick(item)} className={`sd-nav-btn ${activeNav === item ? 'active' : ''}`} style={{ padding: '10px 24px', borderRadius: '100px', border: '1px solid transparent', background: 'transparent', color: activeNav === item ? '#fff' : '#64748b', fontSize: 14, fontWeight: 700, cursor: 'pointer', transition: 'all 0.3s' }}>{item}</button>
-          ))}
+      <nav ref={navRef} style={{ position: 'sticky', top: 0, zIndex: 100, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(20px)', borderBottom: '1px solid #e2e8f0' }}>
+        <div className="sd-container" style={{ height: 72 }}>
+          <div className="sd-nav-container">
+            {nav.map((item) => (
+              <button key={item} onClick={() => handleNavClick(item)} className={`sd-nav-btn ${activeNav === item ? 'active' : ''}`} style={{ padding: '10px 24px', borderRadius: '100px', border: '1px solid transparent', background: 'transparent', color: activeNav === item ? '#fff' : '#64748b', fontSize: 14, fontWeight: 700, cursor: 'pointer', transition: 'all 0.3s' }}>{item}</button>
+            ))}
+          </div>
         </div>
       </nav>
+    
 
-      <main ref={mainRef} style={{ maxWidth: 1280, margin: '0 auto', padding: '40px 48px 80px', display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <main ref={mainRef} className="sd-container" style={{ paddingTop: '40px', paddingBottom: '80px', display: 'flex', flexDirection: 'column', gap: 20 }}>
         {sections.map((section) => (
           <div key={section.id} data-section={section.id}>
             {section.variant === 'dark' ? <DarkCard section={section} /> : <LightCard section={section} />}

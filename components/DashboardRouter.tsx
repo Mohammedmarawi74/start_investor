@@ -46,9 +46,6 @@ import RecycledMaterialsDashboard from './ChemicalsResources/RecycledMaterialsDa
 import BatteryMaterialsDashboard from './ChemicalsResources/BatteryMaterialsDashboard';
 
 import ApparelShoesDashboard from './ConsumerGoodsFMCG/ApparelShoesDashboard';
-import AlcoholicBeveragesDashboard from './ConsumerGoodsFMCG/AlcoholicBeveragesDashboard';
-import CannabisDashboard from './ConsumerGoodsFMCG/CannabisDashboard';
-import TobaccoDashboard from './ConsumerGoodsFMCG/TobaccoDashboard';
 import NonAlcoholicBeveragesDashboard from './ConsumerGoodsFMCG/NonAlcoholicBeveragesDashboard';
 import CleaningProductsDashboard from './ConsumerGoodsFMCG/CleaningProductsDashboard';
 import CosmeticsPersonalCareDashboard from './ConsumerGoodsFMCG/CosmeticsPersonalCareDashboard';
@@ -67,7 +64,7 @@ import PoliticsDashboard from './EconomyPolitics/PoliticsDashboard';
 import PublicPolicyEconomicStrategyDashboard from './EconomyPolitics/PublicPolicyEconomicStrategyDashboard';
 import GeopoliticalRiskTradeAnalysisDashboard from './EconomyPolitics/GeopoliticalRiskTradeAnalysisDashboard';
 
-import ClimateWeatherDashboard from './EnergyEnvironment/ClimateWeatherDashboard';
+import ClimateDashboard from './EnergyEnvironment/ClimateDashboard';
 import EmissionsDashboard from './EnergyEnvironment/EmissionsDashboard';
 import EnergyDashboard from './EnergyEnvironment/EnergyDashboard';
 import GreentechDashboard from './EnergyEnvironment/GreentechDashboard';
@@ -108,7 +105,6 @@ import AiPlatformsDashboard from './Internet/AiPlatformsDashboard';
 
 import CelebritiesDashboard from './Life/CelebritiesDashboard';
 import FamilyFriendsDashboard from './Life/FamilyFriendsDashboard';
-import LoveSexDashboard from './Life/LoveSexDashboard';
 import PersonalityBehaviorDashboard from './Life/PersonalityBehaviorDashboard';
 import HolidaysDashboard from './Life/HolidaysDashboard';
 import MentalHealthWellbeingDashboard from './Life/MentalHealthWellbeingDashboard';
@@ -168,6 +164,7 @@ import DemographicsDashboard from './Society/DemographicsDashboard';
 import EducationScienceDashboard from './Society/EducationScienceDashboard';
 import GeographyNatureDashboard from './Society/GeographyNatureDashboard';
 import HistoricalDataDashboard from './Society/HistoricalDataDashboard';
+import ReligionDashboard from './Society/ReligionDashboard';
 import UrbanDevelopmentPolicyDashboard from './Society/UrbanDevelopmentPolicyDashboard';
 import PopulationAnalyticsDashboard from './Society/PopulationAnalyticsDashboard';
 
@@ -346,12 +343,8 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
       case 'modular-prefab-construction-dashboard': 
         return <ModularPrefabConstructionDashboard sectorId="modular-prefab-construction-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="البناء والإنشاءات" />;
       // FMCG - Consumer Goods & FMCG
-      case 'alcoholic-beverages-dashboard': 
-        return <AlcoholicBeveragesDashboard sectorId="alcoholic-beverages-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="السلع الاستهلاكية (FMCG)" />;
       case 'apparel-shoes-dashboard': 
         return <ApparelShoesDashboard sectorId="apparel-shoes-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="السلع الاستهلاكية (FMCG)" />;
-      case 'cannabis-dashboard': 
-        return <CannabisDashboard sectorId="cannabis-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="السلع الاستهلاكية (FMCG)" />;
       case 'cleaning-products-dashboard': 
         return <CleaningProductsDashboard sectorId="cleaning-products-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="السلع الاستهلاكية (FMCG)" />;
       case 'cosmetics-personal-care-dashboard': 
@@ -368,8 +361,6 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
         return <NonAlcoholicBeveragesDashboard sectorId="non-alcoholic-beverages-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="السلع الاستهلاكية (FMCG)" />;
       case 'pet-supplies-dashboard': 
         return <PetSuppliesDashboard sectorId="pet-supplies-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="السلع الاستهلاكية (FMCG)" />;
-      case 'tobacco-dashboard': 
-        return <TobaccoDashboard sectorId="tobacco-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="السلع الاستهلاكية (FMCG)" />;
       case 'toys-dashboard': 
         return <ToysDashboard sectorId="toys-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="السلع الاستهلاكية (FMCG)" />;
       case 'packaged-foods-dashboard': 
@@ -419,8 +410,6 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
         return <CelebritiesDashboard sectorId="celebrities-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="الحياة والمجتمع" />;
       case 'family-friends-dashboard': 
         return <FamilyFriendsDashboard sectorId="family-friends-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="الحياة والمجتمع" />;
-      case 'love-sex-dashboard': 
-        return <LoveSexDashboard sectorId="love-sex-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="الحياة والمجتمع" />;
       case 'personality-behavior-dashboard': 
         return <PersonalityBehaviorDashboard sectorId="personality-behavior-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="الحياة والمجتمع" />;
       case 'holidays-dashboard': 
@@ -656,7 +645,7 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
         return <PoliticsDashboard sectorId="politics-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="الاقتصاد والسياسة" />;
       // Energy & Environment
       case 'climate-dashboard': 
-        return <ClimateWeatherDashboard sectorId="climate-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="الطاقة والبيئة" />;
+        return <ClimateDashboard sectorId="climate-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="الطاقة والبيئة" />;
       case 'emissions-dashboard': 
         return <EmissionsDashboard sectorId="emissions-dashboard" onBack={() => setActiveTab('market-discovery')} parentCategory="الطاقة والبيئة" />;
       case 'energy-dashboard': 

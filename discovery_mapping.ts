@@ -53,9 +53,7 @@ export const DISCOVERY_MAPPING: CategoryMapping[] = [
   {
     category: "Consumer Goods & FMCG",
     sectors: [
-      { label: "Alcoholic Beverages", id: "alcoholic-beverages-dashboard", filename: "AlcoholicBeveragesDashboard" },
       { label: "Apparel, Shoes & Fashion", id: "apparel-shoes-dashboard", filename: "ApparelShoesDashboard" },
-      { label: "Cannabis", id: "cannabis-dashboard", filename: "CannabisDashboard" },
       { label: "Cleaning Products", id: "cleaning-products-dashboard", filename: "CleaningProductsDashboard" },
       { label: "Cosmetics & Personal Care", id: "cosmetics-personal-care-dashboard", filename: "CosmeticsPersonalCareDashboard" },
       { label: "Food & Nutrition", id: "food-nutrition-dashboard", filename: "FoodNutritionDashboard" },
@@ -64,7 +62,6 @@ export const DISCOVERY_MAPPING: CategoryMapping[] = [
       { label: "Home Improvement", id: "home-improvement-dashboard", filename: "HomeImprovementDashboard" },
       { label: "Non-alcoholic Beverages", id: "non-alcoholic-beverages-dashboard", filename: "NonAlcoholicBeveragesDashboard" },
       { label: "Pets & Animal Supplies", id: "pet-supplies-dashboard", filename: "PetSuppliesDashboard" },
-      { label: "Tobacco", id: "tobacco-dashboard", filename: "TobaccoDashboard" },
       { label: "Toys", id: "toys-dashboard", filename: "ToysDashboard" },
       { label: "Packaged Foods", id: "packaged-foods-dashboard", filename: "PackagedFoodsDashboard" }
     ]
@@ -141,7 +138,6 @@ export const DISCOVERY_MAPPING: CategoryMapping[] = [
     sectors: [
       { label: "Celebrities", id: "celebrities-dashboard", filename: "CelebritiesDashboard" },
       { label: "Family & Friends", id: "family-friends-dashboard", filename: "FamilyFriendsDashboard" },
-      { label: "Love & Sex", id: "love-sex-dashboard", filename: "LoveSexDashboard" },
       { label: "Personality & Behavior", id: "personality-behavior-dashboard", filename: "PersonalityBehaviorDashboard" },
       { label: "Public and religious holidays", id: "holidays-dashboard", filename: "HolidaysDashboard" },
       { label: "Mental Health & Wellbeing Economy", id: "mental-health-wellbeing-economy-dashboard", filename: "MentalHealthWellbeingDashboard" },

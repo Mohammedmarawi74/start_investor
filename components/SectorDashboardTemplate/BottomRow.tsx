@@ -11,9 +11,9 @@ export const BottomRow: FC<{
   if (!hasDefinition && !hasInsights && tags.length === 0) return null;
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: hasDefinition && hasInsights ? '3fr 2fr' : '1fr', gap: 20, direction: 'rtl' }}>
+    <div className={`sd-bottom-grid ${hasDefinition && hasInsights ? 'has-split' : ''}`} style={{ direction: 'rtl' }}>
       {hasDefinition && (
-        <div id="definition-section" data-section="definition" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', borderRadius: 24, border: '1px solid rgba(255,255,255,0.07)', padding: '40px 48px', position: 'relative', overflow: 'hidden' }}>
+        <div id="definition-section" data-section="definition" className="sd-section-card" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', borderRadius: 24, border: '1px solid rgba(255,255,255,0.07)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', top: -60, left: -60, width: 200, height: 200, borderRadius: '50%', background: 'rgba(100,116,139,0.15)', filter: 'blur(60px)', pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', bottom: -60, right: -60, width: 180, height: 180, borderRadius: '50%', background: 'var(--acc-10)', filter: 'blur(60px)', pointerEvents: 'none' }} />
           <div style={{ position: 'relative', zIndex: 1 }}>
@@ -42,7 +42,7 @@ export const BottomRow: FC<{
         </div>
       )}
       {hasInsights && (
-        <div id="insights-section" data-section="insights-bottom" style={{ background: '#fff', borderRadius: 24, border: '1px solid #f1f5f9', padding: '40px 32px', display: 'flex', flexDirection: 'column' }}>
+        <div id="insights-section" data-section="insights-bottom" className="sd-section-card" style={{ background: '#fff', borderRadius: 24, border: '1px solid #f1f5f9', display: 'flex', flexDirection: 'column' }}>
           <h3 style={{ margin: '0 0 28px', fontSize: 22, fontWeight: 800, color: '#0f172a', direction: 'rtl', letterSpacing: '-0.02em' }}>أبرز النقاط</h3>
           <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 16, flex: 1 }}>
             {industryInsights.map((insight, idx) => (
@@ -55,5 +55,6 @@ export const BottomRow: FC<{
         </div>
       )}
     </div>
+
   );
 };

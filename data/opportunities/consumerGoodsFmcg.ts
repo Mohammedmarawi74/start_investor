@@ -51,52 +51,6 @@ import {
 } from 'lucide-react';
 
 export const consumerGoodsFmcgOpportunities: Record<string, BusinessOpportunity[]> = {
-  'alcoholic-beverages-dashboard': [
-    {
-      id: 'alc-production',
-      title: 'شركات الإنتاج الكحولي',
-      icon: Beer,
-      examples: [
-        'مصانع الجعة والتقطير',
-        'مصانع النبيذ والمشروبات الروحية'
-      ]
-    },
-    {
-      id: 'alc-distribution',
-      title: 'شركات التوزيع والمبيعات',
-      icon: Truck,
-      examples: [
-        'توزيع الجملة للمطاعم والفنادق',
-        'سلاسل البيع بالتجزئة والتصدير'
-      ]
-    },
-    {
-      id: 'alc-brands',
-      title: 'شركات العلامات التجارية',
-      icon: Tag,
-      examples: [
-        'بناء براند مشروبات فاخرة',
-        'تصميم الهوية والتسويق'
-      ]
-    },
-    {
-      id: 'alc-packaging',
-      title: 'شركات التعبئة والتغليف',
-      icon: Package,
-      examples: [
-        'زجاجات وعلب فاخرة',
-        'تصميم عبوات مبتكرة'
-      ]
-    },
-    {
-      id: 'alc-hospitality',
-      title: 'شركات الترفيه والضيافة',
-      icon: Utensils,
-      examples: [
-        'الحانات والفنادق والمطاعم'
-      ]
-    }
-  ],
   'apparel-shoes-dashboard': [
     {
       id: 'app-clothing',
@@ -141,44 +95,6 @@ export const consumerGoodsFmcgOpportunities: Record<string, BusinessOpportunity[
       examples: [
         'أقمشة وقطن ومواد صناعية',
         'صباغة وتطريز'
-      ]
-    }
-  ],
-  'cannabis-dashboard': [
-    {
-      id: 'can-farming',
-      title: 'شركات الزراعة والإنتاج',
-      icon: Sprout,
-      examples: [
-        'زراعة قنب طبي وصناعي',
-        'استزراع في بيئات مغلقة'
-      ]
-    },
-    {
-      id: 'can-manufacturing',
-      title: 'شركات التصنيع',
-      icon: FlaskConical,
-      examples: [
-        'زيوت CBD ومستخلصات',
-        'كريمات طبية ومنتجات صيدلانية'
-      ]
-    },
-    {
-      id: 'can-research',
-      title: 'شركات البحث الطبي',
-      icon: Search,
-      examples: [
-        'دراسات علاج الألم',
-        'تطوير أدوية مشتقة'
-      ]
-    },
-    {
-      id: 'can-distribution',
-      title: 'شركات التوزيع المرخص',
-      icon: Stethoscope,
-      examples: [
-        'توزيع طبي وصيدلاني مرخص',
-        'منصات إلكترونية طبية'
       ]
     }
   ],
@@ -432,32 +348,6 @@ export const consumerGoodsFmcgOpportunities: Record<string, BusinessOpportunity[
       icon: Dog,
       examples: [
         'ألعاب وأقفاص وأدوات عناية'
-      ]
-    }
-  ],
-  'tobacco-dashboard': [
-    {
-      id: 'tob-production',
-      title: 'شركات إنتاج التبغ',
-      icon: Wind,
-      examples: [
-        'سجائر وتبغ خام'
-      ]
-    },
-    {
-      id: 'tob-distribution',
-      title: 'شركات التوزيع',
-      icon: Truck,
-      examples: [
-        'توزيع محلي وبيع تجزئة'
-      ]
-    },
-    {
-      id: 'tob-alternatives',
-      title: 'شركات البدائل الحديثة',
-      icon: BatteryMedium, // Using as placeholder for modern vape/alt
-      examples: [
-        'بدائل النيكوتين ومنتجات أقل ضرراً'
       ]
     }
   ],

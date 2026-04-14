@@ -8,7 +8,8 @@ export const LeadersSection: FC<{
   <div
     id="leaders-section"
     data-section="leaders"
-    style={{ background: '#fff', borderRadius: 24, border: '1px solid #f1f5f9', padding: '40px 48px' }}
+    className="sd-section-card"
+    style={{ background: '#fff', borderRadius: 24, border: '1px solid #f1f5f9' }}
   >
     <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 32, direction: 'rtl' }}>
       <div className="sd-bar" style={{ width: 4, height: 52, borderRadius: 4, flexShrink: 0 }} />
