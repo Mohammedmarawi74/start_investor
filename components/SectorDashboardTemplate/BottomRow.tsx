@@ -17,9 +17,9 @@ export const BottomRow: FC<{
           <div style={{ position: 'absolute', top: -60, left: -60, width: 200, height: 200, borderRadius: '50%', background: 'rgba(100,116,139,0.15)', filter: 'blur(60px)', pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', bottom: -60, right: -60, width: 180, height: 180, borderRadius: '50%', background: 'var(--acc-10)', filter: 'blur(60px)', pointerEvents: 'none' }} />
           <div style={{ position: 'relative', zIndex: 1 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20, direction: 'rtl' }}>
-              <div className="sd-bar" style={{ width: 3, height: 44, borderRadius: 4, flexShrink: 0 }} />
-              <h3 style={{ margin: 0, fontSize: 22, fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em' }}>تعريف {title.replace(/^(قطاع|صناعة)\s*/, '')}</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16, direction: 'rtl' }}>
+              <div className="sd-bar" style={{ width: 3, height: 36, borderRadius: 4, flexShrink: 0 }} />
+              <h3 className="sd-section-title" style={{ margin: 0, fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em' }}>تعريف {title.replace(/^(قطاع|صناعة)\s*/, '')}</h3>
             </div>
             <p style={{ margin: 0, fontSize: 16, color: '#cbd5e1', fontWeight: 500, lineHeight: 2, direction: 'rtl' }}>{definition}</p>
             {tags.length > 0 && (
@@ -43,7 +43,7 @@ export const BottomRow: FC<{
       )}
       {hasInsights && (
         <div id="insights-section" data-section="insights-bottom" className="sd-section-card" style={{ background: '#fff', borderRadius: 24, border: '1px solid #f1f5f9', display: 'flex', flexDirection: 'column' }}>
-          <h3 style={{ margin: '0 0 28px', fontSize: 22, fontWeight: 800, color: '#0f172a', direction: 'rtl', letterSpacing: '-0.02em' }}>أبرز النقاط</h3>
+          <h3 className="sd-section-title" style={{ margin: '0 0 20px', fontWeight: 800, color: '#0f172a', direction: 'rtl', letterSpacing: '-0.02em' }}>أبرز النقاط</h3>
           <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 16, flex: 1 }}>
             {industryInsights.map((insight, idx) => (
               <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 12, direction: 'rtl' }}>

@@ -43,14 +43,14 @@ export const LightCard: FC<{ section: SectorSection }> = ({ section }) => (
     }}
   >
     <div className="sd-hover-glow" style={{ position: 'absolute', top: -40, left: -40, width: 160, height: 160, borderRadius: '50%', opacity: 0, transition: 'opacity 0.5s', pointerEvents: 'none' }} />
-    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16, marginBottom: 28, direction: 'rtl' }}>
+    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 20, direction: 'rtl' }}>
       <div style={{ position: 'relative', flexShrink: 0, width: 4 }}>
-        <div className="sd-bar" style={{ width: 4, height: 52, borderRadius: 4 }} />
+        <div className="sd-bar" style={{ width: 4, height: 44, borderRadius: 4 }} />
         <div className="sd-bar-glow" style={{ position: 'absolute', inset: 0, borderRadius: 4, filter: 'blur(4px)' }} />
       </div>
       <div style={{ flex: 1 }}>
-        <h2 style={{ margin: 0, fontSize: 26, fontWeight: 800, color: '#0f172a', lineHeight: 1.2, letterSpacing: '-0.02em' }}>{section.title}</h2>
-        {section.subtitle && <p style={{ margin: '6px 0 0', fontSize: 12, fontWeight: 800, color: '#334155', textTransform: 'uppercase', letterSpacing: '0.12em' }}>{section.subtitle}</p>}
+        <h2 className="sd-section-title" style={{ margin: 0, fontWeight: 800, color: '#0f172a', lineHeight: 1.2, letterSpacing: '-0.02em' }}>{section.title}</h2>
+        {section.subtitle && <p style={{ margin: '4px 0 0', fontSize: 10, fontWeight: 800, color: '#334155', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{section.subtitle}</p>}
       </div>
     </div>
     <div className="sd-section-light-body" style={{ direction: 'rtl' }}>
@@ -67,14 +67,14 @@ export const DarkCard: FC<{ section: SectorSection }> = ({ section }) => (
     <div className="sd-glow" style={{ position: 'absolute', top: -80, left: -80, width: 280, height: 280, borderRadius: '50%', filter: 'blur(80px)', pointerEvents: 'none' }} />
     <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '28px 28px', pointerEvents: 'none' }} />
     <div style={{ position: 'relative', zIndex: 1 }}>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16, marginBottom: 28, direction: 'rtl' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 20, direction: 'rtl' }}>
         <div style={{ position: 'relative', flexShrink: 0 }}>
-          <div className="sd-section-dark-bar" style={{ width: 4, height: 52, borderRadius: 4 }} />
+          <div className="sd-section-dark-bar" style={{ width: 4, height: 44, borderRadius: 4 }} />
           <div className="sd-section-dark-bar-glow" style={{ position: 'absolute', inset: 0, borderRadius: 4, filter: 'blur(6px)' }} />
         </div>
         <div style={{ flex: 1 }}>
-          <h2 style={{ margin: 0, fontSize: 26, fontWeight: 800, color: '#f8fafc', lineHeight: 1.2, letterSpacing: '-0.02em' }}>{section.title}</h2>
-          {section.subtitle && <p style={{ margin: '6px 0 0', fontSize: 12, fontWeight: 700, color: 'var(--acc-60)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>{section.subtitle}</p>}
+          <h2 className="sd-section-title" style={{ margin: 0, fontWeight: 800, color: '#f8fafc', lineHeight: 1.2, letterSpacing: '-0.02em' }}>{section.title}</h2>
+          {section.subtitle && <p style={{ margin: '4px 0 0', fontSize: 10, fontWeight: 700, color: 'var(--acc-60)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{section.subtitle}</p>}
         </div>
       </div>
       <div style={{ direction: 'rtl' }}>
@@ -105,21 +105,24 @@ export const KpiCard: FC<{ kpi: SectorKPI }> = ({ kpi }) => (
 
 export const MarketCard: FC<{ market: SectorMarket }> = ({ market }) => (
   <div
-    style={{ background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 18, padding: '20px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10, transition: 'background 0.2s', cursor: 'default', minHeight: 120 }}
+    className="sd-market-card"
+    style={{ background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 18, display: 'flex', transition: 'background 0.2s', cursor: 'default' }}
     onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(15,23,42,0.85)'; }}
     onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(15,23,42,0.6)'; }}
   >
     {market.icon && (
-      <div className="sd-market-icon-bg" style={{ borderRadius: 12, padding: 10, display: 'flex' }}>
+      <div className="sd-market-icon-bg" style={{ borderRadius: 12, padding: 10, display: 'flex', flexShrink: 0 }}>
         <market.icon className="sd-market-icon" size={22} />
       </div>
     )}
-    <p style={{ margin: 0, fontSize: 10, fontWeight: 700, color: 'var(--acc-60)', textTransform: 'uppercase', letterSpacing: '0.12em', textAlign: 'center', lineHeight: 1.35 }}>{market.label}</p>
-    <div style={{ textAlign: 'center' }}>
-      <p style={{ margin: 0, fontSize: 18, fontWeight: 900, color: '#f8fafc', lineHeight: 1.2 }}>{market.country}</p>
-      {market.note && (
-        <p style={{ margin: '6px 0 0', fontSize: 11, color: '#64748b', fontWeight: 500, lineHeight: 1.4, textAlign: 'center', maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{market.note}</p>
-      )}
+    <div className="sd-market-card-content" style={{ flex: 1, minWidth: 0 }}>
+      <p style={{ margin: 0, fontSize: 10, fontWeight: 700, color: 'var(--acc-60)', textTransform: 'uppercase', letterSpacing: '0.12em', lineHeight: 1.35 }}>{market.label}</p>
+      <div style={{ marginTop: 2 }}>
+        <p style={{ margin: 0, fontSize: 18, fontWeight: 900, color: '#f8fafc', lineHeight: 1.2 }}>{market.country}</p>
+        {market.note && (
+          <p style={{ margin: '4px 0 0', fontSize: 11, color: '#64748b', fontWeight: 500, lineHeight: 1.4, maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{market.note}</p>
+        )}
+      </div>
     </div>
   </div>
 );

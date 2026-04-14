@@ -18,7 +18,7 @@ export const OpportunityCard: FC<{ opp: BusinessOpportunity; index: number; onBu
         background: '#fff',
         border: '1px solid #f1f5f9',
         borderRadius: 24,
-        padding: 24,
+        padding: 20,
         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         position: 'relative',
         overflow: 'hidden',
@@ -165,8 +165,8 @@ export const OpportunitiesSection: FC<{ opportunities: BusinessOpportunity[]; on
         style={{
           display: 'flex',
           alignItems: 'flex-start',
-          gap: 16,
-          marginBottom: 32,
+          gap: 12,
+          marginBottom: 20,
         }}
       >
         <div
@@ -176,9 +176,9 @@ export const OpportunitiesSection: FC<{ opportunities: BusinessOpportunity[]; on
         <div style={{ textAlign: 'right', flex: 1 }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 10 }}>
             <h3
+              className="sd-section-title"
               style={{
                 margin: 0,
-                fontSize: 'clamp(20px, 4vw, 24px)',
                 fontWeight: 800,
                 color: '#0f172a',
                 letterSpacing: '-0.01em',

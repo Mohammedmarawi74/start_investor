@@ -61,12 +61,12 @@ function SwotCard({ title, items, icon: Icon, color }: SwotCardProps) {
   const s = colorStyles[color];
 
   return (
-    <div className={`group/swot relative h-full ${s.bg} border ${s.border} rounded-[2rem] p-8 transition-all duration-300 ${s.hover}`}>
-      <div className="flex items-center gap-3 mb-6">
-        <div className={`w-12 h-12 ${s.iconBg} text-white rounded-2xl flex items-center justify-center shadow-lg ${s.iconShadow} transition-transform duration-500 group-hover/swot:rotate-6`}>
-          <Icon size={24} />
+    <div className={`group/swot relative h-full ${s.bg} border ${s.border} rounded-[2rem] p-5 md:p-8 transition-all duration-300 ${s.hover}`}>
+      <div className="flex items-center gap-3 mb-5">
+        <div className={`w-10 h-10 md:w-12 md:h-12 ${s.iconBg} text-white rounded-xl md:rounded-2xl flex items-center justify-center shadow-lg ${s.iconShadow} transition-transform duration-500 group-hover/swot:rotate-6`}>
+          <Icon size={20} className="md:size-6" />
         </div>
-        <h3 className={`text-xl font-black ${s.text}`}>{title}</h3>
+        <h3 className={`text-lg md:text-xl font-black ${s.text}`}>{title}</h3>
       </div>
       <ul className="space-y-4">
         {items.map((item, i) => (
@@ -112,14 +112,14 @@ export function SwotSection({ swot, title }: SwotSectionProps) {
     >
       <div className="sd-hover-glow" style={{ position: 'absolute', top: -40, left: -40, width: 160, height: 160, borderRadius: '50%', opacity: 0, transition: 'opacity 0.5s', pointerEvents: 'none' }} />
       
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16, marginBottom: 28, direction: 'rtl' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 20, direction: 'rtl' }}>
         <div style={{ position: 'relative', flexShrink: 0, width: 4 }}>
-          <div className="sd-bar" style={{ width: 4, height: 52, borderRadius: 4 }} />
+          <div className="sd-bar" style={{ width: 4, height: 44, borderRadius: 4 }} />
           <div className="sd-bar-glow" style={{ position: 'absolute', inset: 0, borderRadius: 4, filter: 'blur(4px)' }} />
         </div>
         <div style={{ flex: 1 }}>
-          <h2 style={{ margin: 0, fontSize: 26, fontWeight: 800, color: '#0f172a', lineHeight: 1.2, letterSpacing: '-0.02em' }}>تحليل SWOT الاستراتيجي</h2>
-          <p style={{ margin: '6px 0 0', fontSize: 12, fontWeight: 800, color: '#334155', textTransform: 'uppercase', letterSpacing: '0.12em' }}>{title}</p>
+          <h2 className="sd-section-title" style={{ margin: 0, fontWeight: 800, color: '#0f172a', lineHeight: 1.2, letterSpacing: '-0.02em' }}>تحليل SWOT الاستراتيجي</h2>
+          <p style={{ margin: '4px 0 0', fontSize: 10, fontWeight: 800, color: '#334155', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{title}</p>
         </div>
       </div>
 

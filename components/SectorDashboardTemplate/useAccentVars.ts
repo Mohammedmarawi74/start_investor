@@ -88,8 +88,8 @@ export const useAccentVars = (accent: string, accentHex?: string) => {
         max-width: 1320px;
         margin-left: auto;
         margin-right: auto;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 16px;
+        padding-right: 16px;
       }
       @media (min-width: 768px) {
         .sd-container {
@@ -105,8 +105,8 @@ export const useAccentVars = (accent: string, accentHex?: string) => {
       }
 
       .sd-header-section {
-        padding-top: 30px !important;
-        padding-bottom: 40px !important;
+        padding-top: 24px !important;
+        padding-bottom: 32px !important;
       }
       @media (min-width: 1024px) {
         .sd-header-section {
@@ -118,7 +118,7 @@ export const useAccentVars = (accent: string, accentHex?: string) => {
       .sd-header-grid {
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: 24px;
       }
       @media (min-width: 1024px) {
         .sd-header-grid {
@@ -132,7 +132,12 @@ export const useAccentVars = (accent: string, accentHex?: string) => {
       .sd-kpi-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        gap: 8px;
+      }
+      @media (min-width: 480px) {
+        .sd-kpi-grid {
+          gap: 12px;
+        }
       }
       @media (min-width: 640px) {
         .sd-kpi-grid {
@@ -148,8 +153,13 @@ export const useAccentVars = (accent: string, accentHex?: string) => {
 
       .sd-market-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 12px;
+      }
+      @media (min-width: 480px) {
+        .sd-market-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
       @media (min-width: 768px) {
         .sd-market-grid {
@@ -163,26 +173,60 @@ export const useAccentVars = (accent: string, accentHex?: string) => {
         }
       }
 
+      .sd-market-card {
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        gap: 16px !important;
+        min-height: auto !important;
+        padding: 16px !important;
+      }
+      .sd-market-card-content {
+        text-align: right !important;
+      }
+      @media (min-width: 480px) {
+        .sd-market-card {
+          flex-direction: column !important;
+          justify-content: center !important;
+          align-items: center !important;
+          gap: 10px !important;
+          min-height: 120px !important;
+          padding: 20px 16px !important;
+        }
+        .sd-market-card-content {
+          text-align: center !important;
+        }
+      }
+
       .sd-nav-container {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 4px;
         height: 100%;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Firefox */
+        scrollbar-width: none;
+        padding: 0 4px;
       }
       .sd-nav-container::-webkit-scrollbar {
-        display: none; /* Safari/Chrome */
+        display: none;
       }
 
       .sd-nav-btn {
         white-space: nowrap;
         flex-shrink: 0;
+        padding: 8px 16px !important;
+        font-size: 13px !important;
+      }
+      @media (min-width: 768px) {
+        .sd-nav-btn {
+          padding: 10px 24px !important;
+          font-size: 14px !important;
+        }
       }
 
       .sd-section-card {
-        padding: 24px 20px !important;
+        padding: 20px 16px !important;
       }
       @media (min-width: 768px) {
         .sd-section-card {
@@ -190,8 +234,23 @@ export const useAccentVars = (accent: string, accentHex?: string) => {
         }
       }
 
+      .sd-section-title {
+        font-size: 20px !important;
+      }
+      @media (min-width: 768px) {
+        .sd-section-title {
+          font-size: 26px !important;
+        }
+      }
+
       .sd-hero-title {
-        font-size: 28px !important;
+        font-size: 24px !important;
+        line-height: 1.2 !important;
+      }
+      @media (min-width: 480px) {
+        .sd-hero-title {
+          font-size: 28px !important;
+        }
       }
       @media (min-width: 768px) {
         .sd-hero-title {
@@ -201,7 +260,97 @@ export const useAccentVars = (accent: string, accentHex?: string) => {
       @media (min-width: 1024px) {
         .sd-hero-title {
           font-size: 48px !important;
+          line-height: 1.1 !important;
         }
+      }
+
+      .sd-hero-desc {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: center !important;
+      }
+      @media (min-width: 1024px) {
+        .sd-hero-desc {
+          font-size: 16px !important;
+          max-width: 600px !important;
+          text-align: right !important;
+        }
+      }
+
+      .sd-back-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 44px !important;
+        margin-bottom: 24px !important;
+      }
+      @media (min-width: 1024px) {
+        .sd-back-btn {
+          width: auto !important;
+          justify-content: flex-start !important;
+          min-height: auto !important;
+          margin-bottom: 20px !important;
+        }
+      }
+
+      .sd-hero-header-stack {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 0 !important;
+      }
+      @media (min-width: 1024px) {
+        .sd-hero-header-stack {
+          align-items: flex-start !important;
+          text-align: right !important;
+        }
+      }
+
+      .sd-download-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 48px !important;
+        padding: 12px 24px !important;
+      }
+      @media (min-width: 1024px) {
+        .sd-download-btn {
+          width: auto !important;
+          min-height: auto !important;
+          padding: 14px 28px !important;
+          font-size: 14px !important;
+        }
+      }
+
+      .sd-hero-icon-wrapper {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        margin-bottom: 20px !important;
+        justify-content: center !important;
+      }
+      @media (min-width: 1024px) {
+        .sd-hero-icon-wrapper {
+          justify-content: flex-start !important;
+          gap: 16px !important;
+        }
+      }
+
+      /* Global Mobile Safety & UX */
+      .sd-mobile-safe {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+        word-break: break-word !important;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .sd-touch-btn {
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
       }
 
       .sd-opp-grid {
@@ -219,9 +368,12 @@ export const useAccentVars = (accent: string, accentHex?: string) => {
       .sd-bottom-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 16px;
       }
       @media (min-width: 1024px) {
+        .sd-bottom-grid {
+          gap: 20px;
+        }
         .sd-bottom-grid.has-split {
           grid-template-columns: 3fr 2fr;
         }

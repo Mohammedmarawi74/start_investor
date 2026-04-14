@@ -159,10 +159,11 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
 
         <div className="sd-container sd-header-section" style={{ position: 'relative', zIndex: 10 }}>
           <div className="sd-header-grid" style={{ direction: 'rtl' }}>
-            <div style={{ flex: '1 1 auto', maxWidth: 720 }}>
+            <div className="sd-hero-header-stack" style={{ flex: '1 1 auto' }}>
               <button 
                 onClick={onBack}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '100px', color: '#94a3b8', fontSize: '11px', fontWeight: 700, marginBottom: 20, cursor: 'pointer', transition: 'all 0.2s' }}
+                className="sd-back-btn"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '100px', color: '#94a3b8', fontSize: '11px', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s' }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = '#f8fafc'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = '#94a3b8'; }}
               >
@@ -170,7 +171,7 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
                 <ChevronDown size={14} style={{ transform: 'rotate(-90deg)' }} />
               </button>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+              <div className="sd-hero-icon-wrapper">
                 <div className="sd-hero-icon-bg" style={{ padding: 10, borderRadius: 16, boxShadow: '0 10px 25px rgba(0,0,0,0.3)', position: 'relative' }}>
                    <Icon size={24} color="#fff" strokeWidth={1.5} />
                   <div style={{ position: 'absolute', inset: 0, borderRadius: 16, boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.2)' }} />
@@ -178,11 +179,11 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
                 <div style={{ height: 28, width: 1, background: 'rgba(255,255,255,0.1)' }} />
               </div>
 
-              <h1 className="sd-hero-title" style={{ margin: 0, fontWeight: 900, color: '#f8fafc', letterSpacing: '-0.02em', lineHeight: 1.2, marginBottom: 12 }}>{title}</h1>
-              <p style={{ margin: 0, fontSize: 'clamp(14px, 2vw, 16px)', color: '#94a3b8', fontWeight: 500, lineHeight: 1.6, maxWidth: 600 }}>{subtitle}</p>
+              <h1 className="sd-hero-title" style={{ margin: '0 0 12px', fontWeight: 900, color: '#f8fafc', letterSpacing: '-0.02em' }}>{title}</h1>
+              <p className="sd-hero-desc" style={{ margin: 0, color: '#94a3b8', fontWeight: 500 }}>{subtitle}</p>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 28 }}>
-                <button className="sd-download-btn" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 24px', borderRadius: 12, color: '#fff', fontSize: 13, fontWeight: 800, border: 'none', cursor: 'pointer', transition: 'all 0.3s', boxShadow: '0 8px 25px rgba(0,0,0,0.2)' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 28, width: '100%', justifyContent: 'center' }} className="sd-hero-btn-group">
+                <button className="sd-download-btn" style={{ display: 'flex', alignItems: 'center', gap: 10, borderRadius: 12, color: '#fff', fontWeight: 800, border: 'none', cursor: 'pointer', transition: 'all 0.3s', boxShadow: '0 8px 25px rgba(0,0,0,0.2)' }}>
                   <Download size={16} />
                   <span>{pdfLabel}</span>
                 </button>
