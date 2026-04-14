@@ -1,6 +1,7 @@
 import React from 'react';
 import SectorDashboardTemplate, { SectorDashboardProps } from '../SectorDashboardTemplate';
 import { Sprout, Globe, BarChart3, TrendingUp, ShieldCheck, Zap, Leaf, Truck } from 'lucide-react';
+import { AGRICULTURE_OPPORTUNITIES } from '../../data/agricultureOpportunities';
 
 const config: SectorDashboardProps = {
   title: 'قطاع الزراعة',
@@ -128,6 +129,7 @@ const config: SectorDashboardProps = {
   ],
 
   tags: ['Farming', 'Agriculture', 'Smart Farming', 'IoT', 'Livestock', 'Grains'],
+  businessOpportunities: AGRICULTURE_OPPORTUNITIES,
 };
 
 const FarmingDashboard: React.FC<any> = (props) => <SectorDashboardTemplate {...config} {...props} />;

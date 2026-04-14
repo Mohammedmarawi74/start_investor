@@ -50,10 +50,11 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
     iconName: 'Sprout',
     gatekeepers: ['Cargill', 'Bayer', 'Nutrien', 'John Deere', 'Syngenta'],
     sectors: [
-      { id: 'farming-dashboard', label: 'الإنتاج الزراعي والمحاصيل', exists: true },
+      { id: 'farming-dashboard', label: 'الإنتاج الزراعي والمحاصيل', exists: true, isNew: true },
       { id: 'fisheries-aquaculture-dashboard', label: 'الثروة السمكية والاستزراع', exists: true },
       { id: 'forestry-dashboard', label: 'إدارة الغابات والأخشاب', exists: true },
       { id: 'agritech', label: 'تكنولوجيا الزراعة الذكية', exists: true, isNew: true },
+      { id: 'seeds-crop-protection-dashboard', label: 'البذور وحماية المحاصيل', exists: true, isNew: true },
     ]
   },
   {
@@ -66,6 +67,7 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'mining-dashboard', label: 'التعدين والمعادن الثمينة', exists: true },
       { id: 'petroleum-refinery-dashboard', label: 'تكرير البترول والبتروكيماويات', exists: true },
       { id: 'plastic-rubber-dashboard', label: 'البلاستيك والمطاط الصناعي', exists: true },
+      { id: 'pulp-paper-dashboard', label: 'الورق ومنتجاته', exists: true, isNew: true },
     ]
   },
   {
@@ -76,6 +78,7 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'building-construction-dashboard', label: 'تطوير وبناء العقارات', exists: true },
       { id: 'heavy-construction-dashboard', label: 'البناء الثقيل والبنية التحتية', exists: true },
       { id: 'smart-construction-bim-dashboard', label: 'البنية التحتية الذكية وBIM', exists: true, isNew: true },
+      { id: 'modular-prefab-construction-dashboard', label: 'البناء المعياري والجاهز', exists: true, isNew: true },
     ]
   },
   {
@@ -88,6 +91,15 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'food-nutrition-dashboard', label: 'الغذاء والتغذية العالمية', exists: true },
       { id: 'furniture-household-dashboard', label: 'الأثاث والسلوك الاستهلاكي', exists: true },
       { id: 'non-alcoholic-beverages-dashboard', label: 'المشروبات غير الكحولية', exists: true },
+      { id: 'alcoholic-beverages-dashboard', label: 'المشروبات الكحولية', exists: true, isNew: true },
+      { id: 'cannabis-dashboard', label: 'القنب القانوني', exists: true, isNew: true },
+      { id: 'cleaning-products-dashboard', label: 'منتجات التنظيف', exists: true, isNew: true },
+      { id: 'garden-patio-dashboard', label: 'الحديقة والأثاث الخارجي', exists: true, isNew: true },
+      { id: 'home-improvement-dashboard', label: 'تحسين المنزل', exists: true, isNew: true },
+      { id: 'pet-supplies-dashboard', label: 'مستلزمات الحيوانات الأليفة', exists: true, isNew: true },
+      { id: 'tobacco-dashboard', label: 'التبغ', exists: true, isNew: true },
+      { id: 'toys-dashboard', label: 'الألعاب', exists: true, isNew: true },
+      { id: 'packaged-foods-dashboard', label: 'الأغذية المعبأة', exists: true, isNew: true },
     ]
   },
   {
@@ -97,6 +109,7 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
     sectors: [
       { id: 'b2b-ecommerce-dashboard', label: 'تجارة الأعمال B2B', exists: true },
       { id: 'b2c-ecommerce-dashboard', label: 'تجارة المستهلك B2C', exists: true },
+      { id: 'c2c-ecommerce-dashboard', label: 'تجارة المستهلك C2C', exists: true, isNew: true },
       { id: 'digital-shopping-behaviour-dashboard', label: 'سلوك التسوق الرقمي', exists: true },
       { id: 'ecommerce-key-figures-dashboard', label: 'أرقام ومؤشرات السوق', exists: true },
       { id: 'paid-content-dashboard', label: 'المحتوى والخدمات المدفوعة', exists: true },
@@ -110,6 +123,8 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'economy-dashboard', label: 'المؤشرات الاقتصادية الكلية', exists: true },
       { id: 'international-trade-dashboard', label: 'التجارة الدولية والصادرات', exists: true },
       { id: 'politics-dashboard', label: 'السياسة والحكومة واللوائح', exists: true },
+      { id: 'public-policy-economic-strategy-dashboard', label: 'السياسة العامة والاستراتيجية الاقتصادية', exists: true, isNew: true },
+      { id: 'geopolitical-risk-global-trade-analysis-dashboard', label: 'تحليل المخاطر الجيوسياسية والتجارة العالمية', exists: true, isNew: true },
     ]
   },
   {
@@ -122,6 +137,9 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'waste-dashboard', label: 'إدارة النفايات والتدوير', exists: true },
       { id: 'water-dashboard', label: 'المياه والصرف الصحي', exists: true },
       { id: 'greentech-dashboard', label: 'التكنولوجيات الخضراء', exists: true },
+      { id: 'emissions-dashboard', label: 'الانبعاثات الكربونية', exists: true, isNew: true },
+      { id: 'renewable-energy-infrastructure-dashboard', label: 'بنية الطاقة المتجددة', exists: true, isNew: true },
+      { id: 'carbon-capture-climate-tech-dashboard', label: 'تقنيات احتجاز الكربون', exists: true, isNew: true },
     ]
   },
   {
@@ -145,6 +163,7 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'health-system-dashboard', label: 'الأنظمة الصحية العالمية', exists: true },
       { id: 'medical-technology-dashboard', label: 'التكنولوجيا الطبية الحديثة', exists: true },
       { id: 'pharma-market-dashboard', label: 'سوق الأدوية العالمي', exists: true },
+      { id: 'state-of-health-dashboard', label: 'حالة الصحة العامة', exists: true, isNew: true },
     ]
   },
   {
@@ -157,6 +176,9 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'mobile-internet-apps-dashboard', label: 'تطبيقات الهواتف الذكية', exists: true },
       { id: 'online-search-dashboard', label: 'محركات البحث العالمية', exists: true },
       { id: 'social-media-dashboard', label: 'منصات التواصل الاجتماعي', exists: true },
+      { id: 'internet-demographics-dashboard', label: 'ديموغرافية الإنترنت والاستخدام', exists: true, isNew: true },
+      { id: 'online-video-entertainment-dashboard', label: 'ترفيه الفيديو онлайн', exists: true, isNew: true },
+      { id: 'reach-traffic-dashboard', label: 'الوصول وحركة المرور', exists: true, isNew: true },
     ]
   },
   {
@@ -168,6 +190,9 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'family-friends-dashboard', label: 'العلاقات الاجتماعية والأسرة', exists: true },
       { id: 'personality-behavior-dashboard', label: 'السلوك البشري والسمات', exists: true },
       { id: 'holidays-dashboard', label: 'العطلات والمناسبات', exists: true },
+      { id: 'love-sex-dashboard', label: 'الحب والعلاقات الحميمة', exists: true, isNew: true },
+      { id: 'mental-health-wellbeing-economy-dashboard', label: 'اقتصاد الصحة النفسية والعافية', exists: true, isNew: true },
+      { id: 'longevity-human-performance-dashboard', label: 'صناعة طول العمر والأداء البشري', exists: true, isNew: true },
     ]
   },
   {
@@ -192,6 +217,10 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'industrial-machinery-dashboard', label: 'الآلات الصناعية والمعدات', exists: true },
       { id: 'metals-dashboard', label: 'التعدين والمعادن والصلب', exists: true },
       { id: 'vehicle-manufacturing-dashboard', label: 'تصنيع المركبات والسيارات', exists: true },
+      { id: 'rolling-stock-dashboard', label: 'صناعة عربات السكك الحديدية', exists: true, isNew: true },
+      { id: 'shipbuilding-dashboard', label: 'صناعة السفن', exists: true, isNew: true },
+      { id: 'semiconductors-dashboard', label: 'أشباه الموصلات', exists: true, isNew: true },
+      { id: 'advanced-robotics-manufacturing-dashboard', label: 'تصنيع الروبوتات المتقدمة', exists: true, isNew: true },
     ]
   },
   {
@@ -204,6 +233,8 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'mortgages-financing-dashboard', label: 'التمويل والرهن العقاري', exists: true },
       { id: 'property-services-dashboard', label: 'الخدمات وإدارة الأملاك', exists: true },
       { id: 'residential-real-estate-dashboard', label: 'العقارات السكنية والمنازل', exists: true },
+      { id: 'proptech-dashboard', label: 'تكنولوجيا العقارات', exists: true, isNew: true },
+      { id: 'smart-cities-development-dashboard', label: 'تطوير المدن الذكية', exists: true, isNew: true },
     ]
   },
   {
@@ -217,6 +248,16 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'retail-technology-dashboard', label: 'تقنيات تجارة التجزئة', exists: true },
       { id: 'supply-chain-dashboard', label: 'سلاسل التوريد والخدمات', exists: true },
       { id: 'wholesale-dashboard', label: 'تجارة الجملة والتوريد', exists: true },
+      { id: 'diy-retail-dashboard', label: 'تجارة تحسين المنزل DIY', exists: true, isNew: true },
+      { id: 'furniture-retail-dashboard', label: 'تجارة الأثاث', exists: true, isNew: true },
+      { id: 'health-hygiene-dashboard', label: 'الصحة والنظافة', exists: true, isNew: true },
+      { id: 'office-supplies-dashboard', label: 'مستلزمات المكاتب', exists: true, isNew: true },
+      { id: 'private-label-dashboard', label: 'العلامات الخاصة', exists: true, isNew: true },
+      { id: 'shopping-behavior-dashboard', label: 'سلوك التسوق', exists: true, isNew: true },
+      { id: 'sports-leisure-retail-dashboard', label: 'تجارة الرياضة والترفيه', exists: true, isNew: true },
+      { id: 'subscriptions-direct-selling-dashboard', label: 'الاشتراكات والبيع المباشر', exists: true, isNew: true },
+      { id: 'ecommerce-logistics-fulfillment-dashboard', label: 'لوجستيات التجارة الإلكترونية', exists: true, isNew: true },
+      { id: 'omnichannel-retail-systems-dashboard', label: 'أنظمة التجزئة متعددة القنوات', exists: true, isNew: true },
     ]
   },
   {
@@ -229,6 +270,13 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'education-science-dashboard', label: 'التعليم والعلوم والبحث', exists: true },
       { id: 'demographics-dashboard', label: 'الديموغرافيا والنمو السكاني', exists: true },
       { id: 'historical-data-dashboard', label: 'البيانات التاريخية والتوجهات', exists: true },
+      { id: 'digital-transformation-consulting-dashboard', label: 'استشارات التحول الرقمي', exists: true, isNew: true },
+      { id: 'bpo-dashboard', label: 'تعهدات العمليات التجارية', exists: true, isNew: true },
+      { id: 'crime-law-enforcement-dashboard', label: 'الجريمة وإنفاذ القانون', exists: true, isNew: true },
+      { id: 'geography-nature-dashboard', label: 'الجغرافيا والطبيعة', exists: true, isNew: true },
+      { id: 'religion-dashboard', label: 'الدين', exists: true, isNew: true },
+      { id: 'urban-development-smart-cities-policy-dashboard', label: 'التطوير الحضري والسياسة', exists: true, isNew: true },
+      { id: 'population-analytics-demographic-intelligence-dashboard', label: 'التحليلات السكانية', exists: true, isNew: true },
     ]
   },
   {
@@ -240,6 +288,11 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'sports-fitness-dashboard', label: 'اللياقة البدنية والصحة', exists: true },
       { id: 'wellness-spas-dashboard', label: 'الاستجمام والعافية والمنتجعات', exists: true },
       { id: 'art-culture-dashboard', label: 'الفن والثقافة والمتاحف', exists: true },
+      { id: 'gambling-dashboard', label: 'القمار والمراهنات', exists: true, isNew: true },
+      { id: 'hobbies-dashboard', label: 'الهوايات', exists: true, isNew: true },
+      { id: 'parks-outdoors-dashboard', label: 'الحدائق والأنشطة الخارجية', exists: true, isNew: true },
+      { id: 'sports-analytics-performance-tech-dashboard', label: 'تحليلات الأداء الرياضي', exists: true, isNew: true },
+      { id: 'esports-gaming-industry-dashboard', label: 'صناعة الألعاب التنافسية', exists: true, isNew: true },
     ]
   },
   {
@@ -252,6 +305,9 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'it-services-dashboard', label: 'خدمات تقنية المعلومات', exists: true },
       { id: 'hardware-dashboard', label: 'الأجهزة والعتاد التكنولوجي', exists: true },
       { id: 'telecommunications-dashboard', label: 'قطاع الاتصالات والشبكات', exists: true },
+      { id: 'household-appliances-dashboard', label: 'الأجهزة المنزلية', exists: true, isNew: true },
+      { id: 'artificial-intelligence-dashboard', label: 'الذكاء الاصطناعي', exists: true, isNew: true },
+      { id: 'cloud-services-dashboard', label: 'الخدمات السحابية', exists: true, isNew: true },
     ]
   },
   {
@@ -264,6 +320,9 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'public-transport-dashboard', label: 'النقل العام والتنقل الحضري', exists: true },
       { id: 'vehicles-road-traffic-dashboard', label: 'المركبات وحركة المرور', exists: true },
       { id: 'water-transport-dashboard', label: 'النقل البحري والموانئ', exists: true },
+      { id: 'rail-transport-dashboard', label: 'النقل بالسكك الحديدية', exists: true, isNew: true },
+      { id: 'autonomous-vehicles-dashboard', label: 'المركبات ذاتية القيادة', exists: true, isNew: true },
+      { id: 'ev-infrastructure-dashboard', label: 'بنية المركبات الكهربائية', exists: true, isNew: true },
     ]
   },
   {
@@ -275,6 +334,8 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'food-drink-services-dashboard', label: 'خدمات الأطعمة والمشروبات', exists: true },
       { id: 'leisure-travel-dashboard', label: 'سياحة الترفه والرحلات', exists: true },
       { id: 'business-travel-dashboard', label: 'سفر الأعمال والمؤتمرات', exists: true },
+      { id: 'medical-tourism-dashboard', label: 'السياحة العلاجية', exists: true, isNew: true },
+      { id: 'travel-technology-dashboard', label: 'تكنولوجيا السفر', exists: true, isNew: true },
     ]
   }
 ];
