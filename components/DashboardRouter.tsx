@@ -246,6 +246,11 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
     ? 'w-full' 
     : 'max-w-6xl mx-auto py-6 sm:py-8 lg:py-10 px-4 sm:px-6 lg:px-12 pb-20 lg:pb-10';
 
+  const handleBuildPlan = (projectName?: string) => {
+    setActiveTab('new-plan');
+    // Logic to pre-fill the name could go here if needed
+  };
+
   const renderContent = () => {
     switch (activeTab) {
       case 'home':
@@ -309,7 +314,7 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
       case 'influencer-marketing-dashboard':
         return <InfluencerMarketingDashboard onBack={() => setActiveTab('discovery-center')} parentCategory="الإعلانات والتسويق" />;
       case 'farming-dashboard':
-        return <FarmingDashboard onBack={() => setActiveTab('discovery-center')} parentCategory="الزراعة والموارد الطبيعية" />;
+        return <FarmingDashboard onBack={() => setActiveTab('discovery-center')} onBuildPlan={handleBuildPlan} parentCategory="الزراعة والموارد الطبيعية" />;
       case 'fisheries-aquaculture-dashboard':
         return <FisheriesAquacultureDashboard onBack={() => setActiveTab('discovery-center')} parentCategory="الزراعة والموارد الطبيعية" />;
       case 'forestry-dashboard':
@@ -435,9 +440,9 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
       case 'ecommerce-key-figures-dashboard': return <ECommerceKeyFiguresDashboard />;
       case 'paid-content-dashboard': return <PaidContentDashboard />;
       case 'seo-content-marketing': return <SearchEngineOptimizationContentMarketingDashboard />;
-      case 'agritech': return <AgriculturalTechnologyAgritechDashboard />;
+      case 'agritech-dashboard': return <AgriculturalTechnologyAgritechDashboard />;
       case 'smart-farming': return <SmartFarmingDashboard />;
-      case 'seeds-crop-protection': return <SeedsCropProtectionDashboard />;
+      case 'seeds-crop-protection': return <SeedsCropProtectionDashboard onBuildPlan={handleBuildPlan} />;
       case 'recycled-materials': return <RecycledMaterialsDashboard />;
       case 'battery-materials': return <BatteryMaterialsDashboard />;
       case 'sustainable-consumer-goods': return <SustainableConsumerGoodsDashboard />;
@@ -524,7 +529,7 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
       case 'geopolitical-risk-global-trade-analysis-dashboard': return <GeopoliticalRiskTradeAnalysisDashboard onBack={() => setActiveTab('market-discovery')} parentCategory="الاقتصاد والسياسة" />;
       case 'modular-prefab-construction-dashboard': return <ModularPrefabConstructionDashboard onBack={() => setActiveTab('market-discovery')} parentCategory="البناء والإنشاءات" />;
       case 'seeds-crop-protection-dashboard': return <SeedsCropProtectionDashboard onBack={() => setActiveTab('market-discovery')} parentCategory="الزراعة والموارد الطبيعية" />;
-      case 'c2c-ecommerce-dashboard': return <C2CEcommerceDashboard onBack={() => setActiveTab('market-discovery')} parentCategory="التجارة الإلكترونية" />;
+      case 'c2c-ecommerce-dashboard': return <C2CEcommerceDashboard onBack={() => setActiveTab('market-discovery')} onBuildPlan={handleBuildPlan} parentCategory="التجارة الإلكترونية" />;
 
       default:
         return null;

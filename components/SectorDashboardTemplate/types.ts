@@ -58,5 +58,6 @@ export interface SectorDashboardProps {
   topMarkets?: SectorMarket[];
   businessOpportunities?: BusinessOpportunity[];
   onBack?: () => void;
+  onBuildPlan?: (projectName?: string) => void;
   parentCategory?: string;
 }

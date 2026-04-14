@@ -1,10 +1,11 @@
 import React, { useState, type FC } from 'react';
-import { ChevronDown, CheckCircle2 } from 'lucide-react';
+import { ChevronDown, CheckCircle2, ExternalLink } from 'lucide-react';
 import { BusinessOpportunity } from './types';
 
-export const OpportunityCard: FC<{ opp: BusinessOpportunity; index: number }> = ({
+export const OpportunityCard: FC<{ opp: BusinessOpportunity; index: number; onBuildPlan?: (p?: string) => void }> = ({
   opp,
   index,
+  onBuildPlan,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const Icon = opp.icon;
@@ -76,7 +77,7 @@ export const OpportunityCard: FC<{ opp: BusinessOpportunity; index: number }> = 
       </div>
 
       <h4 style={{ margin: '0 0 8px', fontSize: 16, fontWeight: 800, color: '#0f172a' }}>{opp.title}</h4>
-      <p style={{ margin: '0 0 16px', fontSize: 13, fontWeight: 600, color: '#64748b', lineHeight: 1.6 }}>{opp.description}</p>
+
 
       {/* Expandable Content */}
       <div style={{
@@ -87,30 +88,65 @@ export const OpportunityCard: FC<{ opp: BusinessOpportunity; index: number }> = 
         paddingTop: isOpen ? 8 : 0,
       }}>
         <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: 16 }}>
-          <p style={{ margin: '0 0 12px', fontSize: 11, fontWeight: 800, color: 'var(--acc)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>أمثلة للمشاريع:</p>
+          <p style={{ margin: '0 0 12px', fontSize: 11, fontWeight: 800, color: 'var(--acc)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>أمثلة للمشاريع (اضغط للبدء):</p>
           <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
             {opp.examples.map((ex, i) => (
-              <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, fontWeight: 600, color: '#475569' }}>
-                <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--acc-40)' }} />
-                {ex}
+              <li key={i}>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onBuildPlan?.(ex);
+                  }}
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 12,
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: '#475569',
+                    padding: '10px 12px',
+                    background: 'transparent',
+                    border: '1px solid transparent',
+                    borderRadius: 12,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    textAlign: 'right',
+                    direction: 'rtl',
+                  }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.background = 'var(--acc-10)';
+                    el.style.borderColor = 'var(--acc-20)';
+                    el.style.color = 'var(--acc)';
+                    el.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.background = 'transparent';
+                    el.style.borderColor = 'transparent';
+                    el.style.color = '#475569';
+                    el.style.transform = 'translateY(0)';
+                  }}
+                >
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--acc)', boxShadow: '0 0 8px var(--acc-40)' }} />
+                  {ex}
+                  <ExternalLink size={14} style={{ marginRight: 'auto', opacity: 0.5 }} />
+                </button>
               </li>
             ))}
           </ul>
 
-          {opp.note && (
-            <div style={{ marginTop: 24, padding: 12, background: '#f8fafc', borderRadius: 12, border: '1px solid #f1f5f9', display: 'flex', gap: 10 }}>
-              <CheckCircle2 size={16} color="var(--acc)" style={{ marginTop: 2, flexShrink: 0 }} />
-              <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: '#64748b', lineHeight: 1.5 }}>{opp.note}</p>
-            </div>
-          )}
+
         </div>
       </div>
     </div>
   );
 };
 
-export const OpportunitiesSection: FC<{ opportunities: BusinessOpportunity[] }> = ({
+export const OpportunitiesSection: FC<{ opportunities: BusinessOpportunity[]; onBuildPlan?: (p?: string) => void }> = ({
   opportunities,
+  onBuildPlan,
 }) => {
   return (
     <div
@@ -186,7 +222,7 @@ export const OpportunitiesSection: FC<{ opportunities: BusinessOpportunity[] }> 
         }}
       >
         {opportunities.map((opp, idx) => (
-          <OpportunityCard key={opp.id} opp={opp} index={idx} />
+          <OpportunityCard key={opp.id} opp={opp} index={idx} onBuildPlan={onBuildPlan} />
         ))}
       </div>
     </div>

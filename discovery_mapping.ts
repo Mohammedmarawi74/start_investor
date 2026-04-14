@@ -16,7 +16,8 @@ export const DISCOVERY_MAPPING: CategoryMapping[] = [
       { label: "Advertising", id: "advertising-dashboard", filename: "AdvertisingDashboard" },
       { label: "Brands & Leaders", id: "brands-leaders-dashboard", filename: "BrandsLeadersDashboard" },
       { label: "Marketing", id: "marketing-dashboard", filename: "MarketingDashboard" },
-      { label: "Influencer Marketing", id: "influencer-marketing-dashboard", filename: "InfluencerMarketingDashboard" }
+      { label: "Influencer Marketing", id: "influencer-marketing-dashboard", filename: "InfluencerMarketingDashboard" },
+      { label: "SEO & Content Marketing", id: "seo-content-marketing", filename: "SearchEngineOptimizationContentMarketingDashboard" }
     ]
   },
   {

@@ -31,6 +31,7 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
   topMarkets = [],
   businessOpportunities = [],
   onBack,
+  onBuildPlan,
   parentCategory = 'استكشاف السوق',
 }) => {
   // Inject CSS vars
@@ -216,7 +217,7 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
         />
 
         {hasOpportunities && (
-          <OpportunitiesSection opportunities={businessOpportunities} />
+          <OpportunitiesSection opportunities={businessOpportunities} onBuildPlan={onBuildPlan} />
         )}
       </main>
     </div>
