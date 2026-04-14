@@ -14,7 +14,9 @@ import { OpportunitiesSection } from './BusinessOpportunities';
 import { LeadersSection } from './LeadersSection';
 import { BottomRow } from './BottomRow';
 import { buildNav, buildNavMap } from './NavHelpers';
+import { SwotSection } from './SwotSection';
 import { OPPORTUNITIES_REGISTRY } from '../../data/opportunitiesRegistry';
+import { SWOT_REGISTRY } from '../../data/swotRegistry';
 
 const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
   title,
@@ -35,6 +37,7 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
   onBuildPlan,
   parentCategory = 'استكشاف السوق',
   sectorId,
+  swotAnalysis: manualSwot,
 }) => {
   // Inject CSS vars
   useAccentVars(accent, accentHex);
@@ -43,18 +46,23 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
   const registryOpportunities = sectorId ? OPPORTUNITIES_REGISTRY[sectorId] : [];
   const businessOpportunities = (manualOpportunities && manualOpportunities.length > 0) ? manualOpportunities : registryOpportunities;
 
+  // Auto-fetch SWOT if not provided manually
+  const registrySwot = sectorId ? SWOT_REGISTRY[sectorId] : undefined;
+  const swot = manualSwot || registrySwot;
+
   const hasLeaders = leaders.length > 0;
   const hasDefinition = !!definition;
   const hasOpportunities = (businessOpportunities && businessOpportunities.length > 0);
+  const hasSwot = !!swot;
 
   const nav = useMemo(
-    () => buildNav(sections, hasLeaders, hasDefinition, hasOpportunities),
-    [sections, hasLeaders, hasDefinition, hasOpportunities],
+    () => buildNav(sections, hasLeaders, hasDefinition, hasOpportunities, hasSwot),
+    [sections, hasLeaders, hasDefinition, hasOpportunities, hasSwot],
   );
 
   const navMap = useMemo(
-    () => buildNavMap(sections, hasLeaders, hasDefinition, hasOpportunities),
-    [sections, hasLeaders, hasDefinition, hasOpportunities],
+    () => buildNavMap(sections, hasLeaders, hasDefinition, hasOpportunities, hasSwot),
+    [sections, hasLeaders, hasDefinition, hasOpportunities, hasSwot],
   );
 
   const [activeNav, setActiveNav] = useState<string>(nav[0] ?? '');
@@ -99,7 +107,7 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
       if (el) tracked.push(el);
     });
 
-    ['opportunities-section', 'leaders', 'definition', 'insights-bottom'].forEach((id) => {
+    ['opportunities-section', 'leaders', 'definition', 'insights-bottom', 'swot-analysis'].forEach((id) => {
       const el = document.querySelector(`[data-section="${id}"]`) || document.getElementById(id);
       if (el) tracked.push(el);
     });
@@ -210,6 +218,10 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
             {section.variant === 'dark' ? <DarkCard section={section} /> : <LightCard section={section} />}
           </div>
         ))}
+
+        {hasSwot && (
+          <SwotSection swot={swot} title={title} />
+        )}
 
         {hasLeaders && (
           <LeadersSection leaders={leaders} title={title} />

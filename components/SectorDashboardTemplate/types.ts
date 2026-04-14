@@ -57,8 +57,23 @@ export interface SectorDashboardProps {
   tags?: string[];
   topMarkets?: SectorMarket[];
   businessOpportunities?: BusinessOpportunity[];
+  swotAnalysis?: SwotAnalysis;
   onBack?: () => void;
   onBuildPlan?: (projectName?: string) => void;
   parentCategory?: string;
   sectorId?: string; // New: To link with central registry
+}
+
+export interface SwotAnalysis {
+  description: string;
+  strengths: SwotItem[];
+  weaknesses: SwotItem[];
+  opportunities: SwotItem[];
+  threats: SwotItem[];
+  insight: string;
+}
+
+export interface SwotItem {
+  text: string;
+  textEn?: string;
 }
