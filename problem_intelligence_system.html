@@ -1,0 +1,314 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);direction:rtl}
+.wrap{padding:1.5rem 1rem 3rem}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:12px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-dot{width:8px;height:8px;border-radius:50%;background:#534AB7}
+.brand-title{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.brand-sub{font-size:12px;color:var(--color-text-secondary);margin-top:2px}
+.stats-row{display:flex;gap:8px}
+.stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 14px;text-align:center}
+.stat-n{font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.stat-l{font-size:11px;color:var(--color-text-secondary)}
+.breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-secondary);margin-bottom:1.25rem;flex-wrap:wrap}
+.breadcrumb span{color:var(--color-text-primary);font-weight:500}
+.breadcrumb .sep{color:var(--color-text-tertiary)}
+.bc-btn{background:none;border:none;cursor:pointer;color:#7F77DD;font-size:12px;padding:0;font-family:var(--font-sans)}
+.bc-btn:hover{text-decoration:underline}
+.layer-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem}
+.sector-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:1.5rem}
+.sector-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 12px;cursor:pointer;transition:border-color .15s,background .15s}
+.sector-card:hover,.sector-card.active{border-color:#7F77DD;background:#EEEDFE}
+.sector-card:hover .sc-name,.sector-card.active .sc-name{color:#3C3489}
+.sc-icon{font-size:20px;margin-bottom:8px}
+.sc-name{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.sc-count{font-size:11px;color:var(--color-text-secondary)}
+.sub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px;margin-bottom:1.5rem}
+.sub-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px;cursor:pointer;transition:border-color .15s,background .15s;display:flex;align-items:center;gap:10px}
+.sub-card:hover,.sub-card.active{border-color:#1D9E75;background:#E1F5EE}
+.sub-card:hover .sub-name,.sub-card.active .sub-name{color:#085041}
+.sub-dot{width:6px;height:6px;border-radius:50%;background:#5DCAA5;flex-shrink:0}
+.sub-name{font-size:13px;color:var(--color-text-primary)}
+.sub-cnt{font-size:11px;color:var(--color-text-secondary);margin-right:auto;flex-shrink:0}
+.problem-list{display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem}
+.prob-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;cursor:pointer;transition:border-color .15s}
+.prob-card:hover{border-color:#D85A30}
+.prob-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.prob-title{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.scores{display:flex;gap:6px;flex-wrap:wrap}
+.score-pill{font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500}
+.pain-pill{background:#FAECE7;color:#712B13}
+.money-pill{background:#EAF3DE;color:#27500A}
+.freq-pill{background:#E6F1FB;color:#0C447C}
+.gap-pill{background:#FAEEDA;color:#633806}
+.prob-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:10px}
+.prob-footer{display:flex;gap:8px}
+.act-btn{font-size:12px;padding:5px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;color:var(--color-text-primary);font-family:var(--font-sans);transition:background .15s}
+.act-btn:hover{background:var(--color-background-secondary)}
+.act-btn.primary{background:#534AB7;color:#EEEDFE;border-color:#534AB7}
+.act-btn.primary:hover{background:#3C3489}
+.opp-panel{background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1.5rem}
+.opp-title{font-size:14px;font-weight:500;margin-bottom:1rem;color:var(--color-text-primary)}
+.opp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.opp-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px}
+.opp-type{font-size:10px;font-weight:500;letter-spacing:.07em;color:var(--color-text-secondary);text-transform:uppercase;margin-bottom:6px}
+.opp-name{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.opp-model{font-size:12px;color:var(--color-text-secondary)}
+.opp-build{margin-top:10px;width:100%;font-size:12px;padding:6px;border-radius:var(--border-radius-md);border:0.5px solid #AFA9EC;background:#EEEDFE;color:#3C3489;cursor:pointer;font-family:var(--font-sans)}
+.opp-build:hover{background:#CECBF6}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#534AB7;background:none;border:none;cursor:pointer;font-family:var(--font-sans);margin-bottom:1rem;padding:0}
+.back-btn:hover{text-decoration:underline}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:1rem 0}
+.heat-bar{height:4px;border-radius:2px;margin-top:6px}
+.empty{text-align:center;padding:2rem;color:var(--color-text-secondary);font-size:13px}
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script>
+const DATA = {
+  sectors: [
+    {id:'health', icon:'⚕', name:'الصحة', count:1240, color:'coral',
+     subs:[
+      {id:'diag', name:'التشخيص الطبي', count:87, problems:[
+        {id:'p1',title:'تأخر حجز المواعيد الطبية',desc:'المرضى يعانون من انتظار أسابيع لحجز موعد مع طبيب متخصص، مما يؤخر التشخيص.',pain:9,money:8,freq:9,gap:7,
+         opps:[{type:'SaaS',name:'Smart Clinic Scheduler',model:'اشتراك شهري للعيادات'},{type:'Marketplace',name:'Doctor Booking Network',model:'عمولة لكل حجز'},{type:'AI Tool',name:'Waitlist Optimizer AI',model:'SaaS B2B للمستشفيات'}]},
+        {id:'p2',title:'أخطاء التشخيص الأولي',desc:'تشخيص خاطئ في الزيارة الأولى بسبب ضعف الأنظمة وقِصَر وقت الطبيب.',pain:10,money:9,freq:8,gap:9,
+         opps:[{type:'AI Diagnostic',name:'MedAI Assist',model:'لايسنس للمستشفيات'},{type:'Decision Tool',name:'Symptom Intelligence',model:'SaaS للأطباء'}]},
+        {id:'p3',title:'غياب السجل الطبي الموحد',desc:'كل مستشفى يملك سجله الخاص، والمريض يضطر لإعادة جميع التحاليل عند انتقاله.',pain:8,money:7,freq:7,gap:8,
+         opps:[{type:'Platform',name:'Unified Health Record',model:'اشتراك حكومي/مؤسسي'},{type:'API',name:'MedData Bridge',model:'رسوم API لكل استعلام'}]},
+      ]},
+      {id:'mental', name:'الصحة النفسية', count:63, problems:[
+        {id:'p4',title:'صعوبة الوصول للمعالج النفسي',desc:'ندرة المعالجين النفسيين وارتفاع التكلفة يمنع كثيرين من الحصول على الدعم.',pain:9,money:7,freq:8,gap:8,
+         opps:[{type:'Telehealth',name:'MindConnect',model:'اشتراك مباشر للمستخدم'},{type:'AI Companion',name:'TherapyBot',model:'Freemium + Pro'}]},
+      ]},
+      {id:'pharma', name:'الأدوية وسلاسل التوريد', count:45, problems:[
+        {id:'p5',title:'نقص الأدوية في الصيدليات',desc:'عدم توازن بين العرض والطلب يؤدي لأزمات دورية في توفر الأدوية الأساسية.',pain:9,money:9,freq:6,gap:7,
+         opps:[{type:'Supply Chain AI',name:'PharmaFlow',model:'SaaS للموردين والصيدليات'},{type:'Marketplace',name:'MedStock Exchange',model:'عمولة على المعاملات'}]},
+      ]},
+    ]},
+    {id:'edu', icon:'📚', name:'التعليم', count:980, color:'blue',
+     subs:[
+      {id:'k12', name:'التعليم الأساسي', count:120, problems:[
+        {id:'p6',title:'فجوة الفهم بين الطلاب',desc:'معلم واحد لـ40 طالب، يستحيل تخصيص التعليم لكل مستوى على حدة.',pain:8,money:6,freq:9,gap:7,
+         opps:[{type:'EdTech AI',name:'AdaptLearn',model:'اشتراك للمدارس'},{type:'Tool',name:'Learning Gap Detector',model:'SaaS B2B'}]},
+      ]},
+      {id:'higher', name:'التعليم العالي', count:95, problems:[
+        {id:'p7',title:'ضعف ربط الجامعة بسوق العمل',desc:'خريجون بمهارات لا تتطابق مع احتياجات السوق الفعلية.',pain:8,money:8,freq:7,gap:9,
+         opps:[{type:'Platform',name:'SkillBridge',model:'عمولة من الشركات'},{type:'Analytics',name:'MarketSkills AI',model:'تقارير B2B'}]},
+      ]},
+     ]},
+    {id:'energy', icon:'⚡', name:'الطاقة', count:760, color:'amber',
+     subs:[
+      {id:'solar', name:'الطاقة الشمسية', count:58, problems:[
+        {id:'p8',title:'ارتفاع تكلفة تركيب الألواح الشمسية',desc:'رغم انخفاض الأسعار عالميًا، التركيب والصيانة لا يزالان مكلفَيْن للأفراد.',pain:7,money:9,freq:5,gap:7,
+         opps:[{type:'Financing',name:'SolarLease',model:'إيجار الألواح شهريًا'},{type:'Marketplace',name:'SolarConnect',model:'عمولة على التركيب'}]},
+      ]},
+     ]},
+    {id:'agri', icon:'🌱', name:'الزراعة', count:890, color:'green',
+     subs:[
+      {id:'soil', name:'صحة التربة', count:74, problems:[
+        {id:'p9',title:'تدهور خصوبة التربة',desc:'الاستخدام المفرط للأسمدة الكيميائية يدمر التربة على المدى البعيد.',pain:9,money:8,freq:6,gap:8,
+         opps:[{type:'AI SaaS',name:'Soil Intelligence',model:'اشتراك للمزارعين'},{type:'Marketplace',name:'Agri Input Market',model:'عمولة على المشتريات'},{type:'Analytics',name:'Yield Predictor AI',model:'تقارير B2B'}]},
+      ]},
+     ]},
+    {id:'fintech', icon:'💳', name:'الخدمات المالية', count:1100, color:'purple',
+     subs:[
+      {id:'sme', name:'تمويل الشركات الصغيرة', count:88, problems:[
+        {id:'p10',title:'رفض القروض البنكية للمشاريع الناشئة',desc:'البنوك التقليدية ترفض تمويل الشركات الصغيرة لغياب الضمانات.',pain:10,money:10,freq:8,gap:8,
+         opps:[{type:'Fintech',name:'AltFund',model:'رسوم على التمويل %'},{type:'Credit AI',name:'ScoreWise',model:'اشتراك شهري'},{type:'Platform',name:'PeerLend',model:'عمولة بين المقرضين'}]},
+      ]},
+     ]},
+    {id:'transport', icon:'🚗', name:'النقل', count:650, color:'teal',
+     subs:[
+      {id:'logistics', name:'اللوجستيات', count:96, problems:[
+        {id:'p11',title:'عدم كفاءة التوصيل آخر ميل',desc:'آخر كيلومتر في سلسلة التوصيل هو الأغلى والأكثر تعقيدًا.',pain:8,money:9,freq:9,gap:7,
+         opps:[{type:'Routing AI',name:'LastMile AI',model:'SaaS للشركات'},{type:'Network',name:'MicroHub Network',model:'اشتراك + حصة'}]},
+      ]},
+     ]},
+    {id:'govt', icon:'🏛', name:'الحكومة', count:540, color:'gray',
+     subs:[
+      {id:'eservice', name:'الخدمات الرقمية', count:67, problems:[
+        {id:'p12',title:'تعقيد الإجراءات الحكومية',desc:'المواطنون يضيعون ساعات في إنجاز معاملات يمكن أتمتتها بالكامل.',pain:8,money:6,freq:9,gap:8,
+         opps:[{type:'GovTech',name:'ProcedureAI',model:'مشاريع حكومية'},{type:'Platform',name:'CitizenFlow',model:'SaaS للبلديات'}]},
+      ]},
+     ]},
+    {id:'climate', icon:'🌍', name:'البيئة والمناخ', count:480, color:'teal',
+     subs:[
+      {id:'waste', name:'إدارة النفايات', count:52, problems:[
+        {id:'p13',title:'غياب بنية تحتية لإعادة التدوير',desc:'معظم النفايات القابلة للتدوير تذهب للمكبّات لغياب السلاسل اللوجستية.',pain:7,money:7,freq:8,gap:8,
+         opps:[{type:'CleanTech',name:'RecycleRoute',model:'عقود بلدية'},{type:'Marketplace',name:'ScrapConnect',model:'عمولة على المعاملات'}]},
+      ]},
+     ]},
+  ]
+};
+
+const scoreColor = n => n>=9?'#E24B4A':n>=7?'#BA7517':'#639922';
+
+function renderScore(label, n, cls) {
+  return `<span class="score-pill ${cls}">${label} ${n}/10</span>`;
+}
+
+let view = 'sectors';
+let sel = {sector:null, sub:null, problem:null};
+
+function render() {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+
+  const totalProblems = DATA.sectors.reduce((a,s)=>a+s.count,0);
+  const totalOpps = DATA.sectors.reduce((a,s)=>a+s.subs.reduce((b,sub)=>b+sub.problems.reduce((c,p)=>c+p.opps.length,0),0),0);
+
+  app.innerHTML += `
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-dot"></div>
+        <div><div class="brand-title">Problem Intelligence System</div><div class="brand-sub">من المشكلة إلى الفرصة</div></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-n">${DATA.sectors.length}</div><div class="stat-l">قطاع</div></div>
+        <div class="stat"><div class="stat-n">${totalProblems.toLocaleString()}</div><div class="stat-l">مشكلة</div></div>
+        <div class="stat"><div class="stat-n" style="color:#534AB7">${totalOpps}+</div><div class="stat-l">فرصة</div></div>
+      </div>
+    </div>`;
+
+  let bc = `<div class="breadcrumb">`;
+  bc += `<button class="bc-btn" onclick="goTo('sectors')">القطاعات</button>`;
+  if(sel.sector){
+    bc += `<span class="sep">›</span><button class="bc-btn" onclick="goTo('subs')">${sel.sector.name}</button>`;
+  }
+  if(sel.sub){
+    bc += `<span class="sep">›</span><button class="bc-btn" onclick="goTo('problems')">${sel.sub.name}</button>`;
+  }
+  if(sel.problem){
+    bc += `<span class="sep">›</span><span>${sel.problem.title.substring(0,22)}...</span>`;
+  }
+  bc += `</div>`;
+  app.innerHTML += bc;
+
+  if(view === 'sectors') renderSectors(app);
+  else if(view === 'subs') renderSubs(app);
+  else if(view === 'problems') renderProblems(app);
+  else if(view === 'opportunity') renderOpportunity(app);
+}
+
+function renderSectors(app) {
+  app.innerHTML += `<div class="layer-label">الطبقة الأولى — القطاعات الكبرى (Macro Level)</div>`;
+  let grid = `<div class="sector-grid">`;
+  DATA.sectors.forEach(s => {
+    const heat = Math.round((s.count/1240)*100);
+    grid += `<div class="sector-card${sel.sector&&sel.sector.id===s.id?' active':''}" onclick="selectSector('${s.id}')">
+      <div class="sc-icon">${s.icon}</div>
+      <div class="sc-name">${s.name}</div>
+      <div class="sc-count">${s.count.toLocaleString()} مشكلة</div>
+      <div class="heat-bar" style="background:linear-gradient(to right,#7F77DD ${heat}%,var(--color-border-tertiary) ${heat}%)"></div>
+    </div>`;
+  });
+  grid += `</div>`;
+  app.innerHTML += grid;
+
+  app.innerHTML += `<div class="divider"></div>
+  <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.7">
+    اختر قطاعًا للنزول إلى المجالات الفرعية ثم المشاكل الدقيقة وفرص المشاريع.
+  </div>`;
+}
+
+function renderSubs(app) {
+  app.innerHTML += `<div class="layer-label">الطبقة الثانية — المجالات الفرعية (Meso Level) — ${sel.sector.name}</div>`;
+  let grid = `<div class="sub-grid">`;
+  sel.sector.subs.forEach(sub => {
+    grid += `<div class="sub-card${sel.sub&&sel.sub.id===sub.id?' active':''}" onclick="selectSub('${sub.id}')">
+      <div class="sub-dot"></div>
+      <div class="sub-name">${sub.name}</div>
+      <div class="sub-cnt">${sub.count}</div>
+    </div>`;
+  });
+  grid += `</div>`;
+  app.innerHTML += grid;
+}
+
+function renderProblems(app) {
+  app.innerHTML += `<div class="layer-label">الطبقة الثالثة — المشاكل الدقيقة (Micro Level) — ${sel.sub.name}</div>`;
+  let list = `<div class="problem-list">`;
+  sel.sub.problems.forEach(p => {
+    list += `<div class="prob-card">
+      <div class="prob-header">
+        <div class="prob-title">${p.title}</div>
+        <div class="scores">
+          ${renderScore('ألم',p.pain,'pain-pill')}
+          ${renderScore('ربح',p.money,'money-pill')}
+          ${renderScore('تكرار',p.freq,'freq-pill')}
+          ${renderScore('فجوة',p.gap,'gap-pill')}
+        </div>
+      </div>
+      <div class="prob-desc">${p.desc}</div>
+      <div class="prob-footer">
+        <button class="act-btn primary" onclick="selectProblem('${p.id}')">عرض الفرص ↗</button>
+        <button class="act-btn" onclick="sendPrompt('حلل مشكلة: ${p.title} وقدم استراتيجية دخول للسوق')">تحليل استراتيجي ↗</button>
+      </div>
+    </div>`;
+  });
+  list += `</div>`;
+  app.innerHTML += list;
+}
+
+function renderOpportunity(app) {
+  const p = sel.problem;
+  app.innerHTML += `
+    <div class="opp-panel">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:12px;flex-wrap:wrap">
+        <div>
+          <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">${sel.sector.name} › ${sel.sub.name}</div>
+          <div style="font-size:16px;font-weight:500;color:var(--color-text-primary)">${p.title}</div>
+        </div>
+        <div class="scores">
+          ${renderScore('ألم',p.pain,'pain-pill')}
+          ${renderScore('ربح',p.money,'money-pill')}
+          ${renderScore('تكرار',p.freq,'freq-pill')}
+          ${renderScore('فجوة',p.gap,'gap-pill')}
+        </div>
+      </div>
+      <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1rem">${p.desc}</div>
+      <div class="divider"></div>
+      <div class="opp-title">فرص المشاريع المحتملة (${p.opps.length})</div>
+      <div class="opp-grid">
+        ${p.opps.map(o=>`
+          <div class="opp-card">
+            <div class="opp-type">${o.type}</div>
+            <div class="opp-name">${o.name}</div>
+            <div class="opp-model">${o.model}</div>
+            <button class="opp-build" onclick="sendPrompt('ابنِ خطة عمل كاملة لمشروع ${o.name} يحل مشكلة: ${p.title}')">بناء خطة العمل ↗</button>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+}
+
+window.goTo = function(v) {
+  if(v==='sectors'){sel={sector:null,sub:null,problem:null};view='sectors';}
+  else if(v==='subs'){sel.sub=null;sel.problem=null;view='subs';}
+  else if(v==='problems'){sel.problem=null;view='problems';}
+  render();
+};
+
+window.selectSector = function(id) {
+  sel.sector = DATA.sectors.find(s=>s.id===id);
+  sel.sub=null;sel.problem=null;
+  view='subs';render();
+};
+
+window.selectSub = function(id) {
+  sel.sub = sel.sector.subs.find(s=>s.id===id);
+  sel.problem=null;
+  view='problems';render();
+};
+
+window.selectProblem = function(id) {
+  sel.problem = sel.sub.problems.find(p=>p.id===id);
+  view='opportunity';render();
+};
+
+render();
+</script>

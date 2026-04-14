@@ -158,10 +158,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeT
                 />
 
                 <NavItem 
-                  icon={RefreshCw} 
-                  label="محرك المشاكل والفرص" 
-                  active={activeTab === 'problem-opportunity-engine'} 
-                  onClick={() => handleNavigate('problem-opportunity-engine')} 
+                  icon={Activity} 
+                  label="المشاكل والفرص" 
+                  active={activeTab === 'problem-engine'} 
+                  onClick={() => handleNavigate('problem-engine')} 
                   isNew
                 />
 
