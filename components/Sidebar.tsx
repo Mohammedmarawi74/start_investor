@@ -431,6 +431,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ user, isOpen = true, isCollaps
                   isNew
                 />
 
+                <NavItem 
+                  id="problem-opportunity-engine" 
+                  icon={RefreshCw} 
+                  label="محرك المشاكل والفرص" 
+                  active={activeTab === 'problem-opportunity-engine'} 
+                  onClick={() => setActiveTab?.('problem-opportunity-engine')} 
+                  isCollapsed={isCollapsed}
+                  isNew
+                />
+
                 <NavItem id="tour-brand" icon={Palette} label="استوديو الهوية" active={activeTab === 'brand-identity'} onClick={() => setActiveTab?.('brand-identity')} isCollapsed={isCollapsed} />
                 {!isCollapsed && <NavItem icon={ArrowRightLeft} label="مقارنة السيناريوهات" active={activeTab === 'comparison'} onClick={() => setActiveTab?.('comparison')} isCollapsed={isCollapsed} />}
               </NavGroup>

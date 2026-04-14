@@ -157,6 +157,14 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeT
                   isNew
                 />
 
+                <NavItem 
+                  icon={RefreshCw} 
+                  label="محرك المشاكل والفرص" 
+                  active={activeTab === 'problem-opportunity-engine'} 
+                  onClick={() => handleNavigate('problem-opportunity-engine')} 
+                  isNew
+                />
+
 
                 <NavItem icon={Palette} label="استوديو الهوية" active={activeTab === 'brand-identity'} onClick={() => handleNavigate('brand-identity')} />
                 <NavItem icon={ArrowRightLeft} label="مقارنة السيناريوهات" active={activeTab === 'comparison'} onClick={() => handleNavigate('comparison')} />

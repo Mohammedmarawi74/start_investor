@@ -21,6 +21,7 @@ import { Notifications } from './Notifications';
 import { SmartAnalyzer } from './SmartAnalyzer';
 import { Profile } from './Profile';
 import ResultPage from '../easy_mode/ResultPage';
+import ProblemOpportunityEngine from './ProblemOpportunityEngine';
 
 // Dashboards
 import AdvertisingDashboard from './AdvertisingMarketing/AdvertisingDashboard';
@@ -239,7 +240,7 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
   expandedSectionId,
   onSectionExpand
 }) => {
-  const containerClass = ['editor', 'strategic-dashboard', 'contact-us', 'market-discovery'].includes(activeTab) || activeTab.endsWith('-dashboard') 
+  const containerClass = ['editor', 'strategic-dashboard', 'contact-us', 'market-discovery', 'problem-opportunity-engine'].includes(activeTab) || activeTab.endsWith('-dashboard') 
     ? 'w-full' 
     : 'max-w-6xl mx-auto py-6 sm:py-8 lg:py-10 px-4 sm:px-6 lg:px-12 pb-20 lg:pb-10';
 
@@ -273,6 +274,8 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
         return <UnicornBenchmarking />;
       case 'market-discovery':
         return <DiscoveryCenter setActiveTab={setActiveTab} />;
+      case 'problem-opportunity-engine':
+        return <ProblemOpportunityEngine onBuildPlan={handleBuildPlan} />;
       case 'comparison':
         return <PlanComparison />;
       case 'pricing':
