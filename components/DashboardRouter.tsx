@@ -215,7 +215,7 @@ import B2BEcommerceDashboard from './Ecommerce/B2BEcommerceDashboard';
 import B2CEcommerceDashboard from './Ecommerce/B2CEcommerceDashboard';
 import C2CEcommerceDashboard from './Ecommerce/C2CEcommerceDashboard';
 import DigitalShoppingBehaviourDashboard from './Ecommerce/DigitalShoppingBehaviourDashboard';
-import ECommerceKeyFiguresDashboard from './Ecommerce/ECommerceKeyFiguresDashboard';
+import ECommerceKeyFiguresDashboard from './Ecommerce/EcommerceKeyFiguresDashboard';
 import PaidContentDashboard from './Ecommerce/PaidContentDashboard';
 import OnlineMarketplacesDashboard from './Ecommerce/OnlineMarketplacesDashboard';
 import CrossBorderEcommerceDashboard from './Ecommerce/CrossBorderECommerceDashboard';

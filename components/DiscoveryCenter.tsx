@@ -53,7 +53,7 @@ const DISCOVERY_DATA: DiscoveryGroup[] = [
       { id: 'farming-dashboard', label: 'الإنتاج الزراعي والمحاصيل', exists: true, isNew: true },
       { id: 'fisheries-aquaculture-dashboard', label: 'الثروة السمكية والاستزراع', exists: true },
       { id: 'forestry-dashboard', label: 'إدارة الغابات والأخشاب', exists: true },
-      { id: 'agritech', label: 'تكنولوجيا الزراعة الذكية', exists: true, isNew: true },
+      { id: 'agritech-dashboard', label: 'تكنولوجيا الزراعة الذكية', exists: true, isNew: true },
       { id: 'seeds-crop-protection-dashboard', label: 'البذور وحماية المحاصيل', exists: true, isNew: true },
     ]
   },
