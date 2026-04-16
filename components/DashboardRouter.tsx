@@ -244,7 +244,7 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
   setSubTabLabel,
   subTabLabel
 }) => {
-  const containerClass = ['editor', 'strategic-dashboard', 'contact-us', 'market-discovery', 'problem-engine'].includes(activeTab) || activeTab.endsWith('-dashboard') 
+  const containerClass = ['home', 'editor', 'strategic-dashboard', 'contact-us', 'market-discovery', 'problem-engine'].includes(activeTab) || activeTab.endsWith('-dashboard') 
     ? 'w-full' 
     : 'max-w-6xl mx-auto py-6 sm:py-8 lg:py-10 px-4 sm:px-6 lg:px-12 pb-20 lg:pb-10';
 

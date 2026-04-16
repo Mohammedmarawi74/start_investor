@@ -393,7 +393,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ user, isOpen = true, isCollaps
           {isAdminMode ? (
             <>
               <NavGroup title="القلب النابض" isCollapsed={isCollapsed} isAdminMode={isAdminMode}>
-                <NavItem icon={LayoutDashboard} label="نظرة بانورامية" active={activeTab === 'admin-dashboard'} onClick={() => setActiveTab?.('admin-dashboard')} isCollapsed={isCollapsed} isAdminMode={isAdminMode} />
+                <NavItem icon={LayoutDashboard} label="الصفحة الرئيسية" active={activeTab === 'admin-dashboard'} onClick={() => setActiveTab?.('admin-dashboard')} isCollapsed={isCollapsed} isAdminMode={isAdminMode} />
                 <NavItem icon={AreaChart} label="تحليلات المنصة" active={activeTab === 'admin-analytics'} onClick={() => setActiveTab?.('admin-analytics')} isAdminMode={isAdminMode} isCollapsed={isCollapsed} />
               </NavGroup>
 
@@ -412,7 +412,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ user, isOpen = true, isCollaps
           ) : (
             <>
               <NavGroup title="القلب النابض" isCollapsed={isCollapsed}>
-                <NavItem id="tour-home" icon={Home} label="نظرة بانورامية" active={activeTab === 'home'} onClick={() => setActiveTab?.('home')} isCollapsed={isCollapsed} />
+                <NavItem id="tour-home" icon={Home} label="الصفحة الرئيسية" active={activeTab === 'home'} onClick={() => setActiveTab?.('home')} isCollapsed={isCollapsed} />
                 <NavItem id="tour-projects" icon={Layers} label="مشاريعي" active={activeTab === 'my-plans'} onClick={() => setActiveTab?.('my-plans')} isCollapsed={isCollapsed} />
                 <NavItem id="tour-new-plan" icon={Rocket} label="خلق فكرة" active={activeTab === 'new-plan'} onClick={() => setActiveTab?.('new-plan')} isCollapsed={isCollapsed} />
               </NavGroup>

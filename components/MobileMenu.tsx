@@ -126,7 +126,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeT
           {isAdminMode ? (
             <>
               <NavGroup title="القلب النابض">
-                <NavItem icon={LayoutDashboard} label="نظرة بانورامية" active={activeTab === 'admin-dashboard'} onClick={() => handleNavigate('admin-dashboard')} />
+                <NavItem icon={LayoutDashboard} label="الصفحة الرئيسية" active={activeTab === 'admin-dashboard'} onClick={() => handleNavigate('admin-dashboard')} />
                 <NavItem icon={AreaChart} label="تحليلات المنصة" active={activeTab === 'admin-analytics'} onClick={() => handleNavigate('admin-analytics')} />
               </NavGroup>
               <NavGroup title="إدارة النظام">
@@ -141,7 +141,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeT
           ) : (
             <>
               <NavGroup title="القلب النابض">
-                <NavItem icon={Home} label="نظرة بانورامية" active={activeTab === 'home'} onClick={() => handleNavigate('home')} />
+                <NavItem icon={Home} label="الصفحة الرئيسية" active={activeTab === 'home'} onClick={() => handleNavigate('home')} />
                 <NavItem icon={Layers} label="مشاريعي" active={activeTab === 'my-plans'} onClick={() => handleNavigate('my-plans')} />
                 <NavItem icon={Rocket} label="خلق فكرة" active={activeTab === 'new-plan'} onClick={() => handleNavigate('new-plan')} />
               </NavGroup>

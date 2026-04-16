@@ -11,7 +11,9 @@ import {
   AlertCircle,
   Beaker,
   Rocket,
-  TrendingUp
+  TrendingUp,
+  Globe,
+  CheckCircle2
 } from 'lucide-react';
 import { Problem, Sector, SubSector } from './types';
 import { ScoreBadge, CountryTag } from './SubComponents';
@@ -238,8 +240,138 @@ export const OpportunityDetail: React.FC<OpportunityDetailProps> = ({
                  </p>
               </div>
             </div>
-
           </div>
+
+          {/* Global Resolution Intelligence Engine (Strategic Case Study) - Explicit Professional Edition */}
+          {selectedProblem.globalResolution && (
+            <div className="mt-16 -mx-6 sm:-mx-10 lg:-mx-14 bg-white border-t border-slate-100 p-8 sm:p-12 lg:p-16 relative overflow-hidden">
+              <div className="max-w-7xl mx-auto">
+                {/* Section Header */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-slate-100 pb-8">
+                   <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-indigo-600 font-black text-[10px] uppercase tracking-[0.2em]">
+                         <Globe size={14} /> الخريطة العالمية للحلول الاستراتيجية
+                      </div>
+                      <h3 className="text-3xl sm:text-4xl font-black text-slate-900 leading-none">منصة السوابق والحلول</h3>
+                      <p className="text-slate-500 font-medium text-sm sm:text-base">تحليل الدول التي نجحت في سد هذه الفجوة ونماذج إدارتها الحديثة</p>
+                   </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                   
+                   {/* Left Side: Historical Suffering & Context (4 Columns) */}
+                   <div className="lg:col-span-4 space-y-8">
+                      <div className="p-6 sm:p-8 bg-rose-50/30 border border-rose-100 rounded-[2.5rem] relative overflow-hidden">
+                         <div className="absolute top-0 left-0 w-1 h-full bg-rose-500" />
+                         <h4 className="text-base font-black text-rose-900 mb-4 flex items-center gap-2">
+                            <AlertCircle size={18} /> سياق الأزمة (المعاناة)
+                         </h4>
+                         <p className="text-sm font-bold text-rose-800/70 leading-relaxed mb-6">
+                            {selectedProblem.globalResolution.historicalContext}
+                         </p>
+                         <div className="pt-4 border-t border-rose-100">
+                            <p className="text-[10px] font-black text-rose-400 uppercase mb-3">دول واجهت نفس الفجوة سابقاً</p>
+                            <div className="flex flex-wrap gap-2">
+                               {selectedProblem.globalResolution.sufferingCountries.map(c => (
+                                 <span key={c} className="px-3 py-1 bg-white text-rose-600 text-[10px] font-black rounded-lg border border-rose-200">{c}</span>
+                               ))}
+                            </div>
+                         </div>
+                      </div>
+
+                      {/* Success Conditions - Strategic Checklist */}
+                      <div className="p-8 bg-slate-50 border border-slate-100 rounded-[2.5rem]">
+                         <h4 className="text-base font-black text-slate-900 mb-6 flex items-center gap-2">
+                            <Zap size={18} className="text-amber-500" /> ركائز النجاح (Success Pillars)
+                         </h4>
+                         <div className="space-y-4">
+                            {selectedProblem.globalResolution.successConditions.map((cond, i) => (
+                              <div key={i} className="flex items-start gap-3">
+                                 <div className="w-5 h-5 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 mt-0.5">
+                                    <CheckCircle2 size={12} />
+                                 </div>
+                                 <span className="text-xs font-black text-slate-600 leading-relaxed">{cond}</span>
+                              </div>
+                            ))}
+                         </div>
+                      </div>
+                   </div>
+
+                   {/* Right Side: Benchmarks & Management Model (8 Columns) */}
+                   <div className="lg:col-span-8 space-y-10">
+                      
+                      {/* 1. Global Success Benchmarks */}
+                      <div className="space-y-6">
+                         <h4 className="text-lg font-black text-slate-900 flex items-center gap-2">
+                            <TrendingUp size={20} className="text-emerald-500" /> مراجع النجاح العالمي (Global Benchmarks)
+                         </h4>
+                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            {selectedProblem.globalResolution.successCountries.map(country => (
+                              <div key={country.name} className="bg-white p-5 rounded-2xl border border-slate-100 hover:border-emerald-200 transition-all group">
+                                 <div className="flex items-center gap-3 mb-3">
+                                    <span className="text-2xl group-hover:scale-110 transition-transform">{country.flag}</span>
+                                    <span className="text-sm font-black text-slate-900">{country.name}</span>
+                                 </div>
+                                 <p className="text-[10px] font-bold text-slate-500 leading-relaxed">
+                                    {country.reason}
+                                 </p>
+                              </div>
+                            ))}
+                         </div>
+                      </div>
+
+                      {/* 2. Modern Management Model (How it's managed now) */}
+                      <div className="relative group">
+                         <h4 className="text-lg font-black text-slate-900 mb-6 flex items-center gap-2">
+                            <Cpu size={20} className="text-indigo-600" /> نموذج الإدارة الحديثة (Modern Management)
+                         </h4>
+                         <div className="bg-indigo-50/50 p-8 rounded-[2.5rem] border border-indigo-100 relative group-hover:shadow-xl transition-all">
+                            <div className="flex flex-col md:flex-row gap-8 items-start">
+                               <div className="w-16 h-16 bg-white rounded-2xl shadow-sm border border-indigo-100 flex items-center justify-center shrink-0">
+                                  <Activity size={32} className="text-indigo-600" />
+                               </div>
+                               <div className="flex-1">
+                                  <p className="text-slate-700 text-base font-bold leading-relaxed">
+                                     {selectedProblem.globalResolution.currentManagementModel}
+                                  </p>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+
+                      {/* 3. Local Actionable Playbook */}
+                      <div className="bg-slate-900 rounded-[3rem] p-8 sm:p-12 text-white relative overflow-hidden shadow-2xl">
+                         <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 blur-[100px] rounded-full" />
+                         <div className="relative">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-10">
+                               <div>
+                                  <h4 className="text-2xl font-black mb-2 flex items-center gap-3">
+                                     خطة التنفيذ في سوقنا المحلي 🎯
+                                  </h4>
+                                  <p className="text-indigo-300 text-sm font-bold opacity-80">{selectedProblem.globalResolution.localApplication.strategy}</p>
+                               </div>
+                            </div>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                               {selectedProblem.globalResolution.localApplication.phases.map((phase, idx) => (
+                                 <div key={idx} className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:bg-white/11 transition-all">
+                                    <div className="text-[10px] font-black text-indigo-400 uppercase mb-3 tracking-widest">المرحلة 0{idx + 1}</div>
+                                    <p className="text-sm font-black leading-relaxed">{phase}</p>
+                                 </div>
+                               ))}
+                            </div>
+                            
+                            <div className="mt-10 pt-8 border-t border-white/10 text-center">
+                               <button className="px-10 py-4 bg-indigo-600 text-white rounded-2xl text-xs font-black hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-900/20">تصدير استراتيجية الحل بالكامل</button>
+                            </div>
+                         </div>
+                      </div>
+
+                   </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </motion.div>
