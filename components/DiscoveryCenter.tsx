@@ -364,7 +364,7 @@ export function DiscoveryCenter({ setActiveTab }: { setActiveTab: (tab: string) 
     return (
       <div 
         key={group.title} 
-        className={`h-full flex flex-col p-6 rounded-[2rem] border ${theme.border} ${theme.bg} transition-all duration-300 hover:shadow-xl hover:shadow-slate-200/50 group`}
+        className={`h-full flex flex-col p-6 rounded-[2rem] border ${theme.border} ${theme.bg} transition-all duration-300 hover:shadow-xl hover:shadow-slate-200/50 group mx-auto md:mx-0 md:max-w-none`}
       >
         {/* Header Block */}
         <div className="flex items-center gap-3 mb-6">
@@ -492,7 +492,8 @@ export function DiscoveryCenter({ setActiveTab }: { setActiveTab: (tab: string) 
 
       <div className="max-w-[1600px] mx-auto px-8 sm:px-12 mt-24">
         {/* Main Smart Grid - Using Grid Auto Rows for consistent row height */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-32">
+        {/* Center grid items on mobile, align to start on md+ */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-32 justify-items-center md:justify-items-start">
           {filteredGroups.map((group, index) => renderCard(group, index))}
         </div>
 

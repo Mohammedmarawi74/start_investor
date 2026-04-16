@@ -66,19 +66,19 @@ const stats = [
     label: "الخطط النشطة",
     value: "12",
     icon: BrainCircuit,
-    color: "text-indigo-600",
+    color: "text-amber-700",
   },
   {
     label: "رصيد AI",
     value: "1.2k",
     icon: Zap,
-    color: "text-emerald-600",
+    color: "text-amber-700",
   },
   {
     label: "الإنجاز",
     value: "94%",
     icon: CheckCircle2,
-    color: "text-blue-600",
+    color: "text-amber-700",
   },
 ];
 
@@ -171,6 +171,7 @@ export const Home = ({ setActiveTab }: any) => {
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-indigo-50 rounded-2xl sm:rounded-3xl flex items-center justify-center mb-3 sm:mb-4 shadow-inner">
                 <BrainCircuit className="text-indigo-600" size={32} strokeWidth={2} />
               </div>
+              <span className="md:hidden bg-white/20 text-[7px] px-1.5 py-0.5 rounded-full font-black uppercase inline-block mb-1">احترافي</span>
               <p className="text-[8px] sm:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">عضوية البرو</p>
               <p className="font-black text-base sm:text-lg text-indigo-900 tracking-tight">Pro Plan</p>
             </Card>

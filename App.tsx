@@ -28,6 +28,7 @@ const App: React.FC = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isTourRunning, setIsTourRunning] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [subTabLabel, setSubTabLabel] = useState<string | null>(null);
   
   const notificationRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
@@ -35,6 +36,7 @@ const App: React.FC = () => {
   // Persistence Effect: Update localStorage whenever activeTab changes
   useEffect(() => {
     localStorage.setItem('khotta_active_tab', activeTab);
+    setSubTabLabel(null); // Reset sub-label when tab changes
   }, [activeTab]);
 
   useEffect(() => {
@@ -97,6 +99,8 @@ const App: React.FC = () => {
         <Header 
           activeTab={activeTab}
           setActiveTab={setActiveTab}
+          subTabLabel={subTabLabel}
+          setSubTabLabel={setSubTabLabel}
           isNotificationsOpen={isNotificationsOpen}
           setIsNotificationsOpen={setIsNotificationsOpen}
           isProfileOpen={isProfileOpen}
@@ -113,6 +117,7 @@ const App: React.FC = () => {
         <DashboardRouter 
           activeTab={activeTab}
           setActiveTab={setActiveTab}
+          setSubTabLabel={setSubTabLabel}
           user={MOCK_USER}
           sections={sections}
           handleSectionUpdate={handleSectionUpdate}

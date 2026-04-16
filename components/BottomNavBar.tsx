@@ -51,7 +51,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, setActive
               <div className={`p-1.5 sm:p-2 transition-all ${isActive ? 'bg-indigo-50 rounded-xl' : ''}`}>
                 <item.icon size={isActive ? 20 : 18} strokeWidth={isActive ? 2.5 : 2} className="w-5 h-5 sm:w-5 sm:h-5" />
               </div>
-              <span className={`text-[8px] sm:text-[9px] font-black tracking-tight ${isActive ? 'opacity-100' : 'opacity-0 h-0'} transition-all`}>
+              <span className={`text-[8px] sm:text-[9px] font-black tracking-tight transition-all ${isActive ? 'text-indigo-600' : 'text-slate-400'}`}>
                 {item.label}
               </span>
             </button>

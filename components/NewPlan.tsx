@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Plus, 
   Rocket, 
@@ -15,10 +15,12 @@ import {
   Sparkles,
   Layers,
   Zap,
-  ArrowRight
+  ArrowRight,
+  Heart,
+  LayoutGrid
 } from 'lucide-react';
 import SmartBeginnerPro from '../easy_mode/SmartBeginnerPro';
-import { IdeaCreation } from './IdeaCreation';
+import { IdeaCreation, CreationMode } from './IdeaCreation';
 
 interface Template {
   id: string;
@@ -83,12 +85,32 @@ const TEMPLATES: Template[] = [
   }
 ];
 
-export const NewPlan: React.FC<{ onStart: (id: string) => void }> = ({ onStart }) => {
+export const NewPlan: React.FC<{ 
+  onStart: (id: string) => void;
+  onBuildPlan?: () => void;
+  setSubTabLabel: (label: string | null) => void;
+  subTabLabel?: string | null;
+}> = ({ onStart, onBuildPlan, setSubTabLabel, subTabLabel }) => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [mode, setMode] = useState<'selection' | 'easy' | 'ai'>('selection');
+  const [mode, setMode] = useState<'selection' | 'easy' | 'ai' | 'family' | 'bmc' | 'mit24'>('selection');
 
-  if (mode === 'ai') {
-    return <IdeaCreation onBack={() => setMode('selection')} />;
+  useEffect(() => {
+    if (!subTabLabel) {
+      setMode('selection');
+    }
+  }, [subTabLabel]);
+
+  if (mode === 'ai' || mode === 'family' || mode === 'bmc' || mode === 'mit24') {
+    return (
+      <IdeaCreation 
+        initialMode={mode as CreationMode} 
+        onBuildPlan={onBuildPlan}
+        onBack={() => {
+          setMode('selection');
+          setSubTabLabel(null);
+        }} 
+      />
+    );
   }
 
   return (
@@ -103,58 +125,132 @@ export const NewPlan: React.FC<{ onStart: (id: string) => void }> = ({ onStart }
       </div>
 
       {/* 2. DENSE CHOICE GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {/* FAMILY MODE CARD */}
+        <button 
+          onClick={() => {
+            setMode('family');
+            setSubTabLabel('مود الأهل');
+          }}
+          className="group relative overflow-hidden bg-gradient-to-br from-pink-500 to-rose-600 p-5 rounded-[2rem] shadow-xl hover:shadow-pink-100 transition-all duration-500 text-right text-white"
+        >
+          <div className="absolute top-0 left-0 p-2 opacity-10"><Heart size={60} /></div>
+          <div className="flex flex-col gap-3 relative z-10">
+            <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+              <Heart size={20} strokeWidth={2.5} fill="currentColor" />
+            </div>
+            <div>
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1.5">
+                <h3 className="text-sm font-black tracking-tight leading-tight">مود الأهل</h3>
+                <span className="bg-white/20 text-[9px] px-2 py-0.5 rounded-full font-black uppercase shrink-0 leading-none">سهل</span>
+              </div>
+              <p className="text-pink-50 font-bold text-[10px] opacity-90 leading-relaxed line-clamp-2">صغ فكرتك بكلمات بسيطة لتشرحها بوضوح.</p>
+            </div>
+          </div>
+        </button>
+
         {/* EASY MODE CARD */}
         <button 
           onClick={() => onStart('easy')}
-          className="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 p-6 rounded-[2rem] shadow-xl hover:shadow-emerald-100 transition-all duration-500 text-right text-white"
+          className="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 p-5 rounded-[2rem] shadow-xl hover:shadow-emerald-100 transition-all duration-500 text-right text-white"
         >
-          <div className="absolute top-0 left-0 p-2 opacity-10">
-            <Zap size={80} />
-          </div>
-          <div className="flex flex-col gap-5 relative z-10">
-            <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-              <Zap size={24} strokeWidth={2.5} fill="currentColor" />
+          <div className="absolute top-0 left-0 p-2 opacity-10"><Zap size={60} /></div>
+          <div className="flex flex-col gap-3 relative z-10">
+            <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+              <Zap size={20} strokeWidth={2.5} fill="currentColor" />
             </div>
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <h3 className="text-lg font-black tracking-tight">Easy Mode</h3>
-                <span className="bg-white/20 text-[8px] px-1.5 py-0.5 rounded-full font-black uppercase">الناشئ</span>
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1.5">
+                <h3 className="text-sm font-black tracking-tight leading-tight">Easy Mode</h3>
+                <span className="bg-white/20 text-[9px] px-2 py-0.5 rounded-full font-black uppercase shrink-0 leading-none">ناشئ</span>
               </div>
-              <p className="text-emerald-50 font-bold text-[11px] opacity-90 leading-relaxed">تحليل فكرتك وبناء خطة عمل سريعة عبر 8 أسئلة ذكية مبسطة.</p>
+              <p className="text-emerald-50 font-bold text-[10px] opacity-90 leading-relaxed line-clamp-2">تحليل فكرتك عبر 8 أسئلة ذكية مبسطة.</p>
             </div>
           </div>
         </button>
 
+        {/* AI MODE CARD */}
         <button 
-          onClick={() => setMode('ai')}
-          className="group relative overflow-hidden bg-gradient-to-br from-purple-600 to-indigo-600 p-6 rounded-[2rem] shadow-xl hover:shadow-purple-100 transition-all duration-500 text-right text-white"
+          onClick={() => {
+            setMode('ai');
+            setSubTabLabel('التوليد الذكي (AI)');
+          }}
+          className="group relative overflow-hidden bg-gradient-to-br from-purple-600 to-indigo-600 p-5 rounded-[2rem] shadow-xl hover:shadow-purple-100 transition-all duration-500 text-right text-white"
         >
-          <div className="absolute top-0 left-0 p-2 opacity-10">
-            <Sparkles size={80} />
-          </div>
-          <div className="flex flex-col gap-5 relative z-10">
-            <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-              <Wand2 size={24} strokeWidth={2.5} />
+          <div className="absolute top-0 left-0 p-2 opacity-10"><Sparkles size={60} /></div>
+          <div className="flex flex-col gap-3 relative z-10">
+            <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+              <Wand2 size={20} strokeWidth={2.5} />
             </div>
             <div>
-              <h3 className="text-lg font-black mb-1 tracking-tight">التوليد الذكي (AI)</h3>
-              <p className="text-purple-100 font-bold text-[11px] opacity-90 leading-relaxed">دع الذكاء الاصطناعي يبني لك مسودة الهيكل الاستراتيجي لمشروعك آلياً.</p>
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1.5">
+                <h3 className="text-sm font-black tracking-tight leading-tight">التوليد الذكي (AI)</h3>
+              </div>
+              <p className="text-purple-100 font-bold text-[10px] opacity-90 leading-relaxed line-clamp-2">الذكاء الاصطناعي يبني لك الهيكل الاستراتيجي آلياً.</p>
             </div>
           </div>
         </button>
 
+        {/* SCRATCH CARD */}
         <button 
           onClick={() => onStart('scratch')}
-          className="group relative overflow-hidden bg-white border border-slate-100 p-6 rounded-[2rem] shadow-sm hover:shadow-xl hover:shadow-slate-100/50 transition-all duration-500 text-right"
+          className="group relative overflow-hidden bg-white border border-slate-100 p-5 rounded-[2rem] shadow-sm hover:shadow-xl hover:shadow-slate-100/50 transition-all duration-500 text-right"
         >
-          <div className="flex flex-col gap-5">
-            <div className="w-12 h-12 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center group-hover:bg-slate-900 group-hover:text-white transition-all duration-500 shadow-inner">
-              <Plus size={24} strokeWidth={3} />
+          <div className="flex flex-col gap-3">
+            <div className="w-10 h-10 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center group-hover:bg-slate-900 group-hover:text-white transition-all duration-500 shadow-inner">
+              <Plus size={20} strokeWidth={3} />
             </div>
             <div>
-              <h3 className="text-lg font-black text-slate-900 mb-1 tracking-tight">البدء من الصفر</h3>
-              <p className="text-slate-400 font-bold text-[11px] leading-relaxed">أنشئ خطة مخصصة بالكامل خطوة بخطوة بالتحكم المجهري في التفاصيل.</p>
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1.5">
+                <h3 className="text-sm font-black text-slate-900 tracking-tight leading-tight">البدء من الصفر</h3>
+              </div>
+              <p className="text-slate-400 font-bold text-[10px] leading-relaxed line-clamp-2">تحكم كامل في كل تفاصيل الخطة خطوة بخطوة.</p>
+            </div>
+          </div>
+        </button>
+
+        {/* BMC CARD */}
+        <button 
+          onClick={() => {
+            setMode('bmc');
+            setSubTabLabel('Business Canvas');
+          }}
+          className="group relative overflow-hidden bg-gradient-to-br from-emerald-600 to-teal-700 p-5 rounded-[2rem] shadow-xl hover:shadow-emerald-100 transition-all duration-500 text-right text-white"
+        >
+          <div className="absolute top-0 left-0 p-2 opacity-10"><LayoutGrid size={60} /></div>
+          <div className="flex flex-col gap-3 relative z-10">
+            <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+              <LayoutGrid size={20} strokeWidth={2} />
+            </div>
+            <div>
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1.5">
+                <h3 className="text-sm font-black tracking-tight leading-tight">Business Canvas</h3>
+                <span className="bg-white/20 text-[9px] px-2 py-0.5 rounded-full font-black uppercase shrink-0 leading-none">9 حقول</span>
+              </div>
+              <p className="text-emerald-50 font-bold text-[10px] opacity-90 leading-relaxed line-clamp-2">لوحة نموذج العمل الكلاسيكية بشكل تفاعلي.</p>
+            </div>
+          </div>
+        </button>
+
+        {/* MIT24 CARD */}
+        <button 
+          onClick={() => {
+            setMode('mit24');
+            setSubTabLabel('MIT 24 Steps');
+          }}
+          className="group relative overflow-hidden bg-gradient-to-br from-amber-500 to-orange-600 p-5 rounded-[2rem] shadow-xl hover:shadow-amber-100 transition-all duration-500 text-right text-white"
+        >
+          <div className="absolute top-0 left-0 p-2 opacity-10"><Rocket size={60} /></div>
+          <div className="flex flex-col gap-3 relative z-10">
+            <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+              <Rocket size={20} strokeWidth={2} />
+            </div>
+            <div>
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1.5">
+                <h3 className="text-sm font-black tracking-tight leading-tight">MIT 24 Steps</h3>
+                <span className="bg-white/20 text-[9px] px-2 py-0.5 rounded-full font-black uppercase shrink-0 leading-none">احترافي</span>
+              </div>
+              <p className="text-amber-50 font-bold text-[10px] opacity-90 leading-relaxed line-clamp-2">منهج بيل أوليت — 20 خطوة انضباطية تأسيسية.</p>
             </div>
           </div>
         </button>

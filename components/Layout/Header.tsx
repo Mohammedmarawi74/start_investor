@@ -10,6 +10,8 @@ import { User } from '../../types';
 interface HeaderProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  subTabLabel?: string | null;
+  setSubTabLabel?: (label: string | null) => void;
   isNotificationsOpen: boolean;
   setIsNotificationsOpen: (open: boolean) => void;
   isProfileOpen: boolean;
@@ -26,6 +28,8 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   activeTab,
   setActiveTab,
+  subTabLabel,
+  setSubTabLabel,
   isNotificationsOpen,
   setIsNotificationsOpen,
   isProfileOpen,
@@ -74,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
   ];
 
   return (
-    <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-100 px-3 sm:px-4 md:px-6 lg:px-12 py-2 sm:py-3 flex items-center justify-between">
+    <div className="sticky top-0 z-40 w-full max-w-full bg-white/80 backdrop-blur-xl border-b border-gray-100 px-3 sm:px-4 md:px-6 lg:px-12 py-2 sm:py-3 flex items-center justify-between">
        <div className="flex items-center gap-2 sm:gap-3 lg:gap-6">
           {/* Mobile Hamburger Button */}
           <button
@@ -112,8 +116,18 @@ export const Header: React.FC<HeaderProps> = ({
                   </>
                 )}
 
-                <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-1.5 bg-gray-50 border border-gray-100 rounded-full text-gray-700 animate-in fade-in slide-in-from-right-2 duration-500 max-w-[180px] sm:max-w-none truncate">
-                   <span className="w-1 h-1 bg-primary-500 rounded-full flex-shrink-0"></span>
+                <button 
+                  onClick={() => {
+                    setActiveTab(activeTab);
+                    if (setSubTabLabel) setSubTabLabel(null);
+                  }}
+                  className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-1.5 border rounded-full transition-all duration-500 max-w-[180px] sm:max-w-none truncate ${
+                    subTabLabel 
+                      ? 'bg-white border-slate-100 text-slate-500 hover:bg-slate-50 hover:text-slate-900 active:scale-95' 
+                      : 'bg-gray-50 border-gray-100 text-gray-700'
+                  }`}
+                >
+                   <span className={`w-1 h-1 rounded-full flex-shrink-0 ${subTabLabel ? 'bg-slate-300' : 'bg-primary-500'}`}></span>
                    <span className="truncate">
                      {activeTab === 'market-discovery' && 'اكتشاف السوق'}
                      {activeTab === 'profile' && 'الملف الشخصي'}
@@ -127,7 +141,17 @@ export const Header: React.FC<HeaderProps> = ({
                      {activeTab === 'admin-dashboard' && 'لوحة الإدارة'}
                      {activeTab === 'contact-us' && 'اتصل بنا'}
                    </span>
-                </div>
+                </button>
+
+                {subTabLabel && (
+                   <>
+                     <ChevronLeft size={10} className="text-gray-300 w-3 h-3 sm:w-4 sm:h-4" />
+                     <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-1.5 bg-primary-50 border border-primary-100 rounded-full text-primary-700 animate-in fade-in slide-in-from-right-2 duration-500 max-w-[150px] sm:max-w-none truncate">
+                        <span className="w-1 h-1 bg-primary-500 rounded-full flex-shrink-0 animate-pulse"></span>
+                        <span className="truncate font-black">{subTabLabel}</span>
+                     </div>
+                   </>
+                 )}
                </>
              )}
           </nav>

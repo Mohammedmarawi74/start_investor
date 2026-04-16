@@ -127,8 +127,8 @@ export default function ResultPage() {
           </div>
 
           {/* Buttons */}
-          <div className="buttons-section flex items-center gap-2 sm:gap-3 flex-shrink-0 w-full sm:w-auto justify-center sm:justify-end">
-            <div className="badge flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-full px-3 py-1.5 text-[9px] sm:text-[10px] font-black text-indigo-300 shadow-inner">
+          <div className="buttons-section flex flex-wrap items-center gap-2 sm:gap-3 flex-shrink-0 w-full sm:w-auto justify-center sm:justify-end">
+            <div className="badge flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-full px-3 py-1.5 text-[9px] sm:text-[10px] font-black text-indigo-300 shadow-inner shrink-0">
                <Lucide.Sparkles size={12} fill="currentColor" className="animate-pulse" />
                <span>الوضع المتقدم الذكي</span>
             </div>

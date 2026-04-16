@@ -229,6 +229,8 @@ interface DashboardRouterProps {
   handleSectionUpdate: (id: string, updates: Partial<PlanSection>) => void;
   expandedSectionId: string | null;
   onSectionExpand: (id: string | null) => void;
+  setSubTabLabel: (label: string | null) => void;
+  subTabLabel?: string | null;
 }
 
 export const DashboardRouter: React.FC<DashboardRouterProps> = ({
@@ -238,9 +240,11 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
   sections,
   handleSectionUpdate,
   expandedSectionId,
-  onSectionExpand
+  onSectionExpand,
+  setSubTabLabel,
+  subTabLabel
 }) => {
-  const containerClass = ['editor', 'strategic-dashboard', 'contact-us', 'market-discovery'].includes(activeTab) || activeTab.endsWith('-dashboard') 
+  const containerClass = ['editor', 'strategic-dashboard', 'contact-us', 'market-discovery', 'problem-engine'].includes(activeTab) || activeTab.endsWith('-dashboard') 
     ? 'w-full' 
     : 'max-w-6xl mx-auto py-6 sm:py-8 lg:py-10 px-4 sm:px-6 lg:px-12 pb-20 lg:pb-10';
 
@@ -267,7 +271,18 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
       case 'my-plans':
         return <MyProjects />;
       case 'new-plan':
-        return <NewPlan onStart={(id) => id === 'easy' ? setActiveTab('strategic-dashboard') : setActiveTab('editor')} />;
+        // Guard optional props to avoid runtime ReferenceError if not provided by the caller
+        const subTabLabelSafe = typeof subTabLabel === 'string' ? subTabLabel : undefined;
+        const setSubTabLabelSafe = typeof setSubTabLabel === 'function' ? setSubTabLabel : undefined;
+        return (
+          <NewPlan 
+            key={`${activeTab}-${subTabLabel ? 'sub' : 'root'}`}
+            onStart={(id) => id === 'easy' ? setActiveTab('strategic-dashboard') : setActiveTab('editor')} 
+            onBuildPlan={() => setActiveTab('editor')}
+            setSubTabLabel={setSubTabLabelSafe} 
+            subTabLabel={subTabLabelSafe}
+          />
+        );
       case 'brand-identity':
         return <BrandIdentityStudio />;
       case 'unicorn-benchmark':

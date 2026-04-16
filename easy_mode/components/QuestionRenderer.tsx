@@ -55,8 +55,8 @@ export const QuestionCards: React.FC<RendererProps> = ({ question, onSelect, sel
             <button 
               key={val} 
               onClick={() => handleToggle(val)} 
-              style={{ ...styles, width: "fit-content", minWidth: "140px", maxWidth: "180px" }} 
-              className="group relative flex flex-col items-start text-right p-3 rounded-[1rem] border-2 transition-all duration-500"
+              style={styles} 
+              className="group relative flex-1 min-w-[130px] sm:min-w-[140px] max-w-[100%] sm:max-w-[180px] flex flex-col items-start text-right p-3 rounded-[1rem] border-2 transition-all duration-500"
             >
               <div style={{ background: active ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.03)", color: active ? "#fff" : themeColor }} className={`w-8 h-8 rounded-xl flex items-center justify-center mb-2 transition-all duration-500 ${active ? 'rotate-12' : 'group-hover:scale-110'}`}>
                 <LucideIcon name={opt.icon || (question.icon || 'Box')} size={16} />

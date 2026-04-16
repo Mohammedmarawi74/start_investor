@@ -1,0 +1,154 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Globe, ChevronLeft, Target, AlertCircle, ArrowLeft, Search } from 'lucide-react';
+import { CONTINENTS, COUNTRIES, DATA } from '../constants.tsx';
+import { Problem } from '../types';
+import { ScoreBadge, getPainTag, CountryTag } from '../SubComponents';
+
+interface MarketsViewProps {
+  view: string;
+  selectedContinent: string;
+  selectedMarket: string | null;
+  marketSearchTerm: string;
+  currentMarketPage: number;
+  ITEMS_PER_PAGE: number;
+  setView: (v: any) => void;
+  setSelectedContinent: (v: string) => void;
+  setSelectedMarket: (v: string) => void;
+  setMarketSearchTerm: (v: string) => void;
+  setCurrentMarketPage: (v: number) => void;
+  goToOpportunity: (prob: Problem, fromView: any) => void;
+}
+
+export const MarketsView: React.FC<MarketsViewProps> = ({
+  view,
+  selectedContinent,
+  selectedMarket,
+  marketSearchTerm,
+  currentMarketPage,
+  ITEMS_PER_PAGE,
+  setView,
+  setSelectedContinent,
+  setSelectedMarket,
+  setMarketSearchTerm,
+  setCurrentMarketPage,
+  goToOpportunity
+}) => {
+  const marketProblems = React.useMemo(() => {
+    const all: any[] = [];
+    DATA.forEach(sec => sec.subs.forEach(sub => sub.problems.forEach(p => {
+      if ((selectedMarket === 'ALL' || p.countries.includes(selectedMarket || '') || p.countries.includes('ALL'))) {
+         all.push({ ...p, sectorName: sec.name, sectorColor: sec.color, subName: sub.name });
+      }
+    })));
+    return all.filter(p => p.title.includes(marketSearchTerm) || p.desc.includes(marketSearchTerm));
+  }, [selectedMarket, marketSearchTerm]);
+
+  const currentMarketList = marketProblems.slice((currentMarketPage - 1) * ITEMS_PER_PAGE, currentMarketPage * ITEMS_PER_PAGE);
+
+  if (view === 'continents_gateway') {
+    return (
+      <div className="space-y-10">
+        <div className="flex flex-wrap justify-center gap-3">
+          {CONTINENTS.map(c => (
+            <button key={c.id} onClick={() => setSelectedContinent(c.id)}
+              className={`px-6 py-3 rounded-2xl text-xs font-black transition-all border ${selectedContinent === c.id ? 'bg-indigo-600 text-white border-indigo-500 shadow-lg' : 'bg-white text-slate-500 border-slate-100 hover:bg-slate-50'}`}
+            >
+              {c.name}
+            </button>
+          ))}
+        </div>
+
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {CONTINENTS.find(c => c.id === selectedContinent)?.countries.map(cId => {
+            const country = COUNTRIES.find(cc => cc.id === cId);
+            return (
+              <button key={cId} onClick={() => { setSelectedMarket(cId); setView('market_problems'); }}
+                className="group bg-white p-5 rounded-2xl border border-slate-100 hover:border-indigo-200 shadow-sm hover:shadow-md transition-all text-center"
+              >
+                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">{country?.flag}</div>
+                <div className="text-sm font-black text-slate-900 mb-1">{country?.name}</div>
+                <div className="text-[10px] font-bold text-slate-400">استكشف الفرص</div>
+              </button>
+            );
+          })}
+        </motion.div>
+      </div>
+    );
+  }
+
+  if (view === 'market_problems' && selectedMarket) {
+     const country = COUNTRIES.find(c => c.id === selectedMarket);
+     const continent = CONTINENTS.find(c => c.id === selectedContinent);
+     return (
+       <div className="space-y-6">
+          {/* Breadcrumbs */}
+          <div className="flex items-center gap-2 text-xs font-bold text-slate-400 overflow-x-auto no-scrollbar py-2 mb-2">
+              <button onClick={() => { setView('continents_gateway'); setSelectedMarket(''); }} className="hover:text-indigo-600 transition-colors shrink-0">استخبارات الأسواق</button>
+              {continent && (
+                 <>
+                    <ChevronLeft size={12} className="shrink-0" />
+                    <button onClick={() => { setView('continents_gateway'); setSelectedMarket(''); }} className="hover:text-indigo-600 transition-colors shrink-0">{continent.name}</button>
+                 </>
+              )}
+              {country && (
+                 <>
+                    <ChevronLeft size={12} className="shrink-0" />
+                    <span className="text-indigo-600 shrink-0">{country.name}</span>
+                 </>
+              )}
+          </div>
+
+          <div className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
+             <div className="flex items-center gap-4">
+                <div className="text-4xl">{country?.flag}</div>
+                <div>
+                   <h3 className="text-xl font-black text-slate-900">سوق {country?.name}</h3>
+                   <p className="text-xs font-bold text-slate-400">تحليل فجوات السوق المحلي المكتشفة ({marketProblems.length})</p>
+                </div>
+             </div>
+             <div className="relative w-full sm:w-64">
+                <Search size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                <input placeholder="ابحث في فجوات هذا السوق..." value={marketSearchTerm} onChange={e => setMarketSearchTerm(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-100 rounded-xl px-10 py-2.5 text-xs font-bold outline-none focus:ring-2 ring-indigo-500/10 transition-all"
+                />
+             </div>
+          </div>
+
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            {currentMarketList.map(problem => (
+              <div key={problem.id} className="bg-white p-6 sm:p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden flex flex-col">
+                <div className="flex flex-col lg:flex-row gap-6 flex-1">
+                  <div className="flex-1">
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                      <span className={`text-[9px] px-2.5 py-1 rounded-md bg-${problem.sectorColor}-50 text-${problem.sectorColor}-600 border border-${problem.sectorColor}-100 font-black`}>{problem.sectorName}</span>
+                      <span className={`px-2 py-0.5 rounded-md text-[9px] font-black border ${getPainTag(problem.pain).class}`}>#{getPainTag(problem.pain).label}</span>
+                      {problem.countries.map(cId => <CountryTag key={cId} countryId={cId} />)}
+                    </div>
+                    <h3 className="text-lg font-black text-slate-900 mb-3">{problem.title}</h3>
+                    <p className="text-xs font-medium text-slate-500 mb-6 line-clamp-2">{problem.desc}</p>
+                    <button onClick={() => goToOpportunity(problem, 'market_problems')} className="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-[10px] font-black hover:bg-indigo-700 transition-all flex items-center justify-center gap-2"><span>استكشف بيانات الفرصـة</span> <ArrowLeft size={14} /></button>
+                  </div>
+                  <div className="w-full lg:w-[150px] space-y-3 p-4 bg-slate-50 rounded-xl">
+                    <ScoreBadge label="شدة الألم" score={problem.pain} colorClass="text-rose-500" />
+                    <ScoreBadge label="الربحية" score={problem.money} colorClass="text-emerald-500" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* simple pagination */}
+          {marketProblems.length > ITEMS_PER_PAGE && (
+            <div className="flex justify-center items-center gap-4 pt-6">
+               <button disabled={currentMarketPage === 1} onClick={() => setCurrentMarketPage(currentMarketPage - 1)} className="p-2 rounded-lg bg-white border border-slate-100 disabled:opacity-50"><ChevronLeft size={20} className="rotate-180" /></button>
+               <span className="text-xs font-black">صفحة {currentMarketPage}</span>
+               <button disabled={currentMarketPage * ITEMS_PER_PAGE >= marketProblems.length} onClick={() => setCurrentMarketPage(currentMarketPage + 1)} className="p-2 rounded-lg bg-white border border-slate-100 disabled:opacity-50"><ChevronLeft size={20} /></button>
+            </div>
+          )}
+       </div>
+     );
+  }
+
+  return null;
+};

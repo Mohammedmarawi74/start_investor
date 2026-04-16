@@ -18,7 +18,7 @@ const TABS = [
 export const ResultHeader: React.FC<ResultHeaderProps> = ({ activeTab, setActiveTab }) => {
   return (
     <div className="result-header-wrapper w-full bg-[#0f172a]/80 backdrop-blur-xl border-b border-white/10 sticky top-0 z-40 shadow-2xl flex-shrink-0" dir="rtl">
-      <div className="tabs-container flex items-center gap-2 sm:gap-4 px-3 sm:px-6 py-2 sm:py-3 overflow-x-auto no-scrollbar w-full" dir="rtl">
+      <div className="tabs-container flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-4 px-3 sm:px-6 py-2 sm:py-3 w-full" dir="rtl">
         {TABS.map((tab, i) => (
           <button
             key={tab.id}
