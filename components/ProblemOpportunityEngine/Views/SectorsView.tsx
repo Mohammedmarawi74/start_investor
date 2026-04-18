@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LayoutGrid, ChevronLeft, Target, AlertCircle, ArrowLeft } from 'lucide-react';
+import { LayoutGrid, ChevronLeft, Target, AlertCircle, ArrowLeft, ChevronDown, Globe } from 'lucide-react';
 import { Sector, SubSector, Problem } from '../types';
 import { ScoreBadge, getPainTag, CountryTag, CountryList } from '../SubComponents';
 import { MinimalistCard } from '../MinimalistCard';
@@ -34,10 +34,82 @@ export const SectorsView: React.FC<SectorsViewProps> = ({
   goToOpportunity
 }) => {
   const currentCountry = COUNTRIES.find(c => c.id === selectedCountry);
+  const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsCountryOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <div className="space-y-6">
-      {/* ─── Navigation Header (Dropdown + Breadcrumbs) ─── */}
+      {/* ─── Premium Light Country Selector (Gentle Dropdown) ─── */}
+      {view === 'sectors' && (
+        <div className="relative w-fit" ref={dropdownRef}>
+           <button 
+             onClick={() => setIsCountryOpen(!isCountryOpen)}
+             className={`flex items-center gap-3 px-4 py-2.5 bg-white border rounded-2xl transition-all shadow-sm group/btn ${isCountryOpen ? 'border-indigo-400 ring-4 ring-indigo-50' : 'border-slate-100 hover:border-indigo-200'}`}
+           >
+              <div className="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center text-xl border border-slate-50 shadow-inner">
+                 {currentCountry?.flag || <Globe size={18} className="text-indigo-400" />}
+              </div>
+              <div className="text-right">
+                 <p className="text-[9px] font-black text-slate-300 uppercase leading-none mb-1 tracking-widest">المجال الجغرافي</p>
+                 <p className="text-xs font-black text-slate-700 leading-none flex items-center gap-2">
+                    {currentCountry?.name}
+                    <ChevronDown size={14} className={`transition-transform duration-300 ${isCountryOpen ? 'rotate-180 text-indigo-500' : 'text-slate-300'}`} />
+                 </p>
+              </div>
+           </button>
+
+           {/* Gentle Floating Menu */}
+           <AnimatePresence>
+             {isCountryOpen && (
+               <motion.div 
+                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                 animate={{ opacity: 1, y: 0, scale: 1 }}
+                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                 className="absolute top-full right-0 mt-2 w-64 bg-white rounded-[2rem] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] border border-slate-100 z-[100] p-3 overflow-hidden"
+               >
+                  <div className="max-h-[350px] overflow-y-auto no-scrollbar space-y-1">
+                     <p className="px-4 py-2 text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">اختر النطاق</p>
+                     {COUNTRIES.map(c => (
+                        <button 
+                          key={c.id} 
+                          onClick={() => {
+                            setSelectedCountry(c.id);
+                            setIsCountryOpen(false);
+                          }} 
+                          className={`w-full text-right flex items-center gap-3 p-3 rounded-2xl transition-all ${
+                            selectedCountry === c.id 
+                            ? 'bg-indigo-50 text-indigo-700 shadow-sm' 
+                            : 'hover:bg-slate-50 text-slate-500 hover:text-slate-900'
+                          }`}
+                        >
+                           <span className={`text-xl w-8 h-8 rounded-lg flex items-center justify-center bg-white border transition-colors ${selectedCountry === c.id ? 'border-indigo-200 shadow-sm' : 'border-slate-50 hover:border-slate-200'}`}>{c.flag}</span>
+                           <span className="text-xs font-black flex-1">{c.name}</span>
+                           {selectedCountry === c.id && <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full shadow-lg shadow-indigo-200" />}
+                        </button>
+                     ))}
+                  </div>
+                  <div className="mt-2 pt-2 border-t border-slate-50 text-center">
+                     <p className="text-[9px] font-bold text-slate-300 italic">ذكاء استثمارية موثق عالمياً</p>
+                  </div>
+               </motion.div>
+             )}
+           </AnimatePresence>
+        </div>
+      )}
+
+
+      {/* ─── Navigation Header (Breadcrumbs) ─── */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
          {/* Breadcrumbs */}
          <div className="flex items-center gap-2 text-xs font-bold text-slate-400 overflow-x-auto no-scrollbar py-2">
@@ -55,29 +127,6 @@ export const SectorsView: React.FC<SectorsViewProps> = ({
                </>
             )}
          </div>
-
-         {/* Conditional Country Dropdown - Only on Main Sectors View */}
-         {view === 'sectors' && (
-           <div className="relative group shrink-0 w-full md:w-auto">
-              <div className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-xl border border-slate-100 shadow-sm cursor-pointer hover:border-indigo-200 transition-all">
-                 <span className="text-xl">{currentCountry?.flag}</span>
-                 <div className="text-right">
-                    <p className="text-[9px] font-black text-slate-400 uppercase leading-none mb-1">تصفية حسب الدولة:</p>
-                    <p className="text-xs font-black text-slate-900 leading-none">{currentCountry?.name}</p>
-                 </div>
-                 <ChevronLeft size={14} className="-rotate-90 text-slate-300 mr-4" />
-              </div>
-              
-              <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-2 max-h-[300px] overflow-y-auto no-scrollbar">
-                 {COUNTRIES.map(c => (
-                    <button key={c.id} onClick={() => setSelectedCountry(c.id)} className={`w-full text-right flex items-center gap-3 p-3 rounded-xl transition-all ${selectedCountry === c.id ? 'bg-indigo-50 text-indigo-700' : 'hover:bg-slate-50 text-slate-600'}`}>
-                       <span className="text-xl">{c.flag}</span>
-                       <span className="text-sm font-black">{c.name}</span>
-                    </button>
-                 ))}
-              </div>
-           </div>
-         )}
       </div>
 
       <AnimatePresence mode="wait">
