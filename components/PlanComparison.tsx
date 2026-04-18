@@ -94,24 +94,24 @@ export const PlanComparison: React.FC = () => {
   const selectedPlans = useMemo(() => MOCK_PLANS.filter(p => selectedIds.includes(p.id)), [selectedIds]);
 
   return (
-    <div dir="rtl" className="min-h-screen pb-24 font-['IBM_Plex_Sans_Arabic'] animate-in fade-in duration-700">
+    <div dir="rtl" className="min-h-screen pb-24 lg:pb-0 font-['IBM_Plex_Sans_Arabic'] animate-in fade-in duration-700 w-full max-w-full overflow-x-hidden bg-white">
       
-      {/* --- HEADER --- */}
-      <div className="max-w-7xl mx-auto px-6 pt-10 pb-16">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-12">
-          <div className="flex-1">
-             <div className="flex items-center gap-3 mb-4">
+      {/* ─── HEADER ─── */}
+      <div className="w-full max-w-7xl mx-auto px-5 sm:px-10 lg:px-14 pt-8 sm:pt-12 pb-12 sm:pb-20">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-12 lg:mb-16">
+          <div className="flex-1 space-y-4">
+             <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-200">
                   <ArrowRightLeft size={20} />
                 </div>
-                <span className="text-xs font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-4 py-1.5 rounded-full border border-blue-100">Decision Intelligence</span>
+                <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-4 py-1.5 rounded-full border border-blue-100">Decision Intelligence</span>
              </div>
-             <h1 className="text-4xl lg:text-5xl font-black text-slate-900 mb-4 tracking-tight">مقارنة السيناريوهات والجاهزية</h1>
-             <p className="text-slate-500 font-bold text-lg max-w-2xl leading-relaxed">حلل وفاضل بين استثماراتك المخططة. اختر حتى 3 خطط لاكتشاف التوازن الاستراتيجي وحساب المخاطر التراكمية.</p>
+             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-[1.15] tracking-tight">مقارنة السيناريوهات والجاهزية</h1>
+             <p className="text-slate-500 font-bold text-sm sm:text-lg max-w-2xl leading-relaxed">حلل وفاضل بين استثماراتك المخططة. اختر حتى 3 خطط لاكتشاف التوازن الاستراتيجي وحساب المخاطر التراكمية.</p>
           </div>
           
-          <div className="flex items-center gap-4 bg-white p-2 rounded-3xl border border-slate-100 shadow-sm">
-             <div className="flex -space-x-3 rtl:space-x-reverse px-4">
+          <div className="w-full lg:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-4 bg-white p-3 sm:p-2 rounded-3xl border border-slate-100 shadow-sm">
+             <div className="flex -space-x-3 rtl:space-x-reverse px-4 justify-center sm:justify-start">
                {selectedPlans.map(p => (
                  <div key={p.id} className="w-10 h-10 rounded-full bg-blue-600 border-4 border-white flex items-center justify-center text-[10px] font-black text-white shadow-md">
                    {p.title.charAt(0)}
@@ -123,15 +123,15 @@ export const PlanComparison: React.FC = () => {
                  </div>
                ))}
              </div>
-             <div className="h-10 w-px bg-slate-100 mx-2"></div>
+             <div className="hidden sm:block h-10 w-px bg-slate-100 mx-2"></div>
              <button 
                 onClick={() => setIsComparing(!isComparing)}
                 disabled={selectedIds.length < 2}
-                className={`px-8 py-3.5 rounded-2xl text-sm font-black transition-all flex items-center gap-3 ${
+                className={`flex-1 sm:flex-none px-8 py-3.5 rounded-2xl text-sm font-black transition-all flex items-center justify-center gap-3 ${
                   selectedIds.length >= 2 ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-xl' : 'bg-slate-100 text-slate-400 cursor-not-allowed'
                 }`}
              >
-               {isComparing ? <ArrowRight size={18} /> : <Zap size={18} />}
+               {isComparing ? <ArrowRight size={18} className="rotate-180" /> : <Zap size={18} />}
                <span>{isComparing ? 'العودة للاختيار' : 'بدء التحليل المقارن'}</span>
              </button>
           </div>
@@ -230,14 +230,14 @@ export const PlanComparison: React.FC = () => {
              </div>
 
              {/* 2. Visual Comparison Matrix (The War Room) */}
-             <div className="bg-slate-950 rounded-[4rem] p-12 text-white shadow-3xl relative overflow-hidden">
+             <div className="bg-slate-950 rounded-[2.5rem] sm:rounded-[4rem] p-6 sm:p-12 text-white shadow-3xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-20 opacity-10"><BarChart4 size={300} strokeWidth={0.5} /></div>
                 <div className="relative z-10">
-                   <div className="flex items-center gap-4 mb-12">
+                   <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-12">
                       <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-blue-400"><ShieldCheck size={24} /></div>
                       <div>
-                         <h2 className="text-3xl font-black mb-1">الرؤية العميقة للذكاء الاصطناعي</h2>
-                         <p className="text-slate-400 font-bold text-sm">مقارنة المفاضلة والقرار الاستراتيجي النهائي</p>
+                         <h2 className="text-xl sm:text-3xl font-black mb-1">الرؤية العميقة للذكاء الاصطناعي</h2>
+                         <p className="text-slate-400 font-bold text-[11px] sm:text-sm">مقارنة المفاضلة والقرار الاستراتيجي النهائي</p>
                       </div>
                    </div>
 
@@ -285,17 +285,17 @@ export const PlanComparison: React.FC = () => {
 
                          <div className="flex flex-col gap-4">
                             <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-start gap-4">
-                               <CheckCircle2 size={20} className="text-emerald-500 mt-1" />
+                               <CheckCircle2 size={18} className="text-emerald-500 mt-1 shrink-0" />
                                <div>
-                                  <div className="text-[10px] font-black text-emerald-500 uppercase mb-1">عامل النجاح الحاسم</div>
-                                  <p className="text-xs font-bold text-white">كفاءة الفريق في تنفيذ التقنيات الهجينة تضمن إطلاق أسرع بـ 3 أشهر.</p>
+                                  <div className="text-[9px] font-black text-emerald-500 uppercase mb-1">عامل النجاح الحاسم</div>
+                                  <p className="text-xs font-bold text-white leading-relaxed">كفاءة الفريق في تنفيذ التقنيات الهجينة تضمن إطلاق أسرع بـ 3 أشهر.</p>
                                </div>
                             </div>
                             <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-start gap-4">
-                               <AlertTriangle size={20} className="text-amber-500 mt-1" />
+                               <AlertTriangle size={18} className="text-amber-500 mt-1 shrink-0" />
                                <div>
-                                  <div className="text-[10px] font-black text-amber-500 uppercase mb-1">تنبيه المخاطرة</div>
-                                  <p className="text-xs font-bold text-white">تحتاج الخطط المختارة لضبط تكلفة الاستحواذ (CAC) لتجنب استنزاف السيولة مبكراً.</p>
+                                  <div className="text-[9px] font-black text-amber-500 uppercase mb-1">تنبيه المخاطرة</div>
+                                  <p className="text-xs font-bold text-white leading-relaxed">تحتاج الخطط المختارة لضبط تكلفة الاستحواذ (CAC) لتجنب استنزاف السيولة مبكراً.</p>
                                </div>
                             </div>
                          </div>
@@ -305,8 +305,8 @@ export const PlanComparison: React.FC = () => {
              </div>
 
              {/* 3. Competitive Breakdown Matrix */}
-             <div className="bg-white rounded-[3.5rem] border border-slate-100 shadow-sm overflow-hidden">
-                <table className="w-full text-right border-collapse">
+             <div className="bg-white rounded-[2rem] sm:rounded-[3.5rem] border border-slate-100 shadow-sm overflow-hidden overflow-x-auto no-scrollbar">
+                <table className="w-full text-right border-collapse min-w-[700px]">
                    <thead>
                       <tr className="bg-slate-50/50">
                          <th className="p-10 text-[11px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 min-w-[200px]">معيار التنافسية</th>
@@ -350,20 +350,20 @@ export const PlanComparison: React.FC = () => {
         )}
       </div>
 
-      {/* Floating Interactive Legend */}
-      <div className="fixed bottom-10 left-10 z-[60] animate-in slide-in-from-left-10 duration-1000">
-         <div className="bg-white/80 backdrop-blur-xl p-4 rounded-3xl border border-white shadow-2xl flex items-center gap-6 pr-6">
+      {/* Floating Interactive Legend - Responsive optimization */}
+      <div className="fixed bottom-24 lg:bottom-10 right-5 left-5 sm:left-10 lg:left-auto lg:right-auto z-[60] animate-in slide-in-from-bottom-10 lg:slide-in-from-left-10 duration-1000">
+         <div className="bg-white/80 backdrop-blur-xl p-3 sm:p-4 rounded-2xl sm:rounded-3xl border border-white shadow-2xl flex flex-wrap sm:flex-nowrap items-center justify-center gap-4 sm:gap-6 sm:pr-6">
             <div className="flex items-center gap-3">
-               <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-               <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest underline decoration-2 underline-offset-4 decoration-blue-200">الأكثر أماناً</span>
+               <div className="w-2.5 h-2.5 rounded-full bg-blue-600"></div>
+               <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest underline decoration-2 underline-offset-4 decoration-blue-200">الأكثر أماناً</span>
             </div>
             <div className="flex items-center gap-3">
-               <div className="w-3 h-3 rounded-full bg-emerald-600"></div>
-               <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest underline decoration-2 underline-offset-4 decoration-emerald-200">الأعلى ربحاً</span>
+               <div className="w-2.5 h-2.5 rounded-full bg-emerald-600"></div>
+               <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest underline decoration-2 underline-offset-4 decoration-emerald-200">الأعلى ربحاً</span>
             </div>
             <div className="flex items-center gap-3">
-               <div className="w-3 h-3 rounded-full bg-amber-600"></div>
-               <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest underline decoration-2 underline-offset-4 decoration-amber-200">الأسرع للتعادل</span>
+               <div className="w-2.5 h-2.5 rounded-full bg-amber-600"></div>
+               <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest underline decoration-2 underline-offset-4 decoration-amber-200">الأسرع للتعادل</span>
             </div>
          </div>
       </div>

@@ -21,6 +21,7 @@ import { ExportTemplates } from './ExportTemplates';
 import { Notifications } from './Notifications';
 import { SmartAnalyzer } from './SmartAnalyzer';
 import { Profile } from './Profile';
+import { MobileSiteMap } from './MobileSiteMap';
 import ResultPage from '../easy_mode/ResultPage';
 
 // Dashboards
@@ -316,6 +317,8 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
         return <ResultPage />;
       case 'notifications':
         return <Notifications />;
+      case 'site-map':
+        return <MobileSiteMap setActiveTab={setActiveTab} />;
       
       // Dashboards with navigation props
       case 'advertising-dashboard':

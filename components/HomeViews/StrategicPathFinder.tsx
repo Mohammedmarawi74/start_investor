@@ -1,147 +1,154 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { 
   BrainCircuit, 
-  CheckCircle2, 
-  Sparkles, 
-  TrendingUp, 
-  Briefcase, 
   Target, 
-  Globe, 
+  MapPin, 
   ShieldCheck, 
-  Zap,
+  Briefcase, 
+  Activity, 
   ArrowRight,
-  Info,
-  Waves
+  CheckCircle2
 } from 'lucide-react';
 
+/* ═══════════════════════════════════════════════════════════════
+   STRATEGIC PATH FINDER — "Step-by-Step AI Advisor"
+   ═══════════════════════════════════════════════════════════════ */
+
+const STEPS_DATA = [
+  {
+    step: 1,
+    title: 'تحديد الموقع والمرجعية',
+    options: [
+      { id: 'new', title: 'مستثمر طموح', sub: 'أسعى لاستكشاف فرص ناشئة', icon: Target, hint: 'نبدأ من الصفر' },
+      { id: 'scale', title: 'كيان مؤسسي', sub: 'أسعى لتعزيز الحصة السوقية', icon: MapPin, hint: 'تطوير وتوسع' },
+      { id: 'protect', title: 'محفظة استثمارية', sub: 'أسعى لتنويع الاستثمارات', icon: ShieldCheck, hint: 'إدارة مخاوف' },
+    ]
+  },
+  {
+    step: 2,
+    title: 'تحديد الهدف الاستراتيجي',
+    options: [
+      { id: 'b2b', title: 'قطاع الأعمال B2B', sub: 'بناء شراكات طويلة', icon: Briefcase, hint: 'عقود مستقرة' },
+      { id: 'b2c', title: 'المستهلك النهائي B2C', sub: 'حلول سريعة الانتشار', icon: Activity, hint: 'نمو متسارع' },
+      { id: 'deeptech', title: 'تقنيات عميقة', sub: 'بحث وتطوير مستدام', icon: BrainCircuit, hint: 'ميزة تنافسية' },
+    ]
+  },
+  {
+    step: 3,
+    title: 'تحديد الرغبة بالمخاطرة',
+    options: [
+      { id: 'high', title: 'مخاطرة عالية', sub: 'تطلع لتعظيم العوائد الاستثمارية', icon: Target, hint: 'أسواق غير مطروقة' },
+      { id: 'med', title: 'مخاطرة محسوبة', sub: 'استراتيجية نمو متزنة', icon: MapPin, hint: 'موازنة المحفظة' },
+      { id: 'low', title: 'مخاطرة منخفضة', sub: 'ضمان استقرار الأصول', icon: ShieldCheck, hint: 'تدفق نقدي مستقر' },
+    ]
+  }
+];
+
 const DecisionCard = ({ icon: Icon, title, sub, hint, onClick, isSelected }: any) => (
-  <motion.button
-    whileHover={{ y: -2, scale: 1.01 }}
-    whileTap={{ scale: 0.99 }}
+  <div 
     onClick={onClick}
-    className={`relative flex flex-col items-start p-5 rounded-2xl border transition-all text-right group w-full ${
-      isSelected 
-      ? 'bg-indigo-50 border-indigo-500 shadow-sm' 
-      : 'bg-white border-slate-100 hover:border-indigo-300 hover:shadow-md'
-    }`}
+    className={`group relative p-6 bg-white border rounded-[2rem] cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_-12px_rgba(79,70,229,0.15)] hover:-translate-y-2 active:scale-95 text-right
+      ${isSelected ? 'border-indigo-600 ring-4 ring-indigo-50 shadow-xl' : 'border-slate-100 hover:border-indigo-200'}
+    `}
   >
-    <div className={`p-2.5 rounded-xl mb-3 transition-colors ${isSelected ? 'bg-indigo-500 text-white' : 'bg-slate-50 text-slate-400 group-hover:text-indigo-600'}`}>
-      <Icon size={20} />
-    </div>
-    <h4 className="text-slate-900 font-black text-sm mb-1">{title}</h4>
-    <p className="text-slate-500 text-[10px] font-bold leading-relaxed mb-3">{sub}</p>
+    {/* Inner Glow */}
+    <div className={`absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[2rem] ${isSelected ? 'opacity-100' : ''}`} />
     
-    <div className="mt-auto pt-3 border-t border-slate-50 w-full flex items-center justify-between">
-      <div className="flex items-center gap-1.5 text-[9px] font-black text-indigo-500 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity">
-        <Info size={10} /> {hint}
+    <div className="relative flex flex-col items-center text-center gap-4">
+      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 ${isSelected ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 rotate-6' : 'bg-slate-50 text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 group-hover:rotate-3'}`}>
+        <Icon size={28} strokeWidth={1.5} />
       </div>
-      <ArrowRight size={14} className={`text-slate-300 group-hover:text-indigo-500 transition-all ${isSelected ? 'translate-x-0 opacity-100' : 'translate-x-1 opacity-0'}`} />
+      <div className="space-y-1">
+        <h4 className={`text-base font-black transition-colors ${isSelected ? 'text-indigo-900' : 'text-slate-900'}`}>{title}</h4>
+        <p className="text-[11px] font-bold text-slate-400 leading-relaxed px-2">{sub}</p>
+      </div>
+      
+      {/* Selected Indicator */}
+      {isSelected && (
+        <div className="absolute -top-2 -right-2 w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg animate-in zoom-in-0">
+          <CheckCircle2 size={14} />
+        </div>
+      )}
     </div>
-  </motion.button>
+  </div>
 );
 
 export const StrategicPathFinder = ({ setActiveTab }: any) => {
   const [step, setStep] = useState(1);
-  const [selections, setSelections] = useState({ role: '', goal: '', risk: '' });
+  const [selections, setSelections] = useState<any>({});
 
-  const steps = [
-    {
-      id: 'role',
-      title: 'حدد موقعك الحالي',
-      options: [
-        { id: 'early', title: 'رائد أعمال ناشئ', sub: 'تبحث عن فرصة أو نموذج عمل لتبدأ.', icon: Sparkles, hint: 'Idea Builder Mode' },
-        { id: 'existing', title: 'صاحب مشروع قائم', sub: 'تريد تحسين الأداء أو التوسع السوقي.', icon: TrendingUp, hint: 'Analysis Mode' },
-        { id: 'investor', title: 'مستثمر استراتيجي', sub: 'تبحث عن فرص تحليلية عالية العائد.', icon: Briefcase, hint: 'Market Radar' },
-      ]
-    },
-    {
-      id: 'goal',
-      title: 'ما هو هدفك الاستراتيجي؟',
-      options: [
-        { id: 'gap', title: 'اكتشاف ثغرة سوقية', sub: 'تحليل الفجوات والاحتياجات غير الملباة.', icon: Target, hint: 'محرك الفجوات' },
-        { id: 'structure', title: 'هيكلة فكرة أولية', sub: 'بناء نموذج العمل وتحويل الأفكار لخطط.', icon: BrainCircuit, hint: 'بناء النماذج' },
-        { id: 'expansion', title: 'التوسع العالمي', sub: 'دراسة سوابق النجاح ومحاكاة الموديلات.', icon: Globe, hint: 'Global Resolution' },
-      ]
-    },
-    {
-      id: 'risk',
-      title: 'مستوى الشهية الاستثمارية',
-      options: [
-        { id: 'safe', title: 'مخاطرة منخفضة', sub: 'أهداف مستقرة وعائد مضمون وآمن.', icon: ShieldCheck, hint: 'مسار الاستدامة' },
-        { id: 'balanced', title: 'مخاطرة مدروسة', sub: 'توازن احترافي بين الأمان والنمو.', icon: Waves, hint: 'مسار النمو' },
-        { id: 'aggressive', title: 'مخاطرة عالية', sub: 'نمو انفجاري وفرص بمليارات الدولارات.', icon: Zap, hint: 'مسار اليونيكورن' },
-      ]
-    }
-  ];
-
+  const currentStepData = STEPS_DATA.find(s => s.step === step) || STEPS_DATA[0];
   const progress = (step / 3) * 100;
-  const currentStepData = steps[step - 1];
 
   const handleSelection = (id: string) => {
-    const key = steps[step - 1].id;
-    setSelections({ ...selections, [key]: id });
-    if (step < 3) setStep(step + 1);
-    else setStep(4);
+    setSelections({ ...selections, [step]: id });
+    setTimeout(() => {
+      if (step < 3) setStep(prev => prev + 1);
+      else setStep(4);
+    }, 500);
   };
 
   return (
-    <section className="py-[50px] px-6 sm:px-10 lg:px-14 bg-white relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-indigo-50/30 rounded-full blur-[100px] -z-10" />
+    <section className="py-12 sm:py-16 lg:py-24 px-5 sm:px-10 lg:px-14 bg-white relative overflow-hidden" dir="rtl">
+      {/* Dynamic Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40">
+        <div className="absolute top-[10%] left-[5%] w-72 h-72 bg-indigo-100 rounded-full blur-[120px] mix-blend-multiply" />
+        <div className="absolute bottom-[10%] right-[5%] w-96 h-96 bg-blue-100 rounded-full blur-[140px] mix-blend-multiply" />
+      </div>
       
-      <div className="max-w-7xl mx-auto" dir="rtl">
-        {/* Standardized Strategic Heading */}
-        <div className="space-y-4 mb-16 text-right">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-100 shadow-sm">
-             <BrainCircuit size={14} fill="currentColor" /> AI Strategic Advisor
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Section Heading */}
+        <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-16 space-y-4 sm:space-y-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 text-indigo-700 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border border-indigo-100 shadow-sm animate-bounce">
+             <BrainCircuit size={14} /> نظام التوجيه الذكي
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 leading-tight">
-             صمم مسارك الاستراتيجي اليوم
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-[1.15]">
+             صمم <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">مسارك الاستراتيجي</span> اليوم
           </h2>
-          <p className="text-slate-400 font-bold text-sm sm:text-base max-w-2xl leading-relaxed">
-             دع الذكاء الاصطناعي يحلل موقعك الحالي وأهدافك الاستثمارية ليقترح عليك المحرك الأنسب لبدء تنفيذ مسارك الاستراتيجي فوراً.
+          <p className="text-slate-400 font-bold text-[13px] sm:text-base max-w-2xl mx-auto leading-relaxed">
+             دع محرك الذكاء الاصطناعي يحلل موقعك الحالي وأهدافك ليقترح لك المسار الأمثل للانطلاق.
           </p>
         </div>
 
-        {/* ── Light Decision Chamber ────────────────────────────────────────────────── */}
-        <div className="bg-white border border-slate-100 rounded-[2.5rem] p-4 sm:p-8 shadow-2xl shadow-indigo-100/20 relative overflow-hidden max-w-4xl mx-auto">
-           {/* Progress Bar (Light) */}
-           <div className="absolute top-0 left-0 w-full h-1 bg-slate-50">
-              <motion.div 
-                animate={{ width: `${progress}%` }}
-                className="h-full bg-gradient-to-r from-indigo-500 to-blue-400"
-              />
+        {/* ── Decision Chamber ────────────────────────────────────────────────── */}
+        <div className="bg-white/70 backdrop-blur-xl border border-white rounded-[3.5rem] p-6 sm:p-12 shadow-[0_40px_100px_-20px_rgba(79,70,229,0.12)] relative overflow-hidden max-w-5xl mx-auto">
+           
+           {/* Progress Logic */}
+           <div className="absolute top-0 left-0 w-full h-1.5 bg-slate-100/50">
+              <div 
+                className="h-full bg-gradient-to-r from-indigo-500 via-blue-500 to-indigo-600 transition-all duration-1000 ease-out relative"
+                style={{ width: `${progress > 100 ? 100 : progress}%` }}
+              >
+                <div className="absolute top-0 right-0 h-full w-20 bg-white/30 blur-sm animate-[shimmer_2s_infinite]" />
+              </div>
            </div>
 
-           <div className="flex justify-between items-center mb-8 px-2">
-              <div className="text-right">
-                 <p className="text-[8px] font-black text-slate-300 uppercase leading-none tracking-widest mb-0.5">STEP {step}/3</p>
-                 <p className="text-[10px] font-black text-indigo-500 uppercase">Understanding status: {Math.round(progress)}%</p>
+           <div className="flex justify-between items-end mb-12">
+              <div className="space-y-1">
+                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">مرحلة {step <= 3 ? step : 3} من 3</p>
+                 <p className="text-2xl font-black text-indigo-600">{Math.round(progress > 100 ? 100 : progress)}%</p>
               </div>
-              <div className="flex gap-1.5">
+              <div className="flex gap-2.5 pb-2">
                  {[1, 2, 3].map(s => (
-                   <div key={s} className={`w-1.5 h-1.5 rounded-full transition-colors ${s <= step ? 'bg-indigo-500' : 'bg-slate-100'}`} />
+                   <div key={s} className={`w-10 h-1.5 rounded-full transition-all duration-500 ${s <= step ? 'bg-indigo-600 w-16' : 'bg-slate-100'}`} />
                  ))}
               </div>
            </div>
 
-           <AnimatePresence mode="wait">
+           <div className="min-h-[400px] flex items-center">
               {step <= 3 ? (
-                <motion.div 
-                  key={`step-${step}`}
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  className="space-y-8"
-                >
+                <div key={`step-${step}`} className="w-full space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
                    <div className="text-right">
-                      <h3 className="text-lg sm:text-xl font-black text-slate-800 italic mb-1">
-                         0{step}. {currentStepData.title}
-                      </h3>
-                      <p className="text-indigo-400/80 text-[9px] font-bold">بناءً على اختيارك، سيتم تحديد المحرك الأنسب لك.</p>
+                      <div className="flex items-center gap-3 mb-2">
+                         <span className="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-black italic text-lg shadow-lg">0{step}</span>
+                         <h3 className="text-2xl lg:text-3xl font-black text-slate-800">
+                            {currentStepData.title}
+                         </h3>
+                      </div>
+                      <p className="text-slate-400 font-bold text-sm mr-13">بناءً على اختيارك، سيتم مواءمة المحرك الأنسب لك.</p>
                    </div>
 
-                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                       {currentStepData.options.map((opt) => (
                         <DecisionCard 
                           key={opt.id}
@@ -150,54 +157,60 @@ export const StrategicPathFinder = ({ setActiveTab }: any) => {
                           sub={opt.sub}
                           hint={opt.hint}
                           onClick={() => handleSelection(opt.id)}
+                          isSelected={selections[step] === opt.id}
                         />
                       ))}
                    </div>
-                </motion.div>
+                </div>
               ) : (
-                <motion.div 
-                  key="results"
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="py-6 text-center space-y-6"
-                >
-                   <div className="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center mx-auto border border-emerald-100">
-                      <CheckCircle2 size={32} />
+                <div key="results" className="w-full py-10 text-center space-y-10 animate-in zoom-in-95 duration-700">
+                   <div className="relative inline-block">
+                      <div className="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-[2.5rem] flex items-center justify-center mx-auto border-4 border-white shadow-2xl relative z-10">
+                         <CheckCircle2 size={48} />
+                      </div>
+                      <div className="absolute inset-0 bg-emerald-400 blur-3xl opacity-20 animate-pulse" />
                    </div>
                    
-                   <div className="space-y-2">
-                      <p className="text-[8px] font-black text-indigo-400 uppercase tracking-widest mb-2">Strategic Mapping Complete</p>
-                      <h4 className="text-xl font-black text-slate-900 leading-tight">
-                        تم تحليل هدفك بنجاح
+                   <div className="space-y-4">
+                      <p className="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-2">اكتمل المسح الاستراتيجي بنجاح</p>
+                      <h4 className="text-3xl lg:text-4xl font-black text-slate-900 leading-tight">
+                        تمت المواءمة الذكية
                       </h4>
-                      <p className="text-slate-400 font-bold text-[10px] max-w-sm mx-auto leading-relaxed">
-                         ننصحك بالبدء بـ <span className="text-indigo-600">رادار استكشاف الأسواق</span> لتحقيق أفضل عائد استثماري.
+                      <p className="text-slate-500 font-bold text-base max-w-lg mx-auto leading-relaxed">
+                         بناءً على ملفك، ننصحك بالبدء بـ <span className="text-indigo-600 font-black">رادار استكشاف الأسواق</span> للوصول إلى أعلى إمكانات النمو.
                       </p>
                    </div>
 
-                   <div className="flex justify-center items-center gap-4 pt-4">
-                      <button onClick={() => setStep(1)} className="text-[9px] font-black text-slate-400 hover:text-slate-900 transition-colors uppercase">
-                        إعادة بناء المسار
+                   <div className="flex flex-col sm:flex-row justify-center items-center gap-6 pt-6">
+                      <button 
+                        onClick={() => setStep(1)} 
+                        className="px-8 py-4 text-sm font-black text-slate-400 hover:text-slate-900 transition-all uppercase tracking-widest hover:scale-105"
+                      >
+                         إعادة البدء
                       </button>
                       <button 
-                        onClick={() => setActiveTab('problem-engine')}
-                        className="px-6 py-2.5 bg-slate-900 text-white rounded-xl text-[11px] font-black hover:bg-slate-800 transition-all flex items-center gap-2 group"
+                        onClick={() => setActiveTab('market-discovery')}
+                        className="px-10 py-4 bg-slate-900 text-white rounded-[2rem] text-sm font-black hover:bg-indigo-600 transition-all flex items-center gap-3 group shadow-2xl shadow-indigo-200"
                       >
-                         بدء التنفيذ
-                         <ArrowRight size={14} className="rotate-180 group-hover:-translate-x-1 transition-transform" />
+                         بدء التنفيذ الآن
+                         <ArrowRight size={20} className="rotate-180 group-hover:-translate-x-2 transition-transform" />
                       </button>
                    </div>
-                </motion.div>
+                </div>
               )}
-           </AnimatePresence>
+           </div>
 
-           {/* AI Preview (Light) */}
+           {/* AI Status Indicator */}
            {step <= 3 && (
-             <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-center">
-                <div className="px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl flex items-center gap-3">
-                   <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
-                   <p className="text-[9px] font-bold text-slate-500">
-                      {step === 1 ? 'حدد موقعك للبدء...' : `جاري مواءمة هدفك مع سوابق النجاح...`}
+             <div className="mt-12 flex justify-center">
+                <div className="px-6 py-3 bg-slate-900 rounded-full flex items-center gap-4 shadow-2xl shadow-indigo-100">
+                   <div className="flex gap-1">
+                      <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
+                      <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
+                      <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce" />
+                   </div>
+                   <p className="text-[10px] font-black text-slate-100 uppercase tracking-widest">
+                      {step === 1 ? 'نظام التحليل جاهز...' : `جاري ربط البيانات بالنماذج العالمية...`}
                    </p>
                 </div>
              </div>

@@ -11,15 +11,18 @@ import {
 interface BottomNavBarProps {
   activeTab: string;
   setActiveTab: (tab: any) => void;
+  onMenuClick?: () => void;
 }
 
-export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, setActiveTab }) => {
+export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, setActiveTab, onMenuClick }) => {
   const navItems = [
     { id: 'home', icon: Home, label: 'الرئيسية' },
     { id: 'my-plans', icon: Layers, label: 'مشاريعي' },
     { id: 'new-plan', icon: Plus, label: 'خلق فكرة', isCenter: true },
     { id: 'smart-analyzer', icon: BrainCircuit, label: 'المحلل' },
-    { id: 'tasks', icon: Trello, label: 'المهام' },
+    { id: 'site-map', icon: (props: any) => (
+      <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+    ), label: 'القائمة' },
   ];
 
   return (
@@ -45,7 +48,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, setActive
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`flex-1 flex flex-col items-center justify-center gap-0.5 sm:gap-1 py-1.5 sm:py-2 px-1.5 sm:px-2 rounded-2xl transition-all min-h-[48px] touch-manipulation ${isActive ? 'text-indigo-600' : 'text-slate-400 hover:text-slate-600'}`}
+              className={`flex-1 flex flex-col items-center justify-center gap-0.5 sm:gap-1 py-1.5 sm:py-2 px-1 sm:px-2 rounded-2xl transition-all min-h-[48px] touch-manipulation ${isActive ? 'text-indigo-600' : 'text-slate-400 hover:text-slate-600'}`}
               aria-label={item.label}
             >
               <div className={`p-1.5 sm:p-2 transition-all ${isActive ? 'bg-indigo-50 rounded-xl' : ''}`}>

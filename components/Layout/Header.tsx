@@ -179,7 +179,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             {isNotificationsOpen && (
-              <div className="fixed sm:absolute inset-x-0 sm:inset-x-auto left-1/2 sm:left-0 -translate-x-1/2 sm:translate-x-0 top-[60px] sm:top-auto sm:mt-4 w-[calc(100vw-32px)] sm:w-[380px] max-w-[380px] mx-auto sm:mx-0 bg-white border border-slate-100 rounded-[2rem] sm:rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-[90] sm:z-[100] animate-in fade-in slide-in-from-top-4 duration-500 overflow-hidden rtl text-right">
+              <div className="fixed sm:absolute top-[70px] sm:top-auto sm:mt-4 left-4 right-4 sm:left-0 sm:right-auto sm:w-[380px] bg-white border border-slate-100 rounded-[2rem] sm:rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-[100] animate-in fade-in slide-in-from-top-4 duration-500 overflow-hidden rtl text-right">
                 <div className="p-4 sm:p-6 pb-3 sm:pb-4 border-b border-slate-50 flex items-center justify-between bg-gradient-to-l from-slate-50/50 to-white">
                   <div>
                     <h3 className="font-black text-base sm:text-lg text-slate-900 leading-none">مركز التنبيهات</h3>
@@ -218,7 +218,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             {isProfileOpen && (
-              <div className="fixed sm:absolute inset-x-0 sm:inset-x-auto left-1/2 sm:left-0 -translate-x-1/2 sm:translate-x-0 top-[60px] sm:top-auto sm:mt-3 w-[calc(100vw-32px)] sm:w-72 max-w-[288px] mx-auto sm:mx-0 bg-white border border-gray-100 rounded-[2rem] shadow-2xl z-[90] sm:z-[100] animate-in fade-in slide-in-from-top-2 duration-300 overflow-hidden rtl text-right">
+              <div className="fixed sm:absolute top-[70px] sm:top-auto sm:mt-3 left-4 right-4 sm:left-0 sm:right-auto sm:w-72 bg-white border border-gray-100 rounded-[2rem] shadow-2xl z-[100] animate-in fade-in slide-in-from-top-2 duration-300 overflow-hidden rtl text-right">
                  <div className="p-4 sm:p-5 bg-gradient-to-br from-gray-50 to-white border-b border-gray-100">
                     <div className="flex items-center gap-3 sm:gap-4 mb-3">
                        <img src={user.avatar} className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl border-2 border-white shadow-sm" alt="Avatar" />

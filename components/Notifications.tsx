@@ -96,51 +96,51 @@ export const Notifications: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+    <div className="w-full max-w-7xl mx-auto px-5 sm:px-10 lg:px-14 py-8 animate-in fade-in slide-in-from-bottom-8 duration-700 overflow-x-hidden">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-10">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-primary-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-primary-100">
+            <div className="w-10 h-10 lg:w-12 lg:h-12 bg-primary-600 rounded-xl lg:rounded-2xl flex items-center justify-center text-white shadow-xl shadow-primary-100 shrink-0">
               <Bell size={22} strokeWidth={2.5} />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">الإشعارات</h1>
+            <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight">الإشعارات</h1>
           </div>
-          <p className="text-gray-400 font-bold text-sm">لديك {unreadCount} إشعار غير مقروء يحتاج انتباهك.</p>
+          <p className="text-gray-400 font-bold text-xs lg:text-sm">لديك {unreadCount} إشعار غير مقروء يحتاج انتباهك.</p>
         </div>
 
         <div className="flex items-center gap-3">
           <button 
             onClick={markAllAsRead}
-            className="flex items-center gap-2 px-5 py-2.5 bg-white border border-gray-100 rounded-xl text-xs font-bold text-gray-600 hover:bg-gray-50 hover:text-primary-600 transition-all shadow-sm"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 lg:px-5 py-2.5 bg-white border border-gray-100 rounded-xl text-[10px] lg:text-xs font-bold text-gray-600 hover:bg-gray-50 hover:text-primary-600 transition-all shadow-sm whitespace-nowrap"
           >
-            <CheckCheck size={16} />
+            <CheckCheck size={14} className="lg:w-4 lg:h-4" />
             تعيين الكل كمقروء
           </button>
           <button 
             onClick={clearAll}
-            className="flex items-center gap-2 px-5 py-2.5 bg-red-50 text-red-600 rounded-xl text-xs font-bold hover:bg-red-100 transition-all"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 lg:px-5 py-2.5 bg-red-50 text-red-600 rounded-xl text-[10px] lg:text-xs font-bold hover:bg-red-100 transition-all whitespace-nowrap"
           >
-            <Trash2 size={16} />
+            <Trash2 size={14} className="lg:w-4 lg:h-4" />
             حذف الكل
           </button>
         </div>
       </div>
 
       {/* Tabs / Filter */}
-      <div className="flex bg-gray-100/50 p-1.5 rounded-2xl mb-8 w-fit border border-gray-100">
+      <div className="flex bg-gray-100/50 p-1 rounded-xl sm:rounded-2xl mb-8 w-fit border border-gray-100">
         <button 
           onClick={() => setFilter('all')}
-          className={`px-8 py-2.5 rounded-xl text-xs font-bold transition-all ${filter === 'all' ? 'bg-white text-primary-600 shadow-lg' : 'text-gray-400 hover:text-gray-600'}`}
+          className={`px-6 sm:px-8 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold transition-all ${filter === 'all' ? 'bg-white text-primary-600 shadow-lg' : 'text-gray-400 hover:text-gray-600'}`}
         >
           الكل
         </button>
         <button 
           onClick={() => setFilter('unread')}
-          className={`px-8 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${filter === 'unread' ? 'bg-white text-primary-600 shadow-lg' : 'text-gray-400 hover:text-gray-600'}`}
+          className={`px-6 sm:px-8 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold transition-all flex items-center gap-2 ${filter === 'unread' ? 'bg-white text-primary-600 shadow-lg' : 'text-gray-400 hover:text-gray-600'}`}
         >
           غير المقروءة
-          {unreadCount > 0 && <span className="bg-primary-600 text-white text-[10px] px-1.5 py-0.5 rounded-full">{unreadCount}</span>}
+          {unreadCount > 0 && <span className="bg-primary-600 text-white text-[9px] px-1.5 py-0.5 rounded-full">{unreadCount}</span>}
         </button>
       </div>
 
@@ -170,46 +170,52 @@ export const Notifications: React.FC = () => {
               >
                 {/* Unread Indicator Dot */}
                 {!notification.isRead && (
-                  <div className="absolute top-8 right-2 w-2 h-2 bg-primary-600 rounded-full shadow-[0_0_10px_rgba(37,99,235,0.8)] animate-pulse"></div>
+                  <div className="absolute top-6 sm:top-8 right-2 w-2 h-2 bg-primary-600 rounded-full shadow-[0_0_10px_rgba(37,99,235,0.8)] animate-pulse"></div>
                 )}
 
                 {/* Icon Container */}
-                <div className={`w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center shadow-inner ${bg} ${color}`}>
-                  <Icon size={26} strokeWidth={2.5} />
+                <div className={`w-12 h-12 lg:w-14 lg:h-14 rounded-xl lg:rounded-2xl flex-shrink-0 flex items-center justify-center shadow-inner ${bg} ${color}`}>
+                  <Icon size={22} strokeWidth={2.5} className="lg:w-[26px] lg:h-[26px]" />
                 </div>
 
-                {/* Content - ADDED PL-28 TO PREVENT OVERLAP WITH LEFT BUTTONS */}
-                <div className="flex-1 min-w-0 pl-28">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <h4 className={`text-base font-bold truncate ${notification.isRead ? 'text-gray-700' : 'text-gray-900'}`}>
+                {/* Content */}
+                <div className="flex-1 min-w-0 pr-1 lg:pl-28">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2 sm:mb-1.5">
+                    <h4 className={`text-sm sm:text-base font-bold truncate ${notification.isRead ? 'text-gray-700' : 'text-gray-900'}`}>
                       {notification.title}
                     </h4>
-                    <div className="flex items-center gap-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-tighter shrink-0">
+                    <div className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold text-gray-400 uppercase tracking-tighter shrink-0">
                       <Clock size={12} />
                       {notification.timestamp}
                     </div>
                   </div>
-                  <p className="text-sm font-bold text-gray-500 leading-relaxed mb-4">
+                  <p className="text-[12px] sm:text-sm font-bold text-gray-500 leading-relaxed mb-4">
                     {notification.message}
                   </p>
 
-                  <div className="flex items-center gap-4">
-                    <button className="text-[11px] font-bold text-primary-600 hover:text-primary-800 transition-colors flex items-center gap-1 group/btn">
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+                    <button className="text-[10px] sm:text-[11px] font-black text-primary-600 hover:text-primary-800 transition-colors flex items-center gap-1 group/btn">
                       متابعة التفاصيل
                       <ChevronLeft size={14} className="group-hover/btn:-translate-x-1 transition-transform" />
                     </button>
-                    <span className="w-1 h-1 bg-gray-200 rounded-full"></span>
+                    <span className="w-1 h-1 bg-gray-200 rounded-full hidden sm:block"></span>
                     <button 
                       onClick={() => toggleRead(notification.id)}
-                      className="text-[11px] font-bold text-gray-400 hover:text-gray-600 transition-colors"
+                      className="text-[10px] sm:text-[11px] font-bold text-gray-400 hover:text-gray-600 transition-colors"
                     >
                       {notification.isRead ? 'تعليم كغير مقروء' : 'تعليم كمقروء'}
+                    </button>
+                    <button 
+                      onClick={() => deleteNotification(notification.id)}
+                      className="sm:hidden text-[10px] font-bold text-red-400 hover:text-red-500 transition-colors flex items-center gap-1"
+                    >
+                      <Trash2 size={12} /> حذف
                     </button>
                   </div>
                 </div>
 
-                {/* Quick Actions (Appear on Hover) - ADJUSTED TO PREVENT OVERLAP */}
-                <div className="absolute top-1/2 -translate-y-1/2 left-8 opacity-0 group-hover:opacity-100 transition-all flex items-center gap-2 translate-x-[-15px] group-hover:translate-x-0 z-10">
+                {/* Quick Actions (Appear on Hover) - Hidden on mobile, replaced by inline delete */}
+                <div className="absolute top-1/2 -translate-y-1/2 left-8 opacity-0 lg:group-hover:opacity-100 transition-all hidden lg:flex items-center gap-2 translate-x-[-15px] group-hover:translate-x-0 z-10">
                   <button className="p-2.5 bg-white/90 backdrop-blur-sm text-gray-400 rounded-xl hover:text-gray-900 border border-gray-100 shadow-lg">
                     <MoreHorizontal size={14} strokeWidth={3} />
                   </button>

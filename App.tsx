@@ -69,7 +69,7 @@ const App: React.FC = () => {
   const isAdminView = ADMIN_TABS.includes(activeTab);
 
   return (
-    <div className="flex min-h-screen bg-white lg:bg-[#F1F5F9]/80">
+    <div className="flex min-h-screen bg-white lg:bg-[#F1F5F9]/80 w-full max-w-full overflow-x-hidden">
       {/* 1. Global AI Sidebar (Left) - Hidden on Mobile */}
       {!isAdminView && (
         <div className="hidden xl:flex">
@@ -92,7 +92,7 @@ const App: React.FC = () => {
         />
       </div>
 
-      <main className={`flex-1 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] 
+      <main className={`flex-1 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] w-full max-w-full overflow-x-hidden
         ${!isSidebarOpen ? 'mr-0' : isSidebarCollapsed ? 'mr-0 lg:mr-24' : 'mr-0 lg:mr-72'} 
         ${!isAdminView && isAiSidebarOpen ? 'ml-0 xl:ml-96' : 'ml-0'}`}>
 
@@ -142,7 +142,11 @@ const App: React.FC = () => {
       />
 
       {/* 4. Bottom Navigation (Mobile Only) */}
-      <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <BottomNavBar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        onMenuClick={() => setIsMobileMenuOpen(true)}
+      />
     </div>
   );
 };
