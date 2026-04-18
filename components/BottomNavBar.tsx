@@ -30,11 +30,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, setActive
           const isActive = activeTab === item.id;
 
           const handleClick = () => {
-            if (item.id === 'site-map' && onMenuClick) {
-              onMenuClick();
-            } else {
-              setActiveTab(item.id);
-            }
+            setActiveTab(item.id);
           };
 
           if (item.isCenter) {
