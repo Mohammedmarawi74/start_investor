@@ -270,7 +270,7 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
       case 'admin-security':
         return <AdminSecurityDashboard />;
       case 'my-plans':
-        return <MyProjects />;
+        return <MyProjects setActiveTab={setActiveTab} />;
       case 'new-plan':
         // Guard optional props to avoid runtime ReferenceError if not provided by the caller
         const subTabLabelSafe = typeof subTabLabel === 'string' ? subTabLabel : undefined;

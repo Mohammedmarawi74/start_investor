@@ -108,6 +108,26 @@ export const ProblemOpportunityEngine: React.FC = () => {
     setIsCommandOpen(false);
   };
 
+  // ─── RENDERING BRANCH: OPPORTUNITY DETAIL (GLOBAL PRIORITY) ─────────────
+  if (activeView === 'opportunity' && selectedProblem) {
+    return (
+      <div className="w-full min-h-screen bg-slate-50 font-tajawal text-right p-4 sm:p-6 lg:p-10" dir="rtl">
+        <div className="max-w-7xl mx-auto">
+          <AnimatePresence mode="wait">
+            <OpportunityDetail 
+              selectedProblem={selectedProblem} 
+              selectedSector={selectedSector} 
+              selectedSub={selectedSub}
+              lastView={lastView} 
+              setView={setActiveView} 
+              goToProblems={goToProblems}
+            />
+          </AnimatePresence>
+        </div>
+      </div>
+    );
+  }
+
   // ─── RENDERING BRANCH: FULL-SCREEN SEARCH RESULTS (HIGH DENSITY) ────────
   if (exploreMode === 'search_results') {
     const sectorStats = searchContext.results.reduce((acc: any, p) => {
@@ -320,13 +340,6 @@ export const ProblemOpportunityEngine: React.FC = () => {
 
       <div className="max-w-7xl mx-auto pb-20">
         <AnimatePresence mode="wait">
-           {activeView === 'opportunity' && selectedProblem ? (
-             <OpportunityDetail 
-               selectedProblem={selectedProblem} selectedSector={selectedSector} selectedSub={selectedSub}
-               lastView={lastView} setView={setActiveView} goToProblems={goToProblems}
-             />
-           ) : (
-             <>
                {exploreMode === 'sectors' && (
                  <SectorsView 
                    view={activeView} filteredData={filteredData} selectedSector={selectedSector} selectedSub={selectedSub}
@@ -346,8 +359,6 @@ export const ProblemOpportunityEngine: React.FC = () => {
                {exploreMode === 'b2x' && (
                  <B2XView view={activeView} selectedB2X={selectedB2X} setView={setActiveView} setSelectedB2X={setSelectedB2X} goToOpportunity={goToOpportunity} />
                )}
-             </>
-           )}
         </AnimatePresence>
       </div>
     </div>

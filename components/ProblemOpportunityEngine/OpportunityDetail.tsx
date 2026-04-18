@@ -53,6 +53,7 @@ export const OpportunityDetail: React.FC<OpportunityDetailProps> = ({
                 if (lastView === 'b2x_problems') setView('b2x_problems');
                 else if (lastView === 'budget_problems') setView('budget_problems');
                 else if (lastView === 'market_problems') setView('market_problems');
+                else if (lastView === 'search_results') setView('search_results'); 
                 else selectedSub && goToProblems(selectedSub);
               }}
               className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors text-xs font-black bg-slate-50 px-4 py-2.5 rounded-xl border border-slate-100 group/back w-fit"

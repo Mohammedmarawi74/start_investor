@@ -47,7 +47,11 @@ const MOCK_PROJECTS: Project[] = [
   }
 ];
 
-export const MyProjects: React.FC = () => {
+interface MyProjectsProps {
+  setActiveTab?: (tab: string) => void;
+}
+
+export const MyProjects: React.FC<MyProjectsProps> = ({ setActiveTab }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterMode, setFilterMode] = useState<'all' | 'ready' | 'draft'>('all');
 
@@ -81,7 +85,9 @@ export const MyProjects: React.FC = () => {
                    className="w-full pr-12 pl-4 py-3 bg-slate-50 border-none rounded-xl sm:rounded-2xl outline-none text-xs font-bold text-slate-800 focus:bg-white transition-all ring-1 ring-transparent focus:ring-blue-100"
                  />
               </div>
-              <button className="w-full sm:w-auto px-8 py-3.5 bg-blue-600 text-white rounded-xl sm:rounded-2xl text-xs font-black shadow-lg shadow-blue-200 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all">
+              <button 
+                onClick={() => setActiveTab?.('new-plan')}
+                className="w-full sm:w-auto px-8 py-3.5 bg-blue-600 text-white rounded-xl sm:rounded-2xl text-xs font-black shadow-lg shadow-blue-200 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all">
                  <Plus size={18} strokeWidth={3} />
                  <span>مشروع جديد</span>
               </button>
@@ -92,10 +98,12 @@ export const MyProjects: React.FC = () => {
       {/* Grid Container - Higher Density */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
          {filteredProjects.map(project => (
-           <ProjectCard key={project.id} project={project} />
+           <ProjectCard key={project.id} project={project} setActiveTab={setActiveTab} />
          ))}
          
-         <div className="border-2 border-dashed border-slate-200 rounded-3xl flex flex-col items-center justify-center p-8 group hover:border-blue-400 transition-all cursor-pointer hover:bg-blue-50/20">
+         <div 
+           onClick={() => setActiveTab?.('new-plan')}
+           className="border-2 border-dashed border-slate-200 rounded-3xl flex flex-col items-center justify-center p-8 group hover:border-blue-400 transition-all cursor-pointer hover:bg-blue-50/20">
             <div className="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all mb-4">
                <Plus size={24} strokeWidth={3} />
             </div>
@@ -106,7 +114,7 @@ export const MyProjects: React.FC = () => {
   );
 };
 
-const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
+const ProjectCard: React.FC<{ project: Project; setActiveTab?: (tab: string) => void }> = ({ project, setActiveTab }) => {
   return (
     <div className="group bg-white border border-slate-100 rounded-[2rem] sm:rounded-3xl p-4 sm:p-5 lg:p-6 hover:border-blue-600 hover:shadow-[0_20px_60px_rgba(37,99,235,0.06)] transition-all duration-300 relative flex flex-col h-full overflow-hidden">
        {/* Favorite Toggle - Moved to top-left to avoid icon conflict */}
@@ -155,7 +163,9 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 
        {/* Action Buttons Hub - Compact */}
        <div className="flex items-center gap-1.5 sm:gap-2 pt-4 border-t border-slate-50 sm:translate-y-2 sm:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-          <button className="flex-[2.5] min-w-[110px] py-3 lg:py-4 bg-blue-600 text-white rounded-xl lg:rounded-2xl text-[11px] sm:text-[10px] lg:text-[12px] font-black flex items-center justify-center gap-1.5 shadow-lg shadow-blue-100 whitespace-nowrap overflow-hidden">
+          <button 
+            onClick={() => setActiveTab?.('editor')}
+            className="flex-[2.5] min-w-[110px] py-3 lg:py-4 bg-blue-600 text-white rounded-xl lg:rounded-2xl text-[11px] sm:text-[10px] lg:text-[12px] font-black flex items-center justify-center gap-1.5 shadow-lg shadow-blue-100 whitespace-nowrap overflow-hidden">
              <span>فتح الخطة</span>
              <ArrowRight size={14} className="sm:w-[16px] sm:h-[16px] rtl:rotate-180 shrink-0" strokeWidth={3} />
           </button>
