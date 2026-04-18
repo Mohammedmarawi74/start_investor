@@ -80,14 +80,24 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <div className="sticky top-0 z-40 w-full max-w-full bg-white/80 backdrop-blur-xl border-b border-gray-100 px-3 sm:px-4 md:px-6 lg:px-12 py-2 sm:py-3 flex items-center justify-between">
        <div className="flex items-center gap-2 sm:gap-3 lg:gap-6">
-          {/* Mobile Hamburger Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(true)}
-            className="lg:hidden p-2 text-gray-600 rounded-xl hover:bg-gray-50 transition-all shrink-0"
-            aria-label="فتح القائمة"
-          >
-            <Menu size={20} />
-          </button>
+          {/* Mobile Back Button / Hamburger Toggle */}
+          {['editor', 'brand-identity', 'site-map'].includes(activeTab) ? (
+            <button
+              onClick={() => setActiveTab('home')}
+              className="lg:hidden p-2 text-primary-600 bg-primary-50 rounded-xl hover:bg-primary-100 transition-all shrink-0"
+              aria-label="العودة للرئيسية"
+            >
+              <ChevronLeft size={20} className="rotate-180" />
+            </button>
+          ) : (
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="lg:hidden p-2 text-gray-600 rounded-xl hover:bg-gray-50 transition-all shrink-0"
+              aria-label="فتح القائمة"
+            >
+              <Menu size={20} />
+            </button>
+          )}
 
           {/* Mobile Logo / Home Trigger */}
           <button 

@@ -23,36 +23,25 @@ export const getSectionIcon = (title: string) => {
 };
 
 // --- Sub-components ---
-const EditorHeader = ({ progress, onToggleAi, isAiOpen, setActiveTab }: { progress: number, onToggleAi: () => void, isAiOpen: boolean, setActiveTab: (tab: string) => void }) => (
-  <nav className="h-auto lg:h-24 bg-white border-b border-slate-50 flex flex-col lg:flex-row items-center justify-between px-5 sm:px-10 py-4 lg:py-0 shrink-0 z-30 gap-4 lg:gap-0 sticky top-0">
-    {/* Row 1: Icon, Title, AI Button (Mobile) */}
+const EditorHeader = ({ progress, onToggleAi, isAiOpen }: { progress: number, onToggleAi: () => void, isAiOpen: boolean }) => (
+  <nav className="h-auto bg-white/50 backdrop-blur-sm border-b border-slate-50 flex flex-col lg:flex-row items-center justify-between px-5 sm:px-10 py-3 lg:py-4 shrink-0 z-30 gap-4 lg:gap-0 sticky top-0">
+    {/* Row 1: AI Toggle & Context Title */}
     <div className="flex items-center justify-between w-full lg:w-auto">
-      <div className="flex items-center gap-3 sm:gap-4">
-        {/* Back Button for mobile */}
-        <button 
-          onClick={() => setActiveTab('home')}
-          className="lg:hidden w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-600 hover:bg-slate-100 active:scale-90 transition-all ml-1"
-        >
-          <ArrowLeft size={18} className="rotate-180" />
-        </button>
-
-        <div className="w-10 h-10 lg:w-12 lg:h-12 bg-slate-950 text-white rounded-xl lg:rounded-2xl flex items-center justify-center shadow-lg transform -rotate-3 shrink-0">
-          <Briefcase size={20} className="lg:w-6 lg:h-6" />
+      <div className="flex items-center gap-3">
+        <div className="w-8 h-8 lg:w-10 lg:h-10 bg-slate-900 text-white rounded-lg lg:rounded-xl flex items-center justify-center shadow-lg shrink-0">
+          <Briefcase size={16} className="lg:w-5 lg:h-5" />
         </div>
-        <div>
-          <h1 className="text-lg lg:text-2xl font-black text-slate-950 leading-none">المحرر الاستراتيجي</h1>
-          <span className="text-[9px] lg:text-[10px] font-bold text-emerald-500 uppercase tracking-widest mt-1 block">Cloud Synced</span>
-        </div>
+        <h2 className="text-sm lg:text-base font-black text-slate-800">تطوير خطة العمل</h2>
       </div>
       
       {/* AI Toggle Button - Mobile Only */}
       <button 
         onClick={onToggleAi}
-        className={`lg:hidden p-2.5 rounded-xl border-2 transition-all ${
-          isAiOpen ? 'bg-slate-950 text-white border-slate-950 shadow-lg' : 'bg-white border-slate-100 text-slate-400'
+        className={`lg:hidden p-2 rounded-lg border transition-all ${
+          isAiOpen ? 'bg-slate-950 text-white border-slate-950 shadow-sm' : 'bg-white border-slate-100 text-slate-400'
         }`}
       >
-        <BrainCircuit size={18} />
+        <BrainCircuit size={16} />
       </button>
     </div>
 

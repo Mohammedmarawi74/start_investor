@@ -60,19 +60,9 @@ export const BrandIdentityStudio: React.FC<{ setActiveTab?: (tab: string) => voi
     <div dir="rtl" className={`font-['IBM_Plex_Sans_Arabic'] min-h-screen transition-colors duration-700 pb-32 ${isDarkMode ? 'bg-slate-950 text-white' : 'bg-[#FAFAF9] text-slate-900'}`}>
       
       {/* Immersive Header - Mobile Optimized */}
-      <div className={`px-6 pt-12 pb-10 rounded-b-[3rem] shadow-sm mb-8 ${isDarkMode ? 'bg-slate-900/50' : 'bg-white'}`}>
+      <div className={`px-6 pt-8 pb-10 rounded-b-[3rem] shadow-sm mb-8 ${isDarkMode ? 'bg-slate-900/50' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto flex flex-col items-center text-center gap-6">
           <div className="flex flex-col items-center gap-4 relative w-full">
-             {/* Back button for mobile */}
-             {setActiveTab && (
-               <button 
-                 onClick={() => setActiveTab('home')}
-                 className="lg:hidden absolute left-0 top-0 w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-600 hover:bg-slate-100 active:scale-90 transition-all shadow-sm"
-               >
-                 <ArrowLeft size={18} className="rotate-180" />
-               </button>
-             )}
-
              <div className={`w-16 h-16 rounded-3xl flex items-center justify-center shadow-xl transition-transform hover:rotate-12 ${isDarkMode ? 'bg-indigo-600 text-white' : 'bg-[#0052FF] text-white shadow-blue-200'}`}>
                 <Palette size={32} strokeWidth={2.5} />
              </div>
