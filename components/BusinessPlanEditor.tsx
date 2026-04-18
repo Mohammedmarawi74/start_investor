@@ -23,11 +23,19 @@ export const getSectionIcon = (title: string) => {
 };
 
 // --- Sub-components ---
-const EditorHeader = ({ progress, onToggleAi, isAiOpen }: { progress: number, onToggleAi: () => void, isAiOpen: boolean }) => (
-  <nav className="h-auto lg:h-24 bg-white border-b border-slate-50 flex flex-col lg:flex-row items-center justify-between px-5 sm:px-10 py-4 lg:py-0 shrink-0 z-30 gap-4 lg:gap-0">
+const EditorHeader = ({ progress, onToggleAi, isAiOpen, setActiveTab }: { progress: number, onToggleAi: () => void, isAiOpen: boolean, setActiveTab: (tab: string) => void }) => (
+  <nav className="h-auto lg:h-24 bg-white border-b border-slate-50 flex flex-col lg:flex-row items-center justify-between px-5 sm:px-10 py-4 lg:py-0 shrink-0 z-30 gap-4 lg:gap-0 sticky top-0">
     {/* Row 1: Icon, Title, AI Button (Mobile) */}
     <div className="flex items-center justify-between w-full lg:w-auto">
       <div className="flex items-center gap-3 sm:gap-4">
+        {/* Back Button for mobile */}
+        <button 
+          onClick={() => setActiveTab('home')}
+          className="lg:hidden w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-600 hover:bg-slate-100 active:scale-90 transition-all ml-1"
+        >
+          <ArrowLeft size={18} className="rotate-180" />
+        </button>
+
         <div className="w-10 h-10 lg:w-12 lg:h-12 bg-slate-950 text-white rounded-xl lg:rounded-2xl flex items-center justify-center shadow-lg transform -rotate-3 shrink-0">
           <Briefcase size={20} className="lg:w-6 lg:h-6" />
         </div>
@@ -92,6 +100,7 @@ interface BusinessPlanEditorProps {
   onSectionUpdate: (id: string, updates: Partial<PlanSection>) => void;
   expandedSectionId: string | null;
   onSectionExpand: (id: string | null) => void;
+  setActiveTab: (tab: string) => void;
 }
 
 export const BusinessPlanEditor: React.FC<BusinessPlanEditorProps> = ({
@@ -99,6 +108,7 @@ export const BusinessPlanEditor: React.FC<BusinessPlanEditorProps> = ({
   onSectionUpdate,
   expandedSectionId,
   onSectionExpand,
+  setActiveTab
 }) => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState('');
@@ -137,6 +147,7 @@ export const BusinessPlanEditor: React.FC<BusinessPlanEditorProps> = ({
         progress={totalProgress} 
         onToggleAi={() => setIsAiSidebarOpen(!isAiSidebarOpen)} 
         isAiOpen={isAiSidebarOpen} 
+        setActiveTab={setActiveTab}
       />
 
       <div className="flex-1 flex overflow-hidden w-full max-w-full">
