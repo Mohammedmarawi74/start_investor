@@ -96,23 +96,25 @@ const App: React.FC = () => {
         ${!isSidebarOpen ? 'mr-0' : isSidebarCollapsed ? 'mr-0 lg:mr-24' : 'mr-0 lg:mr-72'} 
         ${!isAdminView && isAiSidebarOpen ? 'ml-0 xl:ml-96' : 'ml-0'}`}>
 
-        <Header 
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          subTabLabel={subTabLabel}
-          setSubTabLabel={setSubTabLabel}
-          isNotificationsOpen={isNotificationsOpen}
-          setIsNotificationsOpen={setIsNotificationsOpen}
-          isProfileOpen={isProfileOpen}
-          setIsProfileOpen={setIsProfileOpen}
-          isTourRunning={isTourRunning}
-          setIsTourRunning={setIsTourRunning}
-          setIsSidebarCollapsed={setIsSidebarCollapsed}
-          setIsMobileMenuOpen={setIsMobileMenuOpen}
-          notificationRef={notificationRef}
-          profileRef={profileRef}
-          user={MOCK_USER}
-        />
+        {!['site-map', 'editor', 'brand-identity'].includes(activeTab) && (
+          <Header 
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            subTabLabel={subTabLabel}
+            setSubTabLabel={setSubTabLabel}
+            isNotificationsOpen={isNotificationsOpen}
+            setIsNotificationsOpen={setIsNotificationsOpen}
+            isProfileOpen={isProfileOpen}
+            setIsProfileOpen={setIsProfileOpen}
+            isTourRunning={isTourRunning}
+            setIsTourRunning={setIsTourRunning}
+            setIsSidebarCollapsed={setIsSidebarCollapsed}
+            setIsMobileMenuOpen={setIsMobileMenuOpen}
+            notificationRef={notificationRef}
+            profileRef={profileRef}
+            user={MOCK_USER}
+          />
+        )}
 
         <DashboardRouter 
           activeTab={activeTab}
