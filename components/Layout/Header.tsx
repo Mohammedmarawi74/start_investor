@@ -83,10 +83,20 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Mobile Hamburger Button */}
           <button
             onClick={() => setIsMobileMenuOpen(true)}
-            className="lg:hidden p-2 text-gray-600 rounded-xl hover:bg-gray-50 transition-all"
+            className="lg:hidden p-2 text-gray-600 rounded-xl hover:bg-gray-50 transition-all shrink-0"
             aria-label="فتح القائمة"
           >
             <Menu size={20} />
+          </button>
+
+          {/* Mobile Logo / Home Trigger */}
+          <button 
+            onClick={() => setActiveTab('home')}
+            className="lg:hidden flex items-center group active:scale-95 transition-all"
+          >
+            <div className="w-10 h-10 bg-slate-950 text-white rounded-xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform">
+              <Sparkles size={20} />
+            </div>
           </button>
 
           {/* Dynamic Breadcrumb UI */}

@@ -24,7 +24,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, setActive
   ];
 
   return (
-    <div className="lg:hidden fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] sm:w-[92%] max-w-[400px] sm:max-w-[440px]">
+    <div className="lg:hidden fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] sm:w-[92%] max-w-[400px] sm:max-w-[440px] pb-[env(safe-area-inset-bottom)]">
       <div className="bg-white/90 backdrop-blur-2xl border border-white/60 rounded-[2rem] sm:rounded-[2.5rem] p-1.5 sm:p-2 flex items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5">
         {navItems.map((item) => {
           const isActive = activeTab === item.id;
@@ -34,7 +34,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, setActive
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className="relative -top-6 sm:-top-8 w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-indigo-600 to-purple-600 text-white rounded-full flex items-center justify-center shadow-2xl shadow-indigo-200 border-4 border-white active:scale-90 transition-transform group touch-manipulation"
+                className="relative -top-6 sm:-top-8 w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-indigo-600 to-purple-600 text-white rounded-full flex items-center justify-center shadow-2xl shadow-indigo-200 border-4 border-white active:scale-90 transition-transform group touch-manipulation hover:shadow-indigo-400/50"
                 aria-label={item.label}
               >
                 <item.icon size={24} className="group-hover:rotate-90 transition-transform duration-500 sm:w-7 sm:h-7" />
@@ -46,7 +46,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, setActive
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`flex-1 flex flex-col items-center justify-center gap-0.5 sm:gap-1 py-1.5 sm:py-2 px-1 sm:px-2 rounded-2xl transition-all min-h-[48px] touch-manipulation ${isActive ? 'text-indigo-600' : 'text-slate-400 hover:text-slate-600'}`}
+              className={`flex-1 flex flex-col items-center justify-center gap-0.5 sm:gap-1 py-1.5 sm:py-2 px-1 sm:px-2 rounded-2xl transition-all min-h-[48px] touch-manipulation active:scale-90 ${isActive ? 'text-indigo-600 translate-y-[-2px]' : 'text-slate-400 hover:text-slate-600'}`}
               aria-label={item.label}
             >
               <div className={`p-1.5 sm:p-2 transition-all ${isActive ? 'bg-indigo-50 rounded-xl' : ''}`}>

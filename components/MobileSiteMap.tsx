@@ -16,7 +16,6 @@ export const MobileSiteMap: React.FC<MobileSiteMapProps> = ({ setActiveTab }) =>
     {
       title: 'الرئيسية',
       items: [
-        { id: 'home', label: 'لوحة التحكم', icon: Home, color: 'bg-blue-50 text-blue-600' },
         { id: 'my-plans', label: 'مشاريعي', icon: Layers, color: 'bg-emerald-50 text-emerald-600' },
         { id: 'notifications', label: 'التنبيهات', icon: Bell, color: 'bg-amber-50 text-amber-600' },
       ]
@@ -51,14 +50,39 @@ export const MobileSiteMap: React.FC<MobileSiteMapProps> = ({ setActiveTab }) =>
 
   return (
     <div className="min-h-screen bg-white pb-24 px-6 pt-10 animate-in fade-in duration-700 rtl">
-      <div className="flex items-center gap-4 mb-10">
-        <div className="w-12 h-12 bg-slate-950 text-white rounded-2xl flex items-center justify-center shadow-lg transform -rotate-3">
-          <Rocket size={24} />
+      <div className="flex items-center justify-between mb-10">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 bg-slate-950 text-white rounded-2xl flex items-center justify-center shadow-xl transform -rotate-3 transition-transform hover:rotate-0">
+            <Rocket size={24} />
+          </div>
+          <div>
+            <h1 className="text-2xl font-black text-slate-950 leading-none">خريطة المنصة</h1>
+            <p className="text-[10px] uppercase tracking-widest font-black text-emerald-500 mt-1">Strategic Mission Control</p>
+          </div>
         </div>
-        <div>
-          <h1 className="text-2xl font-black text-slate-950 leading-none">خريطة المنصة</h1>
-          <p className="text-[10px] uppercase tracking-widest font-black text-emerald-500 mt-1">Explore All Sections</p>
-        </div>
+        <button 
+          onClick={() => setActiveTab('home')}
+          className="text-[10px] font-black text-primary-600 bg-primary-50 px-4 py-2 rounded-full border border-primary-100 uppercase tracking-widest"
+        >
+          Back Home
+        </button>
+      </div>
+
+      {/* Featured Entry: Dashboard */}
+      <div className="mb-10 animate-in slide-in-from-bottom-4 duration-700">
+        <button
+          onClick={() => setActiveTab('home')}
+          className="w-full flex items-center gap-6 p-6 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2.5rem] shadow-2xl relative overflow-hidden group active:scale-[0.98] transition-all"
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-white/10 transition-colors" />
+          <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-3xl flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform">
+            <Home size={32} strokeWidth={2.5} />
+          </div>
+          <div className="text-right">
+            <h3 className="text-xl font-black text-white mb-1">لوحة التحكم الرئيسية</h3>
+            <p className="text-slate-400 text-[11px] font-bold">ملخص الاستراتيجية والنبض الحي</p>
+          </div>
+        </button>
       </div>
 
       <div className="space-y-10">
