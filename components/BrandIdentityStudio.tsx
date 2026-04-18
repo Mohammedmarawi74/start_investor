@@ -30,7 +30,7 @@ const BRAND_PERSONALITIES = [
   { id: 'traditional', label: 'رصين (Traditional)', icon: Briefcase }
 ];
 
-export const BrandIdentityStudio: React.FC = () => {
+export const BrandIdentityStudio: React.FC<{ setActiveTab?: (tab: string) => void }> = ({ setActiveTab }) => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [prompt, setPrompt] = useState('');
   const [selectedPalette, setSelectedPalette] = useState<string>('1');
@@ -62,13 +62,23 @@ export const BrandIdentityStudio: React.FC = () => {
       {/* Immersive Header - Mobile Optimized */}
       <div className={`px-6 pt-12 pb-10 rounded-b-[3rem] shadow-sm mb-8 ${isDarkMode ? 'bg-slate-900/50' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto flex flex-col items-center text-center gap-6">
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-4 relative w-full">
+             {/* Back button for mobile */}
+             {setActiveTab && (
+               <button 
+                 onClick={() => setActiveTab('home')}
+                 className="lg:hidden absolute left-0 top-0 w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-600 hover:bg-slate-100 active:scale-90 transition-all shadow-sm"
+               >
+                 <ArrowLeft size={18} className="rotate-180" />
+               </button>
+             )}
+
              <div className={`w-16 h-16 rounded-3xl flex items-center justify-center shadow-xl transition-transform hover:rotate-12 ${isDarkMode ? 'bg-indigo-600 text-white' : 'bg-[#0052FF] text-white shadow-blue-200'}`}>
                 <Palette size={32} strokeWidth={2.5} />
              </div>
              <div>
                 <span className={`text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full border mb-3 inline-block ${isDarkMode ? 'bg-white/5 border-white/10 text-indigo-400' : 'bg-blue-50 border-blue-100 text-[#0052FF]'}`}>Studio Engine v5.0</span>
-                <h1 className="text-3xl font-black tracking-tight leading-tight">استوديو <span className={isDarkMode ? 'text-indigo-400' : 'text-[#0052FF]'}>الهوية البصرية</span></h1>
+                <h1 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight">استوديو <span className={isDarkMode ? 'text-indigo-400' : 'text-[#0052FF]'}>الهوية البصرية</span></h1>
              </div>
           </div>
           <p className={`text-sm font-bold max-w-sm leading-relaxed px-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
@@ -262,7 +272,7 @@ export const BrandIdentityStudio: React.FC = () => {
         </div>
 
         {/* 3. Typography Studio */}
-        <div className={`rounded-[2.5rem] p-10 border flex flex-col items-center gap-8 ${isDarkMode ? 'bg-slate-900/30 border-white/5 text-white' : 'bg-white border-slate-100 shadow-sm text-slate-900'}`}>
+        <div className={`rounded-[2.5rem] p-6 sm:p-10 border flex flex-col items-center gap-6 sm:gap-8 ${isDarkMode ? 'bg-slate-900/30 border-white/5 text-white' : 'bg-white border-slate-100 shadow-sm text-slate-900'}`}>
            <div className="text-center">
               <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-sm ${isDarkMode ? 'bg-indigo-600/20 text-indigo-400' : 'bg-blue-50 text-[#0052FF]'}`}><Type size={28} /></div>
               <h4 className="text-2xl font-black mb-3">استوديو الخطوط</h4>
@@ -293,11 +303,11 @@ const MockupModeBtn = ({ active, onClick, icon, label, darkMode }: { active: boo
 );
 
 const FontPreview = ({ name, sample, isPrimary, darkMode }: { name: string, sample: string, isPrimary: boolean, darkMode: boolean }) => (
-  <div className={`p-6 rounded-[1.8rem] border flex flex-col gap-2 transition-all ${darkMode ? 'bg-white/5 border-white/5' : 'bg-slate-50 border-slate-100 hover:bg-white'}`}>
+  <div className={`p-4 sm:p-6 rounded-[1.8rem] border flex flex-col gap-2 transition-all ${darkMode ? 'bg-white/5 border-white/5' : 'bg-slate-50 border-slate-100 hover:bg-white'}`}>
      <div className="flex items-center justify-between">
         <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{name}</span>
         {isPrimary && <span className={`text-[9px] font-black px-3 py-1 rounded-full ${darkMode ? 'bg-indigo-600/20 text-indigo-400' : 'bg-blue-50 text-[#0052FF]'}`}>Primary</span>}
      </div>
-     <div className="text-xl font-black truncate mt-1">{sample}</div>
+     <div className="text-lg sm:text-xl font-black truncate mt-1">{sample}</div>
   </div>
 );

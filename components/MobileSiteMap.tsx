@@ -30,7 +30,7 @@ interface SiteMapSection {
 }
 
 export const MobileSiteMap: React.FC<MobileSiteMapProps> = ({ setActiveTab }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+
 
   const sections: SiteMapSection[] = [
     {
@@ -74,17 +74,7 @@ export const MobileSiteMap: React.FC<MobileSiteMapProps> = ({ setActiveTab }) =>
     }
   ];
 
-  const filteredSections = useMemo(() => {
-    if (!searchTerm) return sections;
-    return sections.map(section => ({
-      ...section,
-      items: section.items.filter(item => 
-        item.label.toLowerCase().includes(searchTerm.toLowerCase()) || 
-        item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        section.title.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    })).filter(section => section.items.length > 0);
-  }, [searchTerm, sections]);
+
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] pb-40 font-['IBM_Plex_Sans_Arabic'] rtl" dir="rtl">
@@ -107,32 +97,12 @@ export const MobileSiteMap: React.FC<MobileSiteMapProps> = ({ setActiveTab }) =>
 
         </div>
 
-        {/* Search Input */}
-        <div className="relative group">
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-indigo-600">
-            <SearchIcon size={18} />
-          </div>
-          <input 
-            type="text" 
-            placeholder="ابحث عن أداة أو صفحة..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pr-12 pl-4 py-4 bg-slate-100 border-none rounded-2xl text-[13px] font-bold text-slate-800 focus:bg-white focus:ring-4 focus:ring-slate-100 transition-all placeholder:text-slate-400 outline-none"
-          />
-          {searchTerm && (
-            <button 
-              onClick={() => setSearchTerm('')}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 hover:text-slate-600 p-2"
-            >
-              <X size={16} />
-            </button>
-          )}
-        </div>
+
       </div>
 
       {/* Grid Content */}
       <div className="px-6 mt-10 space-y-12 relative z-10">
-        {filteredSections.map((section, sIdx) => (
+        {sections.map((section, sIdx) => (
           <div key={sIdx} className="animate-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${sIdx * 100}ms` }}>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-1.5 h-6 bg-slate-900 rounded-full" />
@@ -175,27 +145,7 @@ export const MobileSiteMap: React.FC<MobileSiteMapProps> = ({ setActiveTab }) =>
           </div>
         ))}
 
-        {/* Support Section Redesigned */}
-        <div className="relative overflow-hidden p-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[3rem] text-white shadow-2xl animate-in slide-in-from-bottom-4 duration-700 delay-500 mb-8">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16" />
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl -ml-12 -mb-12" />
-          
-          <div className="relative z-10 flex flex-col items-center text-center">
-            <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 shadow-xl ring-1 ring-white/20">
-              <HelpCircle size={32} className="text-white" />
-            </div>
-            
-            <h4 className="text-xl font-black mb-3">هل تواجه تحدياً تقنياً؟</h4>
-            <p className="text-[12px] font-bold text-slate-400 mb-10 leading-relaxed px-2">
-              فريق الخبراء متاح لمساعدتك في ضبط إعدادات المنصة وتجاوز أية عقبات استراتيجية تواجهك.
-            </p>
-            
-            <button className="w-full py-4.5 bg-white text-slate-900 rounded-[1.5rem] text-[13px] font-black hover:bg-slate-100 transition-all active:scale-95 shadow-xl shadow-black/20 flex items-center justify-center gap-2">
-              <span>تواصل مع الدعم الفني</span>
-              <ExternalLink size={16} />
-            </button>
-          </div>
-        </div>
+
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { 
   FileText, BarChart3, Lightbulb, Target, Users, DollarSign, 
-  Briefcase, BrainCircuit, Save, Edit3, Plus, X, Zap, LayoutGrid, CheckCircle2 
+  Briefcase, BrainCircuit, Save, Edit3, Plus, X, Zap, LayoutGrid, CheckCircle2, ArrowLeft 
 } from 'lucide-react';
 import { PlanSection } from '../types';
 

@@ -285,7 +285,7 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
           />
         );
       case 'brand-identity':
-        return <BrandIdentityStudio />;
+        return <BrandIdentityStudio setActiveTab={setActiveTab} />;
       case 'unicorn-benchmark':
         return <UnicornBenchmarking />;
       case 'market-discovery':
