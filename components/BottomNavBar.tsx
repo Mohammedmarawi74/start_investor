@@ -1,11 +1,9 @@
-
 import React from 'react';
 import { 
-  Home, 
-  Layers, 
   Plus, 
-  BrainCircuit, 
-  Trello 
+  Layers,
+  Globe,
+  AlertCircle
 } from 'lucide-react';
 
 interface BottomNavBarProps {
@@ -16,12 +14,12 @@ interface BottomNavBarProps {
 
 export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, setActiveTab, onMenuClick }) => {
   const navItems = [
-    { id: 'home', icon: Home, label: 'الرئيسية' },
-    { id: 'my-plans', icon: Layers, label: 'مشاريعي' },
+    { id: 'market-discovery', icon: Globe, label: 'استكشاف السوق' },
+    { id: 'problem-engine', icon: AlertCircle, label: 'الفرص والمشاكل' },
     { id: 'new-plan', icon: Plus, label: 'خلق فكرة', isCenter: true },
-    { id: 'smart-analyzer', icon: BrainCircuit, label: 'المحلل' },
+    { id: 'my-plans', icon: Layers, label: 'مشاريعي' },
     { id: 'site-map', icon: (props: any) => (
-      <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+      <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
     ), label: 'القائمة' },
   ];
 

@@ -14,8 +14,8 @@ import {
 // ─── Data Configuration ───────────────────────────────────────────────────
 
 const MARKET_DISCOVERY_DASHBOARDS = [
-  'advertising-dashboard', 'marketing-dashboard', 'brands-dashboard', 'farming-dashboard',
-  'fisheries-dashboard', 'forestry-dashboard', 'chemical-industry-dashboard',
+  'advertising-dashboard', 'brands-leaders-dashboard', 'marketing-dashboard', 'farming-dashboard',
+  'fisheries-aquaculture-dashboard', 'forestry-dashboard', 'chemical-industry-dashboard',
   'fossil-fuels-dashboard', 'mining-dashboard', 'pulp-paper-dashboard',
   'plastic-rubber-dashboard', 'petroleum-refinery-dashboard', 'apparel-shoes-dashboard',
   'non-alcoholic-beverages-dashboard', 'economy-dashboard', 'building-construction-dashboard',
@@ -25,7 +25,7 @@ const MARKET_DISCOVERY_DASHBOARDS = [
   'b2b-ecommerce-dashboard', 'b2c-ecommerce-dashboard', 'c2c-ecommerce-dashboard',
   'digital-shopping-behaviour-dashboard', 'ecommerce-key-figures-dashboard', 'paid-content-dashboard',
   'financial-services-dashboard', 'financial-institutions-dashboard', 'investments-dashboard', 'insurance-dashboard',
-  'communications-dashboard'
+  'communications-dashboard', 'international-trade-dashboard', 'politics-dashboard', 'climate-dashboard'
 ];
 
 
@@ -51,11 +51,15 @@ const NavItem = memo(({ icon: Icon, label, active, onClick, badge, isNew, varian
 
   return (
     <button
-      onClick={onClick}
-      className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[13px] font-bold transition-all ${variants[variant]}`}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onClick();
+      }}
+      className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-[13px] font-bold transition-all touch-manipulation active:scale-[0.98] ${variants[variant]}`}
     >
       <Icon size={18} strokeWidth={active ? 2.5 : 2} className="flex-shrink-0" />
-      <span className="flex-1 text-right">{label}</span>
+      <span className="flex-1 text-right truncate">{label}</span>
       {isNew && (
         <span className="bg-amber-400 text-amber-950 text-[8px] font-black px-1.5 py-0.5 rounded-lg animate-pulse">جديد</span>
       )}
@@ -144,6 +148,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeT
                 <NavItem icon={Home} label="الصفحة الرئيسية" active={activeTab === 'home'} onClick={() => handleNavigate('home')} />
                 <NavItem icon={Layers} label="مشاريعي" active={activeTab === 'my-plans'} onClick={() => handleNavigate('my-plans')} />
                 <NavItem icon={Rocket} label="خلق فكرة" active={activeTab === 'new-plan'} onClick={() => handleNavigate('new-plan')} />
+                <NavItem icon={LayoutDashboard} label="خارطة المنصة" active={activeTab === 'site-map'} onClick={() => handleNavigate('site-map')} isNew />
               </NavGroup>
 
               <NavGroup title="مختبر الاستراتيجية">
