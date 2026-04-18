@@ -104,13 +104,7 @@ export const MobileSiteMap: React.FC<MobileSiteMapProps> = ({ setActiveTab }) =>
               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Strategic Mission Control</p>
             </div>
           </div>
-          <button 
-            onClick={() => setActiveTab('home')}
-            className="flex items-center gap-2 px-4 py-2.5 bg-slate-900 text-white text-[11px] font-black rounded-full shadow-lg shadow-slate-200 active:scale-90 transition-all"
-          >
-            <span>الرئيسية</span>
-            <ChevronRight size={14} strokeWidth={3} />
-          </button>
+
         </div>
 
         {/* Search Input */}
