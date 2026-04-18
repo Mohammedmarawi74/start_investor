@@ -24,8 +24,36 @@ const MARKET_DISCOVERY_DASHBOARDS = [
   'home-improvement-dashboard', 'pet-supplies-dashboard', 'toys-dashboard',
   'b2b-ecommerce-dashboard', 'b2c-ecommerce-dashboard', 'c2c-ecommerce-dashboard',
   'digital-shopping-behaviour-dashboard', 'ecommerce-key-figures-dashboard', 'paid-content-dashboard',
-  'financial-services-dashboard', 'financial-institutions-dashboard', 'investments-dashboard', 'insurance-dashboard',
-  'communications-dashboard', 'international-trade-dashboard', 'politics-dashboard', 'climate-dashboard'
+  'international-trade-dashboard', 'politics-dashboard', 'climate-dashboard',
+  'emissions-dashboard', 'energy-dashboard', 'greentech-dashboard',
+  'waste-dashboard', 'water-dashboard', 'financial-services-dashboard', 'financial-institutions-dashboard', 
+  'investments-dashboard', 'insurance-dashboard', 'care-support-dashboard',
+  'hospitals-health-professionals-dashboard', 'health-system-dashboard', 'medical-technology-dashboard',
+  'pharma-market-dashboard', 'state-of-health-dashboard', 'cyber-crime-security-dashboard',
+  'internet-demographics-dashboard', 'mobile-internet-apps-dashboard', 'online-search-dashboard',
+  'online-video-entertainment-dashboard', 'reach-traffic-dashboard', 'social-media-dashboard',
+  'celebrities-dashboard', 'family-friends-dashboard', 'personality-behavior-dashboard',
+  'holidays-dashboard', 'audio-dashboard', 'books-publishing-dashboard',
+  'news-dashboard', 'tv-video-film-dashboard', 'video-gaming-esports-dashboard', 'communications-dashboard',
+  'aerospace-defense-dashboard', 'electronics-dashboard', 'industrial-machinery-dashboard',
+  'metals-dashboard', 'rolling-stock-dashboard', 'shipbuilding-dashboard',
+  'vehicle-manufacturing-dashboard', 'commercial-real-estate-dashboard', 'industrial-real-estate-dashboard',
+  'mortgages-financing-dashboard', 'property-services-dashboard', 'residential-real-estate-dashboard',
+  'diy-retail-dashboard', 'fashion-accessories-dashboard', 'food-beverage-retail-dashboard',
+  'furniture-retail-dashboard', 'general-merchandise-dashboard', 'health-hygiene-dashboard',
+  'office-supplies-dashboard', 'private-label-dashboard', 'retail-technology-dashboard',
+  'shopping-behavior-dashboard', 'sports-leisure-retail-dashboard', 'subscriptions-direct-selling-dashboard',
+  'supply-chain-dashboard', 'wholesale-dashboard', 'business-services-dashboard',
+  'skilled-labor-dashboard', 'crime-law-enforcement-dashboard', 'demographics-dashboard',
+  'education-science-dashboard', 'geography-nature-dashboard', 'historical-data-dashboard',
+  'art-culture-dashboard', 'gambling-dashboard', 'hobbies-dashboard',
+  'parks-outdoors-dashboard', 'professional-sports-dashboard', 'sports-fitness-dashboard',
+  'wellness-spas-dashboard', 'consumer-electronics-dashboard', 'hardware-dashboard',
+  'household-appliances-dashboard', 'it-services-dashboard', 'software-dashboard',
+  'telecommunications-dashboard', 'aviation-dashboard', 'logistics-dashboard',
+  'public-transport-dashboard', 'rail-transport-dashboard', 'vehicles-road-traffic-dashboard',
+  'water-transport-dashboard', 'accommodation-dashboard', 'business-travel-dashboard',
+  'food-drink-services-dashboard', 'leisure-travel-dashboard'
 ];
 
 
@@ -51,11 +79,7 @@ const NavItem = memo(({ icon: Icon, label, active, onClick, badge, isNew, varian
 
   return (
     <button
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        onClick();
-      }}
+      onClick={onClick}
       className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-[13px] font-bold transition-all touch-manipulation active:scale-[0.98] ${variants[variant]}`}
     >
       <Icon size={18} strokeWidth={active ? 2.5 : 2} className="flex-shrink-0" />

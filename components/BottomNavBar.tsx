@@ -29,11 +29,19 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, setActive
         {navItems.map((item) => {
           const isActive = activeTab === item.id;
 
+          const handleClick = () => {
+            if (item.id === 'site-map' && onMenuClick) {
+              onMenuClick();
+            } else {
+              setActiveTab(item.id);
+            }
+          };
+
           if (item.isCenter) {
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveTab(item.id)}
+                onClick={handleClick}
                 className="relative -top-6 sm:-top-8 w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-indigo-600 to-purple-600 text-white rounded-full flex items-center justify-center shadow-2xl shadow-indigo-200 border-4 border-white active:scale-90 transition-transform group touch-manipulation hover:shadow-indigo-400/50"
                 aria-label={item.label}
               >
@@ -45,7 +53,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, setActive
           return (
             <button
               key={item.id}
-              onClick={() => setActiveTab(item.id)}
+              onClick={handleClick}
               className={`flex-1 flex flex-col items-center justify-center gap-0.5 sm:gap-1 py-1.5 sm:py-2 px-1 sm:px-2 rounded-2xl transition-all min-h-[48px] touch-manipulation active:scale-90 ${isActive ? 'text-indigo-600 translate-y-[-2px]' : 'text-slate-400 hover:text-slate-600'}`}
               aria-label={item.label}
             >
