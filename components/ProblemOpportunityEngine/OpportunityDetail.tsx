@@ -16,7 +16,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { Problem, Sector, SubSector } from './types';
-import { ScoreBadge, CountryTag } from './SubComponents';
+import { ScoreBadge, CountryTag, CountryList } from './SubComponents';
 import { BUDGET_TIERS, B2X_MODELS } from './constants.tsx';
 
 interface OpportunityDetailProps {
@@ -115,10 +115,21 @@ export const OpportunityDetail: React.FC<OpportunityDetailProps> = ({
                   <span className="text-indigo-600 uppercase">تحليل الثغرة</span>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-[10px] font-black border border-slate-200">{selectedSector?.name || "قطاع تقني"}</span>
-                  {selectedProblem.b2x && <span className="px-3 py-1 bg-slate-900 text-white rounded-lg text-[10px] font-black">{selectedProblem.b2x}</span>}
-                  {selectedProblem.countries.map(cId => <CountryTag key={cId} countryId={cId} />)}
+                <div className="flex flex-wrap items-center gap-3 mb-6">
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg text-[10px] font-black border border-slate-200">
+                     <Target size={14} className="text-slate-400" />
+                     <span>{selectedSector?.name || "قطاع تقني"}</span>
+                  </div>
+                  {selectedProblem.b2x && (
+                    <div className="px-3 py-1.5 bg-slate-900 text-white rounded-lg text-[10px] font-black uppercase tracking-widest">
+                       {selectedProblem.b2x}
+                    </div>
+                  )}
+                  <div className="h-6 w-px bg-slate-200" />
+                  <div className="flex items-center gap-2">
+                     <span className="text-[10px] font-black text-slate-300 uppercase">المناطق:</span>
+                     <CountryList countryIds={selectedProblem.countries} />
+                  </div>
                 </div>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-6 leading-[1.15]">{selectedProblem.title}</h2>
                 <p className="text-base sm:text-xl font-medium text-slate-500 leading-relaxed max-w-4xl">{selectedProblem.desc}</p>

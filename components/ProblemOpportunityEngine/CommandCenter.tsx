@@ -1,17 +1,16 @@
+
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, AlertCircle, Sparkles, ArrowLeft } from 'lucide-react';
-import { COUNTRIES } from './constants';
-import { Problem } from './types';
+import { Search, Globe, Target, ArrowLeft, X } from 'lucide-react';
 
 interface CommandCenterProps {
   isCommandOpen: boolean;
-  setIsCommandOpen: (v: boolean) => void;
+  setIsCommandOpen: (open: boolean) => void;
   cmdQuery: string;
-  setCmdQuery: (v: string) => void;
-  commandInputRef: React.RefObject<HTMLInputElement>;
+  setCmdQuery: (q: string) => void;
+  commandInputRef: React.RefObject<HTMLInputElement | null>;
   cmdResults: any[];
-  goToOpportunity: (p: Problem, view: string) => void;
+  goToOpportunity: (prob: any, fromView: string) => void;
 }
 
 export const CommandCenter: React.FC<CommandCenterProps> = ({
@@ -25,100 +24,118 @@ export const CommandCenter: React.FC<CommandCenterProps> = ({
 }) => {
   return (
     <AnimatePresence>
-       {isCommandOpen && (
-         <div className="fixed inset-0 z-[200] flex items-start justify-center pt-[8vh] sm:pt-[12vh] px-4">
-            {/* Light Glass Backdrop */}
-            <motion.div 
-               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-               className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
-               onClick={() => setIsCommandOpen(false)}
-            />
-            
-            <motion.div 
-               initial={{ opacity: 0, scale: 0.95, y: -20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: -20 }} transition={{ duration: 0.2 }}
-               className="relative w-full max-w-3xl bg-slate-900 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden border border-slate-800 font-tajawal"
-               dir="rtl"
-            >
-               {/* Input Area */}
-               <div className="flex items-center px-6 py-5 border-b border-slate-800 bg-slate-900/50">
-                  <Search size={28} className="text-indigo-400 shrink-0" strokeWidth={2.5} />
-                  <input 
-                    ref={commandInputRef}
-                    value={cmdQuery}
-                    onChange={e => setCmdQuery(e.target.value)}
-                    placeholder="استكشف أي فرصة معمقة، قطاع، أو دولة..."
-                    className="flex-1 bg-transparent border-none outline-none px-5 text-xl sm:text-2xl font-black text-white placeholder-slate-500"
-                  />
-                  <button onClick={() => setIsCommandOpen(false)} className="text-slate-500 hover:text-white transition-colors shrink-0 bg-slate-800 p-2 rounded-xl border border-slate-700">
-                     <kbd className="text-[10px] font-bold font-sans">ESC</kbd>
+      {isCommandOpen && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh] px-4 sm:px-6"
+          onKeyDown={(e) => e.key === 'Escape' && setIsCommandOpen(false)}
+        >
+          {/* Backdrop with sophisticated blur */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsCommandOpen(false)}
+            className="absolute inset-0 bg-slate-900/40 backdrop-blur-md"
+          />
+
+          {/* Search Container */}
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className="relative w-full max-w-2xl bg-white rounded-[2.5rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25)] border border-slate-200/50 overflow-hidden"
+          >
+            {/* Search Input Bar */}
+            <div className="flex items-center px-8 py-6 border-b border-slate-100">
+               <Search size={22} className="text-indigo-500 shrink-0" />
+               <input 
+                 ref={commandInputRef}
+                 type="text"
+                 placeholder="ابحث بالدولة، القطاع، أو نوع الفجوة..."
+                 value={cmdQuery}
+                 onChange={(e) => setCmdQuery(e.target.value)}
+                 className="w-full bg-transparent border-none outline-none px-6 text-lg font-black text-slate-900 placeholder:text-slate-300 placeholder:font-bold"
+               />
+               <div className="flex items-center gap-3">
+                  <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[9px] font-black text-slate-400">
+                     <span className="font-sans">ESC</span>
+                     <span>للإغلاق</span>
+                  </div>
+                  <button 
+                    onClick={() => setIsCommandOpen(false)}
+                    className="p-2 hover:bg-slate-50 rounded-full text-slate-400 transition-colors"
+                  >
+                    <X size={20} />
                   </button>
                </div>
+            </div>
 
-               {/* Results Area */}
-               <div className="max-h-[60vh] overflow-y-auto no-scrollbar bg-slate-900 p-3 sm:p-4">
-                  {cmdResults.length === 0 && cmdQuery && (
-                    <div className="py-16 text-center">
-                       <AlertCircle size={40} className="mx-auto mb-4 text-slate-700" />
-                       <div className="text-slate-500 text-sm font-bold">لا توجد نتائج مطابقة، جرب كلمات أو فلاتر أبسط.</div>
+            {/* Results Area */}
+            <div className="max-h-[60vh] overflow-y-auto no-scrollbar pb-6">
+               {cmdQuery.trim() === '' ? (
+                 <div className="px-10 py-12 text-center space-y-4">
+                    <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto text-slate-300">
+                       <Search size={32} />
                     </div>
-                  )}
-                  {cmdResults.length === 0 && !cmdQuery && (
-                     <div className="py-14 sm:py-20 text-center">
-                         <div className="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-slate-700">
-                            <Sparkles size={32} className="text-indigo-400" />
+                    <div className="space-y-1">
+                       <p className="text-sm font-black text-slate-900">رادار البحث الاستخباراتي</p>
+                       <p className="text-xs font-bold text-slate-400 leading-relaxed max-w-[280px] mx-auto text-center">
+                          ابدأ الكتابة للبحث في مليارات البيانات المرتبطة بالفجوات السوقية والفرص الاستثمارية الناشئة.
+                       </p>
+                    </div>
+                 </div>
+               ) : cmdResults.length === 0 ? (
+                 <div className="px-10 py-12 text-center space-y-4">
+                    <div className="w-16 h-16 bg-rose-50 rounded-full flex items-center justify-center mx-auto text-rose-300">
+                       <Target size={32} />
+                    </div>
+                    <p className="text-sm font-black text-slate-600">عذراً، لم نجد نتائج تطابق "{cmdQuery}"</p>
+                 </div>
+               ) : (
+                 <div className="p-4 space-y-2">
+                    <p className="px-6 py-2 text-[10px] font-black text-slate-300 uppercase tracking-widest">النتائج الاستخباراتية ({cmdResults.length})</p>
+                    {cmdResults.map((result, idx) => (
+                      <button 
+                        key={idx}
+                        onClick={() => {
+                          goToOpportunity(result, 'search');
+                          setIsCommandOpen(false);
+                        }}
+                        className="w-full flex items-center gap-6 p-6 rounded-[1.8rem] hover:bg-indigo-50/50 group transition-all text-right border border-transparent hover:border-indigo-100"
+                      >
+                         <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-slate-400 border border-slate-100 group-hover:scale-110 transition-transform shadow-sm">
+                            <Globe size={20} className="group-hover:text-indigo-500 transition-colors" />
                          </div>
-                         <h4 className="text-lg font-black text-white mb-2">البحث الاستخباراتي السريع</h4>
-                         <p className="text-sm font-medium text-slate-400 max-w-md mx-auto leading-relaxed">
-                            اكتب أي كلمات للبحث المتقاطع فوراً.<br/>
-                            <span className="font-bold text-indigo-400">أمثلة سريعة: </span>
-                            (الصحة B2B)، (السعودية منخفضة التكلفة)، أو (تقنيات التعليم).
-                         </p>
-                     </div>
-                  )}
-                  
-                  {cmdResults.length > 0 && (
-                     <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-3 mb-2 mt-1">أبرز الثغرات الاستثمارية المرتبطة</div>
-                  )}
-
-                  <div className="flex flex-col gap-2">
-                    {cmdResults.map(p => (
-                       <button 
-                         key={p.id}
-                         onClick={() => {
-                            goToOpportunity(p, 'problems');
-                            setIsCommandOpen(false);
-                            setCmdQuery('');
-                         }}
-                         className="w-full text-right p-4 sm:p-5 hover:bg-slate-800/50 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group transition-all border border-transparent hover:border-slate-700"
-                       >
-                         <div className="flex-1 w-full">
-                            <div className="flex flex-wrap items-center gap-2.5 mb-2">
-                               <span className={`text-[9px] px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-black`}>{p.sectorName}</span>
-                               <span className="text-[9px] px-2.5 py-1 rounded-md bg-slate-800 text-slate-400 font-black border border-slate-700">{p.b2x}</span>
-                               <div className="flex -space-x-1 rtl:space-x-reverse ml-2">
-                                   {p.countries.map((cx: string) => (
-                                     <div key={cx} className="w-5 h-5 rounded-full bg-slate-800 flex justify-center items-center text-[9px] border border-slate-900 shadow-sm">{COUNTRIES.find((ccc: any) => ccc.id === cx)?.flag || '🌍'}</div>
-                                   ))}
-                               </div>
+                         <div className="flex-1 space-y-1.5">
+                            <div className="flex items-center gap-2">
+                               <span className="px-2 py-0.5 bg-indigo-50 text-indigo-600 border border-indigo-100/30 rounded text-[9px] font-black uppercase tracking-wide">قطاع {result.sectorName}</span>
+                               <span className="text-[10px] font-bold text-slate-300">|</span>
+                               <span className="text-[10px] font-black text-slate-400">{result.countries.join(', ')}</span>
                             </div>
-                            <h4 className="text-sm sm:text-lg font-black text-white group-hover:text-indigo-400 transition-colors mb-1.5 leading-snug">{p.title}</h4>
-                            <p className="text-xs text-slate-500 line-clamp-1 truncate max-w-2xl">{p.desc}</p>
+                            <h4 className="text-base font-black text-slate-900 group-hover:text-indigo-600 transition-colors">{result.title}</h4>
+                            <p className="text-xs font-medium text-slate-400 line-clamp-1">{result.desc}</p>
                          </div>
-                         <div className="hidden sm:flex items-center gap-4 border-r border-slate-800 pr-5">
-                            <div className="flex flex-col items-center">
-                               <span className="text-[9px] text-amber-500/50 font-black mb-1">الفجوة</span>
-                               <span className="text-sm text-amber-500 font-black">{p.gap}</span>
-                            </div>
-                            <ArrowLeft size={20} className="text-slate-600 group-hover:text-indigo-400 group-hover:-translate-x-1.5 transition-all outline-none" />
-                         </div>
-                       </button>
+                         <ArrowLeft size={18} className="text-slate-200 group-hover:text-indigo-500 group-hover:-translate-x-1 transition-all" />
+                      </button>
                     ))}
-                  </div>
+                 </div>
+               )}
+            </div>
 
+            {/* Footer Tip */}
+            <div className="bg-slate-50/50 px-8 py-4 border-t border-slate-100 flex items-center justify-between">
+               <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-1.5">
+                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                     <span className="text-[9px] font-black text-slate-400 uppercase">تحديثات حية</span>
+                  </div>
                </div>
-            </motion.div>
-         </div>
-       )}
+               <p className="text-[9px] font-bold text-slate-400">نظام البحث الذكي مدفوع ببيانات السوق اللحظية</p>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </AnimatePresence>
   );
 };

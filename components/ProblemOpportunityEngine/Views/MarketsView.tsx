@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Globe, ChevronLeft, Target, AlertCircle, ArrowLeft, Search } from 'lucide-react';
+import { Globe, ChevronLeft, Target, AlertCircle, ArrowLeft, Search, AlertTriangle, TrendingUp } from 'lucide-react';
 import { CONTINENTS, COUNTRIES, DATA } from '../constants.tsx';
 import { Problem } from '../types';
-import { ScoreBadge, getPainTag, CountryTag } from '../SubComponents';
+import { ScoreBadge, getPainTag, CountryTag, CountryList } from '../SubComponents';
+import { MinimalistCard } from '../MinimalistCard';
 
 interface MarketsViewProps {
   view: string;
@@ -120,26 +121,13 @@ export const MarketsView: React.FC<MarketsViewProps> = ({
                  </div>
               </div>
 
-              <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {currentMarketList.map(problem => (
-                  <div key={problem.id} className="bg-white p-6 sm:p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden flex flex-col">
-                    <div className="flex flex-col lg:flex-row gap-6 flex-1">
-                      <div className="flex-1">
-                        <div className="flex flex-wrap items-center gap-2 mb-3">
-                          <span className={`text-[9px] px-2.5 py-1 rounded-md bg-${problem.sectorColor}-50 text-${problem.sectorColor}-600 border border-${problem.sectorColor}-100 font-black`}>{problem.sectorName}</span>
-                          <span className={`px-2 py-0.5 rounded-md text-[9px] font-black border ${getPainTag(problem.pain).class}`}>#{getPainTag(problem.pain).label}</span>
-                          {problem.countries.map(cId => <CountryTag key={cId} countryId={cId} />)}
-                        </div>
-                        <h3 className="text-lg font-black text-slate-900 mb-3">{problem.title}</h3>
-                        <p className="text-xs font-medium text-slate-500 mb-6 line-clamp-2">{problem.desc}</p>
-                        <button onClick={() => goToOpportunity(problem, 'market_problems')} className="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-[10px] font-black hover:bg-indigo-700 transition-all flex items-center justify-center gap-2"><span>استكشف بيانات الفرصـة</span> <ArrowLeft size={14} /></button>
-                      </div>
-                      <div className="w-full lg:w-[150px] space-y-3 p-4 bg-slate-50 rounded-xl">
-                        <ScoreBadge label="شدة الألم" score={problem.pain} colorClass="text-rose-500" />
-                        <ScoreBadge label="الربحية" score={problem.money} colorClass="text-emerald-500" />
-                      </div>
-                    </div>
-                  </div>
+                  <MinimalistCard 
+                    key={problem.id} 
+                    problem={problem} 
+                    onNavigate={() => goToOpportunity(problem, 'market_problems')} 
+                  />
                 ))}
               </div>
 

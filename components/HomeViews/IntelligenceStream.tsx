@@ -9,65 +9,12 @@ import {
   Network,
   Activity as PulseIcon
 } from 'lucide-react';
+import { MinimalistCard } from '../ProblemOpportunityEngine/MinimalistCard';
 
 /* ═══════════════════════════════════════════════════════════════
    INTELLIGENCE STREAM — "Live Gap Radar Feed"
    ═══════════════════════════════════════════════════════════════ */
 
-const StreamCard = ({ item, onNavigate }: any) => {
-  return (
-    <div className="bg-white border border-slate-100 rounded-3xl p-6 hover:shadow-2xl hover:shadow-slate-200/40 transition-all duration-500 group relative overflow-hidden flex flex-col gap-4">
-      {/* Decorative Severity Accent */}
-      <div className={`absolute top-0 right-0 w-full h-1.5 ${item.painColor} opacity-10 group-hover:opacity-100 transition-all duration-500`} />
-       
-      {/* Header: Country & Urgency */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center border border-slate-100 shadow-sm">
-            <span className="text-xl">{item.flag}</span>
-          </div>
-          <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em]">{item.country}</span>
-        </div>
-
-        <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-black ${item.painBg} ${item.painText} border ${item.painBorder}`}>
-           <PulseIcon size={10} className="animate-pulse" />
-           {item.urgency}
-        </div>
-      </div>
-
-      {/* Core Content: Title & Tags */}
-      <div className="space-y-3">
-        <h4 className="text-lg font-black text-slate-900 leading-tight group-hover:text-indigo-600 transition-colors">
-          {item.title}
-        </h4>
-        
-        <div className="flex flex-wrap gap-2">
-          <span className="px-2.5 py-1 bg-slate-50 text-slate-500 rounded-lg text-[9px] font-black border border-slate-100 uppercase tracking-wider">
-            {item.gapType}
-          </span>
-          <span className="px-2.5 py-1 bg-indigo-50 text-indigo-600 rounded-lg text-[9px] font-black border border-indigo-100 uppercase tracking-wider">
-            منافسة: {item.competition}
-          </span>
-        </div>
-      </div>
-
-      {/* Strategic Insight Box with Action */}
-      <div className="bg-slate-50/50 p-4 pb-3 rounded-xl border border-slate-100 group-hover:bg-white group-hover:border-indigo-100 transition-all">
-        <p className="text-[12px] font-bold text-slate-500 leading-relaxed text-right mb-3">
-          {item.description}
-        </p>
-        <div className="flex justify-center">
-           <button 
-             onClick={onNavigate}
-             className="w-12 h-6 bg-slate-900 text-white rounded-full flex items-center justify-center hover:bg-indigo-600 transition-all duration-300 shadow-md transform group-hover:scale-110"
-           >
-             <ArrowLeft size={14} />
-           </button>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 /* Advanced Heatmap Bar */
 const HeatmapBar = ({ label, percentage, color, trend }: any) => (
@@ -196,11 +143,19 @@ export const IntelligenceStream = ({ setActiveTab }: any) => {
         {/* Content: Cards + Heatmap */}
         <div className="flex flex-col lg:flex-row gap-8 items-stretch">
           <div className="flex-1 flex flex-col gap-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {streamItems.map((item, i) => (
-                <StreamCard 
+                <MinimalistCard 
                   key={i} 
-                  item={item} 
+                  problem={{
+                    title: item.title,
+                    desc: item.description,
+                    sectorName: item.gapType,
+                    countries: [item.country === 'السعودية' ? 'SA' : item.country === 'الإمارات' ? 'AE' : item.country === 'مصر' ? 'EG' : 'SY'],
+                    pain: item.painScore,
+                    money: item.profitPotential.replace('$', '').replace('M+', 'M'),
+                    b2x: item.competition
+                  }} 
                   onNavigate={() => setActiveTab('problem-engine')}
                 />
               ))}

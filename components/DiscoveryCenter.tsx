@@ -364,14 +364,14 @@ export function DiscoveryCenter({ setActiveTab }: { setActiveTab: (tab: string) 
     return (
       <div 
         key={group.title} 
-        className={`h-full flex flex-col p-6 rounded-[2rem] border ${theme.border} ${theme.bg} transition-all duration-300 hover:shadow-xl hover:shadow-slate-200/50 group mx-auto md:mx-0 md:max-w-none`}
+        className={`h-full flex flex-col p-5 sm:p-6 rounded-[2rem] border ${theme.border} ${theme.bg} transition-all duration-300 hover:shadow-xl hover:shadow-slate-200/50 group w-full sm:max-w-none`}
       >
         {/* Header Block */}
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-3 mb-5 sm:mb-6">
           <div className={`w-1.5 h-6 ${theme.accent} rounded-full`} />
           <div className="flex items-center gap-2">
             <SafeIcon iconName={group.iconName} size={20} className={theme.icon} />
-            <h2 className={`text-[17px] font-black ${theme.text} tracking-tight`}>{group.title}</h2>
+            <h2 className={`text-[16px] sm:text-[17px] font-black ${theme.text} tracking-tight`}>{group.title}</h2>
           </div>
         </div>
 
@@ -399,9 +399,9 @@ export function DiscoveryCenter({ setActiveTab }: { setActiveTab: (tab: string) 
   };
 
   return (
-    <div className="min-h-screen bg-white rtl text-right pb-32" style={{ fontFamily: '"IBM Plex Sans Arabic", sans-serif' }}>
+    <div className="min-h-screen bg-white text-right pb-32" dir="rtl" style={{ fontFamily: '"IBM Plex Sans Arabic", sans-serif' }}>
       {/* Sleek Strategic Intelligence Banner */}
-      <div className="relative w-full overflow-hidden bg-[#0A0C10] py-10 px-8 sm:px-12 border-b border-white/5">
+      <div className="relative w-full overflow-hidden bg-[#0A0C10] py-12 sm:py-16 px-5 sm:px-12 border-b border-white/5">
         {/* Abstract Background Elements */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-600/10 to-transparent blur-[100px] opacity-40" />
         <div className="absolute bottom-0 left-0 w-1/3 h-full bg-gradient-to-r from-indigo-600/10 to-transparent blur-[100px] opacity-40" />
@@ -412,10 +412,10 @@ export function DiscoveryCenter({ setActiveTab }: { setActiveTab: (tab: string) 
 
               
               <div className="space-y-4">
-                 <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter leading-tight">
+                 <h1 className="text-2xl sm:text-3xl md:text-5xl font-black text-white tracking-tighter leading-tight">
                    رادار استكشاف الأسواق <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">والفرص الاستثمارية</span>
                  </h1>
-                 <p className="text-[17px] md:text-[18px] text-slate-300 font-medium leading-relaxed max-w-2xl opacity-90">
+                 <p className="text-[15px] sm:text-[17px] md:text-[18px] text-slate-300 font-medium leading-relaxed max-w-2xl opacity-90">
                    بوابتك الذكية لاستكشاف مئات الصناعات العالمية وتحليل اتجاهات السوق لدعم قراراتك الاستثمارية وبناء خطة عمل ناجحة.
                  </p>
               </div>
@@ -423,7 +423,7 @@ export function DiscoveryCenter({ setActiveTab }: { setActiveTab: (tab: string) 
 
            </div>
 
-           <div className="hidden lg:flex relative mr-12">
+           <div className="hidden lg:flex relative mr-12 shrink-0">
               <div className="w-32 h-32 rounded-full bg-blue-600/10 blur-[60px] absolute inset-0 animate-pulse" />
               <LucideIcons.Globe size={100} className="text-white/5 relative z-10 rotate-12" />
            </div>
@@ -431,7 +431,7 @@ export function DiscoveryCenter({ setActiveTab }: { setActiveTab: (tab: string) 
       </div>
 
       {/* Advanced Filter & Search Terminal - Permanent Glow Mode */}
-      <div className="relative -mt-10 py-4 px-8 sm:px-12 z-40">
+      <div className="relative -mt-6 sm:-mt-10 py-4 px-4 sm:px-12 z-40">
         <div className="max-w-4xl mx-auto">
           <div className="relative group">
             {/* Permanent High-Tech Glow */}
@@ -443,8 +443,8 @@ export function DiscoveryCenter({ setActiveTab }: { setActiveTab: (tab: string) 
               </div>
               <input 
                 type="text"
-                placeholder="ابحث عن قطاع، صناعة، أو قادة السوق (مثلاً: تكنولوجيا، زراعة، Google)..."
-                className="w-full py-5 pr-2 pl-6 bg-transparent text-[16px] font-bold text-slate-800 focus:outline-none placeholder:text-slate-400"
+                placeholder="ابحث عن قطاع، صناعة، أو قادة السوق..."
+                className="w-full py-4 sm:py-5 pr-2 pl-6 bg-transparent text-[14px] sm:text-[16px] font-bold text-slate-800 focus:outline-none placeholder:text-slate-400"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -490,10 +490,10 @@ export function DiscoveryCenter({ setActiveTab }: { setActiveTab: (tab: string) 
         </div>
       </div>
 
-      <div className="max-w-[1600px] mx-auto px-8 sm:px-12 mt-24">
+      <div className="max-w-[1600px] mx-auto px-5 sm:px-12 mt-16 sm:mt-24">
         {/* Main Smart Grid - Using Grid Auto Rows for consistent row height */}
         {/* Center grid items on mobile, align to start on md+ */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-32 justify-items-center md:justify-items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 pb-32">
           {filteredGroups.map((group, index) => renderCard(group, index))}
         </div>
 

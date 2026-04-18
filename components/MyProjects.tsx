@@ -90,7 +90,7 @@ export const MyProjects: React.FC = () => {
       </div>
 
       {/* Grid Container - Higher Density */}
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
          {filteredProjects.map(project => (
            <ProjectCard key={project.id} project={project} />
          ))}
@@ -108,31 +108,35 @@ export const MyProjects: React.FC = () => {
 
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
   return (
-    <div className="group bg-white border border-slate-100 rounded-3xl p-5 hover:border-blue-600 hover:shadow-[0_20px_60px_rgba(37,99,235,0.06)] transition-all duration-300 relative">
-       {/* Favorite Toggle */}
-       <button className={`absolute top-4 left-4 z-20 p-2 rounded-lg transition-all ${project.isFavorite ? 'text-amber-400 bg-amber-50' : 'text-slate-300 hover:text-amber-400 bg-transparent'}`}>
-          <Star size={14} fill={project.isFavorite ? 'currentColor' : 'none'} strokeWidth={3} />
+    <div className="group bg-white border border-slate-100 rounded-[2rem] sm:rounded-3xl p-4 sm:p-5 lg:p-6 hover:border-blue-600 hover:shadow-[0_20px_60px_rgba(37,99,235,0.06)] transition-all duration-300 relative flex flex-col h-full overflow-hidden">
+       {/* Favorite Toggle - Moved to top-left to avoid icon conflict */}
+       <button className={`absolute top-4 left-4 z-20 p-2 rounded-lg transition-all ${project.isFavorite ? 'text-amber-400 bg-amber-50 shadow-sm' : 'text-slate-300 hover:text-amber-400 bg-transparent'}`}>
+          <Star size={16} fill={project.isFavorite ? 'currentColor' : 'none'} strokeWidth={3} />
        </button>
 
-       {/* Icon & Category */}
-       <div className="flex items-center gap-3 mb-5">
-          <div className="w-11 h-11 bg-slate-900 text-white rounded-2xl flex items-center justify-center transition-transform group-hover:rotate-[-4deg]">
-             <LayoutGrid size={22} strokeWidth={2.5} />
+       {/* Icon & Category Header */}
+       <div className="flex items-start gap-4 mb-6 mt-4">
+          <div className="w-12 h-12 bg-slate-900 text-white rounded-2xl flex items-center justify-center transition-transform group-hover:rotate-[-4deg] shrink-0 shadow-xl ring-4 ring-slate-50">
+             <LayoutGrid size={24} strokeWidth={2.5} />
           </div>
-          <div className="min-w-0">
-             <h3 className="text-sm font-black text-slate-900 truncate mb-0.5 group-hover:text-blue-600 transition-colors">{project.name}</h3>
-             <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">{project.sector}</span>
+          <div className="min-w-0 pr-1 pl-12 sm:pl-0">
+             <h3 className="text-base font-black text-slate-900 leading-tight mb-1.5 group-hover:text-blue-600 transition-colors line-clamp-2">
+               {project.name}
+             </h3>
+             <span className="text-[10px] sm:text-[11px] font-black text-slate-400 uppercase tracking-widest block">
+               {project.sector}
+             </span>
           </div>
        </div>
 
        {/* Status & Readiness */}
-       <div className="flex items-center justify-between mb-6 bg-slate-50/50 p-3 rounded-2xl border border-slate-50">
+       <div className="flex items-center justify-between mb-4 sm:mb-6 lg:mb-8 bg-slate-50/50 p-2.5 sm:p-3 lg:p-4 rounded-xl sm:rounded-2xl border border-slate-50">
           <div className="flex flex-col">
-             <span className="text-[8px] font-black text-slate-400 uppercase mb-0.5">جاهزية التمويل</span>
-             <span className="text-lg font-black text-slate-900">{project.aiScore}%</span>
+             <span className="text-[7px] sm:text-[8px] lg:text-[9px] font-black text-slate-400 uppercase mb-0.5">جاهزية التمويل</span>
+             <span className="text-base sm:text-lg lg:text-xl font-black text-slate-900">{project.aiScore}%</span>
           </div>
-          <div className={`p-2 rounded-xl border flex items-center justify-center ${project.status === 'ready' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : project.status === 'review' ? 'bg-amber-50 text-amber-600 border-amber-100' : 'bg-slate-50 text-slate-500 border-slate-100'}`}>
-             {project.status === 'ready' ? <CheckCircle2 size={16} /> : project.status === 'review' ? <Clock size={16} /> : <TrendingUp size={16} />}
+          <div className={`w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-lg sm:rounded-xl border flex items-center justify-center ${project.status === 'ready' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : project.status === 'review' ? 'bg-amber-50 text-amber-600 border-amber-100' : 'bg-slate-50 text-slate-500 border-slate-100'}`}>
+             {project.status === 'ready' ? <CheckCircle2 size={16} className="sm:w-5 sm:h-5 lg:w-6 lg:h-6" /> : project.status === 'review' ? <Clock size={16} className="sm:w-5 sm:h-5 lg:w-6 lg:h-6" /> : <TrendingUp size={16} className="sm:w-5 sm:h-5 lg:w-6 lg:h-6" />}
           </div>
        </div>
 
@@ -150,16 +154,16 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
        </div>
 
        {/* Action Buttons Hub - Compact */}
-       <div className="flex items-center gap-2 pt-4 border-t border-slate-50 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-          <button className="flex-1 py-3 bg-blue-600 text-white rounded-xl text-[10px] font-black flex items-center justify-center gap-2 shadow-lg shadow-blue-100">
+       <div className="flex items-center gap-1.5 sm:gap-2 pt-4 border-t border-slate-50 sm:translate-y-2 sm:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+          <button className="flex-[2.5] min-w-[110px] py-3 lg:py-4 bg-blue-600 text-white rounded-xl lg:rounded-2xl text-[11px] sm:text-[10px] lg:text-[12px] font-black flex items-center justify-center gap-1.5 shadow-lg shadow-blue-100 whitespace-nowrap overflow-hidden">
              <span>فتح الخطة</span>
-             <ArrowRight size={14} strokeWidth={3} />
+             <ArrowRight size={14} className="sm:w-[16px] sm:h-[16px] rtl:rotate-180 shrink-0" strokeWidth={3} />
           </button>
           
-          <div className="flex gap-1">
-             <ActionIcon icon={<Share2 size={14} />} color="blue" />
-             <ActionIcon icon={<FileDown size={14} />} color="slate" />
-             <ActionIcon icon={<Trash2 size={14} />} color="red" />
+          <div className="flex gap-1 shrink-0">
+             <ActionIcon icon={<Share2 size={12} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />} color="blue" />
+             <ActionIcon icon={<FileDown size={12} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />} color="slate" />
+             <ActionIcon icon={<Trash2 size={12} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />} color="red" />
           </div>
        </div>
 
@@ -179,7 +183,7 @@ const ActionIcon = ({ icon, color }: { icon: React.ReactNode, color: string }) =
     red: 'text-red-600 bg-red-50 hover:bg-red-600 hover:text-white'
   };
   return (
-    <button className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${styles[color]}`}>
+    <button className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl flex items-center justify-center transition-all ${styles[color]}`}>
        {icon}
     </button>
   );

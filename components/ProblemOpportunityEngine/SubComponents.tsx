@@ -1,40 +1,68 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Globe, AlertTriangle, TrendingUp, Activity } from 'lucide-react';
 import { COUNTRIES } from './constants.tsx';
 
 export const ScoreBadge = ({ label, score, colorClass }: { label: string, score: number, colorClass: string }) => {
-  const getWidth = (s: number) => `${s * 10}%`;
   return (
-    <div className="flex flex-col gap-1 w-full">
-      <div className="flex justify-between items-center mb-0.5">
-        <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wide">{label}</span>
-        <span className={`text-[10px] sm:text-[11px] font-black ${colorClass}`}>{score}/10</span>
+    <div className="flex items-center gap-4 w-full group/score">
+      <div className="flex flex-col flex-1">
+         <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{label}</span>
+         <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden shadow-inner">
+            <motion.div 
+               initial={{ width: 0 }}
+               animate={{ width: `${score * 10}%` }}
+               className={`h-full ${colorClass.replace('text-', 'bg-')} rounded-full`}
+            />
+         </div>
       </div>
-      <div className="h-1.5 w-full bg-slate-100/50 rounded-full overflow-hidden shadow-inner flex items-center">
-        <motion.div 
-          initial={{ width: 0 }}
-          animate={{ width: getWidth(score) }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-          className={`h-full ${colorClass.replace('text-', 'bg-')} rounded-full shadow-[0_0_10px_rgba(0,0,0,0.1)]`}
-        />
-      </div>
+      <div className={`text-lg font-black ${colorClass} min-w-[32px] text-left`}>{score}</div>
     </div>
   );
 };
 
 export const getPainTag = (pain: number) => {
-  if (pain >= 9) return { label: 'ألم حاد 🔴', class: 'bg-rose-50 text-rose-600 border-rose-100' };
-  if (pain >= 7) return { label: 'ألم مرتفع 🟠', class: 'bg-orange-50 text-orange-600 border-orange-100' };
-  return { label: 'ألم متوسط 🟡', class: 'bg-amber-50 text-amber-600 border-amber-100' };
+  if (pain >= 9) return { label: 'حرج جداً', color: 'bg-rose-600 text-white', class: 'bg-rose-50 text-rose-600 border-rose-100', icon: 'AlertTriangle' };
+  if (pain >= 7) return { label: 'مرتفع', color: 'bg-orange-500 text-white', class: 'bg-orange-50 text-orange-600 border-orange-100', icon: 'TrendingUp' };
+  return { label: 'متوسط', color: 'bg-amber-500 text-white', class: 'bg-amber-50 text-amber-600 border-amber-100', icon: 'Activity' };
+};
+
+export const CountryList = ({ countryIds }: { countryIds: string[] }) => {
+  if (!countryIds || countryIds.length === 0 || countryIds.includes('ALL')) {
+     return <span className="text-[10px] font-black text-slate-400 flex items-center gap-1.5 bg-slate-50/50 px-3 py-1.5 rounded-lg border border-slate-100/50"><Globe size={13} className="text-slate-400" /> عالمي</span>;
+  }
+  
+  const displayCount = 3;
+  const visibleIds = countryIds.slice(0, displayCount);
+  const remainingCount = countryIds.length - displayCount;
+
+  return (
+    <div className="flex items-center">
+       <div className="flex -space-x-2.5 rtl:space-x-reverse">
+          {visibleIds.map(id => {
+             const c = COUNTRIES.find(x => x.id === id);
+             return c ? (
+               <div key={id} className="w-8 h-8 rounded-full border-[2.5px] border-white bg-slate-50 flex items-center justify-center text-lg shadow-sm hover:z-10 transition-all cursor-help" title={c.name}>
+                 {c.flag}
+               </div>
+             ) : null;
+          })}
+          {remainingCount > 0 && (
+             <div className="w-8 h-8 rounded-full border-[2.5px] border-white bg-slate-100 flex items-center justify-center text-[10px] font-black text-slate-600 shadow-sm">
+                +{remainingCount}
+             </div>
+          )}
+       </div>
+    </div>
+  );
 };
 
 export const CountryTag = ({ countryId }: { countryId: string }) => {
-  const country = COUNTRIES.find(c => c.id === countryId);
-  if (!country || countryId === 'ALL') return null;
+  const c = COUNTRIES.find(x => x.id === countryId);
+  if (!c || countryId === 'ALL') return null;
   return (
-    <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 rounded-md text-[9px] font-black bg-slate-50 text-slate-600 border border-slate-200">
-       <span className="text-[10px] sm:text-xs leading-none">{country.flag}</span>
-       <span className="leading-none">{country.name}</span>
-    </span>
+    <div className="w-6 h-6 rounded-full border border-slate-200 bg-slate-50 flex items-center justify-center text-xs shadow-sm" title={c.name}>
+       {c.flag}
+    </div>
   );
 };

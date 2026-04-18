@@ -1,12 +1,11 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Activity, LayoutGrid, Building2, Wallet, Globe, Search, Sparkles, ChevronDown } from 'lucide-react';
+import { Activity, LayoutGrid, Building2, Wallet, Globe, Search, Sparkles, ChevronDown, ArrowLeft } from 'lucide-react';
 
 // Modules
 import { Sector, SubSector, Problem } from './ProblemOpportunityEngine/types';
 import { DATA, COUNTRIES, BUDGET_TIERS } from './ProblemOpportunityEngine/constants.tsx';
 import { OpportunityDetail } from './ProblemOpportunityEngine/OpportunityDetail';
-import { CommandCenter } from './ProblemOpportunityEngine/CommandCenter';
 
 // Views
 import { SectorsView } from './ProblemOpportunityEngine/Views/SectorsView';
@@ -97,26 +96,115 @@ export const ProblemOpportunityEngine: React.FC = () => {
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">محرك ذكاء الفرص والمشكلات</h1>
         <p className="text-slate-500 text-sm sm:text-lg max-w-2xl mx-auto font-medium leading-relaxed mb-8">استكشف الفجوات السوقية الموثقة عالمياً بمعايير استثمارية دقيقة.</p>
         
-        {/* Command Center Quick Trigger (Spotlight Style) */}
-        <div className="max-w-2xl mx-auto mb-10 px-4">
-           <button 
-             onClick={() => setIsCommandOpen(true)}
-             className="w-full bg-white border border-slate-200 rounded-[1.5rem] py-4 px-6 flex items-center justify-between group hover:border-indigo-300 hover:shadow-xl hover:shadow-indigo-50/50 transition-all duration-300 cursor-text"
+        {/* ─── Production-Ready Inline Contextual Search ─── */}
+        <div className="max-w-2xl mx-auto mb-10 px-4 relative z-50">
+           <div 
+             className={`bg-white border transition-all duration-500 overflow-hidden ${
+               isCommandOpen 
+               ? 'rounded-[2rem] border-indigo-200 shadow-[0_30px_100px_-20px_rgba(79,70,229,0.15)]' 
+               : 'rounded-[1.5rem] border-slate-200 hover:border-indigo-300 shadow-sm hover:shadow-xl hover:shadow-indigo-50/50'
+             }`}
            >
-             <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
-                   <Search size={22} />
-                </div>
-                <div className="text-right">
-                   <p className="text-xs sm:text-sm font-black text-slate-400 leading-none mb-1">استخدم رادار البحث الاستخباراتي</p>
-                   <p className="text-[10px] font-bold text-slate-300 leading-none">ابحث بالدولة، القطاع، أو الميزانية...</p>
-                </div>
-             </div>
-             <div className="flex items-center gap-2">
-                <kbd className="hidden sm:inline-flex px-2 py-1 bg-slate-50 border border-slate-200 rounded-md text-[10px] font-bold text-slate-400 font-sans">CTRL K</kbd>
-                <Sparkles size={18} className="text-indigo-200 group-hover:text-indigo-400 transition-colors" />
+              {/* Input Area */}
+              <div className="py-4 px-6 flex items-center justify-between group">
+                 <div className="flex items-center gap-4 flex-1">
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                      isCommandOpen ? 'bg-indigo-600 text-white' : 'bg-slate-50 text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600'
+                    }`}>
+                       <Search size={22} />
+                    </div>
+                    <div className="flex-1 text-right">
+                       <input 
+                         ref={commandInputRef}
+                         type="text"
+                         value={cmdQuery}
+                         onChange={(e) => {
+                           setCmdQuery(e.target.value);
+                           if (!isCommandOpen) setIsCommandOpen(true);
+                         }}
+                         onFocus={() => setIsCommandOpen(true)}
+                         placeholder="ابحث بالدولة، القطاع، أو الميزانية..."
+                         className="w-full bg-transparent border-none outline-none text-sm font-black text-slate-900 placeholder:text-slate-300 placeholder:font-bold"
+                       />
+                       {!isCommandOpen && <p className="text-[10px] font-bold text-slate-300 leading-none mt-1">استخدم رادار البحث الاستخباراتي</p>}
+                    </div>
+                 </div>
+                 <div className="flex items-center gap-2">
+                    {isCommandOpen ? (
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); setIsCommandOpen(false); setCmdQuery(''); }}
+                        className="p-1.5 hover:bg-slate-50 rounded-lg text-slate-400"
+                      >
+                         <ChevronDown size={18} />
+                      </button>
+                    ) : (
+                      <>
+                        <kbd className="hidden sm:inline-flex px-2 py-1 bg-slate-50 border border-slate-200 rounded-md text-[10px] font-bold text-slate-400 font-sans">CTRL K</kbd>
+                        <Sparkles size={18} className="text-indigo-200 group-hover:text-indigo-400 transition-colors" />
+                      </>
+                    )}
+                  </div>
               </div>
-           </button>
+
+              {/* Inline Results Dropdown */}
+              <AnimatePresence>
+                {isCommandOpen && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="border-t border-slate-100 overflow-hidden"
+                  >
+                    <div className="max-h-[450px] overflow-y-auto no-scrollbar p-2">
+                      {cmdQuery.trim() === '' ? (
+                        <div className="p-8 text-center space-y-4">
+                           <div className="text-[11px] font-black text-slate-300 uppercase tracking-widest">مقترحات البحث الذكي</div>
+                           <div className="flex flex-wrap justify-center gap-2">
+                              {['تحليل مالي', 'النمو المستدام', 'السوق السعودي', 'Healthcare'].map(tag => (
+                                <button key={tag} onClick={() => setCmdQuery(tag)} className="px-4 py-2 bg-slate-50 hover:bg-indigo-50 text-slate-500 hover:text-indigo-600 rounded-xl text-xs font-black transition-all">#{tag}</button>
+                              ))}
+                           </div>
+                        </div>
+                      ) : cmdResults.length === 0 ? (
+                        <div className="p-10 text-center text-slate-400 font-bold text-xs">
+                           لا توجد نتائج مطابقة لـ "{cmdQuery}"
+                        </div>
+                      ) : (
+                        <div className="p-2 space-y-1">
+                           {cmdResults.map((result, idx) => (
+                             <button 
+                               key={idx}
+                               onClick={() => {
+                                 goToOpportunity(result, 'search');
+                                 setIsCommandOpen(false);
+                               }}
+                               className="w-full flex items-start sm:items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl hover:bg-indigo-50/50 group transition-all text-right border border-transparent hover:border-indigo-100"
+                             >
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-indigo-500 shrink-0 group-hover:scale-110 transition-transform mt-0.5 sm:mt-0">
+                                   <Globe size={18} />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                   <h4 className="text-[13px] sm:text-sm font-black text-slate-800 line-clamp-2 sm:line-clamp-1 group-hover:text-indigo-600 leading-tight mb-1">{result.title}</h4>
+                                   <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                                      <span className="text-[8px] sm:text-[9px] font-black text-indigo-500 uppercase tracking-widest whitespace-nowrap">قطاع {result.sectorName}</span>
+                                      <span className="hidden sm:inline text-[9px] font-bold text-slate-300">•</span>
+                                      <span className="text-[10px] font-bold text-slate-400 line-clamp-1 sm:truncate">{result.desc}</span>
+                                   </div>
+                                </div>
+                                <ArrowLeft size={16} className="text-slate-200 group-hover:text-indigo-500 group-hover:-translate-x-1 transition-all shrink-0 mt-1 sm:mt-0" />
+                             </button>
+                           ))}
+                        </div>
+                      )}
+                    </div>
+                    {/* Bottom Action Bar */}
+                    <div className="p-4 bg-slate-50/50 border-t border-slate-50 flex justify-center mt-2">
+                       <button onClick={() => setIsCommandOpen(false)} className="text-[10px] font-black text-slate-400 hover:text-indigo-600 transition-colors uppercase tracking-widest">إغلاق رادار البحث</button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+           </div>
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-2 p-2 bg-white rounded-3xl shadow-xl border border-slate-100 w-fit mx-auto scale-90 sm:scale-100">
@@ -181,12 +269,6 @@ export const ProblemOpportunityEngine: React.FC = () => {
           )}
         </AnimatePresence>
       </div>
-
-      {/* ─── Global Overlays ─── */}
-      <CommandCenter 
-        isCommandOpen={isCommandOpen} setIsCommandOpen={setIsCommandOpen} cmdQuery={cmdQuery} setCmdQuery={setCmdQuery}
-        commandInputRef={commandInputRef} cmdResults={cmdResults} goToOpportunity={goToOpportunity}
-      />
     </div>
   );
 };
