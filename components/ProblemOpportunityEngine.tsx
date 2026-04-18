@@ -209,26 +209,48 @@ export const ProblemOpportunityEngine: React.FC = () => {
                          <motion.div 
                            key={p.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                            onClick={() => goToOpportunity(p, 'search_results')}
-                           className="group bg-white p-4 sm:p-5 rounded-[1.5rem] border border-slate-100 hover:border-indigo-200 shadow-sm hover:shadow-xl hover:shadow-indigo-50/30 transition-all cursor-pointer flex flex-row items-start sm:items-center gap-4 sm:gap-6"
+                           className="group bg-white p-4 sm:p-5 rounded-[1.5rem] border border-slate-100 hover:border-indigo-200 shadow-sm hover:shadow-xl hover:shadow-indigo-50/30 transition-all cursor-pointer flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6"
                          >
-                            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-slate-50 group-hover:bg-indigo-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:text-indigo-600 transition-colors shrink-0">
+                            {/* Mobile Header: Icon & Meta */}
+                            <div className="flex sm:hidden items-center justify-between w-full">
+                               <div className="flex items-center gap-2">
+                                  <div className="w-8 h-8 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-500">
+                                     <Globe size={16} />
+                                  </div>
+                                  <div className="flex flex-col">
+                                     <span className="text-[9px] font-black text-indigo-400 uppercase tracking-widest">{p.sectorName}</span>
+                                     <span className="text-[8px] font-bold text-slate-300">ID: {p.id.slice(0,5)}</span>
+                                  </div>
+                               </div>
+                               <div className="w-8 h-8 rounded-lg bg-slate-50 group-hover:bg-indigo-600 text-slate-300 group-hover:text-white flex items-center justify-center transition-all">
+                                  <ArrowLeft size={14} />
+                               </div>
+                            </div>
+
+                            {/* Desktop Icon (Hidden on mobile) */}
+                            <div className="hidden sm:flex w-14 h-14 bg-slate-50 group-hover:bg-indigo-50 rounded-2xl items-center justify-center text-slate-400 group-hover:text-indigo-600 transition-colors shrink-0">
                                <Globe size={24} />
                             </div>
-                            <div className="flex-1 text-right space-y-1 overflow-hidden">
-                               <div className="flex items-center justify-start gap-3 overflow-hidden">
+
+                            {/* Main Content Area */}
+                            <div className="flex-1 text-right space-y-1.5 overflow-hidden">
+                               {/* Desktop Meta */}
+                               <div className="hidden sm:flex items-center justify-start gap-3 overflow-hidden">
                                   <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest truncate">{p.sectorName}</span>
                                   <span className="w-1 h-1 bg-slate-200 rounded-full shrink-0" />
                                   <span className="text-[10px] font-bold text-slate-400 shrink-0">#{p.id.slice(0,5)}</span>
                                </div>
-                               <h3 className="text-sm sm:text-lg font-black text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-2 sm:line-clamp-1 leading-tight">{p.title}</h3>
-                               <p className="text-[11px] sm:text-[13px] font-medium text-slate-500 line-clamp-2 sm:line-clamp-1 opacity-80">{p.desc}</p>
+                               <h3 className="text-sm sm:text-lg font-black text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-2 leading-tight">{p.title}</h3>
+                               <p className="text-[11px] sm:text-[13px] font-medium text-slate-500 line-clamp-3 sm:line-clamp-1 opacity-80 leading-relaxed">{p.desc}</p>
                             </div>
-                            <div className="shrink-0 flex items-center gap-4 self-center">
+
+                            {/* Desktop Score & Action Area */}
+                            <div className="hidden sm:flex shrink-0 items-center gap-4 self-center">
                                <div className="hidden md:flex flex-col items-end px-4 border-r border-slate-50">
                                   <span className="text-[9px] font-black text-slate-300 uppercase">Score</span>
                                   <span className="text-sm font-black text-slate-700">9.4</span>
                                 </div>
-                               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-50 group-hover:bg-indigo-600 text-slate-400 group-hover:text-white flex items-center justify-center transition-all shadow-sm">
+                               <div className="w-10 h-10 rounded-xl bg-slate-50 group-hover:bg-indigo-600 text-slate-400 group-hover:text-white flex items-center justify-center transition-all shadow-sm">
                                   <ArrowLeft size={18} />
                                 </div>
                             </div>
