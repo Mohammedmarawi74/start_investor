@@ -172,7 +172,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="tour-site-tour-trigger-header"
             onClick={() => { setIsTourRunning(true); setIsSidebarCollapsed(false); }}
-            className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-all group border border-indigo-100/50"
+            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-all group border border-indigo-100/50 active:scale-95"
           >
             <Compass size={18} className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
             <span className="text-[10px] sm:text-[11px] font-black hidden sm:inline">جولة تعريفية</span>
@@ -182,10 +182,10 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="relative" ref={notificationRef}>
             <button
               onClick={() => { setIsNotificationsOpen(!isNotificationsOpen); setIsProfileOpen(false); }}
-              className={`p-1.5 sm:p-2 rounded-xl transition-all relative ${isNotificationsOpen ? 'bg-primary-50 text-primary-600' : 'text-gray-400 hover:bg-gray-100'}`}
+              className={`flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-xl transition-all relative active:scale-95 ${isNotificationsOpen ? 'bg-primary-50 text-primary-600' : 'text-gray-400 hover:bg-gray-100'}`}
             >
               <Bell size={18} className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="absolute top-1 right-1 sm:top-1.5 sm:right-1.5 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-red-500 rounded-full border-2 border-white"></span>
+              <span className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-red-500 rounded-full border-2 border-white"></span>
             </button>
 
             {isNotificationsOpen && (
@@ -221,10 +221,10 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="relative" ref={profileRef}>
             <button
               onClick={() => { setIsProfileOpen(!isProfileOpen); setIsNotificationsOpen(false); }}
-              className={`flex items-center gap-2 sm:gap-3 p-0.5 sm:p-1 pr-2 sm:pr-3 border border-gray-100 rounded-full transition-all group ${isProfileOpen ? 'bg-primary-50 border-primary-100' : 'hover:bg-gray-50'}`}
+              className={`flex items-center justify-center gap-2 sm:gap-3 p-0.5 sm:p-1 pr-0.5 sm:pr-3 border border-gray-100 rounded-full transition-all group active:scale-95 ${isProfileOpen ? 'bg-primary-50 border-primary-100' : 'hover:bg-gray-50'}`}
             >
               <span className={`text-[10px] sm:text-[11px] font-black transition-colors hidden sm:inline ${isProfileOpen ? 'text-primary-700' : 'text-gray-500'}`}>{user.name}</span>
-              <img src={user.avatar} className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white shadow-sm" alt="Profile" />
+              <img src={user.avatar} className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white shadow-sm" alt="Profile" />
             </button>
 
             {isProfileOpen && (
