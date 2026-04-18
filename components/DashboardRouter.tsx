@@ -311,6 +311,7 @@ export const DashboardRouter: React.FC<DashboardRouterProps> = ({
             onSectionUpdate={handleSectionUpdate}
             expandedSectionId={expandedSectionId}
             onSectionExpand={onSectionExpand}
+            setActiveTab={setActiveTab}
           />
         );
       case 'strategic-dashboard':
