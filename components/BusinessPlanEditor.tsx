@@ -249,7 +249,7 @@ export const BusinessPlanEditor: React.FC<BusinessPlanEditorProps> = ({
         {/* لوحة التحليل الذكي (Left) - Fixed with safe z-index */}
         {isAiSidebarOpen && (
           <aside className="fixed inset-y-0 left-0 z-[45] lg:relative lg:inset-auto w-full sm:w-80 bg-white border-r border-slate-100 flex flex-col shrink-0 animate-in slide-in-from-left duration-500 shadow-2xl lg:shadow-none">
-            <div className="p-8 border-b border-slate-50 flex items-center justify-between text-right">
+            <div className="hidden lg:flex p-8 border-b border-slate-50 items-center justify-between text-right">
               <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest text-right">تحليل الجودة اللحظي</h4>
               <button onClick={() => setIsAiSidebarOpen(false)} className="text-slate-300 hover:text-slate-900 transition-colors"><X size={18} /></button>
             </div>
