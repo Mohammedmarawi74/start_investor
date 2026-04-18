@@ -463,7 +463,7 @@
     }
 
     main.sd-container {
-      padding-bottom: max(40px, env(safe-area-inset-bottom)) !important;
+      padding-bottom: max(140px, env(safe-area-inset-bottom)) !important;
     }
   }
 

@@ -220,7 +220,7 @@ const SectorDashboardTemplate: FC<SectorDashboardProps> = ({
       </nav>
     
 
-      <main ref={mainRef} className="sd-container" style={{ paddingTop: '40px', paddingBottom: '80px', display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <main ref={mainRef} className="sd-container" style={{ paddingTop: '40px', paddingBottom: '160px', display: 'flex', flexDirection: 'column', gap: 20 }}>
         {sections.map((section) => (
           <div key={section.id} data-section={section.id}>
             {section.variant === 'dark' ? <DarkCard section={section} /> : <LightCard section={section} />}
