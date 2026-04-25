@@ -11,6 +11,7 @@ interface BudgetViewProps {
   selectedBudget: string | null;
   setView: (v: any) => void;
   setSelectedBudget: (b: any) => void;
+  distributedData: any[];
   goToOpportunity: (prob: Problem, fromView: any) => void;
 }
 
@@ -19,12 +20,13 @@ export const BudgetView: React.FC<BudgetViewProps> = ({
   selectedBudget,
   setView,
   setSelectedBudget,
+  distributedData,
   goToOpportunity
 }) => {
   const budgetProblems = React.useMemo(() => {
     if (!selectedBudget) return [];
     const all: any[] = [];
-    DATA.forEach(sec => sec.subs.forEach(sub => sub.problems.forEach(p => {
+    distributedData.forEach(sec => sec.subs.forEach((sub: any) => sub.problems.forEach((p: any) => {
       if (p.budget === selectedBudget) {
         all.push({ ...p, sectorName: sec.name, sectorColor: sec.color, subName: sub.name });
       }

@@ -16,6 +16,10 @@ export interface Problem {
   countries: any[]; 
   budget: 'low' | 'medium' | 'high';
   b2x: 'B2B' | 'B2C' | 'B2G' | 'B2B2C';
+  sectorId?: string;
+  subSectorId?: string;
+  subSectorName?: string;
+  sectorName?: string;
   globalResolution?: {
     caseStudy: string;
     historicalContext: string; 

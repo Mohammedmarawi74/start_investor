@@ -18,6 +18,7 @@ interface MarketsViewProps {
   setSelectedMarket: (v: string) => void;
   setMarketSearchTerm: (v: string) => void;
   setCurrentMarketPage: (v: number) => void;
+  distributedData: any[];
   goToOpportunity: (prob: Problem, fromView: any) => void;
 }
 
@@ -33,11 +34,12 @@ export const MarketsView: React.FC<MarketsViewProps> = ({
   setSelectedMarket,
   setMarketSearchTerm,
   setCurrentMarketPage,
+  distributedData,
   goToOpportunity
 }) => {
   const marketProblems = React.useMemo(() => {
     const all: any[] = [];
-    DATA.forEach(sec => sec.subs.forEach(sub => sub.problems.forEach(p => {
+    distributedData.forEach(sec => sec.subs.forEach((sub: any) => sub.problems.forEach((p: any) => {
       if ((selectedMarket === 'ALL' || p.countries.includes(selectedMarket || '') || p.countries.includes('ALL'))) {
          all.push({ ...p, sectorName: sec.name, sectorColor: sec.color, subName: sub.name });
       }

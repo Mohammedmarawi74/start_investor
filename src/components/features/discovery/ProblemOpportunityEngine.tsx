@@ -98,10 +98,24 @@ export const ProblemOpportunityEngine: React.FC = () => {
 
     // Dynamic Data from JSON files
     dynamicProblems.forEach(p => {
-      // Extract names if countries are objects
-      const countryNames = p.countries.map(c => typeof c === 'object' ? c.name : c).join(' ');
-      const searchString = `${p.title} ${p.desc} ${countryNames} ${p.b2x}`.toLowerCase();
-      all.push({ ...p, sectorName: "فرص استخباراتية", sectorColor: "indigo", searchString });
+      // Find full country names for search indexing
+      const countryNames = p.countries.map((cId: string) => {
+        const c = COUNTRIES.find(curr => curr.id === cId);
+        return c ? `${c.name} ${cId}` : cId;
+      }).join(' ');
+
+      const searchString = `${p.title} ${p.desc} ${p.sectorName} ${p.subSectorName} ${countryNames} ${p.b2x}`.toLowerCase();
+      
+      // Map back to sector color if available
+      const parentSector = DATA.find(s => s.id === p.sectorId);
+      const sectorColor = parentSector?.color || "indigo";
+
+      all.push({ 
+        ...p, 
+        sectorName: p.sectorName || "فرص استخباراتية", 
+        sectorColor: sectorColor, 
+        searchString 
+      });
     });
 
     console.log("Total flattened problems:", all.length);
@@ -109,15 +123,66 @@ export const ProblemOpportunityEngine: React.FC = () => {
   }, [dynamicProblems]);
 
   const filteredData = useMemo(() => {
-    const staticSectors = DATA.map(sector => {
+    // 1. Prepare Base Static Sectors
+    const baseSectors = DATA.map(sector => ({
+      ...sector,
+      subs: sector.subs.map(sub => ({
+        ...sub,
+        problems: [...sub.problems]
+      }))
+    }));
+
+    // 2. Inject Dynamic Problems into their respective sectors/subs
+    dynamicProblems.forEach(p => {
+      let targetSector = baseSectors.find(s => s.id === p.sectorId);
+      
+      if (!targetSector && p.sectorId !== 'dynamic_sector') {
+        // Create new sector dynamically if it has a valid ID but doesn't exist in baseSectors
+        targetSector = {
+          id: p.sectorId || 'dynamic_sector',
+          icon: Sparkles, // Default icon for dynamic sectors
+          name: p.sectorName || 'قطاع جديد',
+          count: 0,
+          color: 'indigo',
+          subs: []
+        };
+        baseSectors.push(targetSector);
+      }
+
+      if (targetSector) {
+        let targetSub = targetSector.subs.find(sub => sub.name === p.subSectorName || sub.id === p.subSectorId);
+        
+        if (targetSub) {
+          targetSub.problems.push(p);
+        } else {
+          // Create new subsector dynamically
+          targetSector.subs.push({
+            id: `dyn_sub_${p.subSectorName}`,
+            name: p.subSectorName || 'عام',
+            count: 1,
+            problems: [p]
+          });
+        }
+      }
+    });
+
+    // 3. Apply Country Filtering
+    const filtered = baseSectors.map(sector => {
       const filteredSubs = sector.subs.map(sub => {
-        const filteredProblems = sub.problems.filter(p => selectedCountry === 'ALL' || p.countries.includes(selectedCountry) || p.countries.includes('ALL'));
+        const filteredProblems = sub.problems.filter(p => 
+          selectedCountry === 'ALL' || 
+          p.countries.includes(selectedCountry) || 
+          p.countries.includes('ALL') ||
+          // Handle cases where p.countries might be objects with names
+          p.countries.some((c: any) => (typeof c === 'object' ? c.name : c) === selectedCountry)
+        );
         return { ...sub, problems: filteredProblems, count: filteredProblems.length };
       }).filter(s => s.problems.length > 0);
+      
       return { ...sector, subs: filteredSubs, count: filteredSubs.reduce((a, b) => a + b.count, 0) };
     }).filter(s => s.subs.length > 0);
 
-    // Add Dynamic Sector if there are any dynamic problems
+    // 4. Add the "Live Intelligence" Sector as a standalone category too (as requested: "خليهم ايضا موجودين ضمن فرص استخباراتية حية")
     if (dynamicProblems.length > 0) {
       const dynamicSector: Sector = {
         id: 'dynamic_sector',
@@ -134,10 +199,10 @@ export const ProblemOpportunityEngine: React.FC = () => {
           }
         ]
       };
-      return [dynamicSector, ...staticSectors];
+      return [dynamicSector, ...filtered];
     }
 
-    return staticSectors;
+    return filtered;
   }, [selectedCountry, dynamicProblems]);
 
   // ─── Handlers ─────────────────────────────────────────────────────────────
@@ -397,16 +462,16 @@ export const ProblemOpportunityEngine: React.FC = () => {
                  />
                )}
                {exploreMode === 'budget' && (
-                 <BudgetView view={activeView} selectedBudget={selectedBudget} setView={setActiveView} setSelectedBudget={setSelectedBudget} goToOpportunity={goToOpportunity} />
+                 <BudgetView view={activeView} selectedBudget={selectedBudget} setView={setActiveView} setSelectedBudget={setSelectedBudget} goToOpportunity={goToOpportunity} distributedData={filteredData} />
                )}
                {exploreMode === 'markets' && (
                  <MarketsView 
                    view={activeView} selectedContinent={selectedContinent} selectedMarket={selectedMarket} marketSearchTerm={marketSearchTerm} currentMarketPage={currentMarketPage} ITEMS_PER_PAGE={ITEMS_PER_PAGE}
-                   setView={setActiveView} setSelectedContinent={setSelectedContinent} setSelectedMarket={setSelectedMarket} setMarketSearchTerm={setMarketSearchTerm} setCurrentMarketPage={setCurrentMarketPage} goToOpportunity={goToOpportunity}
+                   setView={setActiveView} setSelectedContinent={setSelectedContinent} setSelectedMarket={setSelectedMarket} setMarketSearchTerm={setMarketSearchTerm} setCurrentMarketPage={setCurrentMarketPage} goToOpportunity={goToOpportunity} distributedData={filteredData}
                  />
                )}
                {exploreMode === 'b2x' && (
-                 <B2XView view={activeView} selectedB2X={selectedB2X} setView={setActiveView} setSelectedB2X={setSelectedB2X} goToOpportunity={goToOpportunity} />
+                 <B2XView view={activeView} selectedB2X={selectedB2X} setView={setActiveView} setSelectedB2X={setSelectedB2X} goToOpportunity={goToOpportunity} distributedData={filteredData} />
                )}
         </AnimatePresence>
       </div>

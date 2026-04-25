@@ -9,6 +9,15 @@ import { energyData } from './energy';
 import { industryData } from './industry';
 import { logisticsData } from './logistics';
 import { realEstateData } from './realestate';
+import { 
+  lifeData, 
+  mediaData, 
+  economyData, 
+  advertisingData, 
+  chemicalsData, 
+  reconstructionData, 
+  sportsData 
+} from './extraSectors';
 
 export const DATA: Sector[] = [
   healthData,
@@ -21,4 +30,11 @@ export const DATA: Sector[] = [
   industryData,
   logisticsData,
   realEstateData,
+  lifeData,
+  mediaData,
+  economyData,
+  advertisingData,
+  chemicalsData,
+  reconstructionData,
+  sportsData,
 ];

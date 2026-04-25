@@ -11,6 +11,7 @@ interface B2XViewProps {
   selectedB2X: string | null;
   setView: (v: any) => void;
   setSelectedB2X: (v: any) => void;
+  distributedData: any[];
   goToOpportunity: (prob: Problem, fromView: any) => void;
 }
 
@@ -19,12 +20,13 @@ export const B2XView: React.FC<B2XViewProps> = ({
   selectedB2X,
   setView,
   setSelectedB2X,
+  distributedData,
   goToOpportunity
 }) => {
   const b2xProblems = React.useMemo(() => {
     if (!selectedB2X) return [];
     const all: any[] = [];
-    DATA.forEach(sec => sec.subs.forEach(sub => sub.problems.forEach(p => {
+    distributedData.forEach(sec => sec.subs.forEach((sub: any) => sub.problems.forEach((p: any) => {
       if (p.b2x === selectedB2X) {
         all.push({ ...p, sectorName: sec.name, sectorColor: sec.color, subName: sub.name });
       }
