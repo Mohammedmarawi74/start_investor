@@ -21,6 +21,7 @@ import { ScenarioWarRoom } from './components/ScenarioWarRoom';
 import { InvestorReadinessScore } from './components/InvestorReadinessScore';
 import { ExecutionCommandCenter } from './components/ExecutionCommandCenter';
 import { LeadershipBoard } from './components/LeadershipBoard';
+import { LeadershipOnboarding } from './components/LeadershipOnboarding';
 
 type OpportunityLite = {
   id: string;
@@ -41,6 +42,8 @@ const OPPORTUNITIES: OpportunityLite[] = [
   { id: 'sme-liquidity', title: 'سد فجوة السيولة النقدية للمنشآت الصغيرة والمتوسطة', desc: 'دورات الدفع الطويلة تخلق ضغطا نقديا حادا يتطلب أدوات تمويل ذكية قائمة على التدفقات.', pain: 9.6 },
   { id: 'future-workforce-sim', title: 'محاكاة المستقبل لتأهيل القوى العاملة', desc: 'الطلب السريع على المهارات الميدانية يتجاوز سرعة التدريب التقليدي في القطاعات الضخمة.', pain: 9.4 },
 ];
+
+const LEADERSHIP_ONBOARDING_KEY = 'khotta_hackathon_leadership_onboarding_seen_v3';
 
 const TASK_IDS: TaskId[] = sprintDays.flatMap((day) => day.tasks.map((task) => task.id));
 
@@ -133,6 +136,8 @@ const HackathonView: React.FC = () => {
   const [state, setState] = useState<HackathonState>(createInitialState);
   const [query, setQuery] = useState('');
   const [openOpportunities, setOpenOpportunities] = useState(false);
+  const [showLeadershipOnboarding, setShowLeadershipOnboarding] = useState(false);
+  const [leadershipOnboardingStep, setLeadershipOnboardingStep] = useState(0);
   const [clock, setClock] = useState(Date.now());
 
   useEffect(() => {
@@ -151,6 +156,10 @@ const HackathonView: React.FC = () => {
     } catch {
       // Ignore invalid local cache.
     }
+  }, []);
+
+  useEffect(() => {
+    setShowLeadershipOnboarding(localStorage.getItem(LEADERSHIP_ONBOARDING_KEY) !== 'true');
   }, []);
 
   useEffect(() => {
@@ -289,6 +298,23 @@ const HackathonView: React.FC = () => {
 
   const selectedOpportunity = OPPORTUNITIES.find((item) => item.id === state.selectedOpportunityId);
 
+  const closeLeadershipOnboarding = () => {
+    localStorage.setItem(LEADERSHIP_ONBOARDING_KEY, 'true');
+    setShowLeadershipOnboarding(false);
+  };
+
+  const goNextLeadershipOnboarding = () => {
+    setLeadershipOnboardingStep((current) => {
+      if (current >= 3) {
+        localStorage.setItem(LEADERSHIP_ONBOARDING_KEY, 'true');
+        setShowLeadershipOnboarding(false);
+        return current;
+      }
+
+      return current + 1;
+    });
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 pb-12 text-white">
       <div className="pointer-events-none absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(59,130,246,.18)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,.18)_1px,transparent_1px)] [background-size:44px_44px]" />
@@ -407,6 +433,12 @@ const HackathonView: React.FC = () => {
               />
             </motion.div>
           </>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showLeadershipOnboarding && (
+          <LeadershipOnboarding step={leadershipOnboardingStep} onNext={goNextLeadershipOnboarding} onSkip={closeLeadershipOnboarding} />
         )}
       </AnimatePresence>
 
