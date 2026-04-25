@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (High-end Dining & Mocktail Culture)", "flag": "🌐" },
-        { "name": "Egypt & Morocco (Botanical Richness)", "flag": "🌐" }
+        {
+          "name": "GCC (High-end Dining & Mocktail Culture)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Morocco (Botanical Richness)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

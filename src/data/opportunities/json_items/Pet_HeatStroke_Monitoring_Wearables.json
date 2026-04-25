@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Countries (High Heatstroke Risk)", "flag": "🌐" },
-        { "name": "Egypt & Iraq (Urban Heat Island Effects)", "flag": "🌐" }
+        {
+          "name": "GCC Countries (High Heatstroke Risk)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Iraq (Urban Heat Island Effects)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

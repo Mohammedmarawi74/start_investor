@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Cairo (Mega-City Congestion)", "flag": "🇪🇬" },
-        { "name": "Riyadh (Fast Growing Traffic)", "flag": "🇸🇦" },
-        { "name": "Casablanca & Baghdad", "flag": "🌐" }
+        {
+          "name": "Cairo (Mega-City Congestion)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Riyadh (Fast Growing Traffic)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Casablanca & Baghdad",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 5
     },

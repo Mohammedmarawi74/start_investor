@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Riyadh & Dubai (Global Business Hubs)", "flag": "🌐" },
-        { "name": "Doha & Abu Dhabi", "flag": "🌐" }
+        {
+          "name": "Riyadh & Dubai (Global Business Hubs)",
+          "flag": "🇦🇪"
+        },
+        {
+          "name": "Doha & Abu Dhabi",
+          "flag": "🇦🇪"
+        }
       ],
       "additional_regions_count": 0
     },

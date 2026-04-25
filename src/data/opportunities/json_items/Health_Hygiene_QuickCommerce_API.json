@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Megacities (High Demand for Convenience)", "flag": "🌐" },
-        { "name": "Cairo & Amman (Dense Urban Areas)", "flag": "🌐" }
+        {
+          "name": "GCC Megacities (High Demand for Convenience)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Cairo & Amman (Dense Urban Areas)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

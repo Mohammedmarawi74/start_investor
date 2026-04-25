@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Saudi Arabia & GCC (WhatsApp Dominance)", "flag": "🌐" },
-        { "name": "Egypt & Syria (SME Hubs)", "flag": "🌐" }
+        {
+          "name": "Saudi Arabia & GCC (WhatsApp Dominance)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Syria (SME Hubs)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 10
     },

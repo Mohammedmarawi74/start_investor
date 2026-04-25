@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Megaprojects (NEOM, New Cities)", "flag": "🌐" },
-        { "name": "Post-Conflict Reconstruction (Iraq, Libya, Syria)", "flag": "🌐" }
+        {
+          "name": "GCC Megaprojects (NEOM, New Cities)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Post-Conflict Reconstruction (Iraq, Libya, Syria)",
+          "flag": "🇮🇶"
+        }
       ],
       "additional_regions_count": 0
     },

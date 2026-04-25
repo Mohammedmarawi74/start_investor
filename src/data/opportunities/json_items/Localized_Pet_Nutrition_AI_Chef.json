@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (High Pet Ownership Growth)", "flag": "🌐" },
-        { "name": "Egypt & Lebanon (Urban Pet Owners)", "flag": "🌐" }
+        {
+          "name": "GCC (High Pet Ownership Growth)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Lebanon (Urban Pet Owners)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (High Plastic Consumption)", "flag": "🌐" },
-        { "name": "Egypt & Morocco (Urban Waste Hubs)", "flag": "🌐" }
+        {
+          "name": "GCC (High Plastic Consumption)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Morocco (Urban Waste Hubs)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 5
     },

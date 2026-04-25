@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (CEO Visibility Demand)", "flag": "🌐" },
-        { "name": "Egypt & Jordan (Startup Founders)", "flag": "🌐" }
+        {
+          "name": "GCC (CEO Visibility Demand)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Jordan (Startup Founders)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

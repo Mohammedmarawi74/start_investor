@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Saudi Arabia (Highest Influencer Spend)", "flag": "🇸🇦" },
-        { "name": "UAE & Egypt", "flag": "🌐" }
+        {
+          "name": "Saudi Arabia (Highest Influencer Spend)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "UAE & Egypt",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

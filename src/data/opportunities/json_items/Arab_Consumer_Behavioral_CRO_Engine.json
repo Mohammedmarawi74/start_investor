@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Egypt & Jordan (E-commerce Growth)", "flag": "🌐" },
-        { "name": "GCC (High Purchase Power)", "flag": "🌐" }
+        {
+          "name": "Egypt & Jordan (E-commerce Growth)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "GCC (High Purchase Power)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 5
     },

@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Cities (Target Audience)", "flag": "🌐" },
-        { "name": "Rural Egypt, Morocco, Levant (Source Hubs)", "flag": "🌐" }
+        {
+          "name": "GCC Cities (Target Audience)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Rural Egypt, Morocco, Levant (Source Hubs)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

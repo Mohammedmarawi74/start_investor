@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Empty Quarter & Sahara Deserts", "flag": "🌐" },
-        { "name": "Atlas & Sinai Mountains", "flag": "🌐" },
-        { "name": "Remote Islands & Marine Parks", "flag": "🌐" }
+        {
+          "name": "Empty Quarter & Sahara Deserts",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Atlas & Sinai Mountains",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Remote Islands & Marine Parks",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

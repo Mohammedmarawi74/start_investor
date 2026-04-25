@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Saudi Arabia (Arabian Shield)", "flag": "🇸🇦" },
-        { "name": "Egypt (Eastern Desert)", "flag": "🇪🇬" },
-        { "name": "Sudan & Morocco", "flag": "🌐" }
+        {
+          "name": "Saudi Arabia (Arabian Shield)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt (Eastern Desert)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Sudan & Morocco",
+          "flag": "🇲🇦"
+        }
       ],
       "additional_regions_count": 0
     },

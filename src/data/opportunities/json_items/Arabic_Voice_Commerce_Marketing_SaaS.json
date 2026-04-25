@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (Smart Home Adoption)", "flag": "🌐" },
-        { "name": "Egypt & Jordan (Growing Tech Consumer Base)", "flag": "🌐" }
+        {
+          "name": "GCC (Smart Home Adoption)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Jordan (Growing Tech Consumer Base)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

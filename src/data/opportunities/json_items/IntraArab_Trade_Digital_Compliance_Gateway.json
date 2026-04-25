@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "PAFTA Countries (Pan-Arab Free Trade Area)", "flag": "🌐" },
-        { "name": "Border Crossings (Egypt-Sudan, Jordan-KSA, UAE-Oman)", "flag": "🌐" }
+        {
+          "name": "PAFTA Countries (Pan-Arab Free Trade Area)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Border Crossings (Egypt-Sudan, Jordan-KSA, UAE-Oman)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 22
     },

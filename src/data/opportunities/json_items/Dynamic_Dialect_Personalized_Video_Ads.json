@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Pan-Arab Brands (Regional Campaigns)", "flag": "🌐" },
-        { "name": "E-commerce Platforms (Personalized Retargeting)", "flag": "🌐" }
+        {
+          "name": "Pan-Arab Brands (Regional Campaigns)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "E-commerce Platforms (Personalized Retargeting)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 22
     },

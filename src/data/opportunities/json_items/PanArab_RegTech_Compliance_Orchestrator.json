@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Regional Startups (Expanding from Egypt to KSA/UAE)", "flag": "🌐" },
-        { "name": "SMEs Operating in Multiple Arab Markets", "flag": "🌐" }
+        {
+          "name": "Regional Startups (Expanding from Egypt to KSA/UAE)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "SMEs Operating in Multiple Arab Markets",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 22
     },

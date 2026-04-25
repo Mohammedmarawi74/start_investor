@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syria (IT Talent Pool)", "flag": "🇸🇾" },
-        { "name": "Global Tech Companies", "flag": "🌐" }
+        {
+          "name": "Syria (IT Talent Pool)",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "Global Tech Companies",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

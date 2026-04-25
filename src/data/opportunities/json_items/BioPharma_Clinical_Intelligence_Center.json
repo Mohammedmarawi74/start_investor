@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syrian Pharmaceutical Clusters", "flag": "🇸🇾" },
-        { "name": "Regional Export Markets", "flag": "🌐" }
+        {
+          "name": "Syrian Pharmaceutical Clusters",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "Regional Export Markets",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

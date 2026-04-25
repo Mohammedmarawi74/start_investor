@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Corporate Market", "flag": "🌐" },
-        { "name": "Egypt & Jordan (Fast Growing Hubs)", "flag": "🌐" }
+        {
+          "name": "GCC Corporate Market",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Jordan (Fast Growing Hubs)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

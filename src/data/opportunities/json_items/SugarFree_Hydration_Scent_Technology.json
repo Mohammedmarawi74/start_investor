@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (High Obesity & Diabetes Rates)", "flag": "🌐" },
-        { "name": "Egypt & Jordan (Fast-moving Consumer Market)", "flag": "🌐" }
+        {
+          "name": "GCC (High Obesity & Diabetes Rates)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Jordan (Fast-moving Consumer Market)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

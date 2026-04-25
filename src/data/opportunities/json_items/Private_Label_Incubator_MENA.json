@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Saudi Arabia & UAE (Consumer Brand Demand)", "flag": "🌐" },
-        { "name": "Egypt & Morocco (Strong Manufacturing Base)", "flag": "🌐" }
+        {
+          "name": "Saudi Arabia & UAE (Consumer Brand Demand)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Morocco (Strong Manufacturing Base)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

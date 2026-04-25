@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (Rapid Economic Transformation)", "flag": "🌐" },
-        { "name": "Egypt & North Africa (High Inflation Monitoring)", "flag": "🌐" },
-        { "name": "Conflict-Affected Areas (Missing Official Data)", "flag": "🌐" }
+        {
+          "name": "GCC (Rapid Economic Transformation)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & North Africa (High Inflation Monitoring)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Conflict-Affected Areas (Missing Official Data)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 22
     },

@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Retail Giants", "flag": "🌐" },
-        { "name": "Egypt & Morocco (Mass Markets)", "flag": "🌐" }
+        {
+          "name": "GCC Retail Giants",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Morocco (Mass Markets)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

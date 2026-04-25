@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (High Stress Environment)", "flag": "🌐" },
-        { "name": "Egypt & Levant (Mental Health Stigma)", "flag": "🌐" }
+        {
+          "name": "GCC (High Stress Environment)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Levant (Mental Health Stigma)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 22
     },

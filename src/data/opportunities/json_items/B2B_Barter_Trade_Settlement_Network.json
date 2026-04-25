@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Egypt (Currency Volatility Management)", "flag": "🇪🇬" },
-        { "name": "Lebanon (Liquidity Crisis Solutions)", "flag": "🇱🇧" },
-        { "name": "Syria & Iraq (Post-conflict Trade)", "flag": "🌐" }
+        {
+          "name": "Egypt (Currency Volatility Management)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Lebanon (Liquidity Crisis Solutions)",
+          "flag": "🇱🇧"
+        },
+        {
+          "name": "Syria & Iraq (Post-conflict Trade)",
+          "flag": "🇮🇶"
+        }
       ],
       "additional_regions_count": 10
     },

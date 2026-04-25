@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Saudi Arabia (Haramain & Landbridge)", "flag": "🇸🇦" },
-        { "name": "Morocco (ONCF High-speed Network)", "flag": "🇲🇦" },
-        { "name": "UAE & Egypt (National Rail Projects)", "flag": "🌐" }
+        {
+          "name": "Saudi Arabia (Haramain & Landbridge)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Morocco (ONCF High-speed Network)",
+          "flag": "🇲🇦"
+        },
+        {
+          "name": "UAE & Egypt (National Rail Projects)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

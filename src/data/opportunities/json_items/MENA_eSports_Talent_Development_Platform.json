@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Saudi Arabia (eSports Capital)", "flag": "🇸🇦" },
-        { "name": "Jordan (Talent Hub)", "flag": "🇯🇴" },
-        { "name": "Morocco & Egypt", "flag": "🌐" }
+        {
+          "name": "Saudi Arabia (eSports Capital)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Jordan (Talent Hub)",
+          "flag": "🇯🇴"
+        },
+        {
+          "name": "Morocco & Egypt",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

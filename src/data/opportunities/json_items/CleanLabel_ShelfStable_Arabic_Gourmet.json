@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Global Export Markets (USA/EU Diaspora)", "flag": "🌐" },
-        { "name": "Egypt & Syria (Culinary Heritage Hubs)", "flag": "🌐" },
-        { "name": "GCC (High Demand for Ready-to-Eat)", "flag": "🌐" }
+        {
+          "name": "Global Export Markets (USA/EU Diaspora)",
+          "flag": "🇺🇸"
+        },
+        {
+          "name": "Egypt & Syria (Culinary Heritage Hubs)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "GCC (High Demand for Ready-to-Eat)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

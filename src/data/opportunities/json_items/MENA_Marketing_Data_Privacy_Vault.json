@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Saudi Arabia (NDMO Compliance)", "flag": "🇸🇦" },
-        { "name": "UAE (Data Protection Law)", "flag": "🇦🇪" },
-        { "name": "Egypt & Qatar", "flag": "🌐" }
+        {
+          "name": "Saudi Arabia (NDMO Compliance)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "UAE (Data Protection Law)",
+          "flag": "🇦🇪"
+        },
+        {
+          "name": "Egypt & Qatar",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

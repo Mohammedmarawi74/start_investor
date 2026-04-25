@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Egypt (Massive Fragmented Retail Market)", "flag": "🇪🇬" },
-        { "name": "Saudi Arabia & Jordan (SME Digitization Trend)", "flag": "🌐" }
+        {
+          "name": "Egypt (Massive Fragmented Retail Market)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Saudi Arabia & Jordan (SME Digitization Trend)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 5
     },

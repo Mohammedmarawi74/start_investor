@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Hotels (Large-scale Buffets)", "flag": "🌐" },
-        { "name": "Egypt & Morocco Tourism Hubs", "flag": "🌐" }
+        {
+          "name": "GCC Hotels (Large-scale Buffets)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Morocco Tourism Hubs",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 5
     },

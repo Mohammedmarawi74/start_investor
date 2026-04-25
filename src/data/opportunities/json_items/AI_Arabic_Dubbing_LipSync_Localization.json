@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Global Content (USA/Korea/Turkey)", "flag": "🌐" },
-        { "name": "MENA Consumer Market", "flag": "🌐" }
+        {
+          "name": "Global Content (USA/Korea/Turkey)",
+          "flag": "🇹🇷"
+        },
+        {
+          "name": "MENA Consumer Market",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 22
     },

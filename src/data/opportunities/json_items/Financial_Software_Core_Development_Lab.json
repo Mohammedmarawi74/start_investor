@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syrian Domestic Market", "flag": "🇸🇾" },
-        { "name": "Emerging Markets (Africa/Central Asia)", "flag": "🌐" }
+        {
+          "name": "Syrian Domestic Market",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "Emerging Markets (Africa/Central Asia)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

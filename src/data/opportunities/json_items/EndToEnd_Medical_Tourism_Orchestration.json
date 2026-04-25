@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Jordan (Regional Med-Hub)", "flag": "🇯🇴" },
-        { "name": "UAE (High-end Medical Tourism)", "flag": "🇦🇪" },
-        { "name": "Egypt & Tunisia (Affordable Care)", "flag": "🌐" }
+        {
+          "name": "Jordan (Regional Med-Hub)",
+          "flag": "🇯🇴"
+        },
+        {
+          "name": "UAE (High-end Medical Tourism)",
+          "flag": "🇦🇪"
+        },
+        {
+          "name": "Egypt & Tunisia (Affordable Care)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 5
     },

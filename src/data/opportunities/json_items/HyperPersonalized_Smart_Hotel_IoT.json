@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC High-end Hotels", "flag": "🌐" },
-        { "name": "New Megaprojects (NEOM/Red Sea)", "flag": "🇸🇦" }
+        {
+          "name": "GCC High-end Hotels",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "New Megaprojects (NEOM/Red Sea)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

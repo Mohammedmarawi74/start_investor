@@ -14,7 +14,10 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Global Arabic Audience (Truth Seekers)", "flag": "🌐" }
+        {
+          "name": "Global Arabic Audience (Truth Seekers)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

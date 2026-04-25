@@ -14,7 +14,10 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "MENA Region (Information Integrity Hub)", "flag": "🌐" }
+        {
+          "name": "MENA Region (Information Integrity Hub)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 22
     },

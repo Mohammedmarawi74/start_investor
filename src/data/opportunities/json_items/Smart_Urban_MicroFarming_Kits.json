@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Cities (Extreme Heat & Lack of Gardens)", "flag": "🌐" },
-        { "name": "Egypt (Urban Density Challenges)", "flag": "🇪🇬" }
+        {
+          "name": "GCC Cities (Extreme Heat & Lack of Gardens)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt (Urban Density Challenges)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

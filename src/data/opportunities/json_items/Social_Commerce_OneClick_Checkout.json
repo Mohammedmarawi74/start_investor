@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (World's Highest Social Media Usage for Shopping)", "flag": "🌐" },
-        { "name": "Egypt (Massive Social Commerce Seller Base)", "flag": "🇪🇬" }
+        {
+          "name": "GCC (World's Highest Social Media Usage for Shopping)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt (Massive Social Commerce Seller Base)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

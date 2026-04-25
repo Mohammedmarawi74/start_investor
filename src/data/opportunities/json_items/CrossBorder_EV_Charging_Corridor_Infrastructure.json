@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Cairo-Amman-Dubai Highway", "flag": "🌐" },
-        { "name": "GCC Interstate Network", "flag": "🌐" },
-        { "name": "North Africa Coastal Road", "flag": "🌐" }
+        {
+          "name": "Cairo-Amman-Dubai Highway",
+          "flag": "🇦🇪"
+        },
+        {
+          "name": "GCC Interstate Network",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "North Africa Coastal Road",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

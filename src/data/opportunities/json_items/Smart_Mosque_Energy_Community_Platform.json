@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Saudi Arabia (The Vision of Mosques)", "flag": "🇸🇦" },
-        { "name": "Egypt (Highest Mosque Density)", "flag": "🇪🇬" },
-        { "name": "Jordan & Morocco", "flag": "🌐" }
+        {
+          "name": "Saudi Arabia (The Vision of Mosques)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt (Highest Mosque Density)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Jordan & Morocco",
+          "flag": "🇯🇴"
+        }
       ],
       "additional_regions_count": 22
     },

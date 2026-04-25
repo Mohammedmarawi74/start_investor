@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syrian Provinces (Homs, Latakia, etc.)", "flag": "🇸🇾" },
-        { "name": "Iraqi Cities", "flag": "🇮🇶" },
-        { "name": "Maghreb Villages", "flag": "🌐" }
+        {
+          "name": "Syrian Provinces (Homs, Latakia, etc.)",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "Iraqi Cities",
+          "flag": "🇮🇶"
+        },
+        {
+          "name": "Maghreb Villages",
+          "flag": "🇲🇦"
+        }
       ],
       "additional_regions_count": 50
     },

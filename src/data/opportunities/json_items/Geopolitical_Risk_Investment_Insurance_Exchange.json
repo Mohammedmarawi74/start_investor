@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Emerging Arab Markets (Egypt, Iraq, Syria, Libya)", "flag": "🌐" },
-        { "name": "International Investors (FDI Sources)", "flag": "🌐" }
+        {
+          "name": "Emerging Arab Markets (Egypt, Iraq, Syria, Libya)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "International Investors (FDI Sources)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

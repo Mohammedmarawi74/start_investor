@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syria (Knowledge Hub)", "flag": "🇸🇾" },
-        { "name": "Arab World (Market)", "flag": "🌐" }
+        {
+          "name": "Syria (Knowledge Hub)",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "Arab World (Market)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

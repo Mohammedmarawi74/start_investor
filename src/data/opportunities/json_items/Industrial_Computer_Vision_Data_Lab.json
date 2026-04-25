@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syria (IT Talent Base)", "flag": "🇸🇾" },
-        { "name": "Global Manufacturing Hubs (Turkey/China/Vietnam)", "flag": "🌐" }
+        {
+          "name": "Syria (IT Talent Base)",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "Global Manufacturing Hubs (Turkey/China/Vietnam)",
+          "flag": "🇹🇷"
+        }
       ],
       "additional_regions_count": 0
     },

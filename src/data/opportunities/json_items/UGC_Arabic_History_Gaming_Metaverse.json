@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Global Arab Youth Market", "flag": "🌐" },
-        { "name": "Schools & Universities (History Depts)", "flag": "🌐" }
+        {
+          "name": "Global Arab Youth Market",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Schools & Universities (History Depts)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

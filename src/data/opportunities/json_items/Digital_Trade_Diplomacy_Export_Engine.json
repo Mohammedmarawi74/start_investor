@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Arab Diplomatic Missions Globally", "flag": "🌐" },
-        { "name": "Local Export Authorities (Export Promotion)", "flag": "🌐" }
+        {
+          "name": "Arab Diplomatic Missions Globally",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Local Export Authorities (Export Promotion)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

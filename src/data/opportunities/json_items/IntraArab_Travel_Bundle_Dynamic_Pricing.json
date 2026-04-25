@@ -14,7 +14,10 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Intra-Arab Routes (Egypt-GCC-Levant)", "flag": "🌐" }
+        {
+          "name": "Intra-Arab Routes (Egypt-GCC-Levant)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 22
     },

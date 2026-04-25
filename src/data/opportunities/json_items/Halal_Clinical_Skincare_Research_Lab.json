@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (High Spend on Premium Beauty)", "flag": "🌐" },
-        { "name": "Jordan & Morocco (Source of Ingredients)", "flag": "🌐" }
+        {
+          "name": "GCC (High Spend on Premium Beauty)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Jordan & Morocco (Source of Ingredients)",
+          "flag": "🇯🇴"
+        }
       ],
       "additional_regions_count": 0
     },

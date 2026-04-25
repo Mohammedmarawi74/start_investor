@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (Booming Female Sports Participation)", "flag": "🌐" },
-        { "name": "Global Muslim Diaspora (Europe/USA)", "flag": "🌐" }
+        {
+          "name": "GCC (Booming Female Sports Participation)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Global Muslim Diaspora (Europe/USA)",
+          "flag": "🇺🇸"
+        }
       ],
       "additional_regions_count": 0
     },

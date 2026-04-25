@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syria (Creative Hub)", "flag": "🇸🇾" },
-        { "name": "Global Game Studios (USA/EU/China)", "flag": "🌐" }
+        {
+          "name": "Syria (Creative Hub)",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "Global Game Studios (USA/EU/China)",
+          "flag": "🇺🇸"
+        }
       ],
       "additional_regions_count": 0
     },

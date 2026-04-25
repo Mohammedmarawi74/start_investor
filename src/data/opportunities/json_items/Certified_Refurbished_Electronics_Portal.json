@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Egypt & Jordan (Price Conscious Markets)", "flag": "🌐" },
-        { "name": "GCC (High Electronic Waste & Secondary Market Potential)", "flag": "🌐" }
+        {
+          "name": "Egypt & Jordan (Price Conscious Markets)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "GCC (High Electronic Waste & Secondary Market Potential)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

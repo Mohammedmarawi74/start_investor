@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Red Sea & Suez Canal (Global Choke Point)", "flag": "🌐" },
-        { "name": "Strait of Hormuz (Energy Flow)", "flag": "🌐" },
-        { "name": "Mediterranean Routes", "flag": "🌐" }
+        {
+          "name": "Red Sea & Suez Canal (Global Choke Point)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Strait of Hormuz (Energy Flow)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Mediterranean Routes",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

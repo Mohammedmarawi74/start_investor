@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Jordan (Pharma Export Hub)", "flag": "🇯🇴" },
-        { "name": "Egypt (Vaccine Production)", "flag": "🇪🇬" },
-        { "name": "GCC (Regional Distribution Centers)", "flag": "🌐" }
+        {
+          "name": "Jordan (Pharma Export Hub)",
+          "flag": "🇯🇴"
+        },
+        {
+          "name": "Egypt (Vaccine Production)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "GCC (Regional Distribution Centers)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

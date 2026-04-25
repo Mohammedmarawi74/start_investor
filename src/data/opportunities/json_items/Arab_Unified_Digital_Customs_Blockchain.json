@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC-Levant Borders", "flag": "🌐" },
-        { "name": "Egypt-Sudan-Libya Corridors", "flag": "🌐" },
-        { "name": "Maghreb Intra-trade", "flag": "🌐" }
+        {
+          "name": "GCC-Levant Borders",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt-Sudan-Libya Corridors",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Maghreb Intra-trade",
+          "flag": "🇲🇦"
+        }
       ],
       "additional_regions_count": 22
     },

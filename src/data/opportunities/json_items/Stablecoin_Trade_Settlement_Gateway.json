@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syrian Export/Import Hubs", "flag": "🇸🇾" },
-        { "name": "Regional Trade Partners (GCC/Lebanon/Iraq)", "flag": "🌐" }
+        {
+          "name": "Syrian Export/Import Hubs",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "Regional Trade Partners (GCC/Lebanon/Iraq)",
+          "flag": "🇮🇶"
+        }
       ],
       "additional_regions_count": 3
     },

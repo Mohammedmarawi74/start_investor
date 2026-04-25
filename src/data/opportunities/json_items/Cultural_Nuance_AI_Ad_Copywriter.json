@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (High Ad-Spend)", "flag": "🌐" },
-        { "name": "Egypt & Levant (Creative Hubs)", "flag": "🌐" }
+        {
+          "name": "GCC (High Ad-Spend)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Levant (Creative Hubs)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 22
     },

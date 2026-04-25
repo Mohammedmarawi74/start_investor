@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (High Cost-per-Click Markets)", "flag": "🌐" },
-        { "name": "Egypt & Jordan (Large Scale Campaigns)", "flag": "🌐" }
+        {
+          "name": "GCC (High Cost-per-Click Markets)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Jordan (Large Scale Campaigns)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

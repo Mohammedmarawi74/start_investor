@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Families (Education Focus)", "flag": "🌐" },
-        { "name": "Arab Diaspora (Language Preservation)", "flag": "🌐" }
+        {
+          "name": "GCC Families (Education Focus)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Arab Diaspora (Language Preservation)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 10
     },

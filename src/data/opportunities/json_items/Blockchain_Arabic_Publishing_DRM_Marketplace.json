@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Egypt (Largest Content Producer)", "flag": "🇪🇬" },
-        { "name": "Syria & Lebanon (Heritage Publishing)", "flag": "🌐" },
-        { "name": "Arab Authors Worldwide", "flag": "🌐" }
+        {
+          "name": "Egypt (Largest Content Producer)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Syria & Lebanon (Heritage Publishing)",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "Arab Authors Worldwide",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Malls (High Traffic)", "flag": "🌐" },
-        { "name": "Airports (Duty-Free Areas)", "flag": "🌐" }
+        {
+          "name": "GCC Malls (High Traffic)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Airports (Duty-Free Areas)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (High E-commerce Package Volume)", "flag": "🌐" },
-        { "name": "Egypt (Manufacturing Base for Sustainable Materials)", "flag": "🇪🇬" }
+        {
+          "name": "GCC (High E-commerce Package Volume)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt (Manufacturing Base for Sustainable Materials)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

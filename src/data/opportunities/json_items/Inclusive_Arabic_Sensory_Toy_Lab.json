@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (High Diagnosis Rates of Neurodiversity)", "flag": "🌐" },
-        { "name": "Egypt & Levant (Need for Affordable Therapy Tools)", "flag": "🌐" }
+        {
+          "name": "GCC (High Diagnosis Rates of Neurodiversity)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Levant (Need for Affordable Therapy Tools)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

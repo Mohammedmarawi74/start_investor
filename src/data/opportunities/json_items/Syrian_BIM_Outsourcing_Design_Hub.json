@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syria (Production Center)", "flag": "🇸🇾" },
-        { "name": "GCC Markets (Demand Center)", "flag": "🌐" }
+        {
+          "name": "Syria (Production Center)",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "GCC Markets (Demand Center)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

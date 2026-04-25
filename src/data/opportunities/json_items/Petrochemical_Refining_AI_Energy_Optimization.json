@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (Petrochemical Hubs)", "flag": "🌐" },
-        { "name": "Egypt & Iraq (Refining Capacity)", "flag": "🌐" }
+        {
+          "name": "GCC (Petrochemical Hubs)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Iraq (Refining Capacity)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

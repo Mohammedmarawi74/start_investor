@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Beauty & Fashion Market", "flag": "🌐" },
-        { "name": "Luxury Retailers in Dubai/Riyadh", "flag": "🌐" }
+        {
+          "name": "GCC Beauty & Fashion Market",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Luxury Retailers in Dubai/Riyadh",
+          "flag": "🇦🇪"
+        }
       ],
       "additional_regions_count": 5
     },

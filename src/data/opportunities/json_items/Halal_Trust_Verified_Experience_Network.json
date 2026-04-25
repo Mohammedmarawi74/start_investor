@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Global Muslim Travelers", "flag": "🌐" },
-        { "name": "Non-OIC Destinations (Japan/Europe)", "flag": "🌐" },
-        { "name": "Intra-Arab Family Tourism", "flag": "🌐" }
+        {
+          "name": "Global Muslim Travelers",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Non-OIC Destinations (Japan/Europe)",
+          "flag": "🇪🇺"
+        },
+        {
+          "name": "Intra-Arab Family Tourism",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

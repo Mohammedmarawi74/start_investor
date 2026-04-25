@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syrian Reconstruction Projects", "flag": "🇸🇾" },
-        { "name": "Syrian Engineers Overseas (Collaboration)", "flag": "🌐" }
+        {
+          "name": "Syrian Reconstruction Projects",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "Syrian Engineers Overseas (Collaboration)",
+          "flag": "🇸🇾"
+        }
       ],
       "additional_regions_count": 0
     },

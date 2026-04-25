@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Global Arab Startups", "flag": "🌐" },
-        { "name": "Luxury Brands in GCC", "flag": "🌐" },
-        { "name": "SMEs in Post-Conflict Recovery (Syria/Iraq)", "flag": "🌐" }
+        {
+          "name": "Global Arab Startups",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Luxury Brands in GCC",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "SMEs in Post-Conflict Recovery (Syria/Iraq)",
+          "flag": "🇮🇶"
+        }
       ],
       "additional_regions_count": 0
     },

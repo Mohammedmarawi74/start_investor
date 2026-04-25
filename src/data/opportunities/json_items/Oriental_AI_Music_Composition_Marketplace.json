@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Arab Music Creators Worldwide", "flag": "🌐" },
-        { "name": "Gaming & Film Industry (Demand)", "flag": "🌐" }
+        {
+          "name": "Arab Music Creators Worldwide",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Gaming & Film Industry (Demand)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

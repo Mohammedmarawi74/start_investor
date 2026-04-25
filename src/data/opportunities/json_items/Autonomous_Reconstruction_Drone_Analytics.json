@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syrian Reconstruction Sites", "flag": "🇸🇾" },
-        { "name": "Regional Infrastructure Projects", "flag": "🌐" }
+        {
+          "name": "Syrian Reconstruction Sites",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "Regional Infrastructure Projects",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

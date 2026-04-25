@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Morocco (Traditional Cooking Classes)", "flag": "🇲🇦" },
-        { "name": "Syria & Lebanon (Levantine Cuisine)", "flag": "🌐" },
-        { "name": "GCC (Heritage Majlis Dining)", "flag": "🌐" }
+        {
+          "name": "Morocco (Traditional Cooking Classes)",
+          "flag": "🇲🇦"
+        },
+        {
+          "name": "Syria & Lebanon (Levantine Cuisine)",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "GCC (Heritage Majlis Dining)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 10
     },

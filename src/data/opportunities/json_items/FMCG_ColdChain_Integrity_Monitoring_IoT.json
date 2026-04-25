@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (Extreme Heat Challenges)", "flag": "🌐" },
-        { "name": "Egypt & North Africa (Supply Chain Fragmentation)", "flag": "🌐" }
+        {
+          "name": "GCC (Extreme Heat Challenges)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & North Africa (Supply Chain Fragmentation)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

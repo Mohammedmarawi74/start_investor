@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "UAE & Saudi Arabia (Padel, Diving, Camping Centers)", "flag": "🌐" },
-        { "name": "Egypt & Lebanon (Hiking & Outdoor Community)", "flag": "🌐" }
+        {
+          "name": "UAE & Saudi Arabia (Padel, Diving, Camping Centers)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Lebanon (Hiking & Outdoor Community)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

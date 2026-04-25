@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Dead Sea Resorts", "flag": "🇯🇴" },
-        { "name": "Moroccan Hamam Networks", "flag": "🇲🇦" },
-        { "name": "GCC Luxury Spas", "flag": "🌐" }
+        {
+          "name": "Dead Sea Resorts",
+          "flag": "🇯🇴"
+        },
+        {
+          "name": "Moroccan Hamam Networks",
+          "flag": "🇲🇦"
+        },
+        {
+          "name": "GCC Luxury Spas",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 5
     },

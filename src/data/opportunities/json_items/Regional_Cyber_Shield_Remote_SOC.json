@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syria (Operations Base)", "flag": "🇸🇾" },
-        { "name": "MENA Region (Clients)", "flag": "🌐" }
+        {
+          "name": "Syria (Operations Base)",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "MENA Region (Clients)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

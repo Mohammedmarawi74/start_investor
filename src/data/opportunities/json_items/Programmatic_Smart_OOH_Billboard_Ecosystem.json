@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Riyadh (Fastest Growing OOH Market)", "flag": "🇸🇦" },
-        { "name": "Cairo & Dubai", "flag": "🌐" }
+        {
+          "name": "Riyadh (Fastest Growing OOH Market)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Cairo & Dubai",
+          "flag": "🇦🇪"
+        }
       ],
       "additional_regions_count": 5
     },

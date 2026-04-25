@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Malls & Hypermarkets", "flag": "🌐" },
-        { "name": "Large Retail Chains in Egypt & Morocco", "flag": "🌐" }
+        {
+          "name": "GCC Malls & Hypermarkets",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Large Retail Chains in Egypt & Morocco",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

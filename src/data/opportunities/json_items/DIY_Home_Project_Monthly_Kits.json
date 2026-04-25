@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (Growing Interest in Handcrafted Items)", "flag": "🌐" },
-        { "name": "Egypt & Jordan (Active Youth & Maker Culture)", "flag": "🌐" }
+        {
+          "name": "GCC (Growing Interest in Handcrafted Items)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Jordan (Active Youth & Maker Culture)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

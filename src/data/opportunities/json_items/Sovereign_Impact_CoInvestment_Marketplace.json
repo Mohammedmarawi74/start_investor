@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (Saudi PIF, UAE Mubadala/ADIA, Qatar QIA)", "flag": "🌐" },
-        { "name": "Egypt (The Sovereign Fund of Egypt)", "flag": "🇪🇬" }
+        {
+          "name": "GCC (Saudi PIF, UAE Mubadala/ADIA, Qatar QIA)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt (The Sovereign Fund of Egypt)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

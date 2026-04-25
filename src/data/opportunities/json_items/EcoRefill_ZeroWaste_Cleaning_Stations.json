@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC Cities (High Plastic Footprint)", "flag": "🌐" },
-        { "name": "Egypt (Mass Market with Growing Waste Concern)", "flag": "🇪🇬" }
+        {
+          "name": "GCC Cities (High Plastic Footprint)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt (Mass Market with Growing Waste Concern)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

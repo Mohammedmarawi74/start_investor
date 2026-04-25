@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (Multiple Loyalty Programs Fatigue)", "flag": "🌐" },
-        { "name": "Egypt & Jordan (Need for Value-driven Rewards)", "flag": "🌐" }
+        {
+          "name": "GCC (Multiple Loyalty Programs Fatigue)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Jordan (Need for Value-driven Rewards)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

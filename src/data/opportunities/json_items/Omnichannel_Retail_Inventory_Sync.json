@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (Booming E-commerce & Mall Culture)", "flag": "🌐" },
-        { "name": "Regional Brands expanding across borders", "flag": "🌐" }
+        {
+          "name": "GCC (Booming E-commerce & Mall Culture)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Regional Brands expanding across borders",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (Plastic Policy Shift)", "flag": "🌐" },
-        { "name": "Egypt (Agri-waste Resource)", "flag": "🇪🇬" },
-        { "name": "Iraq (Palm Waste Potential)", "flag": "🇮🇶" }
+        {
+          "name": "GCC (Plastic Policy Shift)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt (Agri-waste Resource)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Iraq (Palm Waste Potential)",
+          "flag": "🇮🇶"
+        }
       ],
       "additional_regions_count": 5
     },

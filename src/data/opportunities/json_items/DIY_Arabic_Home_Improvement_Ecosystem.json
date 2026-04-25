@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Egypt (Strong Artisanal Base)", "flag": "🇪🇬" },
-        { "name": "Saudi Arabia (Young Homeowners)", "flag": "🇸🇦" },
-        { "name": "Syria & Lebanon (Restoration & DIY Demand)", "flag": "🌐" }
+        {
+          "name": "Egypt (Strong Artisanal Base)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Saudi Arabia (Young Homeowners)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Syria & Lebanon (Restoration & DIY Demand)",
+          "flag": "🇸🇾"
+        }
       ],
       "additional_regions_count": 0
     },

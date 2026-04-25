@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Saudi Arabia & UAE (Major Retail Hubs)", "flag": "🌐" },
-        { "name": "Egypt (Large Scale Supermarket Chains)", "flag": "🇪🇬" }
+        {
+          "name": "Saudi Arabia & UAE (Major Retail Hubs)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt (Large Scale Supermarket Chains)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

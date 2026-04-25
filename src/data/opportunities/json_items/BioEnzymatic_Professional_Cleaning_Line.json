@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Egypt (Industrial Base)", "flag": "🇪🇬" },
-        { "name": "Saudi Arabia & UAE (Luxury Hospitality Standards)", "flag": "🌐" }
+        {
+          "name": "Egypt (Industrial Base)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Saudi Arabia & UAE (Luxury Hospitality Standards)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

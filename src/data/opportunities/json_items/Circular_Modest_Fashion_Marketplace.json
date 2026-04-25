@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Global Modest Fashion Markets (GCC/Turkey/Indonesia)", "flag": "🌐" },
-        { "name": "Egypt & Morocco (Textile Manufacturing Hubs)", "flag": "🌐" }
+        {
+          "name": "Global Modest Fashion Markets (GCC/Turkey/Indonesia)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Egypt & Morocco (Textile Manufacturing Hubs)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

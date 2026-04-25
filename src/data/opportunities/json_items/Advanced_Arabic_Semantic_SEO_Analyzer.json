@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Egypt (Largest Content Hub)", "flag": "🇪🇬" },
-        { "name": "Saudi Arabia & UAE (High Competition)", "flag": "🌐" }
+        {
+          "name": "Egypt (Largest Content Hub)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Saudi Arabia & UAE (High Competition)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 22
     },

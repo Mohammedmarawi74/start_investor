@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Riyadh & Dubai (Tech Startup Hubs)", "flag": "🌐" },
-        { "name": "Cairo (High Volume SME Market)", "flag": "🇪🇬" }
+        {
+          "name": "Riyadh & Dubai (Tech Startup Hubs)",
+          "flag": "🇦🇪"
+        },
+        {
+          "name": "Cairo (High Volume SME Market)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

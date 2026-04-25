@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "GCC (High E-commerce Return Rates in Fashion)", "flag": "🌐" },
-        { "name": "Turkey & Egypt (Major Modest Fashion Hubs)", "flag": "🌐" }
+        {
+          "name": "GCC (High E-commerce Return Rates in Fashion)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Turkey & Egypt (Major Modest Fashion Hubs)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

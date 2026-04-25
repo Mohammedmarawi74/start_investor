@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Cairo (High Density Urban Challenge)", "flag": "🇪🇬" },
-        { "name": "Riyadh & Jeddah (Fast Growing Q-commerce)", "flag": "🇸🇦" },
-        { "name": "Casablanca & Baghdad", "flag": "🌐" }
+        {
+          "name": "Cairo (High Density Urban Challenge)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Riyadh & Jeddah (Fast Growing Q-commerce)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Casablanca & Baghdad",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

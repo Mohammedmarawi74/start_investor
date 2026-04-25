@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Global Arab Diaspora (High Demand for Language)", "flag": "🌐" },
-        { "name": "GCC & Egypt (Large Child Population)", "flag": "🌐" }
+        {
+          "name": "Global Arab Diaspora (High Demand for Language)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "GCC & Egypt (Large Child Population)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

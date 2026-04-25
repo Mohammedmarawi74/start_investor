@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Inter-Arab Short-haul Routes", "flag": "🌐" },
-        { "name": "GCC-Levant-Egypt Corridors", "flag": "🌐" }
+        {
+          "name": "Inter-Arab Short-haul Routes",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "GCC-Levant-Egypt Corridors",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

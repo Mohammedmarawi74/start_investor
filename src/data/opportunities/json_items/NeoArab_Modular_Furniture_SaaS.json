@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Riyadh & Dubai (Urban High-growth)", "flag": "🌐" },
-        { "name": "Egypt & Syria (Manufacturing Expertise)", "flag": "🌐" }
+        {
+          "name": "Riyadh & Dubai (Urban High-growth)",
+          "flag": "🇦🇪"
+        },
+        {
+          "name": "Egypt & Syria (Manufacturing Expertise)",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

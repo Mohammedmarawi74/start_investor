@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Syria (Talent)", "flag": "🇸🇾" },
-        { "name": "GCC Smart Cities (Market)", "flag": "🌐" }
+        {
+          "name": "Syria (Talent)",
+          "flag": "🇸🇾"
+        },
+        {
+          "name": "GCC Smart Cities (Market)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 0
     },

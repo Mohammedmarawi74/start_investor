@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Intra-Arab Trade (B2B)", "flag": "🌐" },
-        { "name": "Digital Free Zones (UAE/KSA/Bahrain)", "flag": "🌐" }
+        {
+          "name": "Intra-Arab Trade (B2B)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "Digital Free Zones (UAE/KSA/Bahrain)",
+          "flag": "🇸🇦"
+        }
       ],
       "additional_regions_count": 22
     },

@@ -14,9 +14,18 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Saudi Arabia (Fintech/Healthtech Sandboxes)", "flag": "🇸🇦" },
-        { "name": "UAE (Future Technologies)", "flag": "🇦🇪" },
-        { "name": "Egypt & Jordan", "flag": "🌐" }
+        {
+          "name": "Saudi Arabia (Fintech/Healthtech Sandboxes)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "UAE (Future Technologies)",
+          "flag": "🇦🇪"
+        },
+        {
+          "name": "Egypt & Jordan",
+          "flag": "🇪🇬"
+        }
       ],
       "additional_regions_count": 0
     },

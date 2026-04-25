@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Saudi Arabia & Kuwait (Large Brine Volumes)", "flag": "🌐" },
-        { "name": "UAE (Tech-forward Mining)", "flag": "🇦🇪" }
+        {
+          "name": "Saudi Arabia & Kuwait (Large Brine Volumes)",
+          "flag": "🇸🇦"
+        },
+        {
+          "name": "UAE (Tech-forward Mining)",
+          "flag": "🇦🇪"
+        }
       ],
       "additional_regions_count": 0
     },

@@ -14,8 +14,14 @@
     ],
     "geography": {
       "active_regions": [
-        { "name": "Industrial Exporters (GCC/Egypt/Morocco)", "flag": "🌐" },
-        { "name": "Global Export Markets (EU/North America)", "flag": "🌐" }
+        {
+          "name": "Industrial Exporters (GCC/Egypt/Morocco)",
+          "flag": "🇪🇬"
+        },
+        {
+          "name": "Global Export Markets (EU/North America)",
+          "flag": "🇪🇺"
+        }
       ],
       "additional_regions_count": 0
     },
